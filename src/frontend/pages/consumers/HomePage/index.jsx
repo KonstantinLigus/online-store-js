@@ -1,9 +1,9 @@
-import { getItemsServices } from "@/backend/items";
+import getItemsControllers from "@/backend/items";
 import Image from "next/image";
 
 export default async function HomePage() {
-  const itemServices = await getItemsServices();
-  const items = await itemServices.getAllItems();
+  const itemServices = await getItemsControllers();
+  const { items } = await itemServices.getAllItems();
   return (
     <>
       <div>Home consumers page</div>
