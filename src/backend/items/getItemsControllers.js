@@ -8,10 +8,10 @@ export async function getItemsControllers() {
 
   async function getAllItems() {
     const items = await itemsServices.getAllItems();
-    return NextResponse.json({ data: items });
+    return { items, status: 200 };
   }
-  async function getItemById(id) {
+  async function getItemById({ id }) {
     const item = await itemsServices.getItemById(id);
-    return NextResponse.json({ data: item });
+    return { item, status: 200 };
   }
 }

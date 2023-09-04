@@ -1,8 +1,8 @@
 import connectDB from "../db/connectDB";
 import { Item } from "./item.schema";
 
-export async function getItemsServices() {
-  await connectDB();
+export function getItemsServices() {
+  connectDB();
 
   return Object.freeze({ getAllItems, getItemById });
 
