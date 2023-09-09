@@ -1,9 +1,9 @@
-import getItemsControllers from "@/backend/items";
+import getItemsController from "@/backend/items";
 import Image from "next/image";
 
 export default async function HomePage() {
-  const itemServices = await getItemsControllers();
-  const { items } = await itemServices.getAllItems();
+  const getAllItems = await getItemsController("GET_ALL_ITEMS_ON_SERVER");
+  const { items } = await getAllItems({ categories: "популярні" });
   return (
     <>
       <div>Home consumers page</div>
@@ -15,10 +15,10 @@ export default async function HomePage() {
           gap: "50px",
         }}
       >
-        {items.map(({ _id, title, description, price, images }) => (
+        {items.map(({ _id, title, price, mainImage }) => (
           <li key={_id}>
             <Image
-              src={images[0]}
+              src={mainImage}
               alt={title}
               width={200}
               height={200}
@@ -26,7 +26,6 @@ export default async function HomePage() {
             />
             <div>{title}</div>
             <div>{price}</div>
-            <div>{description}</div>
           </li>
         ))}
       </ul>

@@ -1,7 +1,6 @@
-import tryCatchWrapper from "@/backend/helpers/tryCatchWrapper";
-import getItemsControllers from "@/backend/items";
+import getItemsController from "@/backend/items";
 
 export async function GET(req, { params: { id } }) {
-  const itemsControllers = await getItemsControllers();
-  return await tryCatchWrapper(itemsControllers.getItemById, { id });
+  const getItemById = await getItemsController("GET_ONE_ITEM_ON_CLIENT");
+  return await getItemById(id);
 }

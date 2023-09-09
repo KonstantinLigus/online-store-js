@@ -1,7 +1,8 @@
-import tryCatchWrapper from "@/backend/helpers/tryCatchWrapper";
-import getItemsControllers from "@/backend/items";
+import getItemsController from "@/backend/items";
 
-export async function GET() {
-  const itemsControllers = await getItemsControllers();
-  return await tryCatchWrapper(itemsControllers.getAllItems);
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  const categories = searchParams.get("category");
+  const getAllItems = await getItemsController("GET_ALL_ITEMS_ON_CLIENT");
+  return await getAllItems({ categories });
 }
