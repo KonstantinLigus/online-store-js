@@ -1,0 +1,22 @@
+.footer {
+  background-color: #002603;
+  margin-top: 50px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .logo {
+  color: #618062;
+  font-weight: 600;
+}
+.footer .copyright {
+  color: #618062;
+  font-size: 14px;
+}
+.footer .socialMedia {
+  display: flex;
+  gap: 10px;
+}
+
+/*# sourceMappingURL=Footer.module.css.map */
