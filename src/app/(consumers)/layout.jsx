@@ -1,29 +1,24 @@
 import "../../global-styles/globals.css";
-import { Inter } from "next/font/google";
-import Header from "@/frontend/components/consumers/Header";
+import { Montserrat } from "next/font/google";
 import Footer from "@/frontend/components/consumers/Footer/Footer";
+import NavBar from "@/frontend/components/consumers/NavBar/NavBar";
 
-
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Store",
   description: "Online store",
 };
 
-export default function RootLayout({
-  children,
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header>
-          <Header />
-        </header>
-        <main>{children}</main>
-        <footer>
+      <body className={montserrat.className}>
+        <div className="wrapper">
+          <NavBar />
+          <main>{children}</main>
           <Footer />
-        </footer>
+        </div>
       </body>
     </html>
   );
