@@ -1,0 +1,19 @@
+.productList {
+  background-color: #EDF2EE;
+  padding: 20px 0 50px;
+}
+.productList .list {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.productList .title {
+  font-size: 30px;
+  color: #1E6091;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/*# sourceMappingURL=ProductList.module.css.map */

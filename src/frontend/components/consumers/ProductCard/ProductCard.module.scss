@@ -1,0 +1,40 @@
+.item {
+  background-color: white;
+ padding: 10px;
+  border-radius: 10px;
+
+  .cardImage {
+  }
+
+  .information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    .title {
+      font-size: 18px;
+      color: #2C742F;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 500;
+      color: #1A1A1A;
+    }
+  }
+
+  .button {
+    padding: 10px;
+    background-color: #00B207;
+    color: white;
+    border-radius: 43px;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+
+    &:hover {
+      background-color: #2C742F;
+    }
+  }
+}
