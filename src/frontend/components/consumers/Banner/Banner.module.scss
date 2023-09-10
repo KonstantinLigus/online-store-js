@@ -1,0 +1,33 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 100px;
+  margin-top: 50px;
+
+  .information {
+    .bannerTitle {
+      font-weight: 600;
+      font-size: 56px;
+      color: #002603;
+      margin-bottom: 20px;
+    }
+
+    .bannerDescription {
+      font-size: 18px;
+      color: #618062;
+      margin-bottom: 32px;
+    }
+
+    .button {
+      padding: 16px 40px;
+      background-color: #00B207;
+      color: white;
+      border-radius: 43px;
+
+      &:hover {
+       background-color: #2C742F;
+      }
+    }
+  }
+}
