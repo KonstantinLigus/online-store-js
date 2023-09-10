@@ -1,6 +1,4 @@
-'use client'
 import styles from './Footer.module.scss';
-import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -53,4 +51,3 @@ export default function Footer() {
             </div>
         </footer>
     );
-}
