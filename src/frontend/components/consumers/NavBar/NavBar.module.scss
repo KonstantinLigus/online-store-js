@@ -1,0 +1,29 @@
+.header {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #EDF2EE;
+
+  .logo {
+    font-size: 30px;
+    color: #34A0A4;
+    font-weight: 500;
+  }
+
+  .nav {
+    display: flex;
+    gap: 20px;
+
+    .link {
+      cursor: pointer;
+      font-size: 20px;
+      color: #1E6091;
+      font-weight: 500;
+
+      &:hover {
+        color:#76C893;
+      }
+    }
+  }
+}
