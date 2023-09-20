@@ -16,7 +16,7 @@ const ProductCard = ({title, description, price, mainImage}) => {
                 <h2 className={styles.title}>{title}</h2>
                 <p className={styles.price}>{price}</p>
             </div>
-            <button className={styles.button}>Buy</button>
+            <button className={styles.button}>До кошика</button>
         </li>
     );
 };

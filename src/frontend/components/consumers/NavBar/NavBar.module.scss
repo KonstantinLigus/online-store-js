@@ -1,29 +1,117 @@
+@import '../../../../styles/responsive';
+@import '../../../../styles/mixins';
+
 .header {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #EDF2EE;
+  background-color: #d4d4d4;
 
-  .logo {
-    font-size: 30px;
-    color: #34A0A4;
-    font-weight: 500;
-  }
-
-  .nav {
+  .wrapper {
+    padding: 10px 0;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    @include wrapper;
 
-    .link {
-      cursor: pointer;
-      font-size: 20px;
-      color: #1E6091;
-      font-weight: 500;
+    .navLeft {
+      display: flex;
+      flex: 1;
+      gap: 20px;
+      position: relative;
+  
+      .menuBtn {
+        display: none;
+        &:checked ~ .menu{
+          opacity: 1;
+        }
+        &:checked ~ .menuIcon .navIcon{
+          background: transparent;
+        }
+        &:checked ~ .menuIcon .navIcon:before{
+          transition: all 500ms;
+          transform: rotate(-45deg);
+          top: 0;
+        }
+        &:checked ~ .menuIcon .navIcon:after{
+          transition: all 500ms;
+          transform: rotate(45deg);
+          top: 0;
+        }
+      }
 
-      &:hover {
-        color:#76C893;
+      .menuIcon {
+        cursor: pointer;
+        display: block;
+        float: right;
+        position: relative;
+        user-select: none;
+        z-index: 5;
+      }
+
+      .navIcon {
+        background-color: #333;
+        display: block;
+        height: 2px;
+        position: relative;
+        width: 18px;
+        &:before{
+          background-color :#333;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          top: 5px;
+          transition: all 500ms;
+          width: 100%;
+        }
+        &:after{
+          background-color :#333;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          top: -5px;
+          transition: all 500ms;
+          width: 100%;
+        }
+      }
+
+      .menu {
+        background-color:#fff;
+        margin: 0;
+        opacity: 0;
+        padding: 70px 0 0 0;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 200px;
+        a {
+          cursor: pointer;
+          font-size: 16px;
+          color: #1E6091;
+          font-weight: 500;
+          padding: 16px;
+          line-height: 40px;
+          &:hover {
+            color:#76C893;
+          }
+        }
       }
     }
+
+    .logo {
+      font-size: 30px;
+      color: #34A0A4;
+      font-weight: 500;
+      flex: 1;
+    }
+  
+    .navRight {
+      display: flex;
+      flex: 1;
+      gap: 12px;
+      justify-content: flex-end;
+      width: 100%;
+    }
   }
+
+  
 }

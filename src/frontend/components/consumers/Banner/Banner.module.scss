@@ -1,32 +1,61 @@
+@import '../../../../styles/responsive';
+@import '../../../../styles/mixins';
+
 .banner {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 100px;
-  margin-top: 50px;
-
-  .information {
-    .bannerTitle {
-      font-weight: 600;
-      font-size: 56px;
-      color: #002603;
-      margin-bottom: 20px;
+  background-color: #EDF2EE;
+  
+  .wrapper {
+    display: flex;
+    align-items: center;
+    padding: 40px 0;
+    width: 100%;
+    @include wrapper;
+    @include lg-min {
+      gap: 40px;
+      padding: 60px 0;
     }
 
-    .bannerDescription {
-      font-size: 18px;
-      color: #618062;
-      margin-bottom: 32px;
+    .image {
+      display: none;
+      @include lg-min {
+        flex: 1;
+        display: block;
+        object-fit: cover;
+        height: 300px;
+      }
+      @include xl-min {
+        height: 450px;
+      }
     }
-
-    .button {
-      padding: 16px 40px;
-      background-color: #00B207;
-      color: white;
-      border-radius: 43px;
-
-      &:hover {
-       background-color: #2C742F;
+  
+    .information {
+      flex: 1;
+      .bannerTitle {
+        font-weight: 600;
+        font-size: 2rem;
+        color: #002603;
+        margin-bottom: 20px;
+        @include md-min {
+          font-size: 3rem;
+        }
+        @include lg-min {
+          font-size: 2.5rem;
+        }
+        @include xl-min {
+          font-size: 3.5rem;
+        }
+      }
+  
+      .button {
+        background-color: transparent;
+        border-radius: 40px;
+        border: 2px solid #000;
+        color: #000;
+        font-weight: 600;
+        padding: 8px 20px;
+        &:hover {
+         background-color: #00B207;
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ const ProductList = async () => {
 
     return (
         <div className={styles.productList}>
-            <h1 className={styles.title}>Product List</h1>
+            <h2 className={styles.title}>Акційні товари</h2>
             <ul className={styles.list}>
                 {items.map(item => (
                     <ProductCard
@@ -20,8 +20,8 @@ const ProductList = async () => {
                        />
                 ))}
             </ul>
+            <p className={styles.navigation}>&lt; 1/5 &gt;</p>
         </div>
-
     );
 };
 
