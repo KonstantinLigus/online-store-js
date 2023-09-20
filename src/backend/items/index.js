@@ -4,13 +4,13 @@ import { getClientTryCatchWrapper, getServerTryCatchWrapper } from "./helpers";
 export default async function getItemsController(method) {
   const itemsControllers = await getItemsControllers();
   switch (method) {
-    case "GET_ALL_ITEMS_ON_SERVER":
+    case "GET_FILTERED_ITEMS_ON_SERVER":
       return await getServerTryCatchWrapper(
-        itemsControllers.getAllItemsByField
+        itemsControllers.getAllItemsByField,
       );
-    case "GET_ALL_ITEMS_ON_CLIENT":
+    case "GET_FILTERED_ITEMS_ON_CLIENT":
       return await getClientTryCatchWrapper(
-        itemsControllers.getAllItemsByField
+        itemsControllers.getAllItemsByField,
       );
     case "GET_ONE_ITEM_ON_SERVER":
       return await getServerTryCatchWrapper(itemsControllers.getItemById);
