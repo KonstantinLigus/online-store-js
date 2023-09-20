@@ -3,16 +3,17 @@ import { getItemsServices } from "./getItemsServices";
 export async function getItemsControllers() {
   const itemsServices = await getItemsServices();
 
-  return Object.freeze({ getAllItems, getItemById, getAllItemsByField });
-
-  async function getAllItems() {
-    const items = await itemsServices.getAllItems();
-    return { items, status: 200 };
-  }
+  return Object.freeze({ getItemById, getAllItemsByField });
 
   async function getAllItemsByField(objQuery) {
     const items = await itemsServices.getAllItemsByField(objQuery);
-    return { items, status: 200 };
+    const serializedItems = items.map(({ _id, title, price, mainImage }) => ({
+      _id: _id.toString(),
+      title,
+      price,
+      mainImage,
+    }));
+    return { serializedItems, status: 200 };
   }
 
   async function getItemById(id) {
