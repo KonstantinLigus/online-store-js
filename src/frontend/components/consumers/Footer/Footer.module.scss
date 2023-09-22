@@ -1,26 +1,50 @@
+@import '../../../../styles/responsive';
+@import '../../../../styles/mixins';
+
 .footer {
-  background-color: #002603;
-  margin-top: 50px;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #d4d4d4;
+  padding: 20px 0;
 
-  .logo {
-    color: #618062;
-    font-weight: 600;
-  }
+  .container {
+    @include wrapper;
 
-  .copyright {
-    color: #618062;
-    font-size: 14px;
-  }
+    .wrapper {
+      align-items: flex-end;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
 
-  .socialMedia {
-    display: flex;
-    gap: 10px;
+      .section1 {
+        height: 100%;
 
-    .icon {
+        h2 {
+          font-size: 2rem;
+          font-weight: 600;
+        }
+      }
+
+      .section2 {
+        height: 100%;
+      }
+
+      p {
+        font-size: 0.9rem;
+        line-height: 2rem;
+        @include md-min {
+          font-size: 1.1rem;
+        }
+      }
     }
+
+    .socialMedia {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+    }
+  
   }
 }
