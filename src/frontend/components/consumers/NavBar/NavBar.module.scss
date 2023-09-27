@@ -16,6 +16,7 @@
       flex: 1;
       gap: 20px;
       position: relative;
+      z-index: 10;
   
       .menuBtn {
         display: none;
@@ -112,6 +113,4 @@
       width: 100%;
     }
   }
-
-  
 }

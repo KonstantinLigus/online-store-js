@@ -1,27 +1,109 @@
 .header {
-  padding: 10px 20px;
+  background-color: #d4d4d4;
+}
+.header .wrapper {
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #EDF2EE;
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 90%;
 }
-.header .logo {
+.header .wrapper .navLeft {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  position: relative;
+  z-index: 10;
+}
+.header .wrapper .navLeft .menuBtn {
+  display: none;
+}
+.header .wrapper .navLeft .menuBtn:checked ~ .menu {
+  opacity: 1;
+}
+.header .wrapper .navLeft .menuBtn:checked ~ .menuIcon .navIcon {
+  background: transparent;
+}
+.header .wrapper .navLeft .menuBtn:checked ~ .menuIcon .navIcon:before {
+  transition: all 500ms;
+  transform: rotate(-45deg);
+  top: 0;
+}
+.header .wrapper .navLeft .menuBtn:checked ~ .menuIcon .navIcon:after {
+  transition: all 500ms;
+  transform: rotate(45deg);
+  top: 0;
+}
+.header .wrapper .navLeft .menuIcon {
+  cursor: pointer;
+  display: block;
+  float: right;
+  position: relative;
+  user-select: none;
+  z-index: 5;
+}
+.header .wrapper .navLeft .navIcon {
+  background-color: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  width: 18px;
+}
+.header .wrapper .navLeft .navIcon:before {
+  background-color: #333;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 5px;
+  transition: all 500ms;
+  width: 100%;
+}
+.header .wrapper .navLeft .navIcon:after {
+  background-color: #333;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: -5px;
+  transition: all 500ms;
+  width: 100%;
+}
+.header .wrapper .navLeft .menu {
+  background-color: #fff;
+  margin: 0;
+  opacity: 0;
+  padding: 70px 0 0 0;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 200px;
+}
+.header .wrapper .navLeft .menu a {
+  cursor: pointer;
+  font-size: 16px;
+  color: #1E6091;
+  font-weight: 500;
+  padding: 16px;
+  line-height: 40px;
+}
+.header .wrapper .navLeft .menu a:hover {
+  color: #76C893;
+}
+.header .wrapper .logo {
   font-size: 30px;
   color: #34A0A4;
   font-weight: 500;
+  flex: 1;
 }
-.header .nav {
+.header .wrapper .navRight {
   display: flex;
-  gap: 20px;
-}
-.header .nav .link {
-  cursor: pointer;
-  font-size: 20px;
-  color: #1E6091;
-  font-weight: 500;
-}
-.header .nav .link:hover {
-  color: #76C893;
+  flex: 1;
+  gap: 12px;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 /*# sourceMappingURL=NavBar.module.css.map */
