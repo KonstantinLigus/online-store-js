@@ -4,7 +4,7 @@ export async function getServerTryCatchWrapper(callback) {
       const response = await callback(args);
       return response;
     } catch (error) {
-      return { error: error.message };
+      return { error: error.message, status: error.status };
     }
   };
 }

@@ -1,4 +1,5 @@
 import { getItemsServices } from "./getItemsServices";
+import { NotFoundItemError } from "./helpers/getErrorObj";
 
 export async function getItemsControllers() {
   const itemsServices = await getItemsServices();
@@ -13,7 +14,7 @@ export async function getItemsControllers() {
       price,
       mainImage,
     }));
-    return { serializedItems, status: 200 };
+    return { items: serializedItems, status: 200 };
   }
 
   async function getItemById(id) {
