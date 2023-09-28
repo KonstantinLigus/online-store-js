@@ -1,6 +1,6 @@
+@import '../../../../../src/styles/variables';
+
 .item {
-  background-color: white;
- padding: 10px;
   border-radius: 10px;
 
   .cardImage {
@@ -13,25 +13,28 @@
     gap: 5px;
 
     .title {
-      font-size: 18px;
-      color: #2C742F;
+      color: $text-color;
+      font-size: 12px;
+      font-weight: 400;
     }
 
     .price {
-      font-size: 22px;
-      font-weight: 500;
-      color: #1A1A1A;
+      color: $text-color;
+      font-size: 12px;
+      font-weight: 400;
     }
   }
 
   .button {
-    padding: 10px;
-    background-color: #00B207;
-    color: white;
-    border-radius: 43px;
     width: 100%;
+    padding: 5px 33px;
     text-align: center;
-    margin: 10px 0;
+    background-color: $bg-color;
+    color: $text-color;;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 16px;
+    margin: 9px 0;
 
     &:hover {
       background-color: #2C742F;

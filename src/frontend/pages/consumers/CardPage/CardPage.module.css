@@ -1,9 +1,21 @@
 .productCard {
+  width: 100%;
+  min-width: 320px;
   margin: 0 auto;
-  max-width: 1400px;
-  width: 90%;
+  padding: 0 16px;
   margin-top: 16px;
   margin-bottom: 24px;
+}
+@media screen and (min-width: 576px) {
+  .productCard {
+    padding: 0 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .productCard {
+    max-width: 1400px;
+    padding: 0 60px;
+  }
 }
 .productCard .productName {
   color: #000;
@@ -46,12 +58,15 @@
   font-weight: 500;
 }
 .productCard .button {
+  cursor: pointer;
+  width: 100%;
   color: #000;
   font-size: 20px;
   font-weight: 400;
   border-radius: 32px;
-  background: #D9D9D9;
-  padding: 16px 65px;
+  background: #efefef;
+  padding: 16px 0;
+  text-align: center;
   margin-top: 13px;
   margin-bottom: 30px;
 }
@@ -84,6 +99,9 @@
   margin-top: 8px;
   margin-bottom: 8px;
   margin-left: 20px;
+}
+.productCard .productList {
+  margin-top: 30px;
 }
 
 /*# sourceMappingURL=CardPage.module.css.map */

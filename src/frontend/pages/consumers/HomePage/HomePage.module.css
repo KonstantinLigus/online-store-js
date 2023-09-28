@@ -1,0 +1,19 @@
+.productList {
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media screen and (min-width: 576px) {
+  .productList {
+    padding: 0 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .productList {
+    max-width: 1400px;
+    padding: 0 60px;
+  }
+}
+
+/*# sourceMappingURL=HomePage.module.css.map */

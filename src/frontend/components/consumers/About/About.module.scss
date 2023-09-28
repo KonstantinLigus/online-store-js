@@ -5,16 +5,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    margin-bottom: 100px;
-    margin-top: 50px;
+    gap: 8px;
     padding: 40px 0;
     @include wrapper;
+    margin-top: 15px;
+    margin-bottom: 16px;
 
     h2 {
         font-size: 1.5rem;
         font-weight: 600;
         text-align: center;
+        margin-bottom: 8px;
         @include lg-min {
             font-size: 2.2rem;
         }

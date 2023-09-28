@@ -3,8 +3,8 @@
 @import '../../../../styles/variables';
 
 .productList {
-  padding: 40px 0;
   text-align: center;
+  //@include wrapper;
 
   .title {
     color: $text-color;
@@ -16,21 +16,9 @@
     }
   }
 
-  .list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-    align-items: center;
-    justify-content: center;
-    @include wrapper;
-    @include md-min {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
 
   .navigation {
     font-size: 1.2rem;
     padding-top: 20px;
   }
 }
-
