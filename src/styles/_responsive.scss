@@ -1,3 +1,4 @@
+$screen-xsm-max: 320px;
 $screen-sm-max: 575px;
 $screen-md-max: 767px;
 $screen-lg-max: 1023px;
@@ -10,12 +11,19 @@ $screen-xl-max: 1199px;
   }
 }
 
+//@mixin xsm-min { // screen > 320px
+//  @media screen and (min-width: #{$screen-xsm-max}) {
+//    @content;
+//  }
+//}
+
 // Medium devices
 @mixin md-max { // screen < 768px
   @media screen and (max-width: #{$screen-md-max}) {
     @content;
   }
 }
+
 @mixin md-min { // screen > 575px
   @media screen and (min-width: #{$screen-sm-max + 1}) {
     @content;
@@ -28,6 +36,7 @@ $screen-xl-max: 1199px;
     @content;
   }
 }
+
 @mixin lg-min { // screen > 767px
   @media screen and (min-width: #{$screen-md-max + 1}) {
     @content;
@@ -40,6 +49,7 @@ $screen-xl-max: 1199px;
     @content;
   }
 }
+
 @mixin xl-min { // screen > 1023px
   @media screen and (min-width: #{$screen-lg-max + 1}) {
     @content;
@@ -52,7 +62,6 @@ $screen-xl-max: 1199px;
     @content;
   }
 }
-
 
 
 // Custom max-width devices

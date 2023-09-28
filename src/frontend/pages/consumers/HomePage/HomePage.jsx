@@ -7,7 +7,7 @@ export default async function HomePage() {
         <>
             <Banner/>
             <About />
-            <ProductList/>
+            <ProductList title='Акційні товари'/>
         </>
     );
 }

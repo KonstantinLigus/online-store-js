@@ -1,30 +1,55 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "./ProductList.module.scss";
-import getItemsController from "@/backend/items";
-import ProductCard from "@/frontend/components/consumers/ProductCard/ProductCard";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
 
-const ProductList = async () => {
-  const getFilterdItems = await getItemsController(
-    "GET_FILTERED_ITEMS_ON_SERVER",
-  );
-  const { items } = await getFilterdItems({ categories: "популярні" });
+const ProductList = ({ title }) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { items } = await fetch("api/items");
+      const data = await items.json();
+      setData(data);
+      console.log(data);
+    };
+    fetchData();
+  }, []);
+  // //
+  // useEffect(() => {
+  //   fetch("api/items")
+  //     .then(({ items }) => items.json())
+  //     .then(data => {
+  //       setData(data);
+  //       console.log(data);
+  //     });
+  // }, []);
 
   return (
     <div className={styles.productList}>
-      <h2 className={styles.title}>Акційні товари</h2>
+      <h2 className={styles.title}>{title}</h2>
       <ul className={styles.list}>
-        {items.map(item => (
-          <ProductCard
-            key={item._id}
-            title={item.title}
-            price={item.price}
-            mainImage={item.mainImage}
-          />
-        ))}
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={3}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={swiper => console.log(swiper)}
+        >
+          {data.map(item => (
+            <SwiperSlide key={item._id}>
+              <ProductItem
+                title={item.title}
+                price={item.price}
+                mainImage={item.mainImage}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </ul>
-      <p className={styles.navigation}>&lt; 1/5 &gt;</p>
+      {/*<p className={styles.navigation}>&lt; 1/5 &gt;</p>*/}
     </div>
   );
 };
-
 export default ProductList;
