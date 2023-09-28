@@ -1,5 +1,4 @@
 .productList {
-  padding: 40px 0;
   text-align: center;
 }
 .productList .title {
@@ -11,21 +10,6 @@
 @media screen and (min-width: 768px) {
   .productList .title {
     font-size: 2.2rem;
-  }
-}
-.productList .list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 1400px;
-  width: 90%;
-}
-@media screen and (min-width: 576px) {
-  .productList .list {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
 .productList .navigation {

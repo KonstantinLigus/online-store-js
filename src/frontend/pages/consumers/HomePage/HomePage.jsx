@@ -1,13 +1,14 @@
 import Banner from "@/frontend/components/consumers/Banner/Banner";
 import About from "@/frontend/components/consumers/About/About";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
+import styles from '@/frontend/pages/consumers/HomePage/HomePage.module.scss';
 
 export default async function HomePage() {
     return (
         <>
             <Banner/>
             <About />
-            <ProductList title='Акційні товари'/>
+            <ProductList className={styles.productList} title='Акційні товари'/>
         </>
     );
 }
