@@ -1,0 +1,110 @@
+@import "../../../../../src/styles/responsive";
+@import "../../../../../src/styles/mixins";
+@import "../../../../../src/styles/variables";
+
+.productCard {
+  @include wrapper;
+  margin-top: 16px;
+  margin-bottom: 24px;
+
+  .productName {
+    color: $text-color;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 9px;
+  }
+
+  .imageContainer {
+    position: relative;
+    min-width: 288px;
+    min-height: 231px;
+    margin-bottom: 15px;
+
+    .imageProduct {
+      object-fit: cover;
+    }
+
+    .heartIconContainer {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 32px;
+      height: 32px;
+
+      .heartIcon {
+        object-fit: cover;
+      }
+    }
+  }
+
+  .priceInformation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .price {
+      color: $text-color;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .measure {
+      color: $description-color;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  .button {
+    cursor: pointer;
+    width: 100%;
+    color: $text-color;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 32px;
+    background: $bg-color;
+    padding: 16px 0;
+    text-align: center;
+    margin-top: 13px;
+    margin-bottom: 30px;
+  }
+
+  .characteristic {
+    border-radius: 8px;
+    border: 1px solid $text-color;
+    padding: 12px;
+
+    .headline {
+      color: $text-color;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .heading {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .title {
+        color: $text-color;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    .description {
+      max-width: 170px;
+      color: $text-color;
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      margin-left: 20px;
+    }
+  }
+
+  .productList {
+    margin-top: 30px;
+  }
+}
