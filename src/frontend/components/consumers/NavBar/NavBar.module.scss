@@ -1,5 +1,5 @@
-@import '../../../../styles/responsive';
-@import '../../../../styles/mixins';
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
 
 .header {
   background-color: #d4d4d4;
@@ -17,21 +17,21 @@
       gap: 20px;
       position: relative;
       z-index: 10;
-  
+
       .menuBtn {
         display: none;
-        &:checked ~ .menu{
+        &:checked ~ .menu {
           opacity: 1;
         }
-        &:checked ~ .menuIcon .navIcon{
+        &:checked ~ .menuIcon .navIcon {
           background: transparent;
         }
-        &:checked ~ .menuIcon .navIcon:before{
+        &:checked ~ .menuIcon .navIcon:before {
           transition: all 500ms;
           transform: rotate(-45deg);
           top: 0;
         }
-        &:checked ~ .menuIcon .navIcon:after{
+        &:checked ~ .menuIcon .navIcon:after {
           transition: all 500ms;
           transform: rotate(45deg);
           top: 0;
@@ -53,9 +53,9 @@
         height: 2px;
         position: relative;
         width: 18px;
-        &:before{
-          background-color :#333;
-          content: '';
+        &:before {
+          background-color: #333;
+          content: "";
           display: block;
           height: 100%;
           position: absolute;
@@ -63,9 +63,9 @@
           transition: all 500ms;
           width: 100%;
         }
-        &:after{
-          background-color :#333;
-          content: '';
+        &:after {
+          background-color: #333;
+          content: "";
           display: block;
           height: 100%;
           position: absolute;
@@ -76,35 +76,45 @@
       }
 
       .menu {
-        background-color:#fff;
+        background-color: #fff;
         margin: 0;
         opacity: 0;
         padding: 70px 0 0 0;
         position: absolute;
         left: 0px;
         top: 0px;
-        width: 200px;
+        width: 240px;
         a {
           cursor: pointer;
           font-size: 16px;
-          color: #1E6091;
+          color: #1e6091;
           font-weight: 500;
           padding: 16px;
           line-height: 40px;
           &:hover {
-            color:#76C893;
+            color: #76c893;
           }
+        }
+        li:nth-child(1),
+        li:nth-child(2),
+        li:nth-child(3),
+        li:nth-child(4),
+        li:nth-child(5),
+        li:nth-child(6) {
+          background-color: palegoldenrod;
+          border-radius: 2rem;
+          margin: 10px 10px;
         }
       }
     }
 
     .logo {
       font-size: 30px;
-      color: #34A0A4;
+      color: #34a0a4;
       font-weight: 500;
       flex: 1;
     }
-  
+
     .navRight {
       display: flex;
       flex: 1;

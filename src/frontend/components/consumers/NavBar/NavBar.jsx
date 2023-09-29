@@ -9,32 +9,32 @@ export default function NavBar() {
     {
       id: 0,
       title: "Овочі",
-      url: "/",
+      url: "/vegetables",
     },
     {
       id: 1,
       title: "Фрукти/Ягоди",
-      url: "/",
+      url: "/fruits",
     },
     {
       id: 2,
       title: "Горіхи",
-      url: "/",
+      url: "/nuts",
     },
     {
       id: 3,
       title: "Бакалія",
-      url: "/",
+      url: "/grocery",
     },
     {
       id: 4,
       title: "Консервація",
-      url: "/",
+      url: "/conservation",
     },
     {
       id: 5,
       title: "Молочна продукція",
-      url: "/",
+      url: "/milk",
     },
     {
       id: 6,

@@ -1,4 +1,4 @@
-import styles from "./CardPage.module.scss";
+import styles from "./ProductPage.module.scss";
 import Image from "next/image";
 import product from "../../../../../public/assets/product.png";
 import heart from "../../../../../public/assets/icon/heart-icon.svg";
@@ -23,7 +23,7 @@ const characteristic = [
   },
 ];
 
-const CardPage = () => {
+const ProductPage = () => {
   return (
     <div className={styles.productCard}>
       <h2 className={styles.productName}>Нектарин</h2>
@@ -70,4 +70,4 @@ const CardPage = () => {
   );
 };
 
-export default CardPage;
+export default ProductPage;
