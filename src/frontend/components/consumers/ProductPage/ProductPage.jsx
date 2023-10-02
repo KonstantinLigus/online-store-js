@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import Image from "next/image";
 import product from "../../../../../public/assets/product.png";
@@ -23,14 +24,30 @@ const characteristic = [
   },
 ];
 
-const ProductPage = () => {
+const ProductPage = props => {
+  const productId = props.product;
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("api/items");
+      const { items } = await res.json();
+      let currentProduct = items.find(item => item._id == productId);
+      // тут отримуємо всі елементи, а після цього знаходимо потрібний за id
+      // думаю, що краще мати конкретний запит до бази даних за id
+      setData(currentProduct);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.productCard}>
-      <h2 className={styles.productName}>Нектарин</h2>
+      <h2 className={styles.productName}>{data.title}</h2>
       <div className={styles.imageContainer}>
         <Image
           className={styles.imageProduct}
           src={product}
+          /*src={data.mainImage}* - дивна поведінка: картинка відображається, а консоль пише, що зображення не має src*/
           alt="product"
           fill
         />
@@ -44,7 +61,7 @@ const ProductPage = () => {
         </div>
       </div>
       <div className={styles.priceInformation}>
-        <p className={styles.price}>98 грн</p>
+        <p className={styles.price}>{data.price}</p>
         <p className={styles.measure}>1 кг</p>
       </div>
       <button className={styles.button}>Додати в кошик</button>
@@ -53,13 +70,13 @@ const ProductPage = () => {
         <h2 className={styles.headline}>Характеристики</h2>
 
         {characteristic.map(item => (
-          <>
-            <div key={item.id} className={styles.heading}>
+          <div key={item.id}>
+            <div className={styles.heading}>
               <Image src={information} alt="information" width={14} />
               <h2 className={styles.title}>{item.title}</h2>
             </div>
             <p className={styles.description}>{item.description}</p>
-          </>
+          </div>
         ))}
       </div>
       <ProductList
