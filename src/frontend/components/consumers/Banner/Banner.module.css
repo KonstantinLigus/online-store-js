@@ -1,19 +1,30 @@
 .banner {
-  background-color: #EDF2EE;
+  background-color: #efefef;
+  padding-top: 33px;
+  padding-bottom: 49px;
 }
 .banner .wrapper {
-  display: flex;
-  align-items: center;
-  padding: 40px 0;
   width: 100%;
+  min-width: 320px;
   margin: 0 auto;
-  max-width: 1400px;
-  width: 90%;
+  padding: 0 16px;
+}
+@media screen and (min-width: 576px) {
+  .banner .wrapper {
+    padding: 0 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .banner .wrapper {
+    max-width: 1400px;
+    padding: 0 60px;
+  }
 }
 @media screen and (min-width: 768px) {
   .banner .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    padding: 60px 0;
   }
 }
 .banner .wrapper .image {
@@ -21,10 +32,10 @@
 }
 @media screen and (min-width: 768px) {
   .banner .wrapper .image {
-    flex: 1;
     display: block;
     object-fit: cover;
     height: 300px;
+    width: fit-content;
   }
 }
 @media screen and (min-width: 1024px) {
@@ -33,13 +44,14 @@
   }
 }
 .banner .wrapper .information {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .banner .wrapper .information .bannerTitle {
-  font-weight: 600;
-  font-size: 2rem;
-  color: #002603;
-  margin-bottom: 20px;
+  color: #000;
+  font-size: 32px;
+  font-weight: 400;
 }
 @media screen and (min-width: 576px) {
   .banner .wrapper .information .bannerTitle {
@@ -63,6 +75,7 @@
   color: #000;
   font-weight: 600;
   padding: 8px 20px;
+  margin-top: 24px;
 }
 .banner .wrapper .information .button:hover {
   background-color: #00B207;

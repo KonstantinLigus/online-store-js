@@ -1,5 +1,4 @@
 import { getItemsServices } from "./getItemsServices";
-import { NotFoundItemError } from "./helpers/getErrorObj";
 
 export async function getItemsControllers() {
   const itemsServices = await getItemsServices();

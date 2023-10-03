@@ -1,2 +1,1 @@
-export { getClientTryCatchWrapper } from "./getClientTryCatchWrapper";
-export { getServerTryCatchWrapper } from "./getServerTryCatchWrapper";
+export { getTryCatchWrapper } from "./getTryCatchWrapper";

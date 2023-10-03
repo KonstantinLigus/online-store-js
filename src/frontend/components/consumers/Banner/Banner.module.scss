@@ -1,40 +1,43 @@
 @import '../../../../styles/responsive';
 @import '../../../../styles/mixins';
+@import '../../../../styles/variables';
 
 .banner {
-  background-color: #EDF2EE;
-  
+  background-color: $bg-color;
+  padding-top: 33px;
+  padding-bottom: 49px;
   .wrapper {
-    display: flex;
-    align-items: center;
-    padding: 40px 0;
-    width: 100%;
     @include wrapper;
+
     @include lg-min {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 40px;
-      padding: 60px 0;
     }
 
     .image {
       display: none;
       @include lg-min {
-        flex: 1;
+        //flex: 1;
         display: block;
         object-fit: cover;
         height: 300px;
+        width: fit-content;
       }
       @include xl-min {
         height: 450px;
       }
     }
-  
+
     .information {
-      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       .bannerTitle {
-        font-weight: 600;
-        font-size: 2rem;
-        color: #002603;
-        margin-bottom: 20px;
+        color: $text-color;
+        font-size: 32px;
+        font-weight: 400;
         @include md-min {
           font-size: 3rem;
         }
@@ -45,16 +48,18 @@
           font-size: 3.5rem;
         }
       }
-  
+
       .button {
         background-color: transparent;
         border-radius: 40px;
-        border: 2px solid #000;
-        color: #000;
+        border: 2px solid $text-color;
+        color: $text-color;
         font-weight: 600;
         padding: 8px 20px;
+        margin-top: 24px;
+
         &:hover {
-         background-color: #00B207;
+          background-color: #00B207;
         }
       }
     }

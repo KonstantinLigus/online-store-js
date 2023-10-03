@@ -1,30 +1,52 @@
-import React from "react";
+"use client";
+import React, {useEffect, useState} from "react";
 import styles from "./ProductList.module.scss";
-import getItemsController from "@/backend/items";
-import ProductCard from "@/frontend/components/consumers/ProductCard/ProductCard";
+import "swiper/css";
+import {Swiper, SwiperSlide} from "swiper/react";
+import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
+import {Pagination} from "swiper/modules";
 
-const ProductList = async () => {
-  const getFilterdItems = await getItemsController(
-    "GET_FILTERED_ITEMS_ON_SERVER",
-  );
-  const { items } = await getFilterdItems({ categories: "популярні" });
+const ProductList = ({title, className}) => {
+    const [data, setData] = useState([]);
 
-  return (
-    <div className={styles.productList}>
-      <h2 className={styles.title}>Акційні товари</h2>
-      <ul className={styles.list}>
-        {items.map(item => (
-          <ProductCard
-            key={item._id}
-            title={item.title}
-            price={item.price}
-            mainImage={item.mainImage}
-          />
-        ))}
-      </ul>
-      <p className={styles.navigation}>&lt; 1/5 &gt;</p>
-    </div>
-  );
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch('api/items');
+            const {items} = await res.json();
+            setData(items);
+            console.log(items)
+        }
+        fetchData();
+    }, []);
+
+    return (
+        <div className={`${styles.productList} ${className}`}>
+            <h2 className={styles.title}>{title}</h2>
+            <Swiper
+                pagination={{
+                    type: 'fraction',
+                }}
+                slidesPerView={2}
+                spaceBetween={8}
+                navigation={true}
+                modules={[Pagination]}
+                loop={true}
+                className={styles.mySwiper}
+            >
+                {/*<ul className={styles.list}>*/}
+                    {data.map(item => (
+                        <SwiperSlide key={item._id}>
+                            <ProductItem
+                                title={item.title}
+                                price={item.price}
+                                mainImage={item.mainImage}
+                            />
+                        </SwiperSlide>
+                    ))}
+                {/*</ul>*/}
+            </Swiper>
+        </div>
+    )
+        ;
 };
-
 export default ProductList;

@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from "./ProductCard.module.scss";
+import styles from "./ProductItem.module.scss";
 import Image from "next/image";
 
-const ProductCard = ({title, description, price, mainImage}) => {
+const ProductItem = ({title, description, price, mainImage}) => {
     return (
         <li className={styles.item}>
             <Image className={styles.cardImage}
                 src={mainImage}
                 alt={title}
-                width={200}
-                height={200}
+                width={140}
+                height={140}
                 priority
             />
             <div className={styles.information}>
@@ -21,4 +21,4 @@ const ProductCard = ({title, description, price, mainImage}) => {
     );
 };
 
-export default ProductCard;
+export default ProductItem;

@@ -6,15 +6,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  min-width: 320px;
   margin: 0 auto;
-  max-width: 1400px;
-  width: 90%;
+  padding: 0 16px;
+}
+@media screen and (min-width: 576px) {
+  .header .wrapper {
+    padding: 0 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .header .wrapper {
+    max-width: 1400px;
+    padding: 0 60px;
+  }
 }
 .header .wrapper .navLeft {
   display: flex;
   flex: 1;
   gap: 20px;
   position: relative;
+  z-index: 10;
 }
 .header .wrapper .navLeft .menuBtn {
   display: none;

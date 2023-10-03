@@ -1,6 +1,4 @@
 .item {
-  background-color: white;
-  padding: 10px;
   border-radius: 10px;
 }
 .item .information {
@@ -10,25 +8,28 @@
   gap: 5px;
 }
 .item .information .title {
-  font-size: 18px;
-  color: #2C742F;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
 }
 .item .information .price {
-  font-size: 22px;
-  font-weight: 500;
-  color: #1A1A1A;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
 }
 .item .button {
-  padding: 10px;
-  background-color: #00B207;
-  color: white;
-  border-radius: 43px;
   width: 100%;
+  padding: 5px 33px;
   text-align: center;
-  margin: 10px 0;
+  background-color: #efefef;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 16px;
+  margin: 9px 0;
 }
 .item .button:hover {
   background-color: #2C742F;
 }
 
-/*# sourceMappingURL=ProductCard.module.css.map */
+/*# sourceMappingURL=ProductItem.module.css.map */
