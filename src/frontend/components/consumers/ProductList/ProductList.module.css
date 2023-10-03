@@ -1,6 +1,16 @@
 .productList {
-  background-color: #EDF2EE;
-  padding: 20px 0 50px;
+  padding: 40px 0;
+  text-align: center;
+}
+.productList .title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+@media screen and (min-width: 768px) {
+  .productList .title {
+    font-size: 2.2rem;
+  }
 }
 .productList .list {
   display: flex;
@@ -8,12 +18,9 @@
   align-items: center;
   justify-content: center;
 }
-.productList .title {
-  font-size: 30px;
-  color: #1E6091;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 30px;
+.productList .navigation {
+  font-size: 1.2rem;
+  padding-top: 20px;
 }
 
 /*# sourceMappingURL=ProductList.module.css.map */

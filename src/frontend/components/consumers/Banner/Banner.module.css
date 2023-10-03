@@ -1,29 +1,71 @@
 .banner {
+  background-color: #EDF2EE;
+}
+.banner .wrapper {
   display: flex;
   align-items: center;
-  gap: 40px;
-  margin-bottom: 100px;
-  margin-top: 50px;
+  padding: 40px 0;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 90%;
 }
-.banner .information .bannerTitle {
+@media screen and (min-width: 768px) {
+  .banner .wrapper {
+    gap: 40px;
+    padding: 60px 0;
+  }
+}
+.banner .wrapper .image {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .banner .wrapper .image {
+    flex: 1;
+    display: block;
+    object-fit: cover;
+    height: 300px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .banner .wrapper .image {
+    height: 450px;
+  }
+}
+.banner .wrapper .information {
+  flex: 1;
+}
+.banner .wrapper .information .bannerTitle {
   font-weight: 600;
-  font-size: 56px;
+  font-size: 2rem;
   color: #002603;
   margin-bottom: 20px;
 }
-.banner .information .bannerDescription {
-  font-size: 18px;
-  color: #618062;
-  margin-bottom: 32px;
+@media screen and (min-width: 576px) {
+  .banner .wrapper .information .bannerTitle {
+    font-size: 3rem;
+  }
 }
-.banner .information .button {
-  padding: 16px 40px;
+@media screen and (min-width: 768px) {
+  .banner .wrapper .information .bannerTitle {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .banner .wrapper .information .bannerTitle {
+    font-size: 3.5rem;
+  }
+}
+.banner .wrapper .information .button {
+  background-color: transparent;
+  border-radius: 40px;
+  border: 2px solid #000;
+  color: #000;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+.banner .wrapper .information .button:hover {
   background-color: #00B207;
-  color: white;
-  border-radius: 43px;
-}
-.banner .information .button:hover {
-  background-color: #2C742F;
 }
 
 /*# sourceMappingURL=Banner.module.css.map */
