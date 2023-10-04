@@ -1,126 +1,89 @@
 @import "../../../../styles/responsive";
 @import "../../../../styles/mixins";
 
-.header {
-  background-color: #d4d4d4;
+.navBar {
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: $bg-color;
+  padding: 10px 0;
 
-  .wrapper {
-    padding: 10px 0;
+  .content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 29px;
     @include wrapper;
 
-    .navLeft {
+    .navigation {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      top: 100%;
       display: flex;
-      flex: 1;
-      gap: 20px;
-      position: relative;
-      z-index: 10;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
 
-      .menuBtn {
-        display: none;
-        &:checked ~ .menu {
-          opacity: 1;
-        }
-        &:checked ~ .menuIcon .navIcon {
-          background: transparent;
-        }
-        &:checked ~ .menuIcon .navIcon:before {
-          transition: all 500ms;
-          transform: rotate(-45deg);
-          top: 0;
-        }
-        &:checked ~ .menuIcon .navIcon:after {
-          transition: all 500ms;
-          transform: rotate(45deg);
-          top: 0;
-        }
-      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        min-height: 100vh;
+        background-color: $base-white;
+        min-width: 100vw;
+        padding-top: 30px;
 
-      .menuIcon {
-        cursor: pointer;
-        display: block;
-        float: right;
-        position: relative;
-        user-select: none;
-        z-index: 5;
-      }
 
-      .navIcon {
-        background-color: #333;
-        display: block;
-        height: 2px;
-        position: relative;
-        width: 18px;
-        &:before {
-          background-color: #333;
-          content: "";
-          display: block;
-          height: 100%;
-          position: absolute;
-          top: 5px;
-          transition: all 500ms;
-          width: 100%;
-        }
-        &:after {
-          background-color: #333;
-          content: "";
-          display: block;
-          height: 100%;
-          position: absolute;
-          top: -5px;
-          transition: all 500ms;
-          width: 100%;
-        }
-      }
-
-      .menu {
-        background-color: #fff;
-        margin: 0;
-        opacity: 0;
-        padding: 70px 0 0 0;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 240px;
-        a {
-          cursor: pointer;
-          font-size: 16px;
-          color: #1e6091;
-          font-weight: 500;
-          padding: 16px;
-          line-height: 40px;
+        .item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 2px solid $bg-color;
+          background-color: $bg-color;
+          border-radius: 42px;
+          margin-right: 16px;
+          margin-left: 16px;
+          padding: 14px 21px;
+          color: #000;
+          font-size: 14px;
+          font-weight: 400;
+          @include md-min {
+            margin-right: 40px;
+            margin-left: 40px;
+          }
+          @include xl-min {
+            margin-right: 60px;
+            margin-left: 60px;
+          }
           &:hover {
-            color: #76c893;
+            background-color: white;
+            border: 2px solid $bg-color;
           }
         }
-        li:nth-child(1),
-        li:nth-child(2),
-        li:nth-child(3),
-        li:nth-child(4),
-        li:nth-child(5),
-        li:nth-child(6) {
-          background-color: palegoldenrod;
-          border-radius: 2rem;
-          margin: 10px 10px;
-        }
+      }
+
+      &.hidden {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      &.visible {
+        display: flex;
+        width: 0;
+        height: 0;
       }
     }
 
     .logo {
-      font-size: 30px;
-      color: #34a0a4;
-      font-weight: 500;
-      flex: 1;
-    }
-
-    .navRight {
-      display: flex;
-      flex: 1;
-      gap: 12px;
-      justify-content: flex-end;
-      width: 100%;
+      cursor: pointer;
+      font-size: 24px;
+      color: $text-color;
+      font-weight: 400;
     }
   }
+
 }

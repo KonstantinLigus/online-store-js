@@ -1,0 +1,17 @@
+.title {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.products {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media screen and (min-width: 768px) {
+  .products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*# sourceMappingURL=Category.module.css.map */

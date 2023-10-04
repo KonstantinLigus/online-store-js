@@ -4,6 +4,7 @@ import product from "../../../../../public/assets/product.png";
 import heart from "../../../../../public/assets/icon/heart-icon.svg";
 import information from "../../../../../public/assets/icon/information-line-icon.svg";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
+import getItemsController from "@/backend/items";
 
 const characteristic = [
   {
@@ -23,10 +24,13 @@ const characteristic = [
   },
 ];
 
-const CardPage = () => {
+const CardPage = async ({ id }) => {
+  const getItemById = await getItemsController("GET_ONE_ITEM");
+  const { item } = await getItemById(id);
+
   return (
     <div className={styles.productCard}>
-      <h2 className={styles.productName}>Нектарин</h2>
+      <h2 className={styles.productName}>Нектарин {item.title}</h2>
       <div className={styles.imageContainer}>
         <Image
           className={styles.imageProduct}

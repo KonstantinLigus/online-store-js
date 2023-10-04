@@ -1,0 +1,107 @@
+.productCard {
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0 16px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+@media screen and (min-width: 576px) {
+  .productCard {
+    padding: 0 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .productCard {
+    max-width: 1400px;
+    padding: 0 60px;
+  }
+}
+.productCard .productName {
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 9px;
+}
+.productCard .imageContainer {
+  position: relative;
+  min-width: 288px;
+  min-height: 231px;
+  margin-bottom: 15px;
+}
+.productCard .imageContainer .imageProduct {
+  object-fit: cover;
+}
+.productCard .imageContainer .heartIconContainer {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+}
+.productCard .imageContainer .heartIconContainer .heartIcon {
+  object-fit: cover;
+}
+.productCard .priceInformation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.productCard .priceInformation .price {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+}
+.productCard .priceInformation .measure {
+  color: #787676;
+  font-size: 14px;
+  font-weight: 500;
+}
+.productCard .button {
+  cursor: pointer;
+  width: 100%;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 32px;
+  background: #efefef;
+  padding: 16px 0;
+  text-align: center;
+  margin-top: 13px;
+  margin-bottom: 30px;
+}
+.productCard .characteristic {
+  border-radius: 8px;
+  border: 1px solid #000;
+  padding: 12px;
+}
+.productCard .characteristic .headline {
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+.productCard .characteristic .heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.productCard .characteristic .heading .title {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+}
+.productCard .characteristic .description {
+  max-width: 170px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 20px;
+}
+.productCard .productList {
+  margin-top: 30px;
+}
+
+/*# sourceMappingURL=ProductPage.module.css.map */

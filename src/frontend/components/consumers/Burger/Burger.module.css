@@ -1,0 +1,34 @@
+.burgerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  margin-top: 2px;
+}
+.burgerContainer .burger {
+  width: 16px;
+  height: 2px;
+  background-color: #000;
+  border-radius: 50px;
+}
+.burgerContainer .burger.clicked:nth-child(1) {
+  transform: translateY(2px) rotate(-45deg);
+  transition: ease-out 0.5s;
+}
+.burgerContainer .burger.clicked:nth-child(2) {
+  display: none;
+}
+.burgerContainer .burger.clicked:nth-child(3) {
+  transform: translateY(-3px) rotate(45deg);
+  transition: ease-out 0.5s;
+}
+.burgerContainer .burger.unClicked {
+  transform: rotate(0) translate(0);
+  transition: ease-out 0.5s;
+}
+
+/*# sourceMappingURL=Burger.module.css.map */
