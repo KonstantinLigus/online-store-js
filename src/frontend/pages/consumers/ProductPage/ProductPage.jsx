@@ -26,18 +26,12 @@ const characteristic = [
 ];
 
 const ProductPage = ({ params }) => {
-  const productId = params.id;
-  console.log(params.id);
-
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("api/items");
-      const { items } = await res.json();
-      let currentProduct = items.find(item => item._id == productId);
-      // тут отримуємо всі елементи, а після цього знаходимо потрібний за id
-      // думаю, що краще мати конкретний запит до бази даних за id
-      setData(currentProduct);
+      const res = await fetch(`api/items/${params.id}`);
+      const { item } = await res.json();
+      setData(item);
     };
     fetchData();
   }, []);
@@ -49,7 +43,7 @@ const ProductPage = ({ params }) => {
         <Image
           className={styles.imageProduct}
           src={product}
-          /*src={data.mainImage}* - дивна поведінка: картинка відображається, а консоль пише, що зображення не має src*/
+          /*src={data.mainImage}Image is missing required "src" property - вивід консолі */
           alt="product"
           fill
         />
