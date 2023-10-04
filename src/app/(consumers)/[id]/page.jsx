@@ -1,8 +1,3 @@
-/*
-import Category from "src/frontend/pages/consumers/Category/Category";
-export default Category;
+import ProductPage from "@/frontend/pages/consumers/ProductPage/ProductPage";
 
-
-const getItemById = await getItemsController("GET_ONE_ITEM");
-  const { item } = await getItemById(id);
-*/
+export default ProductPage;
