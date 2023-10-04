@@ -1,3 +1,5 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import Image from "next/image";
 import product from "../../../../../public/assets/product.png";
@@ -23,12 +25,66 @@ const characteristic = [
   },
 ];
 
-const ProductPage = props => {
-  console.log(props);
+const ProductPage = ({ params }) => {
+  const productId = params.id;
+  console.log(params.id);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("api/items");
+      const { items } = await res.json();
+      let currentProduct = items.find(item => item._id == productId);
+      // тут отримуємо всі елементи, а після цього знаходимо потрібний за id
+      // думаю, що краще мати конкретний запит до бази даних за id
+      setData(currentProduct);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.productCard}>
-      <h2 className={styles.productName}>f{props.id}</h2>
+      <h2 className={styles.productName}>{data.title}</h2>
+      <div className={styles.imageContainer}>
+        <Image
+          className={styles.imageProduct}
+          src={product}
+          /*src={data.mainImage}* - дивна поведінка: картинка відображається, а консоль пише, що зображення не має src*/
+          alt="product"
+          fill
+        />
+        <div className={styles.heartIconContainer}>
+          <Image
+            src={heart}
+            alt="heart-icon"
+            fill
+            className={styles.heartIcon}
+          />
+        </div>
+      </div>
+      <div className={styles.priceInformation}>
+        <p className={styles.price}>{data.price}</p>
+        <p className={styles.measure}>1 кг</p>
+      </div>
+      <button className={styles.button}>Додати в кошик</button>
+
+      <div className={styles.characteristic}>
+        <h2 className={styles.headline}>Характеристики</h2>
+
+        {characteristic.map(item => (
+          <div key={item.id}>
+            <div className={styles.heading}>
+              <Image src={information} alt="information" width={14} />
+              <h2 className={styles.title}>{item.title}</h2>
+            </div>
+            <p className={styles.description}>{item.description}</p>
+          </div>
+        ))}
+      </div>
+      <ProductList
+        className={styles.productList}
+        title="З цим товаром купують"
+      />
     </div>
   );
 };
