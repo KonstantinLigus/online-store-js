@@ -43,7 +43,7 @@ const ProductPage = ({ params }) => {
         <Image
           className={styles.imageProduct}
           src={product}
-          //src={data.mainImage} - Image is missing required "src" property - вивід консолі
+          //src={data.mainImage} - Browser console: Image is missing required "src"
           alt="product"
           fill
         />
