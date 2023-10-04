@@ -14,39 +14,42 @@ const ProductList = ({ title, className }) => {
       const res = await fetch("api/items");
       const { items } = await res.json();
       setData(items);
-      console.log(items);
     };
     fetchData();
   }, []);
 
   return (
-    <div className={`${styles.productList} ${className}`}>
-      <h2 className={styles.title}>{title}</h2>
-      <Swiper
-        pagination={{
-          type: "fraction",
-        }}
-        slidesPerView={2}
-        spaceBetween={8}
-        navigation={true}
-        modules={[Pagination]}
-        loop={true}
-        className={styles.mySwiper}
-      >
-        {/*<ul className={styles.list}>*/}
-        {data.map(item => (
-          <SwiperSlide key={item._id}>
-            <ProductItem
-              id={item._id}
-              title={item.title}
-              price={item.price}
-              mainImage={item.mainImage}
-            />
-          </SwiperSlide>
-        ))}
-        {/*</ul>*/}
-      </Swiper>
-    </div>
+    <>
+      {data.length > 0 && (
+        <div className={`${styles.productList} ${className}`}>
+          <h2 className={styles.title}>{title}</h2>
+          <Swiper
+            pagination={{
+              type: "fraction",
+            }}
+            slidesPerView={2}
+            spaceBetween={8}
+            navigation={true}
+            modules={[Pagination]}
+            loop={true}
+            className={styles.mySwiper}
+          >
+            {/*<ul className={styles.list}>*/}
+            {data.map(item => (
+              <SwiperSlide key={item._id}>
+                <ProductItem
+                  id={item._id}
+                  title={item.title}
+                  price={item.price}
+                  mainImage={item.mainImage}
+                />
+              </SwiperSlide>
+            ))}
+            {/*</ul>*/}
+          </Swiper>
+        </div>
+      )}
+    </>
   );
 };
 export default ProductList;
