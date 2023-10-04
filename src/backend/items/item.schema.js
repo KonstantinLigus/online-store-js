@@ -6,7 +6,8 @@ export const itemSchema = new mongoose.Schema({
   price: { type: String, required: true },
   images: { type: [String] },
   mainImage: { type: String },
-  categories: { type: [String] },
+  category: { type: [String] },
+  label: { type: [String] },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
