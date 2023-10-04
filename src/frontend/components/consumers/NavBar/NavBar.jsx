@@ -13,32 +13,32 @@ const links = [
   {
     id: 0,
     title: "Овочі",
-    url: "/vegetables",
+    url: "/category/vegetables",
   },
   {
     id: 1,
     title: "Фрукти/Ягоди",
-    url: "/fruits",
+    url: "/category/fruits",
   },
   {
     id: 2,
     title: "Горіхи",
-    url: "/nuts",
+    url: "/category/nuts",
   },
   {
     id: 3,
     title: "Бакалія",
-    url: "/grocery",
+    url: "/category/grocery",
   },
   {
     id: 4,
     title: "Консервація",
-    url: "/conservation",
+    url: "/category/conservation",
   },
   {
     id: 5,
     title: "Молочна продукція",
-    url: "/milk",
+    url: "/category/milk",
   },
   {
     id: 6,
@@ -102,13 +102,15 @@ export default function NavBar() {
             alt="user icon"
             priority
           />
-          <Image
-            src={cartIcon}
-            width={24}
-            height={24}
-            alt="cart icon"
-            priority
-          />
+          <Link href="cart">
+            <Image
+              src={cartIcon}
+              width={24}
+              height={24}
+              alt="cart icon"
+              priority
+            />
+          </Link>
         </div>
       </div>
     </header>
