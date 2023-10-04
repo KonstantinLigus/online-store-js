@@ -19,35 +19,30 @@ const ProductList = ({ title, className }) => {
   }, []);
 
   return (
-    <>
-      {data.length > 0 && (
-        <div className={`${styles.productList} ${className}`}>
-          <h2 className={styles.title}>{title}</h2>
-          <Swiper
-            pagination={{
-              type: "fraction",
-              //   formatFractionCurrent: number => (number ? number : 1),
-            }}
-            slidesPerView={2}
-            spaceBetween={8}
-            navigation={true}
-            modules={[Pagination]}
-            loop={true}
-            className={styles.mySwiper}
-          >
-            {data.map(item => (
-              <SwiperSlide key={item._id}>
-                <ProductItem
-                  title={item.title}
-                  price={item.price}
-                  mainImage={item.mainImage}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      )}
-    </>
+    <div className={`${styles.productList} ${className}`}>
+      <h2 className={styles.title}>{title}</h2>
+      <Swiper
+        pagination={{
+          type: "fraction",
+        }}
+        slidesPerView={2}
+        spaceBetween={8}
+        navigation={true}
+        modules={[Pagination]}
+        loop={true}
+        className={styles.mySwiper}
+      >
+        {data.map(item => (
+          <SwiperSlide key={item._id}>
+            <ProductItem
+              title={item.title}
+              price={item.price}
+              mainImage={item.mainImage}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 export default ProductList;
