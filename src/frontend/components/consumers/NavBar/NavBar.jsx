@@ -47,11 +47,6 @@ const links = [
   },
   {
     id: 7,
-    title: "Products",
-    url: "/product",
-  },
-  {
-    id: 8,
     title: "Admin page",
     url: "/admin",
   },
