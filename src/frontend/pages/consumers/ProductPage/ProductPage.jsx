@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import Image from "next/image";
-import product from "../../../../../public/assets/product.png";
-import heart from "../../../../../public/assets/icon/heart-icon.svg";
-import information from "../../../../../public/assets/icon/information-line-icon.svg";
+import product from "public/assets/product.png";
+import heart from "public/assets/icon/heart-icon.svg";
+import information from "public/assets/icon/information-line-icon.svg";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 
 const characteristic = [
