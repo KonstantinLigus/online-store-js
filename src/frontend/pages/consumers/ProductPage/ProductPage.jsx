@@ -34,7 +34,7 @@ const ProductPage = ({ params }) => {
       setData(item);
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   return (
     data && (
