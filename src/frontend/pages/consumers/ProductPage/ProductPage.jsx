@@ -43,7 +43,6 @@ const ProductPage = ({ params }) => {
         <div className={styles.imageContainer}>
           <Image
             className={styles.imageProduct}
-            src={product}
             src={data.mainImage} 
             fill
           />
