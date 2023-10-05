@@ -26,7 +26,7 @@ const characteristic = [
 ];
 
 const ProductPage = ({ params }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`api/items/${params.id}`);
@@ -44,8 +44,7 @@ const ProductPage = ({ params }) => {
           <Image
             className={styles.imageProduct}
             src={product}
-            //src={data.mainImage} - Browser console: Image is missing required "src"
-            alt="product"
+            src={data.mainImage} 
             fill
           />
           <div className={styles.heartIconContainer}>
