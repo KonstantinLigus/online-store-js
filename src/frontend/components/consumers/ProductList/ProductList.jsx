@@ -34,15 +34,18 @@ const ProductList = ({ title, className }) => {
             loop={true}
             className={styles.mySwiper}
           >
+            {/*<ul className={styles.list}>*/}
             {data.map(item => (
               <SwiperSlide key={item._id}>
                 <ProductItem
+                  id={item._id}
                   title={item.title}
                   price={item.price}
                   mainImage={item.mainImage}
                 />
               </SwiperSlide>
             ))}
+            {/*</ul>*/}
           </Swiper>
         </div>
       )}

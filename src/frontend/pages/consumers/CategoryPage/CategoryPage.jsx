@@ -1,11 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import styles from "./Category.module.scss";
-import Image from "next/image";
+import styles from "./CategoryPage.module.scss";
 import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
 
-const Category = ({ params }) => {
+const CategoryPage = ({ params }) => {
   const allCategories = {
     vegetables: "овочі",
     fruits: "фрукти та ягоди",
@@ -14,17 +12,15 @@ const Category = ({ params }) => {
     conservation: "консервація",
     milk: "молоко",
   };
-
-  const currentCategory = allCategories[params.category];
+  const currentCategory = allCategories[params.name];
 
   const [data, setData] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("api/items");
+      const res = await fetch("../api/items");
       const { items } = await res.json();
-      setData(items);
       console.log(items);
+      setData(items);
     };
     fetchData();
   }, []);
@@ -32,19 +28,20 @@ const Category = ({ params }) => {
   return (
     <div>
       <h2 className={styles.title}>{currentCategory}</h2>
+
       <div className={styles.products}>
         {data.map(item => (
-          <Link href={`/${params.category}/${item._id}`} key={item._id}>
-            <ProductItem
-              title={item.title}
-              price={item.price}
-              mainImage={item.mainImage}
-            />
-          </Link>
+          <ProductItem
+            key={`/${item._id}`}
+            id={`/${item._id}`}
+            title={item.title}
+            price={item.price}
+            mainImage={item.mainImage}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-export default Category;
+export default CategoryPage;
