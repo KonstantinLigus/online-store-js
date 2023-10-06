@@ -8,6 +8,7 @@ export const itemSchema = new mongoose.Schema({
   mainImage: { type: String },
   category: { type: [String] },
   label: { type: [String] },
+  producer: { type: String },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
