@@ -43,13 +43,7 @@ const ProductList = ({ title, className }) => {
           >
             {data.map(item => (
               <SwiperSlide key={item._id}>
-                <ProductItem
-                  id={item._id}
-                  title={item.title}
-                  price={item.price}
-                  mainImage={item.mainImage}
-                  unit={item.unit}
-                >
+                <ProductItem id={item._id} {...item}>
                   {cartChecker(item._id) ? (
                     <Button
                       title="З кошика"

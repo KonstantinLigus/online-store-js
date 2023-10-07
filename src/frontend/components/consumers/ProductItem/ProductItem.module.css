@@ -1,16 +1,17 @@
 .item {
   border-radius: 10px;
 }
-.item .information {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
 .item .information .title {
+  text-align: left;
   color: #000;
   font-size: 12px;
   font-weight: 400;
+}
+.item .information .priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
 }
 .item .information .priceContainer .price {
   color: #000;
@@ -18,9 +19,8 @@
   font-weight: 400;
 }
 .item .information .priceContainer .unit {
-  color: #000;
-  font-size: 12px;
-  font-weight: 400;
+  color: #AFAFAF;
+  font-size: 8px;
 }
 
 /*# sourceMappingURL=ProductItem.module.css.map */

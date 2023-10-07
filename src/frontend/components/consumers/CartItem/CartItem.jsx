@@ -32,7 +32,7 @@ const CartItem = ({
         <Link href={`${id}`}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
-        <p className={styles.price}>{price}</p>
+        <p className={styles.price}>{price} грн</p>
         <p className={styles.measure}>за 100 грам</p>
 
         <div className={styles.counter}>

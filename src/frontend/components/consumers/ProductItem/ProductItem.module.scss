@@ -7,27 +7,29 @@
   }
 
   .information {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
 
     .title {
+      text-align: left;
       color: $text-color;
       font-size: 12px;
       font-weight: 400;
     }
 
-    .priceContainer{
+    .priceContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+
       .price {
         color: $text-color;
         font-size: 12px;
         font-weight: 400;
       }
+
       .unit {
-        color: $text-color;
-        font-size: 12px;
-        font-weight: 400;
+        color: #AFAFAF;
+        font-size: 8px;
       }
     }
 

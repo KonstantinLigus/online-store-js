@@ -21,8 +21,8 @@ const ProductItem = ({ id, title, price, mainImage, unit, children }) => {
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.priceContainer}>
-          <p className={styles.price}>{price}</p>
-          <p className={styles.unit}>{unit}</p>
+          <p className={styles.price}>{price} грн</p>
+          <p className={styles.unit}>{unit} 100 гр</p>
         </div>
       </div>
       <div>{children}</div>

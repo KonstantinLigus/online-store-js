@@ -39,14 +39,7 @@ const CategoryPage = ({ params }) => {
 
       <div className={styles.products}>
         {data.map(item => (
-          <ProductItem
-            key={`/${item._id}`}
-            id={`/${item._id}`}
-            title={item.title}
-            price={item.price}
-            mainImage={item.mainImage}
-            unit={item.unit}
-          >
+          <ProductItem key={`/${item._id}`} id={`/${item._id}`} {...item}>
             {cartChecker(item._id) ? (
               <Button
                 title="З кошика"
