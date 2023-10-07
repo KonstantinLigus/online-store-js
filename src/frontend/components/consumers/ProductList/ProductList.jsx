@@ -5,9 +5,12 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
 import { Pagination } from "swiper/modules";
+import { useCart } from "@/hooks/useCart";
+import Button from "@/frontend/components/consumers/Button/Button";
 
 const ProductList = ({ title, className }) => {
   const [data, setData] = useState([]);
+  const { cart, addToCart, removeFromCart } = useCart();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +20,10 @@ const ProductList = ({ title, className }) => {
     };
     fetchData();
   }, []);
+
+  const cartChecker = id => {
+    return cart.some(cartItem => cartItem._id === id);
+  };
 
   return (
     <>
@@ -34,7 +41,6 @@ const ProductList = ({ title, className }) => {
             loop={true}
             className={styles.mySwiper}
           >
-            {/*<ul className={styles.list}>*/}
             {data.map(item => (
               <SwiperSlide key={item._id}>
                 <ProductItem
@@ -42,10 +48,18 @@ const ProductList = ({ title, className }) => {
                   title={item.title}
                   price={item.price}
                   mainImage={item.mainImage}
-                />
+                >
+                  {cartChecker(item._id) ? (
+                    <Button
+                      title="З кошика"
+                      onClick={() => removeFromCart(item._id)}
+                    />
+                  ) : (
+                    <Button title="До кошика" onClick={() => addToCart(item)} />
+                  )}
+                </ProductItem>
               </SwiperSlide>
             ))}
-            {/*</ul>*/}
           </Swiper>
         </div>
       )}

@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import styles from "./ProductItem.module.scss";
 import Image from "next/image";
-
-const ProductItem = ({ id, title, description, price, mainImage }) => {
+import styles from "./ProductItem.module.scss";
+const ProductItem = ({ id, title, price, mainImage, children }) => {
   return (
     <li className={styles.item}>
       <Link href={`${id}`}>
@@ -22,7 +21,7 @@ const ProductItem = ({ id, title, description, price, mainImage }) => {
         </Link>
         <p className={styles.price}>{price}</p>
       </div>
-      <button className={styles.button}>До кошика</button>
+      <div>{children}</div>
     </li>
   );
 };

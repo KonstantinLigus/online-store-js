@@ -2,19 +2,23 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CategoryPage.module.scss";
 import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
+import { useCart } from "@/hooks/useCart";
+import Button from "@/frontend/components/consumers/Button/Button";
+
+const allCategories = {
+  vegetables: "овочі",
+  fruits: "фрукти та ягоди",
+  nuts: "горіхи",
+  grocery: "бакалія",
+  conservation: "консервація",
+  milk: "молоко",
+};
 
 const CategoryPage = ({ params }) => {
-  const allCategories = {
-    vegetables: "овочі",
-    fruits: "фрукти та ягоди",
-    nuts: "горіхи",
-    grocery: "бакалія",
-    conservation: "консервація",
-    milk: "молоко",
-  };
+  const [data, setData] = useState([]);
+  const { cart, addToCart, removeFromCart } = useCart();
   const currentCategory = allCategories[params.name];
 
-  const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("../api/items");
@@ -24,6 +28,10 @@ const CategoryPage = ({ params }) => {
     };
     fetchData();
   }, []);
+
+  const cartChecker = id => {
+    return cart.some(cartItem => cartItem._id === id);
+  };
 
   return (
     <div>
@@ -37,7 +45,16 @@ const CategoryPage = ({ params }) => {
             title={item.title}
             price={item.price}
             mainImage={item.mainImage}
-          />
+          >
+            {cartChecker(item._id) ? (
+              <Button
+                title="З кошика"
+                onClick={() => removeFromCart(item._id)}
+              />
+            ) : (
+              <Button title="До кошика" onClick={() => addToCart(item)} />
+            )}
+          </ProductItem>
         ))}
       </div>
     </div>

@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import Image from "next/image";
-import product from "public/assets/product.png";
 import heart from "public/assets/icon/heart-icon.svg";
 import information from "public/assets/icon/information-line-icon.svg";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
+import { useCart } from "@/hooks/useCart";
+import Button from "@/frontend/components/consumers/Button/Button";
 
 const characteristic = [
   {
@@ -27,6 +28,8 @@ const characteristic = [
 
 const ProductPage = ({ params }) => {
   const [data, setData] = useState(null);
+  const { cart, addToCart, removeFromCart } = useCart();
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`api/items/${params.id}`);
@@ -36,6 +39,10 @@ const ProductPage = ({ params }) => {
     fetchData();
   }, [params.id]);
 
+  const cartChecker = id => {
+    return cart.some(cartItem => cartItem._id === id);
+  };
+
   return (
     data && (
       <div className={styles.productCard}>
@@ -43,8 +50,9 @@ const ProductPage = ({ params }) => {
         <div className={styles.imageContainer}>
           <Image
             className={styles.imageProduct}
-            src={data.mainImage} 
+            src={data.mainImage}
             fill
+            alt="product-image"
           />
           <div className={styles.heartIconContainer}>
             <Image
@@ -59,20 +67,39 @@ const ProductPage = ({ params }) => {
           <p className={styles.price}>{data.price}</p>
           <p className={styles.measure}>1 кг</p>
         </div>
-        <button className={styles.button}>Додати в кошик</button>
-  
+        {cartChecker(data._id) ? (
+          <Button
+            className={styles.button}
+            title="Видалити з кошика"
+            onClick={() => removeFromCart(data._id)}
+          />
+        ) : (
+          <Button
+            className={styles.button}
+            title="Додати до кошика"
+            onClick={() => addToCart(data)}
+          />
+        )}
         <div className={styles.characteristic}>
           <h2 className={styles.headline}>Характеристики</h2>
-  
-          {characteristic.map(item => (
-            <div key={item.id}>
-              <div className={styles.heading}>
-                <Image src={information} alt="information" width={14} />
-                <h2 className={styles.title}>{item.title}</h2>
-              </div>
-              <p className={styles.description}>{item.description}</p>
+
+          <div>
+            <div className={styles.heading}>
+              <Image src={information} alt="information" width={14} />
+              <h2 className={styles.title}>Умови зберігання:</h2>
             </div>
-          ))}
+            <p className={styles.description}>{data.description}</p>
+            <div className={styles.heading}>
+              <Image src={information} alt="information" width={14} />
+              <h2 className={styles.title}>Термін зберігання:</h2>
+            </div>
+            <p className={styles.description}>3-5 днів</p>
+            <div className={styles.heading}>
+              <Image src={information} alt="information" width={14} />
+              <h2 className={styles.title}>Місце походження:</h2>
+            </div>
+            <p className={styles.description}>{data.producer}</p>
+          </div>
         </div>
         <ProductList
           className={styles.productList}

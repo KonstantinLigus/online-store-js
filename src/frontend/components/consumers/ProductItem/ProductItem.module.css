@@ -17,19 +17,5 @@
   font-size: 12px;
   font-weight: 400;
 }
-.item .button {
-  width: 100%;
-  padding: 5px 33px;
-  text-align: center;
-  background-color: #efefef;
-  color: #000;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 16px;
-  margin: 9px 0;
-}
-.item .button:hover {
-  background-color: #2C742F;
-}
 
 /*# sourceMappingURL=ProductItem.module.css.map */

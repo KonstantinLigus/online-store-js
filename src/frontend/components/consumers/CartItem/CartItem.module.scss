@@ -1,0 +1,81 @@
+@import '../../../../../src/styles/variables';
+@import '../../../../../src/styles/mixins';
+
+.item {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  background-color: $cart-item-bg;
+  padding: 13px 3px 13px 8px;
+
+  .container {
+    position: relative;
+    width: 96px;
+    height: 86px;
+
+    .cardImage {
+      object-fit: cover;
+    }
+  }
+
+  .information {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: .5px;
+      margin-bottom: 4px;
+    }
+
+    .price {
+      color: $text-color;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .measure {
+      color: $measure-color;
+      font-size: 8px;
+      font-weight: 400;
+      margin-bottom: 13px;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: space-between;
+
+      .amount {
+        display: flex;
+        align-items: center;
+
+        .amountIconContainer {
+          position: relative;
+          width: 20px;
+          height: 20px;
+
+          .amountIcon {
+            cursor: pointer;
+            &:hover {
+              opacity: .5;
+            }
+          }
+        }
+        .amountMeasure {
+          color: $text-color;
+          font-size: 14px;
+          line-height: 18px;
+          letter-spacing: .5px;
+        }
+      }
+    }
+  }
+  .sum {
+    position: absolute;
+    right: 11px;
+    bottom: 17px;
+  }
+}
