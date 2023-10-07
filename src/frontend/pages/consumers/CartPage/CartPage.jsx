@@ -22,6 +22,7 @@ const CartPage = () => {
                 title={item.title}
                 price={item.price}
                 mainImage={item.mainImage}
+                unit={item.unit}
               >
                 <Image
                   className={styles.deleteIcon}

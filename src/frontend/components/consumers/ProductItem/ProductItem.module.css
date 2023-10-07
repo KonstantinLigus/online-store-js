@@ -12,7 +12,12 @@
   font-size: 12px;
   font-weight: 400;
 }
-.item .information .price {
+.item .information .priceContainer .price {
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+}
+.item .information .priceContainer .unit {
   color: #000;
   font-size: 12px;
   font-weight: 400;

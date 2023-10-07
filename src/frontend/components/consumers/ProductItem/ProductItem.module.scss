@@ -18,10 +18,18 @@
       font-weight: 400;
     }
 
-    .price {
-      color: $text-color;
-      font-size: 12px;
-      font-weight: 400;
+    .priceContainer{
+      .price {
+        color: $text-color;
+        font-size: 12px;
+        font-weight: 400;
+      }
+      .unit {
+        color: $text-color;
+        font-size: 12px;
+        font-weight: 400;
+      }
     }
+
   }
 }

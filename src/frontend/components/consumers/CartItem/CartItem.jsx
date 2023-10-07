@@ -5,7 +5,15 @@ import styles from "./CartItem.module.scss";
 import minusIcon from "../../../../../public/assets/icon/icons-minus.png";
 import plusIcon from "../../../../../public/assets/icon/icons-plus.svg";
 
-const CartItem = ({ id, title, price, mainImage, children, className }) => {
+const CartItem = ({
+  id,
+  title,
+  price,
+  mainImage,
+  unit,
+  children,
+  className,
+}) => {
   return (
     <li className={`${styles.item} ${className}`}>
       <Link href={`${id}`}>
@@ -37,7 +45,7 @@ const CartItem = ({ id, title, price, mainImage, children, className }) => {
                 fill
               />
             </div>
-            <p className={styles.amountMeasure}>100 гр</p>
+            <p className={styles.amountMeasure}>{unit}</p>
             <div className={styles.amountIconContainer}>
               <Image
                 className={styles.amountIcon}

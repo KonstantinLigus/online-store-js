@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProductItem.module.scss";
-const ProductItem = ({ id, title, price, mainImage, children }) => {
+
+const ProductItem = ({ id, title, price, mainImage, unit, children }) => {
   return (
     <li className={styles.item}>
       <Link href={`${id}`}>
@@ -19,7 +20,10 @@ const ProductItem = ({ id, title, price, mainImage, children }) => {
         <Link href={`${id}`}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
-        <p className={styles.price}>{price}</p>
+        <div className={styles.priceContainer}>
+          <p className={styles.price}>{price}</p>
+          <p className={styles.unit}>{unit}</p>
+        </div>
       </div>
       <div>{children}</div>
     </li>

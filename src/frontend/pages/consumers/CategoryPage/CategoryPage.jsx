@@ -45,6 +45,7 @@ const CategoryPage = ({ params }) => {
             title={item.title}
             price={item.price}
             mainImage={item.mainImage}
+            unit={item.unit}
           >
             {cartChecker(item._id) ? (
               <Button

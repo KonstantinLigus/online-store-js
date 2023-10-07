@@ -87,9 +87,7 @@ export default function NavBar() {
         </nav>
 
         <Link href="/">
-          <h1 className={styles.logo} onClick={updateMenu}>
-            Logo
-          </h1>
+          <h1 className={styles.logo}>Logo</h1>
         </Link>
         <div>
           <Image
@@ -98,7 +96,6 @@ export default function NavBar() {
             height={24}
             alt="user icon"
             priority
-            onClick={updateMenu}
           />
           <Link href="cart">
             <Image
@@ -107,7 +104,6 @@ export default function NavBar() {
               height={24}
               alt="cart icon"
               priority
-              onClick={updateMenu}
             />
           </Link>
         </div>

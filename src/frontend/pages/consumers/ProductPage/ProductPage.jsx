@@ -64,8 +64,8 @@ const ProductPage = ({ params }) => {
           </div>
         </div>
         <div className={styles.priceInformation}>
-          <p className={styles.price}>{data.price}</p>
-          <p className={styles.measure}>1 кг</p>
+          <p className={styles.price}>{data.price} грн</p>
+          <p className={styles.measure}>{data.unit}</p>
         </div>
         {cartChecker(data._id) ? (
           <Button
