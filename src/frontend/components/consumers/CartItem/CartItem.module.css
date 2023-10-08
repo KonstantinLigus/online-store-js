@@ -51,6 +51,7 @@
 }
 .item .information .counter .amount .amountIconContainer .amountIcon {
   cursor: pointer;
+  object-fit: cover;
 }
 .item .information .counter .amount .amountIconContainer .amountIcon:hover {
   opacity: 0.5;

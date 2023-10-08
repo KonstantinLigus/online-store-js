@@ -15,12 +15,7 @@ const CartPage = () => {
         {cart.length > 0 ? (
           cart.map(item => (
             <>
-              <CartItem
-                className={styles.cartItem}
-                key={item._id}
-                id={item._id}
-                {...item}
-              >
+              <CartItem className={styles.cartItem} key={item._id} {...item}>
                 <Image
                   className={styles.deleteIcon}
                   src={deleteIcon}

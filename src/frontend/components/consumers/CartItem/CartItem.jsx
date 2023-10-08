@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CartItem.module.scss";
-import minusIcon from "../../../../../public/assets/icon/icons-minus.png";
-import plusIcon from "../../../../../public/assets/icon/icons-plus.svg";
+import minusIcon from "@/../public/assets/icon/icons-minus.png";
+import plusIcon from "@/../public/assets/icon/icons-plus.svg";
 
 const CartItem = ({
   id,

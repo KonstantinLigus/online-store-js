@@ -59,6 +59,7 @@
 
           .amountIcon {
             cursor: pointer;
+            object-fit: cover;
             &:hover {
               opacity: .5;
             }
