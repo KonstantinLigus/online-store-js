@@ -2,12 +2,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./NavBar.module.scss";
-import userIcon from "@/../public/assets/icon/user-icon.svg";
-import cartIcon from "@/../public/assets/icon/cart-icon.svg";
+import userIcon from "public/assets/icon/user-icon.svg";
+import cartIcon from "public/assets/icon/cart-icon.svg";
 import Burger from "@/frontend/components/consumers/Burger/Burger";
 import { useState } from "react";
 import burgerStyles from "../Burger/Burger.module.scss";
-import arrow from "@/../public/arrow-right.svg";
+import arrow from "public/arrow-right.svg";
 
 const links = [
   {

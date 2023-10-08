@@ -2,7 +2,7 @@
 import React from "react";
 import { useCart } from "@/hooks/useCart";
 import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
-import deleteIcon from "../../../../../public/assets/icon/cart-delete.svg";
+import deleteIcon from "public/assets/icon/cart-delete.svg";
 import Image from "next/image";
 import styles from "./CartPage.module.scss";
 
