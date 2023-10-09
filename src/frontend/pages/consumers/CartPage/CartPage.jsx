@@ -14,17 +14,15 @@ const CartPage = () => {
       <ul className={styles.cartPage}>
         {cart.length > 0 ? (
           cart.map(item => (
-            <>
-              <CartItem className={styles.cartItem} key={item._id} {...item}>
-                <Image
-                  className={styles.deleteIcon}
-                  src={deleteIcon}
-                  alt="delete-icon"
-                  onClick={() => removeFromCart(item._id)}
-                  width={20}
-                />
-              </CartItem>
-            </>
+            <CartItem className={styles.cartItem} key={item._id} {...item}>
+              <Image
+                className={styles.deleteIcon}
+                src={deleteIcon}
+                alt="delete-icon"
+                onClick={() => removeFromCart(item._id)}
+                width={20}
+              />
+            </CartItem>
           ))
         ) : (
           <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>

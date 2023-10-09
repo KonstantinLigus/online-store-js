@@ -2,10 +2,16 @@
 import { useEffect, useState } from "react";
 
 export const useCart = () => {
-  const [cart, setCart] = useState(() => {
-    const storedProducts = localStorage.getItem("cart");
-    return storedProducts ? JSON.parse(storedProducts) : [];
-  });
+  const [cart, setCart] = useState([]);
+
+  useEffect(
+    () =>
+      setCart(() => {
+        const storedProducts = localStorage.getItem("cart");
+        return storedProducts ? JSON.parse(storedProducts) : [];
+      }),
+    [],
+  );
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
