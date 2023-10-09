@@ -1,0 +1,43 @@
+@import '../../../../styles/responsive';
+@import '../../../../styles/mixins';
+@import '../../../../styles/variables';
+
+.burgerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  margin-top: 2px;
+
+  .burger {
+    width: 16px;
+    height: 2px;
+    background-color: $text-color;
+    border-radius: 50px;
+
+    &.clicked {
+      &:nth-child(1) {
+        transform: translateY(2px) rotate(-45deg);
+        transition: ease-out .5s;
+      }
+
+      &:nth-child(2) {
+       display: none;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-3px) rotate(45deg);
+        transition: ease-out .5s;
+      }
+    }
+
+    &.unClicked {
+      transform: rotate(0) translate(0);
+      transition: ease-out .5s;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import "../../../../styles/responsive";
+
+.title {
+  font-size: 3rem;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.products {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  @include lg-min {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,71 @@
+.item {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  background-color: #D9D9D9;
+  padding: 13px 3px 13px 8px;
+}
+.item .container {
+  position: relative;
+  width: 96px;
+  height: 86px;
+}
+.item .container .cardImage {
+  object-fit: cover;
+}
+.item .information {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.item .information .title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.item .information .price {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+}
+.item .information .measure {
+  color: #929292;
+  font-size: 8px;
+  font-weight: 400;
+  margin-bottom: 13px;
+}
+.item .information .counter {
+  display: flex;
+  justify-content: space-between;
+}
+.item .information .counter .amount {
+  display: flex;
+  align-items: center;
+}
+.item .information .counter .amount .amountIconContainer {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.item .information .counter .amount .amountIconContainer .amountIcon {
+  cursor: pointer;
+  object-fit: cover;
+}
+.item .information .counter .amount .amountIconContainer .amountIcon:hover {
+  opacity: 0.5;
+}
+.item .information .counter .amount .amountMeasure {
+  color: #000;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+}
+.item .sum {
+  position: absolute;
+  right: 11px;
+  bottom: 17px;
+}
+
+/*# sourceMappingURL=CartItem.module.css.map */

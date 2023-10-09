@@ -7,37 +7,31 @@
   }
 
   .information {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
 
     .title {
+      text-align: left;
       color: $text-color;
       font-size: 12px;
       font-weight: 400;
     }
 
-    .price {
-      color: $text-color;
-      font-size: 12px;
-      font-weight: 400;
-    }
-  }
+    .priceContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
 
-  .button {
-    width: 100%;
-    padding: 5px 33px;
-    text-align: center;
-    background-color: $bg-color;
-    color: $text-color;;
-    font-size: 14px;
-    font-weight: 400;
-    border-radius: 16px;
-    margin: 9px 0;
+      .price {
+        color: $text-color;
+        font-size: 12px;
+        font-weight: 400;
+      }
 
-    &:hover {
-      background-color: #2C742F;
+      .unit {
+        color: #AFAFAF;
+        font-size: 8px;
+      }
     }
+
   }
 }

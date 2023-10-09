@@ -1,35 +1,26 @@
 .item {
   border-radius: 10px;
 }
-.item .information {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
 .item .information .title {
+  text-align: left;
   color: #000;
   font-size: 12px;
   font-weight: 400;
 }
-.item .information .price {
+.item .information .priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+.item .information .priceContainer .price {
   color: #000;
   font-size: 12px;
   font-weight: 400;
 }
-.item .button {
-  width: 100%;
-  padding: 5px 33px;
-  text-align: center;
-  background-color: #efefef;
-  color: #000;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 16px;
-  margin: 9px 0;
-}
-.item .button:hover {
-  background-color: #2C742F;
+.item .information .priceContainer .unit {
+  color: #AFAFAF;
+  font-size: 8px;
 }
 
 /*# sourceMappingURL=ProductItem.module.css.map */
