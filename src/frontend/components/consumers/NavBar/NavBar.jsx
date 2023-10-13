@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./NavBar.module.scss";
+import searchIcon from "public/assets/icon/search-icon.svg";
 import userIcon from "public/assets/icon/user-icon.svg";
 import cartIcon from "public/assets/icon/cart-icon.svg";
 import Burger from "@/frontend/components/consumers/Burger/Burger";
@@ -55,6 +56,7 @@ export default function NavBar() {
   const [burgerClass, setBurgerClass] = useState(
     `${burgerStyles.burger} ${burgerStyles.unClicked}`,
   );
+
   const [menuClass, setMenuClass] = useState(
     `${styles.navigation} ${styles.hidden}`,
   );
@@ -69,26 +71,55 @@ export default function NavBar() {
     }
     setIsMenuClicked(!isMenuClicked);
   };
+
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
+
+  const searching = e => {
+    e.preventDefault();
+    setIsSearchClicked(false);
+  };
+
   return (
     <header className={styles.navBar}>
       <div className={styles.content}>
-        <Burger className={burgerClass} onClick={updateMenu} />
-        <nav className={menuClass}>
-          <ul className={styles.list}>
-            {links.map(link => (
-              <Link key={link.id} href={link.url} onClick={updateMenu}>
-                <li className={styles.item}>
-                  {link.title}
-                  <Image src={arrow} alt="arrow-icon" width={24} priority />
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </nav>
+        <div style={{ display: "flex" }}>
+          <Burger className={burgerClass} onClick={updateMenu} />
+          <nav className={menuClass}>
+            <ul className={styles.list}>
+              {links.map(link => (
+                <Link key={link.id} href={link.url} onClick={updateMenu}>
+                  <li className={styles.item}>
+                    {link.title}
+                    <Image src={arrow} alt="arrow-icon" width={24} priority />
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </nav>
+          <Image
+            src={searchIcon}
+            width={18}
+            height={18}
+            alt="user icon"
+            priority
+            onClick={() => setIsSearchClicked(!isSearchClicked)}
+            style={{ marginLeft: "1rem" }}
+          />
+          <form
+            action="GET"
+            onSubmit={searching}
+            className={styles.search}
+            style={isSearchClicked ? { display: "flex" } : { display: "none" }}
+          >
+            <input type="text" placeholder="Пошук..." />
+            <input type="submit" value="Шукати" />
+          </form>
+        </div>
 
         <Link href="/">
           <h1 className={styles.logo}>Logo</h1>
         </Link>
+
         <div>
           <Image
             src={userIcon}
@@ -104,6 +135,7 @@ export default function NavBar() {
               height={24}
               alt="cart icon"
               priority
+              style={{ marginLeft: "1rem" }}
             />
           </Link>
         </div>
