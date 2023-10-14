@@ -1,4 +1,18 @@
 @import "../../../../styles/mixins";
-.productList {
-  @include wrapper;
+@import "../../../../styles/responsive";
+
+.dividerSmall {
+  height: 30px;
+  width: 100%;
+  @include lg-min {
+    height: 60px;
+  }
+}
+
+.divider {
+  height: 60px;
+  width: 100%;
+  @include lg-min {
+    height: 100px;
+  }
 }
