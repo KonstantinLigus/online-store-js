@@ -10,11 +10,10 @@ const Order = props => {
 
   return (
     <div className={styles.wrapper}>
+      <button onClick={closeOrder} className={styles.btnClose}>
+        &#x2715;
+      </button>
       <form action="GET" className={styles.form}>
-        <button onClick={closeOrder} className={styles.btnClose}>
-          &#x2715;
-        </button>
-
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>
             <span>1</span> Особисті дані
@@ -128,9 +127,6 @@ const Order = props => {
             className={styles.inputText}
           ></textarea>
         </fieldset>
-        <button onClick={closeOrder} className={styles.btnOrder}>
-          Оформити замовлення
-        </button>
       </form>
     </div>
   );
