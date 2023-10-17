@@ -5,9 +5,12 @@ import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
 import deleteIcon from "public/assets/icon/cart-delete.svg";
 import Image from "next/image";
 import styles from "./CartPage.module.scss";
+import Order from "@/frontend/components/consumers/Order/Order";
+import { useState } from "react";
 
 const CartPage = () => {
   const { cart, removeFromCart } = useCart();
+  const [order, setOrder] = useState(false);
 
   return (
     <>
@@ -33,6 +36,7 @@ const CartPage = () => {
           <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
         )}
       </ul>
+
       {cart.length > 0 && (
         <div className={styles.cartFooter}>
           <div className={styles.order}>
@@ -40,10 +44,14 @@ const CartPage = () => {
               <p className={styles.caption}>Всього до сплати:</p>
               <p className={styles.sum}>215$</p>
             </div>
-            <button className={styles.button}>Оформити замовлення</button>
+            <button className={styles.button} onClick={() => setOrder(true)}>
+              Оформити замовлення
+            </button>
           </div>
         </div>
       )}
+
+      {order && <Order closeOrder={setOrder} />}
     </>
   );
 };
