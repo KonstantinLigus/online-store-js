@@ -9,8 +9,7 @@ export const itemSchema = new mongoose.Schema({
   category: { type: [String], required: true },
   label: { type: [String] },
   producer: { type: String },
-  measurement: { unit: String, step: Number },
-  action: { type: Number },
+  measurement: { unit: String, values: [Number] },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
