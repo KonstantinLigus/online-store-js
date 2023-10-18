@@ -6,10 +6,10 @@ export const itemSchema = new mongoose.Schema({
   price: { type: [Number], required: true },
   images: { type: [String] },
   mainImage: { type: String },
-  category: { type: [String] },
+  category: { type: [String], required: true },
   label: { type: [String] },
   producer: { type: String },
-  unit: { type: String },
+  measurement: { unit: String, values: [Number] },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
