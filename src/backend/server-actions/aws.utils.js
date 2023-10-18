@@ -27,5 +27,8 @@ export async function putFileToC3BucketAndGetFileURL(file) {
 }
 
 export async function putArrOfFilesToC3BucketAndGetFileURL(arrOfFiles) {
-  arrOfFiles.map();
+  const arrOfURLsPromises = arrOfFiles.map(file =>
+    putFileToC3BucketAndGetFileURL(file),
+  );
+  return Promise.all(arrOfURLsPromises);
 }
