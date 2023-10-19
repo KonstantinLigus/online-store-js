@@ -1,10 +1,14 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
-const { AWS_S3_ACCESS_KEY_ID, AWS_S3_SECRET_ACCESS_KEY, STORE_ITEMS_PHOTOS } =
-  process.env;
+const {
+  AWS_S3_ACCESS_KEY_ID,
+  AWS_S3_SECRET_ACCESS_KEY,
+  STORE_ITEMS_PHOTOS,
+  AWS_REGION,
+} = process.env;
 
 const client = new S3Client({
-  region: "eu-north-1",
+  region: AWS_REGION,
   credentials: {
     accessKeyId: AWS_S3_ACCESS_KEY_ID,
     secretAccessKey: AWS_S3_SECRET_ACCESS_KEY,
