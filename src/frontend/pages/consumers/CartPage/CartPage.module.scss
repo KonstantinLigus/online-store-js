@@ -1,14 +1,39 @@
-@import '../../../../../src/styles/variables';
-@import '../../../../../src/styles/mixins';
+@import "../../../../../src/styles/variables";
+@import "../../../../../src/styles/mixins";
+@import "../../../../../src/styles/responsive";
+
+.back {
+  @include wrapper;
+  .arrow {
+    align-items: center;
+    background-color: $cart-item-bg;
+    border-radius: 1.3rem;
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 2.6rem;
+    justify-content: center;
+    margin: 1em 0;
+    width: 2.6rem;
+    &:hover {
+      background-color: #9d9b9b;
+    }
+  }
+}
 
 .cartPage {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  gap: 2em;
   @include wrapper;
+  @include md-min {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include lg-min {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-  .warning{
-   text-align: center;
+  .warning {
+    text-align: center;
     margin: 30px 0;
   }
 
@@ -22,15 +47,14 @@
       right: 10px;
 
       &:hover {
-        opacity: .5;
+        opacity: 0.5;
       }
     }
   }
-
 }
 
 .cartFooter {
-  margin-top: 50px;
+  margin-top: 1em;
   background-color: $cart-item-bg;
   padding-top: 10px;
   padding-bottom: 21px;
@@ -59,8 +83,8 @@
       width: 100%;
       padding: 16px 30px;
       text-align: center;
-      background-color: #B6B3B3;
-      color: $text-color;;
+      background-color: #b6b3b3;
+      color: $text-color;
       font-size: 20px;
       font-weight: 500;
       border-radius: 32px;

@@ -12,8 +12,22 @@ const CartPage = () => {
   const { cart, removeFromCart } = useCart();
   const [order, setOrder] = useState(false);
 
+  const sendOrder = () => {
+    alert("Ваше замовлення прийнято!");
+    setOrder(false);
+  };
+
   return (
-    <>
+    <main>
+      <div className={styles.back}>
+        <button
+          type="button"
+          onClick={() => history.back()}
+          className={styles.arrow}
+        >
+          &#129120;
+        </button>
+      </div>
       <ul className={styles.cartPage}>
         {cart.length > 0 ? (
           cart.map(item => (
@@ -37,6 +51,8 @@ const CartPage = () => {
         )}
       </ul>
 
+      {order && <Order closeOrder={setOrder} />}
+
       {cart.length > 0 && (
         <div className={styles.cartFooter}>
           <div className={styles.order}>
@@ -44,15 +60,18 @@ const CartPage = () => {
               <p className={styles.caption}>Всього до сплати:</p>
               <p className={styles.sum}>215$</p>
             </div>
-            <button className={styles.button} onClick={() => setOrder(true)}>
+            <button
+              className={styles.button}
+              onClick={() => {
+                !order ? setOrder(true) : sendOrder();
+              }}
+            >
               Оформити замовлення
             </button>
           </div>
         </div>
       )}
-
-      {order && <Order closeOrder={setOrder} />}
-    </>
+    </main>
   );
 };
 export default CartPage;

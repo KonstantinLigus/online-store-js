@@ -116,7 +116,7 @@ export default function NavBar() {
           </form>
         </div>
 
-        <Link href="/">
+        <Link href="/" prefetch={false}>
           <h1 className={styles.logo}>Logo</h1>
         </Link>
 
@@ -128,7 +128,7 @@ export default function NavBar() {
             alt="user icon"
             priority
           />
-          <Link href="cart">
+          <Link href="/cart">
             <Image
               src={cartIcon}
               width={24}
