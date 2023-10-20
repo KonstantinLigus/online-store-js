@@ -6,16 +6,12 @@ import deleteIcon from "public/assets/icon/cart-delete.svg";
 import Image from "next/image";
 import styles from "./CartPage.module.scss";
 import Order from "@/frontend/components/consumers/Order/Order";
+import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import { useState } from "react";
 
 const CartPage = () => {
   const { cart, removeFromCart } = useCart();
   const [order, setOrder] = useState(false);
-
-  const sendOrder = () => {
-    alert("Ваше замовлення прийнято!");
-    setOrder(false);
-  };
 
   return (
     <main>
@@ -51,8 +47,6 @@ const CartPage = () => {
         )}
       </ul>
 
-      {order && <Order closeOrder={setOrder} />}
-
       {cart.length > 0 && (
         <div className={styles.cartFooter}>
           <div className={styles.order}>
@@ -60,16 +54,27 @@ const CartPage = () => {
               <p className={styles.caption}>Всього до сплати:</p>
               <p className={styles.sum}>215$</p>
             </div>
-            <button
-              className={styles.button}
-              onClick={() => {
-                !order ? setOrder(true) : sendOrder();
-              }}
-            >
-              Оформити замовлення
-            </button>
+            {!order && (
+              <button
+                className={styles.button}
+                onClick={() => {
+                  setOrder(true);
+                }}
+              >
+                Оформити замовлення
+              </button>
+            )}
           </div>
         </div>
+      )}
+
+      {order && <Order closeOrder={setOrder} setOrder={setOrder} />}
+
+      {order && (
+        <ProductList
+          className={styles.productList}
+          title="Вас може зацікавити:"
+        />
       )}
     </main>
   );

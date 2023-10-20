@@ -1,11 +1,45 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./Order.module.scss";
+import PhoneNumber from "./PhoneNumber/PhoneNumber";
+import Email from "./Email/Email";
+import Name from "./Name/Name";
+import Delivery from "./Delivery/Delivery";
+import Payment from "./Payment/Payment";
+import ConsumerComment from "./ConsumerComment/ConsumerComment";
+import Fieldset from "./Fieldset/Fieldset";
 
 const Order = props => {
   const closeOrder = () => {
     props.closeOrder(false);
+  };
+
+  const [consumer, setConsumer] = useState({
+    phoneNumber: "",
+    email: "",
+    name: "",
+    deliveryType: "Нова Пошта - Відділення",
+    city: "Київ",
+    office: "Відділення №1",
+    payment: "receipt",
+    comment: "",
+  });
+
+  let ordered = JSON.parse(localStorage.getItem("cart"));
+  ordered = ordered.map(i => i.title);
+
+  useEffect(() => {
+    setConsumer(prev => ({
+      ...prev,
+      ordered,
+    }));
+  }, []);
+
+  const sendOrder = e => {
+    e.preventDefault();
+    props.setOrder(false);
+    alert("Ваше замовлення прийнято!" + Object.entries(consumer));
   };
 
   return (
@@ -13,120 +47,27 @@ const Order = props => {
       <button onClick={closeOrder} className={styles.btnClose}>
         &#x2715;
       </button>
-      <form action="GET" className={styles.form}>
-        <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>
-            <span>1</span> Особисті дані
-          </legend>
+      <form action="GET" className={styles.form} onSubmit={e => sendOrder(e)}>
+        <Fieldset number={1} title={"Особисті дані"}>
+          <PhoneNumber consumer={consumer} changeData={setConsumer} />
+          <Email consumer={consumer} changeData={setConsumer} />
+          <Name consumer={consumer} changeData={setConsumer} />
+        </Fieldset>
 
-          <label htmlFor="tel" className={styles.labelText}>
-            Номер телефону:
-          </label>
-          <input
-            type="tel"
-            name="tel"
-            id="tel"
-            placeholder="+380 68 000 00 00"
-            className={styles.inputText}
-          />
+        <Fieldset number={2} title={"Доставка"}>
+          <Delivery consumer={consumer} changeData={setConsumer} />
+        </Fieldset>
 
-          <label htmlFor="email" className={styles.labelText}>
-            Email:
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="name@gmail.com"
-            className={styles.inputText}
-          />
+        <Fieldset number={3} title={"Оплата"}>
+          <Payment consumer={consumer} changeData={setConsumer} />
+          <ConsumerComment consumer={consumer} changeData={setConsumer} />
+        </Fieldset>
 
-          <label htmlFor="name" className={styles.labelText}>
-            ПІБ:
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Іванчук Сергій Дмитрович"
-            className={styles.inputText}
-          />
-        </fieldset>
-
-        <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>
-            <span>2</span> Доставка
-          </legend>
-
-          <label htmlFor="delivery" className={styles.labelSelect}>
-            Спосіб доставки:
-          </label>
-          <select id="delivery" className={styles.select}>
-            <option>Нова Пошта - Відділення</option>
-            <option>Нова Пошта - доставка кур’єром</option>
-            <option>Самовивіз з магазину в Києві: вул. І.Мазепи, 37</option>
-          </select>
-
-          <label htmlFor="city" className={styles.labelSelect}>
-            Місто:
-          </label>
-          <input
-            type="text"
-            name="city"
-            id="city"
-            className={styles.inputText}
-          />
-
-          <label htmlFor="office" className={styles.labelText}>
-            Відділення:
-          </label>
-          <input
-            type="text"
-            name="office"
-            id="office"
-            className={styles.inputText}
-          />
-        </fieldset>
-
-        <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>
-            <span>3</span> Оплата
-          </legend>
-
-          <input
-            type="radio"
-            name="payment"
-            id="receipt"
-            value="receipt"
-            className={styles.radioBtn}
-          />
-          <label htmlFor="receipt" className={styles.labelRadioBtn}>
-            Оплата при отриманні
-          </label>
-
-          <br />
-
-          <input
-            type="radio"
-            name="payment"
-            id="card"
-            value="card"
-            className={styles.radioBtn}
-          />
-          <label htmlFor="card" className={styles.labelRadioBtn}>
-            Оплата карткою
-          </label>
-
-          <label htmlFor="comment"></label>
-          <textarea
-            name="comment"
-            id="comment"
-            cols="30"
-            rows="10"
-            placeholder="Додайте коментарі до вашого замовлення"
-            className={styles.inputText}
-          ></textarea>
-        </fieldset>
+        <input
+          type="submit"
+          value="Оформити замовлення"
+          className={styles.btnOrder}
+        />
       </form>
     </div>
   );
