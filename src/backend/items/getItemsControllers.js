@@ -7,12 +7,15 @@ export async function getItemsControllers() {
 
   async function getAllItemsByField(objQuery) {
     const items = await itemsServices.getAllItemsByField(objQuery);
-    const serializedItems = items.map(({ _id, title, price, mainImage }) => ({
-      _id: _id.toString(),
-      title,
-      price,
-      mainImage,
-    }));
+    const serializedItems = items.map(
+      ({ _id, title, price, mainImage, action }) => ({
+        _id: _id.toString(),
+        title,
+        price,
+        mainImage,
+        action,
+      }),
+    );
     return { items: serializedItems, status: 200 };
   }
 
