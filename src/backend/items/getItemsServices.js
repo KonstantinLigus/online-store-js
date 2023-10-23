@@ -7,7 +7,9 @@ export async function getItemsServices() {
   return Object.freeze({ getItemById, getAllItemsByField });
 
   async function getAllItemsByField(objQuery) {
-    const items = await Item.find(objQuery);
+    const items = await Item.find(objQuery).select(
+      "title price mainImage action measurement",
+    );
     return items;
   }
 
