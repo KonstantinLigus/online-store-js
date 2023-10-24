@@ -1,6 +1,6 @@
 import "@/global-styles/globals.css";
 import { Inter } from "next/font/google";
-import AuthProviders from "@/frontend/pages/consumers/SessionProvider/SessionProvider";
+import SessionProvider from "@/frontend/pages/consumers/SessionProvider/SessionProvider";
 import UserBar from "@/frontend/pages/consumers/UserBar/UserBar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -10,14 +10,14 @@ export const metadata = {
   description: "Online store",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProviders>
+        <SessionProvider>
           <UserBar />
           {children}
-        </AuthProviders>
+        </SessionProvider>
       </body>
     </html>
   );
