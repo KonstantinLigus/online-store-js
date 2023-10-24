@@ -8,7 +8,7 @@ export async function getItemsServices() {
 
   async function getAllItemsByField(objQuery) {
     const items = await Item.find(objQuery).select(
-      "-description -images -category -producer",
+      "title price mainImage action measurement",
     );
     return items;
   }

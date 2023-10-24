@@ -10,6 +10,7 @@ export const itemSchema = new mongoose.Schema({
   label: { type: [String] },
   producer: { type: String },
   measurement: { unit: String, values: [Number] },
+  action: { type: Number },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
