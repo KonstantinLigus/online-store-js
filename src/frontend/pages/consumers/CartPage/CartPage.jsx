@@ -1,59 +1,34 @@
 "use client";
-import React from "react";
+import "@/global-styles/globals.css";
+import React, { useState } from "react";
 import { useCart } from "@/hooks/useCart";
-import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
-import deleteIcon from "public/assets/icon/cart-delete.svg";
 import Image from "next/image";
 import styles from "./CartPage.module.scss";
-import Order from "@/frontend/components/consumers/Order/Order";
-import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
-import { useState } from "react";
+import Header from "@/frontend/components/consumers/CartPage/Header/Header";
+import Order from "@/frontend/components/consumers/CartPage/Order/Order";
+import ProductsInCart from "@/frontend/components/consumers/CartPage/ProductsInCart/ProductsInCart";
+import TotalPrice from "@/frontend/components/consumers/CartPage/TotalPrice/TotalPrice";
 
 const CartPage = () => {
   const { cart, removeFromCart } = useCart();
+  const [showProductsInCart, setShowProductsInCart] = useState(true);
   const [order, setOrder] = useState(false);
 
-  return (
-    <main>
-      <div className={styles.back}>
-        <button
-          type="button"
-          onClick={() => history.back()}
-          className={styles.arrow}
-        >
-          &#129120;
-        </button>
-      </div>
-      <ul className={styles.cartPage}>
-        {cart.length > 0 ? (
-          cart.map(item => (
-            <CartItem
-              className={styles.cartItem}
-              key={item._id}
-              id={item._id}
-              {...item}
-            >
-              <Image
-                className={styles.deleteIcon}
-                src={deleteIcon}
-                alt="delete-icon"
-                onClick={() => removeFromCart(item._id)}
-                width={20}
-              />
-            </CartItem>
-          ))
-        ) : (
-          <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
-        )}
-      </ul>
+  const toggleProducts = () => setShowProductsInCart(!showProductsInCart);
 
-      {cart.length > 0 && (
-        <div className={styles.cartFooter}>
-          <div className={styles.order}>
-            <div className={styles.headline}>
-              <p className={styles.caption}>Всього до сплати:</p>
-              <p className={styles.sum}>215$</p>
-            </div>
+  return (
+    <main className={styles.main}>
+      <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
+
+      {cart.length > 0 ? (
+        <>
+          <div className={styles.productsWrapper}>
+            {showProductsInCart && (
+              <ProductsInCart cart={cart} removeFromCart={removeFromCart} />
+            )}
+          </div>
+          <div className={styles.price}>
+            <TotalPrice price={215} />
             {!order && (
               <button
                 className={styles.button}
@@ -65,17 +40,12 @@ const CartPage = () => {
               </button>
             )}
           </div>
-        </div>
+        </>
+      ) : (
+        <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
       )}
 
       {order && <Order closeOrder={setOrder} setOrder={setOrder} />}
-
-      {order && (
-        <ProductList
-          className={styles.productList}
-          title="Вас може зацікавити:"
-        />
-      )}
     </main>
   );
 };
