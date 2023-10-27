@@ -7,11 +7,57 @@
   flex-direction: column;
   min-height: 100vh;
 
+  .header {
+    @include wrapper;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+    .btnBack {
+      align-items: center;
+      background-color: $cart-item-bg;
+      border-radius: 1.3rem;
+      display: flex;
+      font-size: 1.5rem;
+      font-weight: bold;
+      height: 2.6rem;
+      justify-content: center;
+      width: 2.6rem;
+      &:hover {
+        background-color: #9d9b9b;
+      }
+    }
+  }
+
   .productsWrapper {
     flex: 1 1 auto;
   }
 
   .price {
+    @include wrapper;
+    align-items: center;
+    background-color: $cart-item-bg;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+
+    .caption {
+      color: $text-color;
+      font-size: 14px;
+    }
+
+    .sum {
+      color: $text-color;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .linkToOrder {
     @include wrapper;
     background-color: $cart-item-bg;
     margin-top: 1rem;
