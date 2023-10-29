@@ -1,4 +1,4 @@
-import connectDB from "../db/connectDB";
+import connectDB from "@/backend/db/connectDB";
 import { Item } from "./item.schema";
 
 export async function getItemsServices() {

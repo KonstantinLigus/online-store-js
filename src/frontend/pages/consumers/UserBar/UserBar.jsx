@@ -9,7 +9,7 @@ const UserBar = () => {
     <>
       {status === "authenticated" && (
         <>
-          <p>Signed in as {data.user.email}</p>
+          <p>Signed in as {data.user?.email}</p>
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}
