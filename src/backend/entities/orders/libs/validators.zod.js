@@ -20,7 +20,7 @@ export const orderZodSchema = z.object({
         /(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)|(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)/g,
         {
           message:
-            "Must contain 2 or 3 words without leading or trailing spaces. Only one space between words are available. Each word must start with capital letter.",
+            "Must contain 2 or 3 words without leading or trailing spaces. Only one space between words are available. Each word must start with a capital letter.",
         },
       ),
     city: z.string(),
