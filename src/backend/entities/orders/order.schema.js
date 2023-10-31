@@ -13,14 +13,14 @@ export const orderSchema = new mongoose.Schema({
     custumerFullName: { type: String, required: true },
     city: { type: String, required: true },
     deliveryMethod: { type: String, required: true },
-    postOffice: { type: String, required: true },
+    postOffice: { type: Number, required: true },
     customerPhone: { type: String, required: true },
     email: { type: String, required: true },
     paymentMethod: { type: String, required: true },
-    comment: { type: String, required: true },
+    comment: { type: String },
   },
-  owner: { type: String },
-  isCompleted: { type: Boolean, required: true },
+  owner: { type: String, default: null },
+  isCompleted: { type: Boolean, required: true, default: false },
 });
 
 export const Order =

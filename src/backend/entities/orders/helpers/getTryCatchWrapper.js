@@ -1,4 +1,4 @@
-import { getNotFoundUserError } from "./getErrorObj";
+import { getOrderError } from "./getErrorObj";
 
 export async function getTryCatchWrapper(callback) {
   return async function (...args) {
@@ -6,7 +6,7 @@ export async function getTryCatchWrapper(callback) {
       const res = await callback(...args);
       return res;
     } catch (error) {
-      return getNotFoundUserError(error);
+      return getOrderError(error);
     }
   };
 }

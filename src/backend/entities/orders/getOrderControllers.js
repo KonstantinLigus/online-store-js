@@ -1,4 +1,5 @@
 import { getOrderServices } from "./getOrderServices";
+import { orderZodSchema } from "./libs/validators.zod";
 
 export async function getOrderControllers() {
   const orderServices = await getOrderServices();
@@ -16,6 +17,7 @@ export async function getOrderControllers() {
   }
 
   async function createOrder(orderObj) {
+    orderZodSchema.parse(orderObj);
     const order = await orderServices.createOrder(orderObj);
     return { order, status: 200 };
   }
