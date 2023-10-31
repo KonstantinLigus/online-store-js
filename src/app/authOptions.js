@@ -1,57 +1,38 @@
-import getUserController from "@/backend/user";
+import getUserController from "@/backend/entities/users";
 import GoogleProvider from "next-auth/providers/google";
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env;
-let userDB = null;
+export async function getAuthOptions() {
+  const getUserByField = await getUserController("GET_USER_BY_FIELD");
+  const createNewUser = await getUserController("CREATE_USER");
+  return {
+    secret: NEXTAUTH_SECRET,
+    providers: [
+      GoogleProvider({
+        clientId: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
+      }),
+    ],
+    callbacks: {
+      async signIn({ user: { name, email, image } }) {
+        const { user: userFromDB } = await getUserByField({ email });
+        if (!userFromDB) {
+          await createNewUser({
+            email,
+            name,
+            image,
+          });
+        }
+        return true;
+      },
 
-const authOptions = {
-  secret: NEXTAUTH_SECRET,
-  providers: [
-    GoogleProvider({
-      clientId: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-    }),
-  ],
-  callbacks: {
-    async signIn({ user: { name, email, image } }) {
-      const { user: userFromDB } = await (
-        await getUserController("GET_USER_BY_FIELD")
-      )({ email });
-      if (userFromDB) {
-        userDB = userFromDB;
-      } else {
-        const { user: newUserFromDB } = await (
-          await getUserController("CREATE_USER")
-        )({
-          email,
-          name,
-          image,
-        });
-        userDB = newUserFromDB;
-      }
-      return true;
-    },
-    async jwt({ token, account, profile }) {
-      if (account) {
-        token.accessToken = account.access_token;
-        token.id = profile.id;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (!userDB) {
-        const { user } = await (
-          await getUserController("GET_USER_BY_FIELD")
-        )({ email: session.user.email });
+      async session({ session }) {
+        const { user } = await getUserByField({ email: session.user.email });
         session.user = user;
-        session.accessToken = token.accessToken;
         return session;
-      }
-      session.user = userDB;
-      session.accessToken = token.accessToken;
-      return session;
+      },
     },
-  },
-};
+  };
+}
 
-export default authOptions;
+export default getAuthOptions;

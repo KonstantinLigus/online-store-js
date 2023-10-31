@@ -17,6 +17,6 @@ export async function getUserControllers() {
 
   async function createUser(userObj) {
     const user = await userServices.createUser(userObj);
-    return { user, status: 200 };
+    return { user, status: 201 };
   }
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import getItemsController from "@/backend/items";
+import getItemsController from "@/backend/entities/items";
 
 export async function GET(req, { params: { id } }) {
   const getItemById = await getItemsController("GET_ONE_ITEM");
