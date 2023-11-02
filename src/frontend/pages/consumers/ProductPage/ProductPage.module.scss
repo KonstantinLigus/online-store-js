@@ -15,10 +15,11 @@
   }
 
   .imageContainer {
-    position: relative;
-    min-width: 288px;
-    min-height: 231px;
     margin-bottom: 15px;
+    height: 320px;
+    max-width: 600px;
+    min-width: 240px;
+    position: relative;
 
     .imageProduct {
       object-fit: cover;
@@ -38,9 +39,7 @@
   }
 
   .priceInformation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: left;
 
     .price {
       color: $text-color;
@@ -49,9 +48,21 @@
     }
 
     .measure {
-      color: $description-color;
-      font-size: 14px;
-      font-weight: 500;
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+
+      .measureLabel {
+        border: 1px solid #777;
+        color: #777;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+      }
+
+      .measureRadioBtn:checked + label {
+        border: 2px solid #000;
+        color: #000;
+      }
     }
   }
 

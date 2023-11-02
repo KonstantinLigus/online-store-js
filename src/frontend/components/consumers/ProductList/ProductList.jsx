@@ -20,6 +20,7 @@ const ProductList = ({ title, className }) => {
     };
     fetchData();
   }, []);
+  console.log(data);
 
   const cartChecker = id => {
     return cart.some(cartItem => cartItem._id === id);

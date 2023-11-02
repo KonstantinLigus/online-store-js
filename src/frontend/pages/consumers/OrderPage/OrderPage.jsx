@@ -24,10 +24,18 @@ const OrderPage = () => {
       {cart.length > 0 ? (
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
-
+          {/*
           {showProductsInCart && (
             <ProductsInCart cart={cart} removeFromCart={removeFromCart} />
           )}
+ */}
+          <div
+            style={
+              showProductsInCart ? { display: "block" } : { display: "none" }
+            }
+          >
+            <ProductsInCart cart={cart} removeFromCart={removeFromCart} />
+          </div>
 
           <div className={styles.price}>
             <p className={styles.caption}>Всього до сплати:</p>

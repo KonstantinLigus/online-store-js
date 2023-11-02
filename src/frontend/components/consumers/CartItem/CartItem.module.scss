@@ -1,5 +1,5 @@
-@import '../../../../../src/styles/variables';
-@import '../../../../../src/styles/mixins';
+@import "../../../../../src/styles/variables";
+@import "../../../../../src/styles/mixins";
 
 .item {
   position: relative;
@@ -27,21 +27,26 @@
       font-size: 14px;
       font-weight: 500;
       line-height: 18px;
-      letter-spacing: .5px;
+      letter-spacing: 0.5px;
       margin-bottom: 4px;
     }
 
-    .price {
-      color: $text-color;
-      font-size: 14px;
-      font-weight: 400;
-    }
-
     .measure {
-      color: $measure-color;
-      font-size: 8px;
-      font-weight: 400;
-      margin-bottom: 13px;
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+
+      .measureLabel {
+        border: 1px solid #777;
+        color: #777;
+        cursor: pointer;
+        padding: 0.2rem 0.5rem;
+      }
+
+      .measureRadioBtn:checked + label {
+        border: 2px solid #000;
+        color: #000;
+      }
     }
 
     .counter {
@@ -61,7 +66,7 @@
             cursor: pointer;
             object-fit: cover;
             &:hover {
-              opacity: .5;
+              opacity: 0.5;
             }
           }
         }
@@ -69,7 +74,7 @@
           color: $text-color;
           font-size: 14px;
           line-height: 18px;
-          letter-spacing: .5px;
+          letter-spacing: 0.5px;
         }
       }
     }
