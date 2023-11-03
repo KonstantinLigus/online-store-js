@@ -50,10 +50,19 @@ const ProductPage = ({ params }) => {
         </div>
 
         <div className={styles.priceInformation}>
-          <p className={styles.price}>{data.price[measure]} грн</p>
+          {data.prices[0].actionPrice ? (
+            <>
+              <p className={styles.price}>
+                <span>{data.prices[measure].price} грн</span>
+                {data.prices[measure].actionPrice} грн
+              </p>
+            </>
+          ) : (
+            <p className={styles.price}>{data.prices[measure].price} грн</p>
+          )}
 
           <div className={styles.measure}>
-            {data.measurement.values.map((item, index) => (
+            {data.prices.map((item, index) => (
               <div key={index}>
                 <input
                   type="radio"
@@ -64,8 +73,8 @@ const ProductPage = ({ params }) => {
                   onChange={() => setMeasure(index)}
                 />
                 <label htmlFor={index} className={styles.measureLabel}>
-                  {item}
-                  {data.measurement.unit}
+                  {item.value}
+                  {item.unit}
                 </label>
               </div>
             ))}

@@ -20,16 +20,5 @@
 
   .cartItem {
     position: relative;
-
-    .deleteIcon {
-      cursor: pointer;
-      position: absolute;
-      top: 19px;
-      right: 10px;
-
-      &:hover {
-        opacity: 0.5;
-      }
-    }
   }
 }

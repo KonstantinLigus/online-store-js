@@ -50,38 +50,46 @@
     }
 
     .counter {
+      align-items: center;
       display: flex;
-      justify-content: space-between;
 
-      .amount {
-        display: flex;
+      .counterButton {
         align-items: center;
+        background-color: #aaa;
+        border-radius: 50%;
+        display: flex;
+        font-size: 22px;
+        justify-content: center;
+        height: 26px;
+        width: 26px;
 
-        .amountIconContainer {
-          position: relative;
-          width: 20px;
-          height: 20px;
+        &:hover {
+          background-color: #999;
+        }
+      }
 
-          .amountIcon {
-            cursor: pointer;
-            object-fit: cover;
-            &:hover {
-              opacity: 0.5;
-            }
-          }
-        }
-        .amountMeasure {
-          color: $text-color;
-          font-size: 14px;
-          line-height: 18px;
-          letter-spacing: 0.5px;
-        }
+      .counterValue {
+        color: $text-color;
+        font-size: 18px;
+        margin: 0 0.5rem;
       }
     }
   }
+
   .sum {
     position: absolute;
     right: 11px;
     bottom: 17px;
+  }
+
+  .deleteIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 19px;
+    right: 10px;
+
+    &:hover {
+      opacity: 0.5;
+    }
   }
 }

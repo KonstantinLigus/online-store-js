@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./ProductItem.module.scss";
 
 const ProductItem = ({ id, title, prices, mainImage, unit, children }) => {
-  console.log(prices);
+  //console.log(prices);
   return (
     <li className={styles.item}>
       <Link href={`${id}`}>
@@ -22,8 +22,20 @@ const ProductItem = ({ id, title, prices, mainImage, unit, children }) => {
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.priceContainer}>
-          <p className={styles.price}> грн</p>
-          <p className={styles.unit}>{unit}</p>
+          {prices[0].actionPrice ? (
+            <>
+              <p className={styles.price}>
+                <span>{prices[0].price} грн</span>
+                {prices[0].actionPrice} грн
+              </p>
+            </>
+          ) : (
+            <p className={styles.price}>{prices[0].price} грн</p>
+          )}
+
+          <p className={styles.unit}>
+            {prices[0].value} {prices[0].unit}
+          </p>
         </div>
       </div>
       <div>{children}</div>
