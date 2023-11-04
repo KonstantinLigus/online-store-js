@@ -8,7 +8,11 @@ export const useCart = () => {
   const countTotalPrice = value => {
     let total = 0;
     for (let i of value) {
-      total += i.prices[i.measure].price * i.quantity;
+      let price;
+      i.prices[i.measure].actionPrice
+        ? (price = i.prices[i.measure].actionPrice)
+        : (price = i.prices[i.measure].price);
+      total += price * i.quantity;
     }
     setTotalPrice(total);
   };
@@ -23,15 +27,6 @@ export const useCart = () => {
       countTotalPrice(products);
     }
   }, []);
-
-  /*
-  useEffect(() => {
-    setCart(() => {
-      let storedProducts = localStorage.getItem("cart");
-      return storedProducts ? JSON.parse(storedProducts) : [];
-    });
-  }, []);
-  */
 
   const addToCart = (item, measure = 0, quantity = 1) => {
     const updatedCart = [...cart, { ...item, measure, quantity }];

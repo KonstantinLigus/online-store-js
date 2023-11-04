@@ -81,9 +81,20 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
         </div>
       </div>
 
-      <h3 className={styles.sum}>
-        {item.prices[measureCurrent].price * quantityCurrent} грн
-      </h3>
+      {item.prices[measureCurrent].actionPrice ? (
+        <>
+          <p className={styles.actionSum}>
+            <span>
+              {item.prices[measureCurrent].price * quantityCurrent} грн
+            </span>
+            {item.prices[measureCurrent].actionPrice * quantityCurrent} грн
+          </p>
+        </>
+      ) : (
+        <p className={styles.sum}>
+          {item.prices[measureCurrent].price * quantityCurrent} грн
+        </p>
+      )}
 
       <Image
         className={styles.deleteIcon}

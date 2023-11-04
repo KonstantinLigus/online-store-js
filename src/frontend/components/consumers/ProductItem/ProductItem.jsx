@@ -3,8 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProductItem.module.scss";
 
-const ProductItem = ({ id, title, prices, mainImage, unit, children }) => {
-  //console.log(prices);
+const ProductItem = ({ id, title, prices, mainImage, children }) => {
   return (
     <li className={styles.item}>
       <Link href={`${id}`}>
@@ -24,7 +23,7 @@ const ProductItem = ({ id, title, prices, mainImage, unit, children }) => {
         <div className={styles.priceContainer}>
           {prices[0].actionPrice ? (
             <>
-              <p className={styles.price}>
+              <p className={styles.actionPrice}>
                 <span>{prices[0].price} грн</span>
                 {prices[0].actionPrice} грн
               </p>

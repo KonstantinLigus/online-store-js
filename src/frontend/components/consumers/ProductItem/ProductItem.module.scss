@@ -17,16 +17,22 @@
       align-items: center;
       margin-top: 4px;
 
-      .price {
-        color: $text-color;
+      .actionPrice {
+        color: red;
         font-size: 12px;
         font-weight: 400;
 
         span {
-          color: red;
+          color: $text-color;
           margin-right: 0.5rem;
           text-decoration: line-through;
         }
+      }
+
+      .price {
+        color: $text-color;
+        font-size: 12px;
+        font-weight: 400;
       }
 
       .unit {
