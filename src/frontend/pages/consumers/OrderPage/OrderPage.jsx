@@ -9,7 +9,7 @@ import Order from "@/frontend/components/consumers/OrderPage/Order/Order";
 import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
 
 const OrderPage = () => {
-  const { cart, removeFromCart } = useCart();
+  const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
   const [showProductsInCart, setShowProductsInCart] = useState(false);
 
   let orderedProducts = cart.map(i => i.title);
@@ -25,13 +25,21 @@ const OrderPage = () => {
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
 
-          {showProductsInCart && (
-            <ProductsInCart cart={cart} removeFromCart={removeFromCart} />
-          )}
+          <div
+            style={
+              showProductsInCart ? { display: "block" } : { display: "none" }
+            }
+          >
+            <ProductsInCart
+              cart={cart}
+              removeFromCart={removeFromCart}
+              updateCartItem={updateCartItem}
+            />
+          </div>
 
           <div className={styles.price}>
             <p className={styles.caption}>Всього до сплати:</p>
-            <p className={styles.sum}>215 $</p>
+            <p className={styles.sum}>{totalPrice} грн</p>
           </div>
 
           <Order productsInCart={orderedProducts} />

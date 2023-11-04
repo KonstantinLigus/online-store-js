@@ -8,24 +8,6 @@ import ProductList from "@/frontend/components/consumers/ProductList/ProductList
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 
-const characteristic = [
-  {
-    id: 0,
-    title: "Умови зберігання:",
-    description: "температура від +2 до +5; вологість 85-90%",
-  },
-  {
-    id: 1,
-    title: "Термін зберігання:",
-    description: "3-5 днів",
-  },
-  {
-    id: 2,
-    title: "Країна походження:",
-    description: "Іспанія, Греція",
-  },
-];
-
 const ProductPage = ({ params }) => {
   const [data, setData] = useState(null);
   const { cart, addToCart, removeFromCart } = useCart();
@@ -43,30 +25,62 @@ const ProductPage = ({ params }) => {
     return cart.some(cartItem => cartItem._id === id);
   };
 
+  const [measure, setMeasure] = useState(0);
+
   return (
     data && (
       <div className={styles.productCard}>
         <h2 className={styles.productName}>{data.title}</h2>
+
         <div className={styles.imageContainer}>
           <Image
             className={styles.imageProduct}
             src={data.mainImage}
             fill
-            alt="product-image"
+            alt="product image"
           />
           <div className={styles.heartIconContainer}>
             <Image
               src={heart}
-              alt="heart-icon"
+              alt="heart icon"
               fill
               className={styles.heartIcon}
             />
           </div>
         </div>
+
         <div className={styles.priceInformation}>
-          <p className={styles.price}>{data.price} грн</p>
-          <p className={styles.measure}>{data.unit}</p>
+          {data.prices[0].actionPrice ? (
+            <>
+              <p className={styles.price}>
+                <span>{data.prices[measure].price} грн</span>
+                {data.prices[measure].actionPrice} грн
+              </p>
+            </>
+          ) : (
+            <p className={styles.price}>{data.prices[measure].price} грн</p>
+          )}
+
+          <div className={styles.measure}>
+            {data.prices.map((item, index) => (
+              <div key={index}>
+                <input
+                  type="radio"
+                  name="measurement"
+                  id={index}
+                  className={styles.measureRadioBtn}
+                  checked={index === measure}
+                  onChange={() => setMeasure(index)}
+                />
+                <label htmlFor={index} className={styles.measureLabel}>
+                  {item.value}
+                  {item.unit}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
+
         {cartChecker(data._id) ? (
           <Button
             className={styles.button}
@@ -76,13 +90,13 @@ const ProductPage = ({ params }) => {
         ) : (
           <Button
             className={styles.button}
-            title="Додати до кошика"
-            onClick={() => addToCart(data)}
+            title="Додати в кошик"
+            onClick={() => addToCart(data, measure)}
           />
         )}
+
         <div className={styles.characteristic}>
           <h2 className={styles.headline}>Характеристики</h2>
-
           <div>
             <div className={styles.heading}>
               <Image src={information} alt="information" width={14} />
@@ -101,6 +115,7 @@ const ProductPage = ({ params }) => {
             <p className={styles.description}>{data.producer}</p>
           </div>
         </div>
+
         <ProductList
           className={styles.productList}
           title="З цим товаром купують"
