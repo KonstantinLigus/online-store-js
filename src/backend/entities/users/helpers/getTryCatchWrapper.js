@@ -1,6 +1,6 @@
 import { getNotFoundUserError } from "./getErrorObj";
 
-export async function getTryCatchWrapper(callback) {
+export function getTryCatchWrapper(callback) {
   return async function (...args) {
     try {
       const res = await callback(...args);
