@@ -1,12 +1,11 @@
-import { getItemsControllers } from "./getItemsControllers";
+import { itemsControllers } from "./itemsControllers";
 import { getTryCatchWrapper } from "./helpers";
 
-export default async function getItemsController(method) {
-  const itemsControllers = await getItemsControllers();
+export default function getItemsController(method) {
   switch (method) {
     case "GET_FILTERED_ITEMS":
-      return await getTryCatchWrapper(itemsControllers.getAllItemsByField);
+      return getTryCatchWrapper(itemsControllers.getAllItemsByField);
     case "GET_ONE_ITEM":
-      return await getTryCatchWrapper(itemsControllers.getItemById);
+      return getTryCatchWrapper(itemsControllers.getItemById);
   }
 }

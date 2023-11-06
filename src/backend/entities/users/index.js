@@ -1,14 +1,13 @@
-import { getUserControllers } from "./getUserControllers";
+import { userControllers } from "./userControllers";
 import { getTryCatchWrapper } from "./helpers";
 
-export default async function getUserController(method) {
-  const userControllers = await getUserControllers();
+export default function getUserController(method) {
   switch (method) {
     case "GET_USER_BY_FIELD":
-      return await getTryCatchWrapper(userControllers.getUserByField);
+      return getTryCatchWrapper(userControllers.getUserByField);
     case "GET_USER_BY_ID":
-      return await getTryCatchWrapper(userControllers.getUserById);
+      return getTryCatchWrapper(userControllers.getUserById);
     case "CREATE_USER":
-      return await getTryCatchWrapper(userControllers.createUser);
+      return getTryCatchWrapper(userControllers.createUser);
   }
 }

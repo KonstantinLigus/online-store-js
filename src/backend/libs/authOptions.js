@@ -2,9 +2,9 @@ import getUserController from "@/backend/entities/users";
 import GoogleProvider from "next-auth/providers/google";
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env;
-export async function getAuthOptions() {
-  const getUserByField = await getUserController("GET_USER_BY_FIELD");
-  const createNewUser = await getUserController("CREATE_USER");
+export function getAuthOptions() {
+  const getUserByField = getUserController("GET_USER_BY_FIELD");
+  const createNewUser = getUserController("CREATE_USER");
   return {
     secret: NEXTAUTH_SECRET,
     providers: [
