@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const { HOST_DB } = process.env;
 
 export default async function connectDB() {
-  console.log(mongoose.connection.readyState);
   if (mongoose.connection.readyState === 1) {
     return;
   }
