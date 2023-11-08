@@ -1,11 +1,11 @@
-import getAuthOptions from "@/backend/libs/authOptions";
+import authOptions from "@/backend/libs/authOptions";
 import getOrderController from "@/backend/entities/orders";
 import getUserController from "@/backend/entities/users";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function createOrder(req) {
-  const session = await getServerSession(getAuthOptions());
+  const session = await getServerSession(authOptions);
   let userId = null;
   if (session) {
     const getUserById = getUserController("GET_USER_BY_ID");
