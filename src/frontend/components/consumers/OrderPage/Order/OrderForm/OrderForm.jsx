@@ -15,19 +15,54 @@ const OrderForm = props => {
 
   let productsInCart = props.productsInCart;
 
-  const sendOrder = e => {
+  const [nameIsValid, setNameIsValid] = useState(true);
+  const [phoneIsValid, setPhoneIsValid] = useState(true);
+  const [emailIsValid, setEmailIsValid] = useState(true);
+
+  const validateData = e => {
     e.preventDefault();
+    if (
+      !/(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)|(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)/g.test(
+        consumer.name,
+      )
+    ) {
+      setNameIsValid(false);
+    } else if (!/^\+380\d{9}$/.test(consumer.phoneNumber)) {
+      setPhoneIsValid(false);
+    } else if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
+      setEmailIsValid(false);
+    } else {
+      sendOrder();
+    }
+  };
+
+  const sendOrder = () => {
     alert(
       "Ваше замовлення прийнято!" + Object.entries(consumer) + productsInCart,
     );
   };
 
   return (
-    <form action="GET" className={styles.form} onSubmit={e => sendOrder(e)}>
+    <form action="GET" className={styles.form}>
       <Fieldset number={1} title={"Особисті дані"}>
-        <Phone consumer={consumer} changeData={setConsumer} />
-        <Email consumer={consumer} changeData={setConsumer} />
-        <Name consumer={consumer} changeData={setConsumer} />
+        <Phone
+          consumer={consumer}
+          changeData={setConsumer}
+          phoneIsValid={phoneIsValid}
+          setPhoneIsValid={setPhoneIsValid}
+        />
+        <Email
+          consumer={consumer}
+          changeData={setConsumer}
+          emailIsValid={emailIsValid}
+          setEmailIsValid={setEmailIsValid}
+        />
+        <Name
+          consumer={consumer}
+          changeData={setConsumer}
+          nameIsValid={nameIsValid}
+          setNameIsValid={setNameIsValid}
+        />
       </Fieldset>
 
       <Fieldset number={2} title={"Доставка"}>
@@ -41,9 +76,10 @@ const OrderForm = props => {
 
       <div className={styles.btnOrderWrapper}>
         <input
-          type="submit"
+          type="button"
           value="Оформити замовлення"
           className={styles.btnOrder}
+          onClick={e => validateData(e)}
         />
       </div>
     </form>

@@ -52,6 +52,7 @@ const links = [
     url: "/admin",
   },
 ];
+
 export default function NavBar() {
   const [burgerClass, setBurgerClass] = useState(
     `${burgerStyles.burger} ${burgerStyles.unClicked}`,

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../OrderForm.module.scss";
 
 const Delivery = ({ consumer, changeData }) => {
@@ -8,33 +8,31 @@ const Delivery = ({ consumer, changeData }) => {
     "Нова Пошта - доставка кур’єром",
     "Самовивіз з магазину в Києві: вул. І.Мазепи, 37",
   ];
-  const cities = [
-    "Київ",
-    "Вінниця",
-    "Дніпро",
-    "Житомир",
-    "Запоріжжя",
-    "Івано-Франківськ",
-    "Кропивницький",
-    "Луцьк",
-    "Львів",
-    "Миколаїв",
-    "Одеса",
-    "Полтава",
-    "Рівне",
-    "Суми",
-    "Тернопіль",
-    "Ужгород",
-    "Харків",
-    "Херсон",
-    "Хмельницький",
-    "Черкаси",
-    "Чернівці",
-    "Чернігів",
-  ];
-  const offices = ["Відділення №1", "Відділення №2", "Відділення №3"];
+
+  const [regions, setRegions] = useState([]);
+  const [region, setRegion] = useState({});
+  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState("");
+  const [offices, setOffices] = useState([]);
+
+  const [invalidRegion, setInvalidRegion] = useState(false);
+  const [invalidCity, setInvalidCity] = useState(false);
+  const [invalidOffice, setInvalidOffice] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("api/novaPoshta/getAreas");
+      const { data } = await res.json();
+      setRegions(data);
+    };
+    fetchData();
+  }, []);
 
   const handleRegion = e => {
+    let region = regions.find(i => i.description === e.target.value);
+    if (region !== undefined) {
+      setRegion(region);
+    }
     changeData(prev => ({
       ...prev,
       region: e.target.value,
@@ -42,10 +40,24 @@ const Delivery = ({ consumer, changeData }) => {
   };
 
   const handleCity = e => {
+    if (invalidCity) setInvalidCity(false);
+    if (e.target.value.length > 0) {
+      const fetchData = async () => {
+        const res = await fetch(
+          `api/novaPoshta/getCities?areaRef=${region.areaRef}&cityName=${e.target.value}`,
+        );
+        const { data } = await res.json();
+        setCities(data);
+      };
+      fetchData();
+    }
+
     changeData(prev => ({
       ...prev,
       city: e.target.value,
     }));
+
+    setCity(e.target.value);
   };
 
   const handleDeliveryType = e => {
@@ -56,45 +68,75 @@ const Delivery = ({ consumer, changeData }) => {
   };
 
   const handleOffice = e => {
-    changeData(prev => ({
-      ...prev,
-      office: e.target.value,
-    }));
+    if (city === cities[0].description) {
+      const fetchData = async () => {
+        const res = await fetch(
+          `api/novaPoshta/getPostOffices?cityRef=${cities[0].cityRef}`,
+        );
+        const { data } = await res.json();
+        setOffices(data);
+        console.log(data);
+      };
+      fetchData();
+
+      changeData(prev => ({
+        ...prev,
+        office: e.target.value,
+      }));
+    } else {
+      setInvalidCity(true);
+    }
   };
 
   return (
     <>
       <label htmlFor="region" className={styles.labelSelect}>
-        Область:
+        Область:&nbsp;
+        <span
+          className={styles.invalidData}
+          style={invalidRegion ? { display: "initial" } : { display: "none" }}
+        >
+          Виберіть область з випадаючого списку
+        </span>
       </label>
-      <select
-        id="region"
+      <input
+        list="region"
+        name="region"
         className={styles.select}
         value={consumer.region}
         onChange={handleRegion}
-      >
-        {cities.map(c => (
-          <option key={c} value={c}>
-            {c}
+      />
+      <datalist id="region">
+        {regions.map(r => (
+          <option key={r.areaRef} value={r.description}>
+            {r.description}
           </option>
         ))}
-      </select>
+      </datalist>
 
       <label htmlFor="city" className={styles.labelSelect}>
-        Місто:
+        Місто:&nbsp;
+        <span
+          className={styles.invalidData}
+          style={invalidCity ? { display: "initial" } : { display: "none" }}
+        >
+          Виберіть місто з випадаючого списку
+        </span>
       </label>
-      <select
-        id="city"
+      <input
+        list="city"
+        name="city"
         className={styles.select}
         value={consumer.city}
         onChange={handleCity}
-      >
+      />
+      <datalist id="city">
         {cities.map(c => (
-          <option key={c} value={c}>
-            {c}
+          <option key={c.cityRef} value={c.description}>
+            {c.description}
           </option>
         ))}
-      </select>
+      </datalist>
 
       <label htmlFor="delivery" className={styles.labelSelect}>
         Спосіб доставки:
@@ -113,20 +155,28 @@ const Delivery = ({ consumer, changeData }) => {
       </select>
 
       <label htmlFor="office" className={styles.labelText}>
-        Відділення:
+        Відділення:&nbsp;
+        <span
+          className={styles.invalidData}
+          style={invalidOffice ? { display: "initial" } : { display: "none" }}
+        >
+          Виберіть відділення з випадаючого списку
+        </span>
       </label>
-      <select
-        id="office"
+      <input
+        list="office"
+        name="office"
         className={styles.select}
         value={consumer.office}
         onChange={handleOffice}
-      >
+      />
+      <datalist id="office">
         {offices.map(o => (
-          <option key={o} value={o}>
-            {o}
+          <option key={o.number} value={o.description}>
+            {o.description}
           </option>
         ))}
-      </select>
+      </datalist>
     </>
   );
 };

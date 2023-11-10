@@ -12,10 +12,10 @@ const Order = props => {
     phoneNumber: "",
     email: "",
     name: "",
-    region: "Київ",
-    city: "Київ",
+    region: "",
+    city: "",
     deliveryType: "Нова Пошта - Відділення",
-    office: "Відділення №1",
+    office: "",
     payment: "receipt",
     comment: "",
   });

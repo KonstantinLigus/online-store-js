@@ -36,6 +36,11 @@
     .labelText {
       margin-top: 0.5rem;
       display: block;
+
+      span.invalidData {
+        color: red;
+        font-size: 0.9rem;
+      }
     }
 
     .inputText {
@@ -52,6 +57,11 @@
       margin-top: 0.5rem;
       display: block;
       width: 100%;
+
+      span.invalidData {
+        color: red;
+        font-size: 0.9rem;
+      }
     }
 
     .select {

@@ -2,8 +2,9 @@
 import React from "react";
 import styles from "../OrderForm.module.scss";
 
-const Name = ({ consumer, changeData }) => {
+const Name = ({ consumer, changeData, nameIsValid, setNameIsValid }) => {
   const handleChange = e => {
+    if (!nameIsValid) setNameIsValid(true);
     changeData(prev => ({
       ...prev,
       name: e.target.value,
@@ -13,7 +14,13 @@ const Name = ({ consumer, changeData }) => {
   return (
     <>
       <label htmlFor="name" className={styles.labelText}>
-        ПІБ:
+        ПІБ:&nbsp;
+        <span
+          className={styles.invalidData}
+          style={nameIsValid ? { display: "none" } : { display: "initial" }}
+        >
+          Введіть правильне ім'я
+        </span>
       </label>
       <input
         type="text"
