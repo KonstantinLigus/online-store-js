@@ -13,9 +13,9 @@ const OrderPage = () => {
   const [showProductsInCart, setShowProductsInCart] = useState(false);
 
   let orderedProducts = cart.map(i => i.title);
-  useEffect(() => {
-    orderedProducts = cart.map(i => i.title);
-  }, [cart]);
+  // useEffect(() => {
+  //   orderedProducts = cart.map(i => i.title);
+  // }, [cart]);
 
   const toggleProducts = () => setShowProductsInCart(!showProductsInCart);
 

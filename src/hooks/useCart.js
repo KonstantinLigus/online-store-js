@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { giuseMemo, useState } from "react";
 
 export const useCart = () => {
   const [cart, setCart] = useState([]);
@@ -18,15 +18,17 @@ export const useCart = () => {
     setTotalPrice(total);
   };
 
-  useEffect(() => {
-    let storedProducts = localStorage.getItem("cart");
-    setCart(() => {
-      return storedProducts ? JSON.parse(storedProducts) : [];
-    });
-    if (storedProducts) {
-      let products = JSON.parse(storedProducts);
-      countTotalPrice(products);
-      setCartLength(products.length);
+  useMemo(() => {
+    if (typeof window !== undefined) {
+      let storedProducts = localStorage.getItem("cart");
+      setCart(() => {
+        return storedProducts ? JSON.parse(storedProducts) : [];
+      });
+      if (storedProducts) {
+        let products = JSON.parse(storedProducts);
+        countTotalPrice(products);
+        setCartLength(products.length);
+      }
     }
   }, []);
 
