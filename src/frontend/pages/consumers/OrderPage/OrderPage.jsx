@@ -21,7 +21,7 @@ const OrderPage = () => {
 
   return (
     <main className={styles.main}>
-      {cart.length > 0 ? (
+      {cart !== null && cart.length > 0 ? (
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
 
