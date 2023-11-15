@@ -11,7 +11,9 @@ const Order = props => {
   const [consumerInfo, setConsumerInfo] = useState({
     phoneNumber: "",
     email: "",
-    name: "",
+    firstName: "",
+    secondName: "",
+    surname: "",
     region: "",
     city: "",
     deliveryType: "Нова Пошта - Відділення",

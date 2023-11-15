@@ -5,7 +5,9 @@ import styles from "./OrderForm.module.scss";
 import Fieldset from "./Fieldset/Fieldset";
 import Phone from "./Phone/Phone";
 import Email from "./Email/Email";
-import Name from "./Name/Name";
+import FirstName from "./FirstName/FirstName";
+import SecondName from "./SecondName/SecondName";
+import Surname from "./Surname/Surname";
 import Delivery from "./Delivery/Delivery";
 import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
@@ -15,23 +17,68 @@ const OrderForm = props => {
 
   let productsInCart = props.productsInCart;
 
-  const [nameIsValid, setNameIsValid] = useState(true);
+  const [firstNameIsValid, setFirstNameIsValid] = useState(true);
+  const [surnameIsValid, setSurnameIsValid] = useState(true);
   const [phoneIsValid, setPhoneIsValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
+  const [checkRegion, setCheckRegion] = useState(true);
+  const [regionIsValid, setRegionIsValid] = useState(true);
+  const [checkCity, setCheckCity] = useState(true);
+  const [cityIsValid, setCityIsValid] = useState(true);
+  const [checkOffice, setCheckOffice] = useState(true);
+  const [officeIsValid, setOfficeIsValid] = useState(true);
 
   const validateData = e => {
     e.preventDefault();
-    if (
-      !/(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)|(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)/g.test(
-        consumer.name,
-      )
-    ) {
-      setNameIsValid(false);
-    } else if (!/^\+380\d{9}$/.test(consumer.phoneNumber)) {
+    let checked = true;
+
+    if (!/(^[A-ZА-Я][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
+      checked = false;
+      setFirstNameIsValid(false);
+    }
+    if (!/(^[A-ZА-Я][a-zа-яії'-]+$)/g.test(consumer.surname)) {
+      checked = false;
+      setSurnameIsValid(false);
+    }
+    if (consumer.phoneNumber.length < 17) {
+      checked = false;
       setPhoneIsValid(false);
-    } else if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
+    }
+    if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
+      checked = false;
       setEmailIsValid(false);
-    } else {
+    }
+
+    if (
+      consumer.deliveryType === "Нова Пошта - Відділення" ||
+      consumer.deliveryType === "Нова Пошта - доставка кур’єром"
+    ) {
+      if (!checkRegion || consumer.region === "") {
+        checked = false;
+        setRegionIsValid(false);
+      } else {
+        if (!checkCity || consumer.city === "") {
+          checked = false;
+          setCityIsValid(false);
+        } else {
+          if (consumer.deliveryType === "Нова Пошта - Відділення") {
+            if (!checkOffice || consumer.office === "") {
+              checked = false;
+              setOfficeIsValid(false);
+            }
+          } else if (
+            consumer.deliveryType === "Нова Пошта - доставка кур’єром"
+          ) {
+            if (consumer.office === "") {
+              checked = false;
+              setOfficeIsValid(false);
+            }
+          }
+        }
+      }
+    }
+
+    if (checked === true) {
       sendOrder();
     }
   };
@@ -57,16 +104,38 @@ const OrderForm = props => {
           emailIsValid={emailIsValid}
           setEmailIsValid={setEmailIsValid}
         />
-        <Name
+        <Surname
           consumer={consumer}
           changeData={setConsumer}
-          nameIsValid={nameIsValid}
-          setNameIsValid={setNameIsValid}
+          surnameIsValid={surnameIsValid}
+          setSurnameIsValid={setSurnameIsValid}
         />
+        <FirstName
+          consumer={consumer}
+          changeData={setConsumer}
+          firstNameIsValid={firstNameIsValid}
+          setFirstNameIsValid={setFirstNameIsValid}
+        />
+        <SecondName consumer={consumer} changeData={setConsumer} />
       </Fieldset>
 
       <Fieldset number={2} title={"Доставка"}>
-        <Delivery consumer={consumer} changeData={setConsumer} />
+        <Delivery
+          consumer={consumer}
+          changeData={setConsumer}
+          checkRegion={checkRegion}
+          setCheckRegion={setCheckRegion}
+          regionIsValid={regionIsValid}
+          setRegionIsValid={setRegionIsValid}
+          checkCity={checkCity}
+          setCheckCity={setCheckCity}
+          cityIsValid={cityIsValid}
+          setCityIsValid={setCityIsValid}
+          checkOffice={checkOffice}
+          setCheckOffice={setCheckOffice}
+          officeIsValid={officeIsValid}
+          setOfficeIsValid={setOfficeIsValid}
+        />
       </Fieldset>
 
       <Fieldset number={3} title={"Оплата"}>
