@@ -21,7 +21,7 @@ const CategoryPage = ({ params }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("../api/items");
+      const res = await fetch(`../api/items?category=${currentCategory}`);
       const { items } = await res.json();
       console.log(items);
       setData(items);

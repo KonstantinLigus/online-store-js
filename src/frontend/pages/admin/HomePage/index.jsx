@@ -1,3 +1,9 @@
+import Orders from "../../../components/admin/Orders/Orders";
+
 export default function HomePage() {
-  return <div>Home admin page</div>;
+  return (
+    <>
+      <Orders />
+    </>
+  );
 }

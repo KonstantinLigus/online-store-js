@@ -84,6 +84,8 @@ const OrderForm = props => {
   };
 
   const sendOrder = () => {
+    // backend code
+    // const order = {...consumer, ordered=productsInCart}
     alert(
       "Ваше замовлення прийнято!" + Object.entries(consumer) + productsInCart,
     );

@@ -11,11 +11,14 @@ import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/Produ
 const OrderPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
   const [showProductsInCart, setShowProductsInCart] = useState(false);
+  console.log(cart);
 
   let orderedProducts = cart.map(i => i.title);
+  /*
   useEffect(() => {
     orderedProducts = cart.map(i => i.title);
   }, [cart]);
+  */
 
   const toggleProducts = () => setShowProductsInCart(!showProductsInCart);
 
