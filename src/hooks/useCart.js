@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 
 export const useCart = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartLength, setCartLength] = useState(0);
 
   const countTotalPrice = value => {
     let total = 0;
@@ -25,6 +26,7 @@ export const useCart = () => {
     if (storedProducts) {
       let products = JSON.parse(storedProducts);
       countTotalPrice(products);
+      setCartLength(products.length);
     }
   }, []);
 
@@ -33,6 +35,7 @@ export const useCart = () => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     countTotalPrice(updatedCart);
+    setCartLength(updatedCart.length);
   };
 
   const removeFromCart = id => {
@@ -40,6 +43,7 @@ export const useCart = () => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     countTotalPrice(updatedCart);
+    setCartLength(updatedCart.length);
   };
 
   const updateCartItem = (item, measure, quantity) => {
@@ -52,5 +56,12 @@ export const useCart = () => {
     countTotalPrice(updatedCart);
   };
 
-  return { totalPrice, cart, addToCart, removeFromCart, updateCartItem };
+  return {
+    totalPrice,
+    cart,
+    cartLength,
+    addToCart,
+    removeFromCart,
+    updateCartItem,
+  };
 };
