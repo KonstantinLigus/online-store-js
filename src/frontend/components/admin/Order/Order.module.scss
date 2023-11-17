@@ -7,3 +7,20 @@
     margin: 0.5rem 0;
   }
 }
+
+.item {
+  height: 100px;
+  position: relative;
+
+  .imgContainer {
+    float: left;
+    height: 100%;
+    margin-right: 0.5rem;
+    position: relative;
+    width: 80px;
+
+    .itemImage {
+      object-fit: contain;
+    }
+  }
+}

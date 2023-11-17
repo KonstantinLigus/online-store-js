@@ -51,7 +51,32 @@ const Orders = () => {
           ],
           quantity: 1,
         },
+        {
+          _id: "652019e5e7519ff5c13f298d",
+          title: "свинина",
+          mainImage:
+            "https://store-items-photos.s3.eu-north-1.amazonaws.com/meet-pork.png",
+          measure: 0,
+          prices: [
+            {
+              _id: "654e7e59025760f02b52e9d7",
+              actionPrice: null,
+              price: 200,
+              unit: "г",
+              value: 1000,
+            },
+          ],
+          quantity: 1,
+        },
       ],
+      totalPrice: 500,
+      sendingTime: {
+        day: 12,
+        mounth: 8,
+        year: 2023,
+        hour: 9,
+        minutes: 44,
+      },
     },
     {
       phoneNumber: "+380 97 123 00 00",
@@ -65,16 +90,59 @@ const Orders = () => {
       office: "",
       payment: "card",
       comment: "",
+      ordered: [
+        {
+          _id: "652019e5e7519ff5c13f298b",
+          title: "крупа гречана",
+          mainImage:
+            "https://store-items-photos.s3.eu-north-1.amazonaws.com/krupa-grechnevaya.webp",
+          measure: 0,
+          prices: [
+            {
+              _id: "654e7e59025760f02b52e9d7",
+              actionPrice: 475,
+              price: 100,
+              unit: "г",
+              value: 500,
+            },
+            {
+              _id: "654e7e59025760f02b52e9d8",
+              actionPrice: 665,
+              price: 140,
+              unit: "г",
+              value: 700,
+            },
+            {
+              _id: "654e7e59025760f02b52e9d9",
+              actionPrice: 950,
+              price: 200,
+              unit: "г",
+              value: 1000,
+            },
+          ],
+          quantity: 3,
+        },
+      ],
+      totalPrice: 320,
+      sendingTime: {
+        day: 17,
+        mounth: 10,
+        year: 2023,
+        hour: 18,
+        minutes: 21,
+      },
     },
   ]);
 
   return (
-    <div className={styles.orders}>
-      <h2>Замовлення:</h2>
-      {orders.map((order, index) => (
-        <Order order={order} key={index} />
-      ))}
-    </div>
+    orders && (
+      <div className={styles.orders}>
+        <h2>Замовлення:</h2>
+        {orders.map((order, index) => (
+          <Order order={order} key={index} />
+        ))}
+      </div>
+    )
   );
 };
 export default Orders;

@@ -16,6 +16,7 @@ const OrderForm = props => {
   const [consumer, setConsumer] = useState({ ...props.consumer });
 
   let productsInCart = props.productsInCart;
+  let allProductsPrice = props.allProductsPrice;
 
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
   const [surnameIsValid, setSurnameIsValid] = useState(true);
@@ -84,10 +85,24 @@ const OrderForm = props => {
   };
 
   const sendOrder = () => {
+    const date = new Date();
+    let sendingTime = {
+      day: date.getDate(),
+      mounth: date.getMonth(),
+      year: date.getFullYear(),
+      hour: date.getHours(),
+      minutes: date.getMinutes(),
+    };
     // backend code
-    // const order = {...consumer, ordered=productsInCart}
+    // const order = {...consumer, ordered=productsInCart, totalPrice=allProductsPrice, sendingTime}
     alert(
-      "Ваше замовлення прийнято!" + Object.entries(consumer) + productsInCart,
+      "Ваше замовлення прийнято!",
+      /*+
+        Object.entries(consumer) +
+        productsInCart +
+        allProductsPrice +
+        sendingTime,
+        */
     );
   };
 

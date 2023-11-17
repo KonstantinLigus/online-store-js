@@ -63,6 +63,7 @@ const Order = props => {
         <OrderForm
           consumer={consumerInfo}
           productsInCart={props.productsInCart}
+          allProductsPrice={props.allProductsPrice}
         />
         {!userAuthenticated && !newCustomer && <RegularCustomer />}
       </div>
