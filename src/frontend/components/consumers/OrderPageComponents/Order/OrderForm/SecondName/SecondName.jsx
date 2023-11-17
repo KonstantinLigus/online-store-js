@@ -1,31 +1,31 @@
 "use client";
 import React from "react";
-import styles from "../Form.module.scss";
+import styles from "../OrderForm.module.scss";
 
-const Name = ({ consumer, changeData }) => {
+const SecondName = ({ consumer, changeData }) => {
   const handleChange = e => {
     changeData(prev => ({
       ...prev,
-      name: e.target.value,
+      secondName: e.target.value,
     }));
   };
 
   return (
     <>
       <label htmlFor="name" className={styles.labelText}>
-        ПІБ:
+        По-батькові:
       </label>
       <input
         type="text"
         name="name"
         id="name"
-        placeholder="Іванчук Сергій Дмитрович"
+        placeholder="Дмитрович"
         className={styles.inputText}
-        value={consumer.name}
+        value={consumer.secondName}
         onChange={handleChange}
       />
     </>
   );
 };
 
-export default Name;
+export default SecondName;
