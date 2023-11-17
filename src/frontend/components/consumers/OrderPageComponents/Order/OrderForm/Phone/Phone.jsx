@@ -11,7 +11,6 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
 
   const handleChange = e => {
     if (!phoneIsValid) setPhoneIsValid(true);
-    console.log(e.key);
 
     let value = e.target.value;
     let valueLast = value[value.length - 1];

@@ -33,11 +33,11 @@ const OrderForm = props => {
     e.preventDefault();
     let checked = true;
 
-    if (!/(^[A-ZА-Я][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
+    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
       checked = false;
       setFirstNameIsValid(false);
     }
-    if (!/(^[A-ZА-Я][a-zа-яії'-]+$)/g.test(consumer.surname)) {
+    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.surname)) {
       checked = false;
       setSurnameIsValid(false);
     }

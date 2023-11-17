@@ -21,7 +21,7 @@ const CartPage = () => {
           &#129120;
         </button>
       </div>
-      {cart && cart.length > 0 && (
+      {cart !== null && cart.length > 0 && (
         <>
           <div className={styles.productsWrapper}>
             <ProductsInCart

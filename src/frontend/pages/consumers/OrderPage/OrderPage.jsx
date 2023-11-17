@@ -19,7 +19,7 @@ const OrderPage = () => {
 
   return (
     <main className={styles.main}>
-      {cart !== null && cart.length > 0 ? (
+      {cart !== null && cart.length > 0 && (
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
 
@@ -45,7 +45,8 @@ const OrderPage = () => {
             allProductsPrice={allProductsPrice}
           />
         </>
-      ) : (
+      )}
+      {cart !== null && (
         <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
       )}
     </main>
