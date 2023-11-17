@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 export const useCart = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartLength, setCartLength] = useState(0);
 

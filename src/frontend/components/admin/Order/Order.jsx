@@ -32,7 +32,7 @@ const Order = ({ order }) => {
       <hr className={styles.hr} />
 
       <p>Призвище: {order.surname}</p>
-      <p>Ім'я: {order.firstName}</p>
+      <p>Ім&apos;я: {order.firstName}</p>
       {order.secondName && <p>По-батькові: {order.secondName}</p>}
       <p>Телефон: {order.phoneNumber}</p>
       <p>Email: {order.email}</p>

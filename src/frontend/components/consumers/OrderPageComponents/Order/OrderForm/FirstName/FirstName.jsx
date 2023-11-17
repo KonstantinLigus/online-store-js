@@ -19,14 +19,14 @@ const FirstName = ({
   return (
     <>
       <label htmlFor="name" className={styles.labelText}>
-        Ім'я:&nbsp;
+        Ім&apos;я:&nbsp;
         <span
           className={styles.invalidData}
           style={
             firstNameIsValid ? { display: "none" } : { display: "initial" }
           }
         >
-          Введіть правильне ім'я
+          Введіть правильне ім&apos;я
         </span>
       </label>
       <input

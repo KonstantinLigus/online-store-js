@@ -134,6 +134,8 @@ const Orders = () => {
     },
   ]);
 
+  // backend: remove array from order and get data from database
+
   return (
     orders && (
       <div className={styles.orders}>

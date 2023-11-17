@@ -22,7 +22,7 @@ const CartPage = () => {
         </button>
       </div>
 
-      {cart.length > 0 ? (
+      {cart && cart.length > 0 ? (
         <>
           <div className={styles.productsWrapper}>
             <ProductsInCart
@@ -44,7 +44,9 @@ const CartPage = () => {
           </div>
         </>
       ) : (
-        <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
+        cart !== null && (
+          <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
+        )
       )}
     </main>
   );

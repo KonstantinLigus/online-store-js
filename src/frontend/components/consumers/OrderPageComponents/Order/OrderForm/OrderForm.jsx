@@ -93,7 +93,7 @@ const OrderForm = props => {
       hour: date.getHours(),
       minutes: date.getMinutes(),
     };
-    // backend code
+    // backend code for order rsending
     // const order = {...consumer, ordered=productsInCart, totalPrice=allProductsPrice, sendingTime}
     alert(
       "Ваше замовлення прийнято!",
