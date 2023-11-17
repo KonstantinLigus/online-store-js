@@ -1,10 +1,14 @@
-import authOptions from "@/backend/libs/authOptions";
-import getOrderController from "@/backend/entities/orders";
-import getUserController from "@/backend/entities/users";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import mongoose from "mongoose";
+import authOptions from "@/backend/libs/authOptions";
+import orderControllers from "@/backend/entities/orders";
+import getUserController from "@/backend/entities/users";
+import { countTotalPrice } from "@/backend/helpers";
+import { createDataAndSignatureObj } from "@/backend/libs/liqPay";
+import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
+import { orderZodSchema } from "@/backend/libs/validators.zod";
 
-export async function createOrder(req) {
+async function createOrder(req) {
   const session = await getServerSession(authOptions);
   let userId = null;
   if (session) {
@@ -12,11 +16,31 @@ export async function createOrder(req) {
     const { user } = getUserById(session.user._id.toString());
     userId = user ? user._id.toString() : null;
   }
-  const data = await req.json();
-  data.isCompleted = false;
-  data.owner = userId;
-  const createOrder = getOrderController("CREATE_ORDER");
-  const res = await createOrder(data);
+  const order = await req.json();
 
-  return NextResponse.json({ ...res }, { status: res.status });
+  orderZodSchema.parse(order);
+
+  order.isCompleted = false;
+  let {
+    deliveryInfo: { comment },
+  } = order;
+  comment = comment ? comment : "";
+  order.deliveryInfo.comment = comment;
+  order.owner = userId;
+  order._id = new mongoose.mongo.ObjectId();
+
+  const totalPrice = countTotalPrice(order.products);
+  const liqPayEncodedData = createDataAndSignatureObj({
+    amount: totalPrice,
+    description: comment,
+    order_id: order._id.toString(),
+  });
+
+  order.liqPayEncodedData = liqPayEncodedData;
+  const data = await orderControllers.createOrder(order);
+  return data;
 }
+
+const wrappedCreateOrder = getTryCatchWrapper(createOrder);
+
+export default wrappedCreateOrder;

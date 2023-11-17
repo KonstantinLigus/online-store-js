@@ -7,9 +7,20 @@ export const Payment = ({ dataAndSignatureObj }) => {
   const [isScript, setIsScript] = useState(false);
   useEffect(() => setIsScript(true), [dataAndSignatureObj]);
 
+  const successPaymentHandler = async data => {
+    const res = await fetch(`/api/order/update?id=${data.order_id}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        isPaid: true,
+        liqPayEncodedData: null,
+      }),
+    });
+    const dataRes = await res.json();
+  };
+
   return (
     <>
-      <div id="liqpay_checkout"></div>;
+      <div id="liqpay_checkout"></div>
       {isScript && (
         <>
           <Script id="liqpay-script">
@@ -20,10 +31,7 @@ export const Payment = ({ dataAndSignatureObj }) => {
                   embedTo: "#liqpay_checkout",
                   mode: "popup", // embed || popup
                 })
-                  .on("liqpay.callback", function (data) {
-                    console.log(data.status);
-                    console.log(data);
-                  })
+                  .on("liqpay.callback", successPaymentHandler)
                   .on("liqpay.ready", function (data) {
                     // ready
                   })

@@ -34,6 +34,4 @@ export const orderZodSchema = z.object({
     paymentMethod: z.enum(["card", "cash"]),
     comment: z.string().optional(),
   }),
-  owner: z.string().nullable(),
-  isCompleted: z.boolean(),
 });

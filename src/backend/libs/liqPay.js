@@ -21,6 +21,7 @@ export function createDataAndSignatureObj(params) {
   params.language = "uk";
   params.version = 3;
   params.action = "pay";
+  params.currency = "UAH";
   const data = createBase64Str(params);
   const signature = createHashedStr(
     LIQ_PAY_PRIVATE_KEY + data + LIQ_PAY_PRIVATE_KEY,

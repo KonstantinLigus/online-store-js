@@ -21,6 +21,11 @@ export const orderSchema = new mongoose.Schema({
   },
   owner: { type: String, default: null },
   isCompleted: { type: Boolean, required: true, default: false },
+  isPaid: { type: Boolean, required: true, default: false },
+  liqPayEncodedData: {
+    data: { type: String },
+    signature: { type: String },
+  },
 });
 
 export const Order =
