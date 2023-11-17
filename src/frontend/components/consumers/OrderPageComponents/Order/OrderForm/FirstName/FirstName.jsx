@@ -2,37 +2,44 @@
 import React from "react";
 import styles from "../OrderForm.module.scss";
 
-const Name = ({ consumer, changeData, nameIsValid, setNameIsValid }) => {
+const FirstName = ({
+  consumer,
+  changeData,
+  firstNameIsValid,
+  setFirstNameIsValid,
+}) => {
   const handleChange = e => {
-    if (!nameIsValid) setNameIsValid(true);
+    if (!firstNameIsValid) setFirstNameIsValid(true);
     changeData(prev => ({
       ...prev,
-      name: e.target.value,
+      firstName: e.target.value,
     }));
   };
 
   return (
     <>
       <label htmlFor="name" className={styles.labelText}>
-        ПІБ:&nbsp;
+        Ім&apos;я:&nbsp;
         <span
           className={styles.invalidData}
-          style={nameIsValid ? { display: "none" } : { display: "initial" }}
+          style={
+            firstNameIsValid ? { display: "none" } : { display: "initial" }
+          }
         >
-          Введіть правильне ім'я
+          Введіть правильне ім&apos;я
         </span>
       </label>
       <input
         type="text"
         name="name"
         id="name"
-        placeholder="Іванчук Сергій Дмитрович"
+        placeholder="Сергій"
         className={styles.inputText}
-        value={consumer.name}
+        value={consumer.firstName}
         onChange={handleChange}
       />
     </>
   );
 };
 
-export default Name;
+export default FirstName;

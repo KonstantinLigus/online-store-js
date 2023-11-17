@@ -11,7 +11,9 @@ const Order = props => {
   const [consumerInfo, setConsumerInfo] = useState({
     phoneNumber: "",
     email: "",
-    name: "",
+    firstName: "",
+    secondName: "",
+    surname: "",
     region: "",
     city: "",
     deliveryType: "Нова Пошта - Відділення",
@@ -61,6 +63,7 @@ const Order = props => {
         <OrderForm
           consumer={consumerInfo}
           productsInCart={props.productsInCart}
+          allProductsPrice={props.allProductsPrice}
         />
         {!userAuthenticated && !newCustomer && <RegularCustomer />}
       </div>
