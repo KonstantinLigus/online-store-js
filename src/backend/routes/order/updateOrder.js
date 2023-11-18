@@ -3,7 +3,7 @@ import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 
 async function updateOrder(req) {
   const _id = req.nextUrl.searchParams.get("id");
-  const updatedFields = req.json();
+  const updatedFields = await req.json();
   if (!_id || !updatedFields) {
     const error = new Error("Empty order id or updated fields!");
     error.status = 400;

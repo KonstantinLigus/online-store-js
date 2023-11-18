@@ -1,3 +1,3 @@
 export function countTotalPrice(arr) {
-  return arr.reduce((acc, { value, price }) => acc + value * price, 0);
+  return arr.reduce((acc, { quantity, price }) => acc + quantity * price, 0);
 }

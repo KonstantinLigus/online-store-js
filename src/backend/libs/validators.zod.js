@@ -5,7 +5,7 @@ export const orderZodSchema = z.object({
     .array(
       z.object({
         productName: z.string(),
-        value: z.number(),
+        quantity: z.number(),
         price: z.number(),
         unit: z.string(),
       }),

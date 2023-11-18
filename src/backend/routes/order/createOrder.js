@@ -20,13 +20,13 @@ async function createOrder(req) {
 
   orderZodSchema.parse(order);
 
-  order.isCompleted = false;
   let {
     deliveryInfo: { comment },
   } = order;
   comment = comment ? comment : "";
   order.deliveryInfo.comment = comment;
   order.owner = userId;
+  order.dateOfCreation = Date.now();
   order._id = new mongoose.mongo.ObjectId();
 
   const totalPrice = countTotalPrice(order.products);

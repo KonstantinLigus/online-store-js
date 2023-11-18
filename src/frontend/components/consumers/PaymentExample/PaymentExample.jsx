@@ -7,19 +7,19 @@ const paymentExample = {
   products: [
     {
       productName: "яблука",
-      value: 2,
+      quantity: 2,
       unit: "кг",
       price: 50,
     },
     {
       productName: "помідори",
-      value: 3,
+      quantity: 3,
       unit: "кг",
       price: 60,
     },
   ],
   deliveryInfo: {
-    custumerFullName: "Дмитенко Олексій Вікторович",
+    custumerFullName: "Дмитренко Олексій Вікторович",
     city: "Київ",
     deliveryMethod: "Нова пошта",
     postOffice: 43,
@@ -33,8 +33,9 @@ const paymentExample = {
 
 export const PaymentExample = () => {
   const [dataAndSignatureObj, setDataAndSignatureObj] = useState(null);
+  const [isShowPayment, setIsShowPayment] = useState(false);
 
-  const onPayBtnClick = async () => {
+  const createOrderHandler = async () => {
     const res = await fetch("api/order/create", {
       method: "POST",
       body: JSON.stringify(paymentExample),
@@ -44,15 +45,27 @@ export const PaymentExample = () => {
     } = await res.json();
     setDataAndSignatureObj(liqPayEncodedData);
   };
+  const payForOrderBtnClickHandler = () => setIsShowPayment(true);
   return (
     <>
       <button
-        onClick={onPayBtnClick}
+        onClick={createOrderHandler}
         style={{ display: "block", border: "2px solid green" }}
       >
-        Pay for order
+        Create order
       </button>
       {dataAndSignatureObj && (
+        <>
+          <p>Order was created! Ready to pay!</p>
+          <button
+            onClick={payForOrderBtnClickHandler}
+            style={{ display: "block", border: "2px solid green" }}
+          >
+            Pay for order
+          </button>
+        </>
+      )}
+      {dataAndSignatureObj && isShowPayment && (
         <Payment dataAndSignatureObj={dataAndSignatureObj} />
       )}
     </>

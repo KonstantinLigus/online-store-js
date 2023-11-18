@@ -7,12 +7,13 @@ export const Payment = ({ dataAndSignatureObj }) => {
   const [isScript, setIsScript] = useState(false);
   useEffect(() => setIsScript(true), [dataAndSignatureObj]);
 
-  const successPaymentHandler = async data => {
-    const res = await fetch(`/api/order/update?id=${data.order_id}`, {
+  const successPaymentHandler = async ({ order_id, end_date }) => {
+    const res = await fetch(`/api/order/update?id=${order_id}`, {
       method: "PATCH",
       body: JSON.stringify({
         isPaid: true,
         liqPayEncodedData: null,
+        dateOfPayment: end_date,
       }),
     });
     const dataRes = await res.json();
