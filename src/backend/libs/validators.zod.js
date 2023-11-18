@@ -5,7 +5,7 @@ export const orderZodSchema = z.object({
     .array(
       z.object({
         productName: z.string(),
-        value: z.number(),
+        quantity: z.number(),
         price: z.number(),
         unit: z.string(),
       }),
@@ -34,6 +34,4 @@ export const orderZodSchema = z.object({
     paymentMethod: z.enum(["card", "cash"]),
     comment: z.string().optional(),
   }),
-  owner: z.string().nullable(),
-  isCompleted: z.boolean(),
 });

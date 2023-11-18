@@ -3,6 +3,7 @@ import About from "@/frontend/components/consumers/About/About";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import Blog from "@/frontend/components/consumers/Blog/Blog";
 import styles from "@/frontend/pages/consumers/HomePage/HomePage.module.scss";
+import { PaymentExample } from "@/frontend/components/consumers/PaymentExample/PaymentExample";
 
 export default async function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default async function HomePage() {
       <div className={styles.divider}></div>
       <Blog />
       <div className={styles.dividerSmall}></div>
+      <PaymentExample />
     </>
   );
 }

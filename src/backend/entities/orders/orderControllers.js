@@ -1,10 +1,10 @@
 import { orderServices } from "./orderServices";
-import { orderZodSchema } from "./libs/validators.zod";
 
 export const orderControllers = Object.freeze({
   getOrderById,
   getOrderByField,
   createOrder,
+  updateOrder,
 });
 
 async function getOrderByField(objQuery) {
@@ -18,7 +18,16 @@ async function getOrderById(id) {
 }
 
 async function createOrder(orderObj) {
-  orderZodSchema.parse(orderObj);
   const order = await orderServices.createOrder(orderObj);
-  return { order, status: 200 };
+  return { order, status: 201 };
+}
+
+async function updateOrder({ _id, updatedFields }) {
+  const updatedOrder = await orderServices.updateOrder({ _id, updatedFields });
+  if (!updatedOrder) {
+    const error = new Error("Wrong id!");
+    error.status = 400;
+    throw error;
+  }
+  return { updatedOrder, status: 200 };
 }

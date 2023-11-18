@@ -4,7 +4,7 @@ export const orderSchema = new mongoose.Schema({
   products: [
     {
       productName: { type: String, required: true },
-      value: { type: Number, required: true },
+      quantity: { type: Number, required: true },
       price: { type: Number, required: true },
       unit: { type: String, required: true },
     },
@@ -20,7 +20,14 @@ export const orderSchema = new mongoose.Schema({
     comment: { type: String },
   },
   owner: { type: String, default: null },
-  isCompleted: { type: Boolean, required: true, default: false },
+  isCompleted: { type: Boolean, default: false },
+  isPaid: { type: Boolean, default: false },
+  dateOfPayment: { type: String, default: null },
+  dateOfCreation: { type: String, required: true, default: null },
+  liqPayEncodedData: {
+    data: { type: String },
+    signature: { type: String },
+  },
 });
 
 export const Order =
