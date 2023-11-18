@@ -6,22 +6,25 @@ import { Payment } from "../Payment/Payment";
 const paymentExample = {
   products: [
     {
-      productName: "яблука",
+      _id: "64f1fd1285a65597f40a4828",
       quantity: 2,
-      unit: "кг",
+      value: "1 кг",
       price: 50,
     },
     {
-      productName: "помідори",
+      _id: "64f1fe2185a65597f40a482a",
       quantity: 3,
-      unit: "кг",
+      value: "1 кг",
       price: 60,
     },
   ],
   deliveryInfo: {
-    custumerFullName: "Дмитренко Олексій Вікторович",
+    firstName: "Олексій",
+    secondName: "Вікторович",
+    surname: "Дмитренко",
+    region: "Київска",
     city: "Київ",
-    deliveryMethod: "Нова пошта",
+    deliveryType: "Нова пошта",
     postOffice: 43,
     customerPhone: "+380949568123",
     email: "user@gmail.com",

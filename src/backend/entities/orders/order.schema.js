@@ -3,16 +3,18 @@ import mongoose from "mongoose";
 export const orderSchema = new mongoose.Schema({
   products: [
     {
-      productName: { type: String, required: true },
       quantity: { type: Number, required: true },
+      value: { type: String, required: true },
       price: { type: Number, required: true },
-      unit: { type: String, required: true },
     },
   ],
   deliveryInfo: {
-    custumerFullName: { type: String, required: true },
+    firstName: { type: String, required: true },
+    secondName: { type: String, default: "" },
+    surname: { type: String, required: true },
+    region: { type: String, required: true },
     city: { type: String, required: true },
-    deliveryMethod: { type: String, required: true },
+    deliveryType: { type: String, required: true },
     postOffice: { type: Number, required: true },
     customerPhone: { type: String, required: true },
     email: { type: String, required: true },

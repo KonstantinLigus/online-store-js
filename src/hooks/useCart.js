@@ -31,7 +31,10 @@ export const useCart = () => {
   }, []);
 
   const addToCart = (item, measure = 0, quantity = 1) => {
-    const updatedCart = [...cart, { ...item, measure, quantity }];
+    const updatedCart = [
+      ...cart,
+      { _id: item._id, price: item.prices[measure], quantity },
+    ];
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     countTotalPrice(updatedCart);
