@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "../OrderForm.module.scss";
 
 const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
-  const [phoneNumber, setPhoneNumber] = useState(consumer.phoneNumber);
+  const [phoneNumber, setPhoneNumber] = useState(consumer.customerPhone);
 
   const handleClick = e => {
     if (e.target.value.length === 0) setPhoneNumber("+380");
@@ -20,7 +20,7 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
         setPhoneNumber(value);
         changeData(prev => ({
           ...prev,
-          phoneNumber: value,
+          customerPhone: value,
         }));
       }
     }
@@ -36,7 +36,7 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
             setPhoneNumber(value);
             changeData(prev => ({
               ...prev,
-              phoneNumber: value,
+              customerPhone: value,
             }));
           }
           if (value.length === 9) {
@@ -44,7 +44,7 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
             setPhoneNumber(value);
             changeData(prev => ({
               ...prev,
-              phoneNumber: value,
+              customerPhone: value,
             }));
           }
           if (value.length === 13) {
@@ -52,7 +52,7 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
             setPhoneNumber(value);
             changeData(prev => ({
               ...prev,
-              phoneNumber: value,
+              customerPhone: value,
             }));
           }
           if (value.length === 16) {
@@ -60,7 +60,7 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
             setPhoneNumber(value);
             changeData(prev => ({
               ...prev,
-              phoneNumber: value,
+              customerPhone: value,
             }));
           }
         } else {
@@ -74,7 +74,7 @@ const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
             setPhoneNumber(value);
             changeData(prev => ({
               ...prev,
-              phoneNumber: value,
+              customerPhone: value,
             }));
           }
         }

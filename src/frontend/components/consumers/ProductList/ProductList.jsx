@@ -17,6 +17,7 @@ const ProductList = ({ title, className }) => {
       const res = await fetch("api/items");
       const { items } = await res.json();
       setData(items);
+      console.log(items);
     };
     fetchData();
   }, []);

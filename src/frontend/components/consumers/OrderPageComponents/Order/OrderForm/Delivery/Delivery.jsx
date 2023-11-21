@@ -85,7 +85,7 @@ const Delivery = ({
       consumer.city = "";
       setOfficesIsAvailable(false);
       if (!officeIsValid) setOfficeIsValid(true);
-      consumer.office = "";
+      consumer.postOffice = "";
     } else {
       setCheckRegion(true);
     }
@@ -142,7 +142,7 @@ const Delivery = ({
 
     changeData(prev => ({
       ...prev,
-      office: e.target.value,
+      postOffice: e.target.value,
     }));
   };
 
@@ -254,7 +254,7 @@ const Delivery = ({
         list="office"
         name="office"
         className={styles.select}
-        value={consumer.office}
+        value={consumer.postOffice}
         onChange={officeType === "Відділення" ? handleOffice : handleAddress}
         disabled={!officesIsAvailable}
       />
