@@ -15,9 +15,6 @@ import Comment from "./Comment/Comment";
 const OrderForm = props => {
   const [consumer, setConsumer] = useState({ ...props.consumer });
 
-  let productsInCart = props.productsInCart;
-  let allProductsPrice = props.allProductsPrice;
-
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
   const [surnameIsValid, setSurnameIsValid] = useState(true);
   const [phoneIsValid, setPhoneIsValid] = useState(true);
@@ -41,7 +38,7 @@ const OrderForm = props => {
       checked = false;
       setSurnameIsValid(false);
     }
-    if (consumer.phoneNumber.length < 17) {
+    if (consumer.customerPhone.length < 17) {
       checked = false;
       setPhoneIsValid(false);
     }
@@ -63,14 +60,14 @@ const OrderForm = props => {
           setCityIsValid(false);
         } else {
           if (consumer.deliveryType === "Нова Пошта - Відділення") {
-            if (!checkOffice || consumer.office === "") {
+            if (!checkOffice || consumer.postOffice === "") {
               checked = false;
               setOfficeIsValid(false);
             }
           } else if (
             consumer.deliveryType === "Нова Пошта - доставка кур’єром"
           ) {
-            if (consumer.office === "") {
+            if (consumer.postOffice === "") {
               checked = false;
               setOfficeIsValid(false);
             }
@@ -93,14 +90,22 @@ const OrderForm = props => {
       hour: date.getHours(),
       minutes: date.getMinutes(),
     };
+    let orderedProducts = props.productsInCart.map(i => ({
+      _id: i._id,
+      quantity: i.quantity,
+      value: i.prices[i.measure].value + " " + i.prices[i.measure].unit,
+      price: i.prices[i.measure].actionPrice
+        ? i.prices[i.measure].actionPrice
+        : i.prices[i.measure].price,
+    }));
     // backend code for order rsending
-    // const order = {...consumer, ordered=productsInCart, totalPrice=allProductsPrice, sendingTime}
+    // let orderForSending = {deliveryInfo: consumer, products: orderedProducts}
     alert(
       "Ваше замовлення прийнято!",
-      /*+
+      /*
+      +
         Object.entries(consumer) +
-        productsInCart +
-        allProductsPrice +
+        Object.entries(orderedProducts) +
         sendingTime,
         */
     );

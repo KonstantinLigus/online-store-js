@@ -20,52 +20,61 @@ const mounths = [
   "грудня",
 ];
 
-const Order = ({ order }) => {
+const Order = ({
+  deliveryInfo,
+  customerProducts,
+  sendingTime,
+  allProducts,
+}) => {
+  let totalPrice = 0;
+  for (let i of customerProducts) {
+    totalPrice += i.price * i.quantity;
+  }
+
   return (
     <div className={styles.order}>
       <p>
-        {order.sendingTime.day} {mounths[order.sendingTime.mounth]}{" "}
-        {order.sendingTime.year}, {order.sendingTime.hour}:
-        {order.sendingTime.minutes}
+        {sendingTime.day} {mounths[sendingTime.mounth]} {sendingTime.year},{" "}
+        {sendingTime.hour}:{sendingTime.minutes}
       </p>
 
       <hr className={styles.hr} />
-
-      <p>Призвище: {order.surname}</p>
-      <p>Ім&apos;я: {order.firstName}</p>
-      {order.secondName && <p>По-батькові: {order.secondName}</p>}
-      <p>Телефон: {order.phoneNumber}</p>
-      <p>Email: {order.email}</p>
-
-      <hr className={styles.hr} />
-
-      <p>Доставка: {order.deliveryType}</p>
-      {order.region && <p>Область: {order.region}</p>}
-      {order.city && <p>Місто: {order.city}</p>}
-      {order.office && <p>Адреса: {order.office}</p>}
+      <p>Призвище: {deliveryInfo.surname}</p>
+      <p>Ім&apos;я: {deliveryInfo.firstName}</p>
+      {deliveryInfo.secondName && <p>По-батькові: {deliveryInfo.secondName}</p>}
+      <p>Телефон: {deliveryInfo.customerPhone}</p>
+      <p>Email: {deliveryInfo.email}</p>
 
       <hr className={styles.hr} />
 
+      <p>Доставка: {deliveryInfo.deliveryType}</p>
+      {deliveryInfo.region && <p>Область: {deliveryInfo.region}</p>}
+      {deliveryInfo.city && <p>Місто: {deliveryInfo.city}</p>}
+      {deliveryInfo.postOffice && <p>Адреса: {deliveryInfo.postOffice}</p>}
+      <hr className={styles.hr} />
       <p>
-        Оплата: {order.payment === "card" ? "Оплачено" : "Оплата при отриманні"}
+        Оплата:{" "}
+        {deliveryInfo.paymentMethod === "card"
+          ? "Оплачено"
+          : "Оплата при отриманні"}
       </p>
 
       <hr className={styles.hr} />
 
-      {order.comment && (
+      {deliveryInfo.comment && (
         <>
-          <p> Коментар: {order.comment}</p>
+          <p> Коментар: {deliveryInfo.comment}</p>
           <hr className={styles.hr} />
         </>
       )}
 
-      {order.ordered.map((item, index) => (
-        <OrderedProduct item={item} key={index} />
+      {customerProducts.map((item, index) => (
+        <OrderedProduct item={item} allProducts={allProducts} key={index} />
       ))}
 
       <hr className={styles.hr} />
 
-      <p>Загальна вартість: {order.totalPrice} грн</p>
+      <p>Загальна вартість: {totalPrice} грн</p>
     </div>
   );
 };
