@@ -9,8 +9,6 @@ const Order = props => {
   const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [newCustomer, setNewCustomer] = useState(true);
   const [consumerInfo, setConsumerInfo] = useState({
-    customerPhone: "",
-    email: "",
     firstName: "",
     secondName: "",
     surname: "",
@@ -18,6 +16,8 @@ const Order = props => {
     city: "",
     deliveryType: "Нова Пошта - Відділення",
     postOffice: "",
+    customerPhone: "",
+    email: "",
     paymentMethod: "receipt",
     comment: "",
   });

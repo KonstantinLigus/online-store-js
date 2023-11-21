@@ -4,27 +4,34 @@ export const orderZodSchema = z.object({
   products: z
     .array(
       z.object({
-        productName: z.string(),
+        _id: z.string(),
         quantity: z.number(),
+        value: z.string(),
         price: z.number(),
-        unit: z.string(),
       }),
     )
     .nonempty({
       message: "Can't be empty!",
     }),
   deliveryInfo: z.object({
-    custumerFullName: z
+    firstName: z.string().regex(/^[A-ZА-ЯІЇ][a-zа-яії'-]+$/g, {
+      message:
+        "First name must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
+    }),
+    secondName: z
       .string()
-      .regex(
-        /(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)|(^[A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+ [A-ZА-Я][a-zа-яії'-]+$)/g,
-        {
-          message:
-            "Must contain 2 or 3 words without leading or trailing spaces. Only one space between words are available. Each word must start with a capital letter.",
-        },
-      ),
+      .regex(/^[A-ZА-ЯІЇ][a-zа-яії'-]+$/g, {
+        message:
+          "Second name must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
+      })
+      .optional(),
+    surname: z.string().regex(/^[A-ZА-ЯІЇ][a-zа-яії'-]+$/g, {
+      message:
+        "Surname must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
+    }),
+    region: z.string(),
     city: z.string(),
-    deliveryMethod: z.enum(["Нова пошта"]),
+    deliveryType: z.enum(["Нова пошта"]),
     postOffice: z.number(),
     customerPhone: z
       .string()
