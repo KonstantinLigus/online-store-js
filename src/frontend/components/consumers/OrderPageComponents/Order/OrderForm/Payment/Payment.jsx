@@ -1,12 +1,17 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "../OrderForm.module.scss";
+import { Payment as LiqPay } from "@/frontend/components/consumers/Payment/Payment";
 
 const Payment = ({ consumer, changeData }) => {
+  const [cardPayment, setCardPayment] = useState(false);
+
   const handleChange = e => {
+    e.target.value === "card" ? setCardPayment(true) : setCardPayment(false);
+
     changeData(prev => ({
       ...prev,
-      payment: e.target.value,
+      paymentMethod: e.target.value,
     }));
   };
 
@@ -18,7 +23,7 @@ const Payment = ({ consumer, changeData }) => {
         id="receipt"
         value="receipt"
         className={styles.radioBtn}
-        checked={consumer.payment === "receipt"}
+        checked={consumer.paymentMethod === "receipt"}
         onChange={handleChange}
       />
       <label htmlFor="receipt" className={styles.labelRadioBtn}>
@@ -33,12 +38,16 @@ const Payment = ({ consumer, changeData }) => {
         id="card"
         value="card"
         className={styles.radioBtn}
-        checked={consumer.payment === "card"}
+        checked={consumer.paymentMethod === "card"}
         onChange={handleChange}
       />
       <label htmlFor="card" className={styles.labelRadioBtn}>
         Оплата карткою
       </label>
+
+      {/*
+      {cardPayment && <LiqPay />}
+       */}
     </>
   );
 };
