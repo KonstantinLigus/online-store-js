@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
-import getItemsController from "@/backend/entities/items";
+import itemsControllers from "@/backend/entities/items";
+import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 
-export async function getItemById(req, { params: { id } }) {
-  const getItemById = getItemsController("GET_ONE_ITEM");
-  const res = await getItemById(id);
-  return NextResponse.json(res, { status: res.status });
+async function getItemById(req, { params: { id } }) {
+  const data = await itemsControllers.getItemById(id);
+  return data;
 }
+
+export default getTryCatchWrapper(getItemById);

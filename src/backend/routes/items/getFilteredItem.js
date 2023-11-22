@@ -1,16 +1,17 @@
-import { NextResponse } from "next/server";
-import getItemsController from "@/backend/entities/items";
+import itemsControllers from "@/backend/entities/items";
+import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 
 export async function getFilteredItems(req) {
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category");
-  const getfilteredItems = getItemsController("GET_FILTERED_ITEMS");
-  let res = [];
+  let data = [];
   if (category) {
-    res = await getfilteredItems({ category });
+    data = await itemsControllers.getAllItemsByField({ category });
   }
   if (!category) {
-    res = await getfilteredItems({});
+    data = await itemsControllers.getAllItemsByField({});
   }
-  return NextResponse.json(res, { status: res.status });
+  return data;
 }
+
+export default getTryCatchWrapper(getFilteredItems);

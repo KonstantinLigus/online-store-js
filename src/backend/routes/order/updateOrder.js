@@ -17,6 +17,4 @@ async function updateOrder(req) {
   return updatedOrder;
 }
 
-const wrappedCreateOrder = getTryCatchWrapper(updateOrder);
-
-export default wrappedCreateOrder;
+export default getTryCatchWrapper(updateOrder);
