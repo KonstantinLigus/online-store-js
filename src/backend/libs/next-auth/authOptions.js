@@ -1,4 +1,4 @@
-import userControllers from "@/backend/entities/users";
+import userOAuthControllers from "@/backend/entities/usersOAuth";
 import GoogleProvider from "next-auth/providers/google";
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env;
@@ -20,11 +20,11 @@ const authOptions = {
   ],
   callbacks: {
     async signIn({ user: { name, email, image } }) {
-      const { user: userFromDB } = await userControllers.getUserByField({
+      const { user: userFromDB } = await userOAuthControllers.getUserByField({
         email,
       });
       if (!userFromDB) {
-        await userControllers.createNewUser({
+        await userOAuthControllers.createNewUser({
           email,
           name,
           image,
@@ -34,7 +34,7 @@ const authOptions = {
     },
 
     async session({ session }) {
-      const { user } = await userControllers.getUserByField({
+      const { user } = await userOAuthControllers.getUserByField({
         email: session.user.email,
       });
       session.user = user;

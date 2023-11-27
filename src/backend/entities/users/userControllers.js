@@ -17,6 +17,6 @@ async function getUserById(id) {
 }
 
 async function createUser(userObj) {
-  const user = await userServices.createUser(userObj);
-  return { user, status: 201 };
+  const { name, email } = await userServices.createUser(userObj);
+  return { user: { name, email }, status: 201 };
 }
