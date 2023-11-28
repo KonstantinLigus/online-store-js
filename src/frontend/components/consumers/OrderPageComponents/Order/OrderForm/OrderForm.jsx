@@ -8,7 +8,6 @@ import Email from "./Email/Email";
 import FirstName from "./FirstName/FirstName";
 import SecondName from "./SecondName/SecondName";
 import Surname from "./Surname/Surname";
-import Delivery from "./Delivery/Delivery";
 import DeliveryType from "./Delivery/DeliveryType";
 import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
