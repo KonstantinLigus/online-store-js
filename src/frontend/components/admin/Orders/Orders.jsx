@@ -17,6 +17,9 @@ const Orders = () => {
         region: "Київська",
         city: "Київ",
         postOffice: "Відділення №1: вул. Пирогівський шлях, 135",
+        street: "",
+        house: "",
+        flat: "",
         customerPhone: "+380 50 111 22 22",
         email: "mail@mail.com",
         paymentMethod: "receipt",
@@ -76,6 +79,41 @@ const Orders = () => {
         year: 2023,
         hour: 18,
         minutes: 21,
+      },
+    },
+    {
+      deliveryInfo: {
+        firstName: "Іван",
+        secondName: "",
+        surname: "Доу",
+        deliveryType: "Нова Пошта - доставка кур’єром",
+        region: "Київська",
+        city: "Київ",
+        postOffice: "",
+        street: "Шевченка",
+        house: "100",
+        flat: "5б",
+        customerPhone: "+380 50 111 22 22",
+        email: "mail@mail.com",
+        paymentMethod: "receipt",
+        comment: "Зателефонуйте коли відправите",
+      },
+
+      products: [
+        {
+          _id: "652019e5e7519ff5c13f298d",
+          quantity: 3,
+          value: "1000 г",
+          price: 200,
+        },
+      ],
+
+      sendingTime: {
+        day: 12,
+        mounth: 8,
+        year: 2023,
+        hour: 9,
+        minutes: 44,
       },
     },
   ]);

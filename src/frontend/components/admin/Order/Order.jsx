@@ -51,6 +51,12 @@ const Order = ({
       {deliveryInfo.region && <p>Область: {deliveryInfo.region}</p>}
       {deliveryInfo.city && <p>Місто: {deliveryInfo.city}</p>}
       {deliveryInfo.postOffice && <p>Адреса: {deliveryInfo.postOffice}</p>}
+      {deliveryInfo.street && (
+        <p>
+          Адреса: вул. {deliveryInfo.street}, {deliveryInfo.house}
+          {deliveryInfo.flat && "/" + deliveryInfo.flat}
+        </p>
+      )}
       <hr className={styles.hr} />
       <p>
         Оплата:{" "}
