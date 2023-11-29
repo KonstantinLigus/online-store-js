@@ -27,7 +27,7 @@ const CategoryPage = ({ params }) => {
       setData(items);
     };
     fetchData();
-  }, []);
+  }, [currentCategory]);
 
   const cartChecker = id => {
     return cart.some(cartItem => cartItem._id === id);

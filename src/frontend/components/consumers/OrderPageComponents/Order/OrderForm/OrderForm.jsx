@@ -8,7 +8,7 @@ import Email from "./Email/Email";
 import FirstName from "./FirstName/FirstName";
 import SecondName from "./SecondName/SecondName";
 import Surname from "./Surname/Surname";
-import Delivery from "./Delivery/Delivery";
+import DeliveryType from "./Delivery/DeliveryType";
 import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
 
@@ -19,12 +19,18 @@ const OrderForm = props => {
   const [surnameIsValid, setSurnameIsValid] = useState(true);
   const [phoneIsValid, setPhoneIsValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
-  const [checkRegion, setCheckRegion] = useState(true);
-  const [regionIsValid, setRegionIsValid] = useState(true);
-  const [checkCity, setCheckCity] = useState(true);
-  const [cityIsValid, setCityIsValid] = useState(true);
-  const [checkOffice, setCheckOffice] = useState(true);
-  const [officeIsValid, setOfficeIsValid] = useState(true);
+
+  const [regionIsValid, setRegionIsValid] = useState(false);
+  const [regionError, setRegionError] = useState(false);
+
+  const [cityIsValid, setCityIsValid] = useState(false);
+  const [cityError, setCityError] = useState(false);
+
+  const [postOfficeIsValid, setPostOfficeIsValid] = useState(false);
+  const [postOfficeError, setPostOfficeError] = useState(false);
+
+  const [streetIsValid, setStreetIsValid] = useState(true);
+  const [houseIsValid, setHouseIsValid] = useState(true);
 
   const validateData = e => {
     e.preventDefault();
@@ -48,37 +54,36 @@ const OrderForm = props => {
     }
 
     if (
-      consumer.deliveryType === "Нова Пошта - Відділення" ||
-      consumer.deliveryType === "Нова Пошта - доставка кур’єром"
+      consumer.deliveryType !==
+      "Самовивіз з магазину в Києві: вул. І.Мазепи, 37"
     ) {
-      if (!checkRegion || consumer.region === "") {
+      if (!regionIsValid) {
         checked = false;
-        setRegionIsValid(false);
+        setRegionError(true);
+      }
+      if (!cityIsValid) {
+        checked = false;
+        setCityError(true);
       } else {
-        if (!checkCity || consumer.city === "") {
-          checked = false;
-          setCityIsValid(false);
+        if (consumer.deliveryType === "Нова Пошта - Відділення") {
+          if (!postOfficeIsValid || !consumer.postOffice) {
+            checked = false;
+            setPostOfficeError(true);
+          }
         } else {
-          if (consumer.deliveryType === "Нова Пошта - Відділення") {
-            if (!checkOffice || consumer.postOffice === "") {
-              checked = false;
-              setOfficeIsValid(false);
-            }
-          } else if (
-            consumer.deliveryType === "Нова Пошта - доставка кур’єром"
-          ) {
-            if (consumer.postOffice === "") {
-              checked = false;
-              setOfficeIsValid(false);
-            }
+          if (consumer.street.length < 3) {
+            checked = false;
+            setStreetIsValid(false);
+          }
+          if (!consumer.house) {
+            checked = false;
+            setHouseIsValid(false);
           }
         }
       }
     }
 
-    if (checked === true) {
-      sendOrder();
-    }
+    if (checked) sendOrder();
   };
 
   const sendOrder = () => {
@@ -142,21 +147,25 @@ const OrderForm = props => {
       </Fieldset>
 
       <Fieldset number={2} title={"Доставка"}>
-        <Delivery
+        <DeliveryType
           consumer={consumer}
           changeData={setConsumer}
-          checkRegion={checkRegion}
-          setCheckRegion={setCheckRegion}
           regionIsValid={regionIsValid}
           setRegionIsValid={setRegionIsValid}
-          checkCity={checkCity}
-          setCheckCity={setCheckCity}
+          regionError={regionError}
+          setRegionError={setRegionError}
           cityIsValid={cityIsValid}
           setCityIsValid={setCityIsValid}
-          checkOffice={checkOffice}
-          setCheckOffice={setCheckOffice}
-          officeIsValid={officeIsValid}
-          setOfficeIsValid={setOfficeIsValid}
+          cityError={cityError}
+          setCityError={setCityError}
+          postOfficeIsValid={postOfficeIsValid}
+          setPostOfficeIsValid={setPostOfficeIsValid}
+          postOfficeError={postOfficeError}
+          setPostOfficeError={setPostOfficeError}
+          streetIsValid={streetIsValid}
+          setStreetIsValid={setStreetIsValid}
+          houseIsValid={houseIsValid}
+          setHouseIsValid={setHouseIsValid}
         />
       </Fieldset>
 
