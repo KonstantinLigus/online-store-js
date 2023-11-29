@@ -19,7 +19,13 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user: { name, email, image } }) {
+    async signIn({ profile }) {
+      let {
+        given_name: name,
+        family_name: surname,
+        email,
+        picture: image,
+      } = profile;
       const { user: userFromDB } = await userControllers.getUserByField({
         email,
       });
@@ -27,6 +33,7 @@ const authOptions = {
         await userControllers.createUser({
           email,
           name,
+          surname: surname || null,
           image,
         });
       }

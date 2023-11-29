@@ -28,14 +28,11 @@ async function signUp(req) {
     throw userExistError;
   }
   const salt = await bcrypt.genSalt();
-  const hashedPassword = await bcrypt.hash(password, salt);
-  const _id = new mongoose.mongo.ObjectId();
-
+  user.password = await bcrypt.hash(password, salt);
   user.verificationToken = crypto.randomUUID();
-  user.password = hashedPassword;
-  user._id = _id;
+  user._id = new mongoose.mongo.ObjectId();
   const createdUser = await userControllers.createUser(user);
-  createAndSetUserTokenToCookie(_id);
+  createAndSetUserTokenToCookie(user._id);
   return createdUser;
 }
 
