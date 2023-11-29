@@ -9,7 +9,11 @@ export function getError(err) {
     status = 400;
     error = { ...err.issues };
   }
-  if (err.name === "UserExistError") {
+  if (
+    /\w*[Tt]oken\w*/.test(err.name) ||
+    err.name === "UserExistError" ||
+    err.name === "invalidTokenDataError"
+  ) {
     status = 400;
   }
   return { error, status };

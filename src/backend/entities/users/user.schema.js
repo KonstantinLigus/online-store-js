@@ -8,16 +8,21 @@ const user = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    default: null,
   },
   email: {
     type: String,
     required: [true, "Email is required"],
     unique: true,
   },
+  image: { type: String, default: null },
+  city: { type: String, default: null },
+  deliveryMethod: { type: String, default: null },
+  postOffice: { type: String, default: null },
+  phone: { type: String, default: null },
   verificationToken: {
     type: String,
-    required: [true, "Verify token is required"],
+    default: null,
   },
 });
 

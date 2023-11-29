@@ -3,14 +3,14 @@ import { cookies } from "next/headers";
 
 const { TOKEN_LIFE_TIME, NEXTAUTH_SECRET } = process.env;
 
-export function createAndSetUserTokenToCookie({ _id, path }) {
+export function createAndSetUserTokenToCookie(_id) {
   const token = jwt.sign({ _id }, NEXTAUTH_SECRET, {
-    expiresIn: TOKEN_LIFE_TIME,
+    expiresIn: Number(TOKEN_LIFE_TIME),
   });
   cookies().set({
     name: "token",
     value: token,
-    path,
+    path: "/",
     maxAge: TOKEN_LIFE_TIME,
   });
 }

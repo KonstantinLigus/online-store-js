@@ -16,12 +16,14 @@ async function signUp(req) {
   if (userFromDB) {
     const { name: nameFromDB, email: emailFromDB } = userFromDB;
     let userExistError = null;
-    userExistError =
-      nameFromDB === name &&
-      new Error(`Name: ${nameFromDB} have already exist`);
-    userExistError =
-      emailFromDB === email &&
-      new Error(`Email: ${emailFromDB} have already exist`);
+    if (nameFromDB === name)
+      userExistError = new Error(`Name: ${nameFromDB} have already exist`);
+    if (emailFromDB === email)
+      userExistError = new Error(`Email: ${emailFromDB} have already exist`);
+    if (nameFromDB === name && emailFromDB === email)
+      userExistError = new Error(
+        `Name: ${nameFromDB} and email: ${emailFromDB} have already exist`,
+      );
     userExistError.name = "UserExistError";
     throw userExistError;
   }
@@ -33,7 +35,7 @@ async function signUp(req) {
   user.password = hashedPassword;
   user._id = _id;
   const createdUser = await userControllers.createUser(user);
-  createAndSetUserTokenToCookie({ _id, path: "api/auth" });
+  createAndSetUserTokenToCookie(_id);
   return createdUser;
 }
 
