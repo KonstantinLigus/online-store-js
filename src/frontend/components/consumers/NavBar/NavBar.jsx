@@ -90,6 +90,7 @@ export default function NavBar() {
           <h1 className={styles.logo}>Logo</h1>
         </Link>
         <div>
+          <Link href='login'>
           <Image
             src={userIcon}
             width={24}
@@ -97,6 +98,7 @@ export default function NavBar() {
             alt="user icon"
             priority
           />
+          </Link>
           <Link href="cart">
             <Image
               src={cartIcon}
