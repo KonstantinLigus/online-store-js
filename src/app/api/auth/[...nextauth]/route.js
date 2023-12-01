@@ -1,4 +1,4 @@
 export {
   default as GET,
   default as POST,
-} from "@/backend/routes/auth/authHandler";
+} from "@/backend/routes/userOAuth/userOAuthHandler";

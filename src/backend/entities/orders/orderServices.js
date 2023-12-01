@@ -3,18 +3,12 @@ import { Order } from "./order.schema";
 
 export const orderServices = Object.freeze({
   getOrderByField,
-  getOrderById,
   createOrder,
   updateOrder,
 });
 
 async function getOrderByField(objQuery) {
   const order = await Order.findOne(objQuery);
-  return order;
-}
-
-async function getOrderById(id) {
-  const order = await Order.findById(id);
   return order;
 }
 
