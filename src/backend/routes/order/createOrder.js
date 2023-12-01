@@ -12,7 +12,9 @@ async function createOrder(req) {
   const session = await getServerSession(authOptions);
   let userId = null;
   if (session) {
-    const { user } = userControllers.getUserById(session.user._id.toString());
+    const { user } = userControllers.getUserByField({
+      _id: session.user._id.toString(),
+    });
     userId = user ? user._id.toString() : null;
   }
   const order = await req.json();

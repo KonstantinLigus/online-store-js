@@ -12,9 +12,13 @@ export function getError(err) {
   if (
     /\w*[Tt]oken\w*/.test(err.name) ||
     err.name === "UserExistError" ||
-    err.name === "invalidTokenDataError"
+    err.name === "WrongUserPassword"
   ) {
     status = 400;
   }
+  if (err.name === "UserNotFound") {
+    status = 404;
+  }
+
   return { error, status };
 }

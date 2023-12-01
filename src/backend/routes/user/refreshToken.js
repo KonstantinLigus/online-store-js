@@ -1,7 +1,7 @@
 import userControllers from "@/backend/entities/users";
-import { createAndSetUserTokenToCookie } from "@/backend/helpers/createAndSetUserTokenToCookie";
+import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
-import { verifyToken } from "@/backend/helpers/verifyToken";
+import { verifyToken } from "@/backend/libs/jwt/verifyToken";
 
 async function refreshToken(req) {
   const token = req.cookies.get("token");
