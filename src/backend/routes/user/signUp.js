@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import mongoose from "mongoose";
 import { userSignUpZodSchema } from "@/backend/libs/zod/user.signUp.zod.schema";
 import userControllers from "@/backend/entities/users";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
@@ -19,11 +18,11 @@ async function signUp(req) {
   const salt = await bcrypt.genSalt();
   user.password = await bcrypt.hash(password, salt);
   user.verificationToken = crypto.randomUUID();
-  user._id = new mongoose.mongo.ObjectId();
-  const {user:createdUser, status} = await userControllers.createUser(user);
-  createAndSetUserTokenToCookie(user._id);
-
-  return data;
+  const { user: createdUser, status } = await userControllers.createUser(user);
+  createAndSetUserTokenToCookie(createdUser._id);
+  delete createdUser._id;
+  delete createdUser.password;
+  return { createdUser, status };
 }
 
 export default getTryCatchWrapper(signUp);

@@ -23,8 +23,6 @@ async function signIn(req) {
     throw wrongUserPasswordError;
   }
   createAndSetUserTokenToCookie(userFromDB._id);
-  // const { name, email: emailDB } = userFromDB;
-  // return { user: { name: name, email: emailDB }, status };
   delete userFromDB._id;
   delete userFromDB.password;
   return { user: userFromDB, status };

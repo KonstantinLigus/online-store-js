@@ -1,7 +1,6 @@
 import { orderServices } from "./orderServices";
 
 export const orderControllers = Object.freeze({
-  getOrderById,
   getOrderByField,
   createOrder,
   updateOrder,
@@ -9,11 +8,6 @@ export const orderControllers = Object.freeze({
 
 async function getOrderByField(objQuery) {
   const order = await orderServices.getOrderByField(objQuery);
-  return { order, status: 200 };
-}
-
-async function getOrderById(id) {
-  const order = await orderServices.getOrderById(id);
   return { order, status: 200 };
 }
 
