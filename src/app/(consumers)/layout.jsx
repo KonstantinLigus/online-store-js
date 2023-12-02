@@ -1,7 +1,7 @@
 import "@/global-styles/globals.css";
 import { Inter } from "next/font/google";
-import Footer from "@/frontend/components/consumers/Footer/Footer";
-import NavBar from "@/frontend/components/consumers/NavBar/NavBar";
+import SessionProvider from "@/frontend/pages/consumers/SessionProvider/SessionProvider";
+import UserBar from "@/frontend/pages/consumers/UserBar/UserBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,13 +10,14 @@ export const metadata = {
   description: "Online store",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
+        <SessionProvider>
+          <UserBar />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

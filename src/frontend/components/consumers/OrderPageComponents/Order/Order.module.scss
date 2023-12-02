@@ -1,0 +1,57 @@
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/variables";
+
+.wrapper {
+  @include wrapper;
+  box-shadow: 0 0 1rem #aaa;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 0 !important;
+
+  .nav {
+    display: flex;
+
+    .authenticated {
+      display: flex;
+      flex: 1;
+
+      .customerOn {
+        align-items: center;
+        background-color: #aaa;
+        border: 2px solid #333;
+        border-radius: 1rem;
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        font-size: 1rem;
+        margin: 1rem;
+
+        p {
+          pointer-events: none;
+        }
+      }
+
+      .customerOff {
+        align-items: center;
+        border: 2px solid #333;
+        border-radius: 1rem;
+        color: #777;
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        font-size: 1rem;
+        margin: 1rem;
+
+        p {
+          cursor: pointer;
+          padding: 1rem;
+        }
+      }
+    }
+  }
+
+  .formContainer {
+    position: relative;
+  }
+}

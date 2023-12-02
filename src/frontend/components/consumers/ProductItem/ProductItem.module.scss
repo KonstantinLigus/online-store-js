@@ -1,13 +1,9 @@
-@import '../../../../../src/styles/variables';
+@import "../../../../../src/styles/variables";
 
 .item {
   border-radius: 10px;
 
-  .cardImage {
-  }
-
   .information {
-
     .title {
       text-align: left;
       color: $text-color;
@@ -21,6 +17,18 @@
       align-items: center;
       margin-top: 4px;
 
+      .actionPrice {
+        color: red;
+        font-size: 12px;
+        font-weight: 400;
+
+        span {
+          color: $text-color;
+          margin-right: 0.5rem;
+          text-decoration: line-through;
+        }
+      }
+
       .price {
         color: $text-color;
         font-size: 12px;
@@ -28,10 +36,9 @@
       }
 
       .unit {
-        color: #AFAFAF;
-        font-size: 8px;
+        color: #afafaf;
+        font-size: 12px;
       }
     }
-
   }
 }
