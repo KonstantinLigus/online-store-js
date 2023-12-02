@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
-};
-
-module.exports = nextConfig;
+    images: {
+      domains: [process.env.IMAGES_DOMAIN],
+      hostname: "",
+    },
+  };
