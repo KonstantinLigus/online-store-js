@@ -122,13 +122,15 @@ export default function NavBar() {
         </Link>
 
         <div>
-          <Image
-            src={userIcon}
-            width={24}
-            height={24}
-            alt="user icon"
-            priority
-          />
+          <Link href="login">
+            <Image
+              src={userIcon}
+              width={24}
+              height={24}
+              alt="user icon"
+              priority
+            />
+          </Link>
           <Link href="/cart">
             <Image
               src={cartIcon}
