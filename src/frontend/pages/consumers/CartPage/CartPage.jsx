@@ -1,50 +1,52 @@
 "use client";
-import React from "react";
+import "@/global-styles/globals.css";
+import React, { useState } from "react";
 import { useCart } from "@/hooks/useCart";
-import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
-import deleteIcon from "public/assets/icon/cart-delete.svg";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./CartPage.module.scss";
+import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
 
 const CartPage = () => {
-  const { cart, removeFromCart } = useCart();
+  const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
 
   return (
-    <>
-      <ul className={styles.cartPage}>
-        {cart.length > 0 ? (
-          cart.map(item => (
-            <CartItem
-              className={styles.cartItem}
-              key={item._id}
-              id={item._id}
-              {...item}
-            >
-              <Image
-                className={styles.deleteIcon}
-                src={deleteIcon}
-                alt="delete-icon"
-                onClick={() => removeFromCart(item._id)}
-                width={20}
-              />
-            </CartItem>
-          ))
-        ) : (
-          <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
-        )}
-      </ul>
-      {cart.length > 0 && (
-        <div className={styles.cartFooter}>
-          <div className={styles.order}>
-            <div className={styles.headline}>
-              <p className={styles.caption}>Всього до сплати:</p>
-              <p className={styles.sum}>215$</p>
-            </div>
-            <button className={styles.button}>Оформити замовлення</button>
+    <main className={styles.main}>
+      <div className={styles.header}>
+        <button
+          type="button"
+          onClick={() => history.back()}
+          className={styles.btnBack}
+        >
+          &#129120;
+        </button>
+      </div>
+      {cart !== null && cart.length > 0 && (
+        <>
+          <div className={styles.productsWrapper}>
+            <ProductsInCart
+              cart={cart}
+              removeFromCart={removeFromCart}
+              updateCartItem={updateCartItem}
+            />
           </div>
-        </div>
+
+          <div className={styles.price}>
+            <p className={styles.caption}>Всього до сплати:</p>
+            <p className={styles.sum}>{totalPrice} грн</p>
+          </div>
+
+          <div className={styles.linkToOrder}>
+            <Link href="/order">
+              <p className={styles.button}>Оформити замовлення</p>
+            </Link>
+          </div>
+        </>
       )}
-    </>
+      {cart !== null && (
+        <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
+      )}
+    </main>
   );
 };
 export default CartPage;

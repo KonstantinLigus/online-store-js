@@ -27,7 +27,7 @@ const ProductList = ({ title, className }) => {
 
   return (
     <>
-      {data.length > 0 && (
+      {data?.length > 0 && (
         <div className={`${styles.productList} ${className}`}>
           <h2 className={styles.title}>{title}</h2>
           <Swiper

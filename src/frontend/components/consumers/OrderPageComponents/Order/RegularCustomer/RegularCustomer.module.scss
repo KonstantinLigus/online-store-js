@@ -1,0 +1,91 @@
+@import "../../../../../../styles/mixins";
+@import "../../../../../../styles/responsive";
+@import "../../../../../../styles/variables";
+
+.regularCustomer {
+  background-color: #fff;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  .container {
+    margin: auto;
+    max-width: 500px;
+    padding: 1rem;
+
+    .form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 2rem 0;
+      width: 100%;
+
+      .labelText {
+        grid-column: 1/-1;
+        margin-top: 0.5rem;
+        text-align: left;
+      }
+
+      .inputText {
+        background-color: $bg-color;
+        grid-column: 1/-1;
+        padding: 1rem;
+        text-align: left;
+        width: 100%;
+        &::placeholder {
+          color: $measure-color;
+        }
+      }
+
+      .btnPassword {
+        color: $text-color;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: underline;
+        width: 100%;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .btnSubmit {
+        background-color: #a8a8a8;
+        border-radius: 30px;
+        color: $text-color;
+        font-size: 20px;
+        font-weight: 400;
+        margin: 12px 0;
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+
+        &:hover {
+          background-color: #888;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btnSignIn {
+      background-color: #a8a8a8;
+      border-radius: 30px;
+      color: $text-color;
+      font-size: 20px;
+      font-weight: 400;
+      margin: 12px 0;
+      padding: 1rem;
+      text-align: center;
+      width: 100%;
+
+      &:hover {
+        background-color: #888;
+        cursor: pointer;
+      }
+    }
+  }
+}

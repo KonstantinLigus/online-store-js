@@ -2,7 +2,9 @@
 const nextConfig = {
   images: {
     domains: [process.env.IMAGES_DOMAIN],
-    hostname: "",
+  },
+  experimental: {
+    serverActions: true,
   },
 };
 
