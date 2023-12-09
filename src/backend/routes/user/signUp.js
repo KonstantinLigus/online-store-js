@@ -22,8 +22,8 @@ async function signUp(req) {
   const verificationToken = crypto.randomUUID();
   user.verificationToken = verificationToken;
   const message = createVerifyEmailMessage({
-    emailForVerify: email,
-    linkForVerify: `${process.env.EMAIL_VERIFICATION_URL}/${verificationToken}`,
+    email,
+    verificationToken,
   });
   await sendEmail(message);
   const { user: createdUser, status } = await userControllers.createUser(user);

@@ -22,9 +22,15 @@ async function signIn(req) {
     wrongUserPasswordError.name = "WrongUserPassword";
     throw wrongUserPasswordError;
   }
+  if (userFromDB.verificationToken) {
+    const emailNotVerifiedError = new Error("Email was not verified!");
+    emailNotVerifiedError.name = "emailNotVerifiedError";
+    throw emailNotVerifiedError;
+  }
   createAndSetUserTokenToCookie(userFromDB._id);
   delete userFromDB._id;
   delete userFromDB.password;
+  delete userFromDB.verificationToken;
   return { user: userFromDB, status };
 }
 
