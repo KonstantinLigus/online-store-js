@@ -1,11 +1,11 @@
-import bcrypt from "bcrypt";
-import crypto from "crypto";
 import { userSignUpZodSchema } from "@/backend/libs/zod/user.signUp.zod.schema";
 import userControllers from "@/backend/entities/users";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
 import { createVerifyEmailMessage } from "@/backend/libs/send-grid/messages";
+import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
+import { getRandomUUID } from "@/backend/libs/crypto/getRandomUUID";
 
 async function signUp(req) {
   const user = await req.json();
@@ -17,9 +17,8 @@ async function signUp(req) {
     userExistError.name = "UserExistError";
     throw userExistError;
   }
-  const salt = await bcrypt.genSalt();
-  user.password = await bcrypt.hash(password, salt);
-  const verificationToken = crypto.randomUUID();
+  user.password = await getHashedPassword(password);
+  const verificationToken = getRandomUUID();
   user.verificationToken = verificationToken;
   const message = createVerifyEmailMessage({
     email,

@@ -1,8 +1,8 @@
-import bcrypt from "bcrypt";
 import userControllers from "@/backend/entities/users";
 import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { userSignInZodSchema } from "@/backend/libs/zod/user.signIn.schema";
+import { comparePassword } from "@/backend/libs/bcrypt/comparePassword";
 
 async function signIn(req) {
   const user = await req.json();
@@ -16,7 +16,10 @@ async function signIn(req) {
     userNotFoundError.name = "UserNotFound";
     throw userNotFoundError;
   }
-  const isPasswordMatch = await bcrypt.compare(password, userFromDB.password);
+  const isPasswordMatch = await comparePassword({
+    pswd: password,
+    hashedPswd: userFromDB.password,
+  });
   if (!isPasswordMatch) {
     const wrongUserPasswordError = new Error("Wrong password!");
     wrongUserPasswordError.name = "WrongUserPassword";
