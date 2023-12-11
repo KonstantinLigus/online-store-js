@@ -14,6 +14,6 @@ export function createPasswordRecoverMessage({ email, newPassword }) {
     from: FROM_EMAIL_SEND,
     to: email,
     subject: "Eco Store password recover",
-    html: `<head><style>*{color: green;}</style></head><h3>You are currently change password for accessing to our site</h3><p>This is your new password: ${newPassword} </p>`,
+    html: `<head><style>*{color: green;} .newPswd{color: black;}</style></head><h3>You are currently change password for accessing to our site</h3><p>This is your new password: <b class="newPswd">${newPassword}</b></p>`,
   };
 }

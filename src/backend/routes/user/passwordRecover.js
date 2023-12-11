@@ -20,7 +20,7 @@ async function passwordRecover(req) {
   }
   const newPassword = getRandomUUID().substring(0, 8);
   const newHashedPassword = await getHashedPassword(newPassword);
-  userFromDB.password = newHashedPassword;
+  await userControllers.updateUser({ email }, { password: newHashedPassword });
   const messageWithNewPassword = createPasswordRecoverMessage({
     email,
     newPassword,

@@ -6,17 +6,14 @@ import { sendEmail } from "@/backend/libs/send-grid/send-email";
 import { createVerifyEmailMessage } from "@/backend/libs/send-grid/messages";
 import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
 import { getRandomUUID } from "@/backend/libs/crypto/getRandomUUID";
+import { UserExistError } from "@/backend/helpers/errors";
 
 async function signUp(req) {
   const user = await req.json();
   userSignUpZodSchema.parse(user);
   const { password, email } = user;
   const { user: userFromDB } = await userControllers.getUserByField({ email });
-  if (userFromDB) {
-    const userExistError = new Error(`Email: ${email} have already exist`);
-    userExistError.name = "UserExistError";
-    throw userExistError;
-  }
+  if (userFromDB) throw new UserExistError(email);
   user.password = await getHashedPassword(password);
   const verificationToken = getRandomUUID();
   user.verificationToken = verificationToken;

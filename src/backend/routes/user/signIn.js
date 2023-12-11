@@ -3,6 +3,11 @@ import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUs
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { userSignInZodSchema } from "@/backend/libs/zod/user.signIn.schema";
 import { comparePassword } from "@/backend/libs/bcrypt/comparePassword";
+import {
+  EmailNotVerifiedError,
+  UserNotFoundError,
+  WrongUserPasswordError,
+} from "@/backend/helpers/errors";
 
 async function signIn(req) {
   const user = await req.json();
@@ -11,25 +16,13 @@ async function signIn(req) {
   const { user: userFromDB, status } = await userControllers.getUserByField({
     email,
   });
-  if (!userFromDB) {
-    const userNotFoundError = new Error("Wrong email!");
-    userNotFoundError.name = "UserNotFound";
-    throw userNotFoundError;
-  }
+  if (!userFromDB) throw new UserNotFoundError();
   const isPasswordMatch = await comparePassword({
     pswd: password,
     hashedPswd: userFromDB.password,
   });
-  if (!isPasswordMatch) {
-    const wrongUserPasswordError = new Error("Wrong password!");
-    wrongUserPasswordError.name = "WrongUserPassword";
-    throw wrongUserPasswordError;
-  }
-  if (userFromDB.verificationToken) {
-    const emailNotVerifiedError = new Error("Email was not verified!");
-    emailNotVerifiedError.name = "emailNotVerifiedError";
-    throw emailNotVerifiedError;
-  }
+  if (!isPasswordMatch) throw new WrongUserPasswordError();
+  if (userFromDB.verificationToken) throw new EmailNotVerifiedError();
   createAndSetUserTokenToCookie(userFromDB._id);
   delete userFromDB._id;
   delete userFromDB.password;
