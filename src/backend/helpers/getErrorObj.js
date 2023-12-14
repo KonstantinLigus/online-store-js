@@ -1,13 +1,13 @@
 export function getError(err) {
   let error = err.message;
-  let status = err.status || 404;
+  let status = err.status || 500;
   if (err.name === "CastError") {
     error = `item with id: ${err.value} was not found`;
     status = 404;
   }
   if (err.name === "ZodError") {
     status = 400;
-    error = { ...err.issues };
+    error = { ...err.format() };
   }
   if (
     /\w*[Tt]oken\w*/.test(err.name) ||
