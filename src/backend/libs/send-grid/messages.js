@@ -17,3 +17,12 @@ export function createPasswordRecoverMessage({ email, newPassword }) {
     html: `<head><style>*{color: green;} .newPswd{color: black;}</style></head><h3>You are currently change password for accessing to our site</h3><p>This is your new password: <b class="newPswd">${newPassword}</b></p>`,
   };
 }
+
+export function createNewOrderMessage({ email, orderId }) {
+  return {
+    from: FROM_EMAIL_SEND,
+    to: email,
+    subject: "Eco Store new order",
+    html: `<head><style>*{color: green;} .newPswd{color: black;}</style></head><h3>You are currently make order in our site</h3><p>This is your order id: <b class="newPswd">${orderId}</b></p>`,
+  };
+}

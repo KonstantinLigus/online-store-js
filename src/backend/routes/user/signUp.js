@@ -1,12 +1,13 @@
 import { userSignUpZodSchema } from "@/backend/libs/zod/user.signUp.zod.schema";
 import userControllers from "@/backend/entities/users";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
-import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
+import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
 import { createVerifyEmailMessage } from "@/backend/libs/send-grid/messages";
 import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
 import { getRandomUUID } from "@/backend/libs/crypto/getRandomUUID";
 import { UserExistError } from "@/backend/helpers/errors";
+import { setUserTokenToCookie } from "@/backend/libs/next/cookieOperations";
 
 async function signUp(req) {
   const user = await req.json();
@@ -23,7 +24,8 @@ async function signUp(req) {
   });
   await sendEmail(message);
   const { user: createdUser, status } = await userControllers.createUser(user);
-  createAndSetUserTokenToCookie(createdUser._id);
+  const token = createUserToken(createdUser._id);
+  setUserTokenToCookie(token);
   delete createdUser._id;
   delete createdUser.password;
   delete createdUser.verificationToken;

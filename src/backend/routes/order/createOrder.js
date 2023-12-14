@@ -7,20 +7,30 @@ import { countTotalPrice } from "@/backend/helpers";
 import { createDataAndSignatureObj } from "@/backend/libs/liqPay/liqPay";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { orderZodSchema } from "@/backend/libs/zod/order.zod.schema";
+import { getCookie } from "@/backend/libs/next/cookieOperations";
+import { verifyToken } from "@/backend/libs/jwt/verifyToken";
+import { sendEmail } from "@/backend/libs/send-grid/send-email";
+import { createNewOrderMessage } from "@/backend/libs/send-grid/messages";
 
 async function createOrder(req) {
   const session = await getServerSession(authOptions);
   let userId = null;
+  let userEmail = null;
   if (session) {
-    const { user } = userControllers.getUserByField({
+    const { user } = await userControllers.getUserByField({
       _id: session.user._id.toString(),
     });
     userId = user ? user._id.toString() : null;
+    userEmail = user ? user.email : null;
+  }
+  const token = getCookie("token");
+  if (!session && token) {
+    userId = verifyToken(token.value)._id;
+    const { user } = await userControllers.getUserByField({ _id: userId });
+    userEmail = user ? user.email : null;
   }
   const order = await req.json();
-
   orderZodSchema.parse(order);
-
   let {
     deliveryInfo: { comment },
   } = order;
@@ -39,6 +49,13 @@ async function createOrder(req) {
 
   order.liqPayEncodedData = liqPayEncodedData;
   const data = await orderControllers.createOrder(order);
+  if (userEmail) {
+    const newOrderMsg = createNewOrderMessage({
+      email: userEmail,
+      orderId: order._id.toString(),
+    });
+    await sendEmail(newOrderMsg);
+  }
   return data;
 }
 
