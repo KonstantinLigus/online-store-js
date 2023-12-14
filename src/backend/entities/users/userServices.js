@@ -4,6 +4,7 @@ import { User } from "./user.schema";
 export const userServices = Object.freeze({
   getUserByField,
   createUser,
+  updateUser,
 });
 
 async function getUserByField(objQuery) {
@@ -14,4 +15,9 @@ async function getUserByField(objQuery) {
 async function createUser(userObj) {
   const user = await User.create(userObj);
   return user;
+}
+
+async function updateUser(filter, updateObj) {
+  const updatedUser = await User.findOneAndUpdate(filter, updateObj);
+  return updatedUser;
 }

@@ -1,8 +1,14 @@
-import bcrypt from "bcrypt";
 import userControllers from "@/backend/entities/users";
-import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
+import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { userSignInZodSchema } from "@/backend/libs/zod/user.signIn.schema";
+import { comparePassword } from "@/backend/libs/bcrypt/comparePassword";
+import {
+  EmailNotVerifiedError,
+  UserNotFoundError,
+  WrongUserPasswordError,
+} from "@/backend/helpers/errors";
+import { setUserTokenToCookie } from "@/backend/libs/next/cookieOperations";
 
 async function signIn(req) {
   const user = await req.json();
@@ -11,20 +17,18 @@ async function signIn(req) {
   const { user: userFromDB, status } = await userControllers.getUserByField({
     email,
   });
-  if (!userFromDB) {
-    const userNotFoundError = new Error("Wrong email!");
-    userNotFoundError.name = "UserNotFound";
-    throw userNotFoundError;
-  }
-  const isPasswordMatch = await bcrypt.compare(password, userFromDB.password);
-  if (!isPasswordMatch) {
-    const wrongUserPasswordError = new Error("Wrong password!");
-    wrongUserPasswordError.name = "WrongUserPassword";
-    throw wrongUserPasswordError;
-  }
-  createAndSetUserTokenToCookie(userFromDB._id);
+  if (!userFromDB) throw new UserNotFoundError();
+  const isPasswordMatch = await comparePassword({
+    pswd: password,
+    hashedPswd: userFromDB.password,
+  });
+  if (!isPasswordMatch) throw new WrongUserPasswordError();
+  if (userFromDB.verificationToken) throw new EmailNotVerifiedError();
+  const token = createUserToken(userFromDB._id);
+  setUserTokenToCookie(token);
   delete userFromDB._id;
   delete userFromDB.password;
+  delete userFromDB.verificationToken;
   return { user: userFromDB, status };
 }
 

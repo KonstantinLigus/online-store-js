@@ -1,27 +1,34 @@
-import bcrypt from "bcrypt";
-import crypto from "crypto";
 import { userSignUpZodSchema } from "@/backend/libs/zod/user.signUp.zod.schema";
 import userControllers from "@/backend/entities/users";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
-import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
+import { createUserToken } from "@/backend/libs/jwt/createUserToken";
+import { sendEmail } from "@/backend/libs/send-grid/send-email";
+import { createVerifyEmailMessage } from "@/backend/libs/send-grid/messages";
+import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
+import { getRandomUUID } from "@/backend/libs/crypto/getRandomUUID";
+import { UserExistError } from "@/backend/helpers/errors";
+import { setUserTokenToCookie } from "@/backend/libs/next/cookieOperations";
 
 async function signUp(req) {
   const user = await req.json();
   userSignUpZodSchema.parse(user);
   const { password, email } = user;
   const { user: userFromDB } = await userControllers.getUserByField({ email });
-  if (userFromDB) {
-    const userExistError = new Error(`Email: ${email} have already exist`);
-    userExistError.name = "UserExistError";
-    throw userExistError;
-  }
-  const salt = await bcrypt.genSalt();
-  user.password = await bcrypt.hash(password, salt);
-  user.verificationToken = crypto.randomUUID();
+  if (userFromDB) throw new UserExistError(email);
+  user.password = await getHashedPassword(password);
+  const verificationToken = getRandomUUID();
+  user.verificationToken = verificationToken;
+  const message = createVerifyEmailMessage({
+    email,
+    verificationToken,
+  });
+  await sendEmail(message);
   const { user: createdUser, status } = await userControllers.createUser(user);
-  createAndSetUserTokenToCookie(createdUser._id);
+  const token = createUserToken(createdUser._id);
+  setUserTokenToCookie(token);
   delete createdUser._id;
   delete createdUser.password;
+  delete createdUser.verificationToken;
   return { createdUser, status };
 }
 

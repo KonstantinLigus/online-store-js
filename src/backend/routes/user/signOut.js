@@ -1,8 +1,8 @@
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
-import { cookies } from "next/headers";
+import { deleteCookie } from "@/backend/libs/next/cookieOperations";
 
 async function signOut() {
-  cookies().delete("token");
+  deleteCookie("token");
   return { message: "user signed out!" };
 }
 

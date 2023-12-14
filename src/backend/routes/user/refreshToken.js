@@ -1,5 +1,5 @@
 import userControllers from "@/backend/entities/users";
-import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createAndSetUserTokenToCookie";
+import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createUserToken";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { verifyToken } from "@/backend/libs/jwt/verifyToken";
 
