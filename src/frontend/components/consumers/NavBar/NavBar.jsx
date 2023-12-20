@@ -9,41 +9,46 @@ import burgerStyles from "../Burger/Burger.module.scss";
 const links = [
   {
     id: 0,
+    title: "Всі категорії",
+    url: "/categories",
+  },
+  {
+    id: 1,
     title: "Овочі",
     url: "/category/vegetables",
   },
   {
-    id: 1,
+    id: 2,
     title: "Фрукти/Ягоди",
     url: "/category/fruits",
   },
   {
-    id: 2,
+    id: 3,
     title: "Горіхи",
     url: "/category/nuts",
   },
   {
-    id: 3,
+    id: 4,
     title: "Бакалія",
     url: "/category/grocery",
   },
   {
-    id: 4,
+    id: 5,
     title: "Консервація",
     url: "/category/conservation",
   },
   {
-    id: 5,
+    id: 6,
     title: "Молочна продукція",
     url: "/category/milk",
   },
   {
-    id: 6,
+    id: 7,
     title: "Home",
     url: "/",
   },
   {
-    id: 7,
+    id: 8,
     title: "Admin page",
     url: "/admin",
   },

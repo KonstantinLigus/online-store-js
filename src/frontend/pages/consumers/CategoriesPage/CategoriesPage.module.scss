@@ -1,0 +1,26 @@
+@import "../../../../styles/responsive";
+
+.categories {
+  width: 100%;
+
+  .category {
+    padding: 2em;
+    width: 100%;
+
+    .categoryName {
+      font-size: 28px;
+      margin: 1em auto;
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+    .products {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      @include lg-min {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+}
