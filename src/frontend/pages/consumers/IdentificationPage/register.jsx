@@ -3,10 +3,10 @@
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
 import "./register.scss";
-import { signUp } from "@/backend/server-actions/user/signUp-action";
+import { signUpAction } from "@/backend/server-actions/user/signUp-action";
 
 const IdentificationPage = () => {
-  const [state, formAction] = useFormState(signUp, null);
+  const [state, formAction] = useFormState(signUpAction, null);
   return (
     <div className="container">
       <h2>Реєстрація</h2>

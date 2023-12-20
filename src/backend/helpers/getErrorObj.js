@@ -9,6 +9,11 @@ export function getError(err) {
     status = 400;
     error = { ...err.format() };
   }
+  if (err.name === "signUpZodError") {
+    const errObj = err.flatten();
+    error =
+      errObj.formErrors.length > 0 ? errObj.formErrors : errObj.fieldErrors;
+  }
   if (
     /\w*[Tt]oken\w*/.test(err.name) ||
     err.name === "UserExistError" ||
