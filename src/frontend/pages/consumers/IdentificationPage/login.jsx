@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import googleIcon from "public/assets/icon/icon-google.svg";
 import "./login.scss";
 const LoginPage = () => {
   return (
@@ -24,7 +23,12 @@ const LoginPage = () => {
       <label className="google-auth" htmlFor="">
         Також можна увійти через:
         <button>
-          <Image alt="logo-img" src={googleIcon} width={24} height={24}></Image>{" "}
+          <Image
+            alt="logo-img"
+            src="/assets/icon/icon-google.svg"
+            width={24}
+            height={24}
+          ></Image>
           Google
         </button>
       </label>

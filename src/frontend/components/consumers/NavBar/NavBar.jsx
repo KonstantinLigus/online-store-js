@@ -2,13 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./NavBar.module.scss";
-import searchIcon from "public/assets/icon/search-icon.svg";
-import userIcon from "public/assets/icon/user-icon.svg";
-import cartIcon from "public/assets/icon/cart-icon.svg";
 import Burger from "@/frontend/components/consumers/Burger/Burger";
 import { useState } from "react";
 import burgerStyles from "../Burger/Burger.module.scss";
-import arrow from "public/arrow-right.svg";
 
 const links = [
   {
@@ -91,14 +87,20 @@ export default function NavBar() {
                 <Link key={link.id} href={link.url} onClick={updateMenu}>
                   <li className={styles.item}>
                     {link.title}
-                    <Image src={arrow} alt="arrow-icon" width={24} priority />
+                    <Image
+                      src="/arrow-right.svg"
+                      alt="arrow-icon"
+                      width={24}
+                      height={24}
+                      priority
+                    />
                   </li>
                 </Link>
               ))}
             </ul>
           </nav>
           <Image
-            src={searchIcon}
+            src="/assets/icon/search-icon.svg"
             width={18}
             height={18}
             alt="user icon"
@@ -124,7 +126,7 @@ export default function NavBar() {
         <div>
           <Link href="login">
             <Image
-              src={userIcon}
+              src="/assets/icon/user-icon.svg"
               width={24}
               height={24}
               alt="user icon"
@@ -133,7 +135,7 @@ export default function NavBar() {
           </Link>
           <Link href="/cart">
             <Image
-              src={cartIcon}
+              src="/assets/icon/cart-icon.svg"
               width={24}
               height={24}
               alt="cart icon"
