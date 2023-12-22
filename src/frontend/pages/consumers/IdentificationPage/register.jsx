@@ -3,7 +3,7 @@
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
 import "./register.scss";
-import { signUpAction } from "@/backend/server-actions/user/signUp-action";
+import { signUpAction } from "@/backend/server-actions/user";
 
 const IdentificationPage = () => {
   const [state, formAction] = useFormState(signUpAction, null);
@@ -19,10 +19,13 @@ const IdentificationPage = () => {
         <p>{state?.phone}</p>
         <input placeholder="E-mail*" type="email" name="email" />
         <p>{state?.email}</p>
-        <p>{state?.message}</p>
         <input placeholder="Пароль*" type="password" name="password" />
         <p>{state?.password}</p>
-        <input placeholder="Повторити пароль*" type="password" />
+        <input
+          placeholder="Повторити пароль*"
+          type="password"
+          name="passwordRepeat"
+        />
         <p>{state?.password}</p>
         <SubmitButton name="Зареєструватись" />
       </form>

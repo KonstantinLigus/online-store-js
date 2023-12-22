@@ -9,20 +9,24 @@ export function getError(err) {
     status = 400;
     error = { ...err.format() };
   }
-  if (err.name === "signUpZodError") {
-    const errObj = err.flatten();
-    error =
-      errObj.formErrors.length > 0 ? errObj.formErrors : errObj.fieldErrors;
+  if (err.name === "UserParseError") {
+    status = 400;
   }
   if (
     /\w*[Tt]oken\w*/.test(err.name) ||
     err.name === "UserExistError" ||
-    err.name === "WrongUserPassword"
+    err.name === "WrongUserPasswordError" ||
+    err.name === "EmailNotVerifiedError"
   ) {
+    error = { email: err.message };
     status = 400;
   }
-  if (err.name === "UserNotFound") {
+  if (err.name === "UserNotFoundError") {
     status = 404;
+  }
+  if (err.name === "PasswordsNotTheSameError") {
+    error = { password: err.message };
+    status = 400;
   }
 
   return { error, status };

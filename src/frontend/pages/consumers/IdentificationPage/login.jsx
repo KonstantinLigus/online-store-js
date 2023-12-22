@@ -1,19 +1,28 @@
+"use client";
+
+import { useFormState } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import "./login.scss";
+import { signInAction } from "@/backend/server-actions/user";
+
 const LoginPage = () => {
+  const [state, formAction] = useFormState(signInAction, null);
+
   return (
     <div className="container">
       <h2>Вхід особистого кабінету</h2>
-      <form>
+      <form action={formAction}>
         <label>
           Email:
-          <input placeholder="name@gmail.com" type="email" />
+          <input placeholder="name@gmail.com" type="email" name="email" />
         </label>
+        <p>{state?.email}</p>
         <label>
           Пароль:
-          <input placeholder="*********" type="password" />
+          <input placeholder="*********" type="password" name="password" />
         </label>
+        <p>{state?.password}</p>
         <button type="submit">Увійти</button>
       </form>
       <div className="nav-fomr">

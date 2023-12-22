@@ -1,34 +1,49 @@
 export class UserExistError extends Error {
-  name = "userExistError";
+  name = "UserExistError";
   constructor(email) {
     super(`Email: ${email} have already exist!`);
   }
 }
 
 export class UserNotFoundError extends Error {
-  name = "userNotFoundError";
+  name = "UserNotFoundError";
   constructor() {
     super("Wrong email!");
   }
 }
 
 export class WrongUserPasswordError extends Error {
-  name = "wrongUserPasswordError";
+  name = "WrongUserPasswordError";
   constructor() {
     super("Wrong password!");
   }
 }
 
 export class EmailNotVerifiedError extends Error {
-  name = "emailNotVerifiedError";
+  name = "EmailNotVerifiedError";
   constructor() {
     super("Email was not verified!");
   }
 }
 
 export class UserNotExistError extends Error {
-  name = "userNotExistError";
+  name = "UserNotExistError";
   constructor() {
     super("User doesn't exist!");
+  }
+}
+
+export class PasswordsNotTheSameError extends Error {
+  name = "PasswordsNotTheSameError";
+  constructor() {
+    super("Passwords don't the same!");
+  }
+}
+
+export class UserParseError extends Error {
+  name = "UserParseError";
+  constructor(error) {
+    super();
+    this.message = error;
   }
 }

@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 
 const { HOST_DB } = process.env;
 
-await connectDB();
-
 export default async function connectDB() {
   if (mongoose.connection.readyState === 1) {
     return;
@@ -15,3 +13,5 @@ export default async function connectDB() {
     console.log("database error connection:", error);
   }
 }
+
+connectDB();
