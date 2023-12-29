@@ -8,6 +8,7 @@ export const orderZodSchema = z.object({
         quantity: z.number(),
         value: z.string(),
         price: z.number(),
+        _id: z.string(),
       }),
     )
     .nonempty({
@@ -31,8 +32,12 @@ export const orderZodSchema = z.object({
     }),
     region: z.string(),
     city: z.string(),
-    deliveryType: z.enum(["Нова пошта"]),
-    postOffice: z.number(),
+    deliveryType: z.enum([
+      "Нова Пошта - Відділення",
+      "Самовивіз з магазину в Києві: вул. І.Мазепи, 37",
+      "Нова Пошта - доставка кур’єром",
+    ]),
+    postOffice: z.string(),
     customerPhone: z
       .string()
       .length(13, { message: "Must be exactly 13 characters long" })

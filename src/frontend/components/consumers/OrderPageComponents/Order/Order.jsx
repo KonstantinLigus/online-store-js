@@ -15,13 +15,13 @@ const Order = props => {
     deliveryType: "Нова Пошта - Відділення",
     region: "",
     city: "",
-    postOffice: "",
+    postOffice: null,
     street: "",
     house: "",
     flat: "",
     customerPhone: "",
     email: "",
-    paymentMethod: "receipt",
+    paymentMethod: "card",
     comment: "",
   });
 
@@ -67,6 +67,8 @@ const Order = props => {
           consumer={consumerInfo}
           productsInCart={props.productsInCart}
           allProductsPrice={props.allProductsPrice}
+          setIsOrderCreated={props.setIsOrderCreated}
+          removeCart={props.removeCart}
         />
         {!userAuthenticated && !newCustomer && <RegularCustomer />}
       </div>

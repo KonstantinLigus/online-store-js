@@ -16,7 +16,7 @@ export const orderSchema = new mongoose.Schema({
     region: { type: String, required: true },
     city: { type: String, required: true },
     deliveryType: { type: String, required: true },
-    postOffice: { type: Number, required: true },
+    postOffice: { type: String, required: true },
     customerPhone: { type: String, required: true },
     email: { type: String, required: true },
     paymentMethod: { type: String, required: true },

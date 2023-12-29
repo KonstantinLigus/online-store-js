@@ -56,6 +56,11 @@ export const useCart = () => {
     countTotalPrice(updatedCart);
   };
 
+  const removeCart = () => {
+    localStorage.removeItem("cart");
+    setCart(null);
+  };
+
   return {
     totalPrice,
     cart,
@@ -63,5 +68,6 @@ export const useCart = () => {
     addToCart,
     removeFromCart,
     updateCartItem,
+    removeCart,
   };
 };
