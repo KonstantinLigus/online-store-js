@@ -5,6 +5,7 @@ import styles from "./NavBar.module.scss";
 import Burger from "@/frontend/components/consumers/Burger/Burger";
 import { useState } from "react";
 import burgerStyles from "../Burger/Burger.module.scss";
+import UserBar from "@/frontend/pages/consumers/UserBar/UserBar";
 
 const links = [
   {
@@ -54,7 +55,7 @@ const links = [
   },
 ];
 
-export default function NavBar() {
+export default function NavBar(props) {
   const [burgerClass, setBurgerClass] = useState(
     `${burgerStyles.burger} ${burgerStyles.unClicked}`,
   );
@@ -129,23 +130,14 @@ export default function NavBar() {
         </Link>
 
         <div>
-          <Link href="login">
-            <Image
-              src="/assets/icon/user-icon.svg"
-              width={24}
-              height={24}
-              alt="user icon"
-              priority
-            />
-          </Link>
-          <Link href="/cart">
+          <UserBar token={props.token} />
+          <Link href="/cart" style={{ marginLeft: "1rem" }}>
             <Image
               src="/assets/icon/cart-icon.svg"
               width={24}
               height={24}
               alt="cart icon"
               priority
-              style={{ marginLeft: "1rem" }}
             />
           </Link>
         </div>

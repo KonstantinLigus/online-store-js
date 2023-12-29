@@ -1,3 +1,5 @@
+"use server";
+
 import { signUp } from "@/backend/entities/users/domain/signUp-use-case";
 import { compareStrings, getError } from "@/backend/helpers";
 import {

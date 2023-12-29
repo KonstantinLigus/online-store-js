@@ -15,16 +15,19 @@ export function getError(err) {
   if (
     /\w*[Tt]oken\w*/.test(err.name) ||
     err.name === "UserExistError" ||
-    err.name === "WrongUserPasswordError" ||
     err.name === "EmailNotVerifiedError"
   ) {
     error = { email: err.message };
     status = 400;
   }
   if (err.name === "UserNotFoundError") {
+    error = { email: err.message };
     status = 404;
   }
-  if (err.name === "PasswordsNotTheSameError") {
+  if (
+    err.name === "WrongUserPasswordError" ||
+    err.name === "PasswordsNotTheSameError"
+  ) {
     error = { password: err.message };
     status = 400;
   }

@@ -16,7 +16,7 @@ export async function signIn(user) {
   if (!userFromDB) throw new UserNotFoundError();
   const isPasswordMatch = await comparePassword({
     pswd: password,
-    hashedPswd: userFromDB.password,
+    hashedPswd: userFromDB.password || "",
   });
   if (!isPasswordMatch) throw new WrongUserPasswordError();
   if (userFromDB.verificationToken) throw new EmailNotVerifiedError();

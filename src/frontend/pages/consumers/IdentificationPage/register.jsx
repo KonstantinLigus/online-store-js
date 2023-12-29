@@ -3,7 +3,7 @@
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
 import "./register.scss";
-import { signUpAction } from "@/backend/server-actions/user";
+import { signUpAction } from "@/backend/entities/users/entry-points";
 
 const IdentificationPage = () => {
   const [state, formAction] = useFormState(signUpAction, null);

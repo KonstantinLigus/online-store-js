@@ -1,13 +1,18 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import "./login.scss";
-import { signInAction } from "@/backend/server-actions/user";
+import { signInAction } from "@/backend/entities/users/entry-points";
 
 const LoginPage = () => {
   const [state, formAction] = useFormState(signInAction, null);
+
+  const signInWithGoogleClickHandle = () => {
+    signIn("google", { callbackUrl: "/account" });
+  };
 
   return (
     <div className="container">
@@ -31,7 +36,7 @@ const LoginPage = () => {
       </div>
       <label className="google-auth" htmlFor="">
         Також можна увійти через:
-        <button>
+        <button onClick={signInWithGoogleClickHandle}>
           <Image
             alt="logo-img"
             src="/assets/icon/icon-google.svg"

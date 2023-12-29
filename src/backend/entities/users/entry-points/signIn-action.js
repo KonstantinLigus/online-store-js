@@ -1,3 +1,5 @@
+"use server";
+
 import { getError } from "@/backend/helpers";
 import { UserParseError } from "@/backend/helpers/errors";
 import { redirectToPage } from "@/backend/libs/next";
