@@ -15,7 +15,7 @@ async function getUserByField(objQuery) {
 
 async function createUser(userObj) {
   const user = await User.create(userObj);
-  return user;
+  return user.toObject();
 }
 
 async function updateUser(filter, updateObj) {

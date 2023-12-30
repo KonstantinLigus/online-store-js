@@ -2,13 +2,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./NavBar.module.scss";
-import searchIcon from "public/assets/icon/search-icon.svg";
-import userIcon from "public/assets/icon/user-icon.svg";
-import cartIcon from "public/assets/icon/cart-icon.svg";
 import Burger from "@/frontend/components/consumers/Burger/Burger";
 import { useState } from "react";
 import burgerStyles from "../Burger/Burger.module.scss";
-import arrow from "public/arrow-right.svg";
+import UserBar from "@/frontend/pages/consumers/UserBar/UserBar";
 
 const links = [
   {
@@ -58,7 +55,7 @@ const links = [
   },
 ];
 
-export default function NavBar() {
+export default function NavBar(props) {
   const [burgerClass, setBurgerClass] = useState(
     `${burgerStyles.burger} ${burgerStyles.unClicked}`,
   );
@@ -96,14 +93,20 @@ export default function NavBar() {
                 <Link key={link.id} href={link.url} onClick={updateMenu}>
                   <li className={styles.item}>
                     {link.title}
-                    <Image src={arrow} alt="arrow-icon" width={24} priority />
+                    <Image
+                      src="/arrow-right.svg"
+                      alt="arrow-icon"
+                      width={24}
+                      height={24}
+                      priority
+                    />
                   </li>
                 </Link>
               ))}
             </ul>
           </nav>
           <Image
-            src={searchIcon}
+            src="/assets/icon/search-icon.svg"
             width={18}
             height={18}
             alt="user icon"
@@ -127,23 +130,14 @@ export default function NavBar() {
         </Link>
 
         <div>
-          <Link href="login">
+          <UserBar token={props.token} />
+          <Link href="/cart" style={{ marginLeft: "1rem" }}>
             <Image
-              src={userIcon}
-              width={24}
-              height={24}
-              alt="user icon"
-              priority
-            />
-          </Link>
-          <Link href="/cart">
-            <Image
-              src={cartIcon}
+              src="/assets/icon/cart-icon.svg"
               width={24}
               height={24}
               alt="cart icon"
               priority
-              style={{ marginLeft: "1rem" }}
             />
           </Link>
         </div>

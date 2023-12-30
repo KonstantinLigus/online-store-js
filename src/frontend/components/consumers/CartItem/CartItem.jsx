@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CartItem.module.scss";
-import deleteIcon from "public/assets/icon/cart-delete.svg";
 
 const CartItem = ({ item, removeFromCart, updateCartItem }) => {
   const [measureCurrent, setMeasureCurrent] = useState(item.measure);
@@ -98,10 +97,11 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
 
       <Image
         className={styles.deleteIcon}
-        src={deleteIcon}
+        src="/assets/icon/cart-delete.svg"
         alt="delete-icon"
         onClick={() => removeFromCart(item._id)}
         width={20}
+        height={20}
       />
     </li>
   );

@@ -1,22 +1,33 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import styles from "./userBar.module.scss";
+import { signOutAction } from "@/backend/entities/users/entry-points/signOut-action";
 
-const UserBar = () => {
-  const { data, status } = useSession();
+const UserBar = ({ token }) => {
+  const { status } = useSession();
+
+  const getStyles = (status, token) => {
+    if (status === "unauthenticated" && !token) return styles.userIconEmpty;
+    if (status === "authenticated" || token) return styles.userIconFilled;
+  };
+
+  const signOutClickHandler = async () => {
+    if (status === "authenticated") signOut({ callbackUrl: "/login" });
+    if (token) await signOutAction();
+  };
 
   return (
     <>
-      {status === "authenticated" && (
-        <>
-          <p>Signed in as {data.user?.email}</p>
-          <button onClick={() => signOut()}>Sign out</button>
-        </>
-      )}
-      {status === "loading" && <p>Loading...</p>}
-      {status === "unauthenticated" && (
-        <button onClick={() => signIn("google")}>Sign in</button>
-      )}
+      {status === "authenticated" ||
+        (token && <button onClick={signOutClickHandler}>Sign out</button>)}
+      {status === "loading" && <p className={styles.userInfo}>Loading...</p>}
+      <Link href="/login">
+        <svg width={24} height={24} className={getStyles(status, token)}>
+          <use href="assets/icon/user-icon.svg#user" />
+        </svg>
+      </Link>
     </>
   );
 };
