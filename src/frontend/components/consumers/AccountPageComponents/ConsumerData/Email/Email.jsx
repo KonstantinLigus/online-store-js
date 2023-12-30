@@ -2,10 +2,42 @@
 import React from "react";
 import styles from "../ConsumerData.module.scss";
 
-const Email = ({ consumer, changeData, emailIsValid, setEmailIsValid }) => {
+const Email = ({
+  consumerData,
+  consumerDataChanges,
+  setConsumerDataChanges,
+  setDataWasChanged,
+  dataIsValid,
+  setDataIsValid,
+}) => {
   const handleChange = e => {
-    if (!emailIsValid) setEmailIsValid(true);
-    changeData(prev => ({
+    if (!/^\S+@\S+\.\S+$/.test(e.target.value)) {
+      setDataIsValid(prev => ({
+        ...prev,
+        email: false,
+      }));
+    } else {
+      if (!dataIsValid.email) {
+        setDataIsValid(prev => ({
+          ...prev,
+          email: true,
+        }));
+      }
+    }
+
+    if (e.target.value !== consumerData.email) {
+      setDataWasChanged(prev => ({
+        ...prev,
+        email: true,
+      }));
+    } else {
+      setDataWasChanged(prev => ({
+        ...prev,
+        email: false,
+      }));
+    }
+
+    setConsumerDataChanges(prev => ({
       ...prev,
       email: e.target.value,
     }));
@@ -17,7 +49,9 @@ const Email = ({ consumer, changeData, emailIsValid, setEmailIsValid }) => {
         Email:&nbsp;
         <span
           className={styles.invalidData}
-          style={emailIsValid ? { display: "none" } : { display: "initial" }}
+          style={
+            dataIsValid.email ? { display: "none" } : { display: "initial" }
+          }
         >
           Введіть дійсний email
         </span>
@@ -26,9 +60,8 @@ const Email = ({ consumer, changeData, emailIsValid, setEmailIsValid }) => {
         type="email"
         name="email"
         id="email"
-        placeholder="name@gmail.com"
         className={styles.inputText}
-        value={consumer.email}
+        value={consumerDataChanges.email}
         onChange={handleChange}
       />
     </>

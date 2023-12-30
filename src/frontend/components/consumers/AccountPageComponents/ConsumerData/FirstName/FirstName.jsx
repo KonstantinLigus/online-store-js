@@ -3,14 +3,42 @@ import React from "react";
 import styles from "../ConsumerData.module.scss";
 
 const FirstName = ({
-  consumer,
-  changeData,
-  firstNameIsValid,
-  setFirstNameIsValid,
+  consumerData,
+  consumerDataChanges,
+  setConsumerDataChanges,
+  dataWasChanged,
+  setDataWasChanged,
+  dataIsValid,
+  setDataIsValid,
 }) => {
   const handleChange = e => {
-    if (!firstNameIsValid) setFirstNameIsValid(true);
-    changeData(prev => ({
+    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(e.target.value)) {
+      setDataIsValid(prev => ({
+        ...prev,
+        firstName: false,
+      }));
+    } else {
+      if (!dataIsValid.firstName) {
+        setDataIsValid(prev => ({
+          ...prev,
+          firstName: true,
+        }));
+      }
+    }
+
+    if (e.target.value !== consumerData.firstName) {
+      setDataWasChanged(prev => ({
+        ...prev,
+        firstName: true,
+      }));
+    } else {
+      setDataWasChanged(prev => ({
+        ...prev,
+        firstName: false,
+      }));
+    }
+
+    setConsumerDataChanges(prev => ({
       ...prev,
       firstName: e.target.value,
     }));
@@ -23,19 +51,18 @@ const FirstName = ({
         <span
           className={styles.invalidData}
           style={
-            firstNameIsValid ? { display: "none" } : { display: "initial" }
+            dataIsValid.firstName ? { display: "none" } : { display: "initial" }
           }
         >
-          Введіть правильне ім&apos;я
+          Ім&apos;я має мати не менше 2-х літер
         </span>
       </label>
       <input
         type="text"
         name="name"
         id="name"
-        placeholder="Сергій"
         className={styles.inputText}
-        value={consumer.firstName}
+        value={consumerDataChanges.firstName}
         onChange={handleChange}
       />
     </>

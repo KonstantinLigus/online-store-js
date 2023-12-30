@@ -3,14 +3,41 @@ import React from "react";
 import styles from "../ConsumerData.module.scss";
 
 const Surname = ({
-  consumer,
-  changeData,
-  surnameIsValid,
-  setSurnameIsValid,
+  consumerData,
+  consumerDataChanges,
+  setConsumerDataChanges,
+  setDataWasChanged,
+  dataIsValid,
+  setDataIsValid,
 }) => {
   const handleChange = e => {
-    if (!surnameIsValid) setSurnameIsValid(true);
-    changeData(prev => ({
+    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(e.target.value)) {
+      setDataIsValid(prev => ({
+        ...prev,
+        surname: false,
+      }));
+    } else {
+      if (!dataIsValid.firstName) {
+        setDataIsValid(prev => ({
+          ...prev,
+          surname: true,
+        }));
+      }
+    }
+
+    if (e.target.value !== consumerData.surname) {
+      setDataWasChanged(prev => ({
+        ...prev,
+        surname: true,
+      }));
+    } else {
+      setDataWasChanged(prev => ({
+        ...prev,
+        surname: false,
+      }));
+    }
+
+    setConsumerDataChanges(prev => ({
       ...prev,
       surname: e.target.value,
     }));
@@ -22,18 +49,19 @@ const Surname = ({
         Прізвище:&nbsp;
         <span
           className={styles.invalidData}
-          style={surnameIsValid ? { display: "none" } : { display: "initial" }}
+          style={
+            dataIsValid.surname ? { display: "none" } : { display: "initial" }
+          }
         >
-          Введіть правильне прізвище
+          Прізвище має мати не менше 2-х літер
         </span>
       </label>
       <input
         type="text"
         name="name"
         id="name"
-        placeholder="Іванчук"
         className={styles.inputText}
-        value={consumer.surname}
+        value={consumerDataChanges.surname}
         onChange={handleChange}
       />
     </>

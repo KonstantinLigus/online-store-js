@@ -6,21 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./CartPage.module.scss";
 import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
+import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 
 const CartPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
 
   return (
     <main className={styles.main}>
-      <div className={styles.header}>
-        <button
-          type="button"
-          onClick={() => history.back()}
-          className={styles.btnBack}
-        >
-          &#129120;
-        </button>
-      </div>
+      <ToPreviousPage title="Кошик" />
+
       {cart !== null && cart.length > 0 && (
         <>
           <div className={styles.productsWrapper}>

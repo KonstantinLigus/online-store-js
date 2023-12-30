@@ -18,6 +18,7 @@
 
       &::after {
         content: "\022C1";
+        cursor: pointer;
         position: absolute;
         right: 0;
         top: 0;
@@ -87,11 +88,11 @@
     }
   }
 
-  .btnOrderWrapper {
+  .buttonsWrapper {
     text-align: center;
     width: 100%;
 
-    .btnOrder {
+    .formButton {
       background-color: #a8a8a8;
       border-radius: 30px;
       color: $text-color;
@@ -103,9 +104,15 @@
       text-align: center;
       width: 100%;
 
-      &:hover {
-        background-color: #888;
-        cursor: pointer;
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      &:enabled {
+        &:hover {
+          background-color: #888;
+          cursor: pointer;
+        }
       }
     }
   }

@@ -4,6 +4,7 @@ import styles from "./CategoryPage.module.scss";
 import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
+import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 
 const allCategories = {
   vegetables: "овочі",
@@ -34,6 +35,7 @@ const CategoryPage = ({ params }) => {
 
   return (
     <div>
+      <ToPreviousPage title={currentCategory} />
       <h2 className={styles.title}>{currentCategory}</h2>
 
       <div className={styles.products}>

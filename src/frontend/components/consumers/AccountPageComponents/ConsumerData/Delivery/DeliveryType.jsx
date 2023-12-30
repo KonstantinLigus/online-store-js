@@ -4,23 +4,12 @@ import styles from "../ConsumerData.module.scss";
 import RegionAndCity from "./RegionAndCity";
 
 const DeliveryType = ({
-  consumer,
-  changeData,
-  regionIsValid,
-  setRegionIsValid,
-  regionError,
-  setRegionError,
-  cityIsValid,
-  setCityIsValid,
-  cityError,
-  setCityError,
-  setPostOfficeIsValid,
-  postOfficeError,
-  setPostOfficeError,
-  streetIsValid,
-  setStreetIsValid,
-  houseIsValid,
-  setHouseIsValid,
+  consumerData,
+  consumerDataChanges,
+  setConsumerDataChanges,
+  setDataWasChanged,
+  dataIsValid,
+  setDataIsValid,
 }) => {
   const deliveryTypes = [
     "Нова Пошта - Відділення",
@@ -46,7 +35,20 @@ const DeliveryType = ({
         setTypeOfDelivery("pickup");
         break;
     }
-    changeData(prev => ({
+
+    if (e.target.value !== consumerData.deliveryType) {
+      setDataWasChanged(prev => ({
+        ...prev,
+        deliveryType: true,
+      }));
+    } else {
+      setDataWasChanged(prev => ({
+        ...prev,
+        deliveryType: false,
+      }));
+    }
+
+    setConsumerDataChanges(prev => ({
       ...prev,
       deliveryType: e.target.value,
       region: "",
@@ -66,7 +68,7 @@ const DeliveryType = ({
       <select
         id="delivery"
         className={styles.select}
-        value={consumer.deliveryType}
+        value={consumerDataChanges.deliveryType}
         onChange={handleDeliveryType}
       >
         {deliveryTypes.map(i => (
@@ -76,6 +78,7 @@ const DeliveryType = ({
         ))}
       </select>
 
+      {/*
       {regionIsAvailable && (
         <RegionAndCity
           consumer={consumer}
@@ -98,6 +101,7 @@ const DeliveryType = ({
           setHouseIsValid={setHouseIsValid}
         />
       )}
+       */}
     </>
   );
 };

@@ -2,9 +2,26 @@
 import React from "react";
 import styles from "../ConsumerData.module.scss";
 
-const SecondName = ({ consumer, changeData }) => {
+const SecondName = ({
+  consumerData,
+  consumerDataChanges,
+  setConsumerDataChanges,
+  setDataWasChanged,
+}) => {
   const handleChange = e => {
-    changeData(prev => ({
+    if (e.target.value !== consumerData.secondName) {
+      setDataWasChanged(prev => ({
+        ...prev,
+        secondName: true,
+      }));
+    } else {
+      setDataWasChanged(prev => ({
+        ...prev,
+        secondName: false,
+      }));
+    }
+
+    setConsumerDataChanges(prev => ({
       ...prev,
       secondName: e.target.value,
     }));
@@ -19,9 +36,8 @@ const SecondName = ({ consumer, changeData }) => {
         type="text"
         name="name"
         id="name"
-        placeholder="Дмитрович"
         className={styles.inputText}
-        value={consumer.secondName}
+        value={consumerDataChanges.secondName}
         onChange={handleChange}
       />
     </>
