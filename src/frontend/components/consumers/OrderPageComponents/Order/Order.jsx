@@ -15,7 +15,7 @@ const Order = props => {
     deliveryType: "Нова Пошта - Відділення",
     region: "",
     city: "",
-    postOffice: null,
+    postOffice: "",
     street: "",
     house: "",
     flat: "",

@@ -47,3 +47,10 @@ export class UserParseError extends Error {
     this.message = error;
   }
 }
+
+export class FieldNotExistError extends Error {
+  name = "FieldNotExistError";
+  constructor(message) {
+    super(message);
+  }
+}

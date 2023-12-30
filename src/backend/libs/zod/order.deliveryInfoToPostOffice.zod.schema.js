@@ -1,19 +1,7 @@
 import { z } from "zod";
+import { productsZodSchema } from "./order.productsZodSchema.zod.schema";
 
-export const orderZodSchema = z.object({
-  products: z
-    .array(
-      z.object({
-        productName: z.string(),
-        quantity: z.number(),
-        value: z.string(),
-        price: z.number(),
-        _id: z.string(),
-      }),
-    )
-    .nonempty({
-      message: "Can't be empty!",
-    }),
+export const orderDeliveryInfoToPostOfficeSchema = productsZodSchema.extend({
   deliveryInfo: z.object({
     firstName: z.string().regex(/^[A-ZА-ЯІЇ][a-zа-яії'-]+$/g, {
       message:
@@ -32,11 +20,7 @@ export const orderZodSchema = z.object({
     }),
     region: z.string(),
     city: z.string(),
-    deliveryType: z.enum([
-      "Нова Пошта - Відділення",
-      "Самовивіз з магазину в Києві: вул. І.Мазепи, 37",
-      "Нова Пошта - доставка кур’єром",
-    ]),
+    deliveryType: z.enum(["Нова Пошта - Відділення"]),
     postOffice: z.string(),
     customerPhone: z
       .string()

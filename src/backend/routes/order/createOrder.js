@@ -6,13 +6,24 @@ import userControllers from "@/backend/entities/users";
 import { countTotalPrice } from "@/backend/helpers";
 import { createDataAndSignatureObj } from "@/backend/libs/liqPay/liqPay";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
-import { orderZodSchema } from "@/backend/libs/zod/order.zod.schema";
 import { getCookie } from "@/backend/libs/next/cookieOperations";
 import { verifyToken } from "@/backend/libs/jwt/verifyToken";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
 import { createNewOrderMessage } from "@/backend/libs/send-grid/messages";
+import { FieldNotExistError } from "@/backend/helpers/errors";
+import {
+  orderDeliveryInfoByCourierSchema,
+  orderDeliveryInfoToPostOfficeSchema,
+} from "@/backend/libs/zod";
 
 async function createOrder(req) {
+  const order = await req.json();
+  if (!order.deliveryInfo)
+    throw new FieldNotExistError("order.deliveryInfo doesn't exist!");
+  if (order.deliveryInfo.deliveryType === "Нова Пошта - Відділення")
+    orderDeliveryInfoToPostOfficeSchema.parse(order);
+  if (order.deliveryInfo.deliveryType === "Нова Пошта - доставка кур’єром")
+    orderDeliveryInfoByCourierSchema.parse(order);
   const session = await getServerSession(authOptions);
   let userId = null;
   if (session) {
@@ -24,10 +35,7 @@ async function createOrder(req) {
   const token = getCookie("token");
   if (!session && token) {
     userId = verifyToken(token.value)._id;
-    const { user } = await userControllers.getUserByField({ _id: userId });
   }
-  const order = await req.json();
-  orderZodSchema.parse(order);
   let {
     deliveryInfo: { comment, email },
   } = order;

@@ -9,7 +9,7 @@ export function getError(err) {
     status = 400;
     error = { ...err.format() };
   }
-  if (err.name === "UserParseError") {
+  if (err.name === "UserParseError" || err.name === "FieldNotExistError") {
     status = 400;
   }
   if (
