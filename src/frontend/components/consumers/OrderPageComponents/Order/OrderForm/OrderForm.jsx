@@ -13,6 +13,7 @@ import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
 
 const OrderForm = props => {
+  const { productsInCart, setIsOrderCreated, removeCart } = props;
   const [consumer, setConsumer] = useState({ ...props.consumer });
 
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
@@ -32,7 +33,7 @@ const OrderForm = props => {
   const [streetIsValid, setStreetIsValid] = useState(true);
   const [houseIsValid, setHouseIsValid] = useState(true);
 
-  const validateData = e => {
+  const validateData = async e => {
     e.preventDefault();
     let checked = true;
 
@@ -83,20 +84,13 @@ const OrderForm = props => {
       }
     }
 
-    if (checked) sendOrder();
+    if (checked) await sendOrder();
   };
 
-  const sendOrder = () => {
-    const date = new Date();
-    let sendingTime = {
-      day: date.getDate(),
-      mounth: date.getMonth(),
-      year: date.getFullYear(),
-      hour: date.getHours(),
-      minutes: date.getMinutes(),
-    };
-    let orderedProducts = props.productsInCart.map(i => ({
+  const sendOrder = async () => {
+    let orderedProducts = productsInCart.map(i => ({
       _id: i._id,
+      productName: i.title,
       quantity: i.quantity,
       value: i.prices[i.measure].value + " " + i.prices[i.measure].unit,
       price: i.prices[i.measure].actionPrice
@@ -104,16 +98,16 @@ const OrderForm = props => {
         : i.prices[i.measure].price,
     }));
     // backend code for order rsending
-    // let orderForSending = {deliveryInfo: consumer, products: orderedProducts}
-    alert(
-      "Ваше замовлення прийнято!",
-      /*
-      +
-        Object.entries(consumer) +
-        Object.entries(orderedProducts) +
-        sendingTime,
-        */
-    );
+    consumer.customerPhone = consumer.customerPhone.replace(/\s+/g, "");
+    let orderForSending = { deliveryInfo: consumer, products: orderedProducts };
+    const res = await fetch("/api/order/create", {
+      method: "POST",
+      body: JSON.stringify(orderForSending),
+    });
+    if (res.status === 201) {
+      setIsOrderCreated(true);
+      removeCart();
+    }
   };
 
   return (
@@ -145,7 +139,6 @@ const OrderForm = props => {
         />
         <SecondName consumer={consumer} changeData={setConsumer} />
       </Fieldset>
-
       <Fieldset number={2} title={"Доставка"}>
         <DeliveryType
           consumer={consumer}
@@ -168,12 +161,10 @@ const OrderForm = props => {
           setHouseIsValid={setHouseIsValid}
         />
       </Fieldset>
-
       <Fieldset number={3} title={"Оплата"}>
         <Payment consumer={consumer} changeData={setConsumer} />
         <Comment consumer={consumer} changeData={setConsumer} />
       </Fieldset>
-
       <div className={styles.btnOrderWrapper}>
         <input
           type="button"

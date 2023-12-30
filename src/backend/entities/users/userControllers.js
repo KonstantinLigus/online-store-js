@@ -7,8 +7,7 @@ export const userControllers = Object.freeze({
 });
 
 async function getUserByField(objQuery) {
-  const data = await userServices.getUserByField(objQuery);
-  const user = data ? data.toObject() : data;
+  const user = await userServices.getUserByField(objQuery);
   return { user, status: 200 };
 }
 

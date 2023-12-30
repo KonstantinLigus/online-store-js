@@ -6,15 +6,12 @@
     margin-top: 24px;
     display: flex;
     justify-content: space-between;
-    a{
-    border-bottom: 1px solid;
-    }
   }
   .google-auth {
     display: flex;
     flex-direction: column;
     margin-top: 24px;
-    gap:8px;
+    gap: 8px;
     button {
       border-radius: 32px;
       background: #d9d9d9;

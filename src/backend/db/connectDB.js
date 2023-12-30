@@ -14,4 +14,4 @@ export default async function connectDB() {
   }
 }
 
-await connectDB();
+connectDB();

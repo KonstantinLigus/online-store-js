@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import Image from "next/image";
-import heart from "public/assets/icon/heart-icon.svg";
-import information from "public/assets/icon/information-line-icon.svg";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
@@ -41,7 +39,7 @@ const ProductPage = ({ params }) => {
           />
           <div className={styles.heartIconContainer}>
             <Image
-              src={heart}
+              src="/assets/icon/heart-icon.svg"
               alt="heart icon"
               fill
               className={styles.heartIcon}
@@ -99,17 +97,32 @@ const ProductPage = ({ params }) => {
           <h2 className={styles.headline}>Характеристики</h2>
           <div>
             <div className={styles.heading}>
-              <Image src={information} alt="information" width={14} />
+              <Image
+                src="/assets/icon/information-line-icon.svg"
+                alt="information"
+                width={14}
+                height={14}
+              />
               <h2 className={styles.title}>Умови зберігання:</h2>
             </div>
             <p className={styles.description}>{data.description}</p>
             <div className={styles.heading}>
-              <Image src={information} alt="information" width={14} />
+              <Image
+                src="/assets/icon/information-line-icon.svg"
+                alt="information"
+                width={14}
+                height={14}
+              />
               <h2 className={styles.title}>Термін зберігання:</h2>
             </div>
             <p className={styles.description}>3-5 днів</p>
             <div className={styles.heading}>
-              <Image src={information} alt="information" width={14} />
+              <Image
+                src="/assets/icon/information-line-icon.svg"
+                alt="information"
+                width={14}
+                height={14}
+              />
               <h2 className={styles.title}>Місце походження:</h2>
             </div>
             <p className={styles.description}>{data.producer}</p>

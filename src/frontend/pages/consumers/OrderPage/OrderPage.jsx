@@ -9,8 +9,10 @@ import Order from "@/frontend/components/consumers/OrderPageComponents/Order/Ord
 import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
 
 const OrderPage = () => {
-  const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
+  const { totalPrice, cart, removeFromCart, updateCartItem, removeCart } =
+    useCart();
   const [showProductsInCart, setShowProductsInCart] = useState(false);
+  const [isOrderCreated, setIsOrderCreated] = useState(false);
 
   let orderedProducts = cart;
   let allProductsPrice = totalPrice;
@@ -19,7 +21,7 @@ const OrderPage = () => {
 
   return (
     <main className={styles.main}>
-      {cart !== null && cart.length > 0 ? (
+      {cart?.length > 0 && !isOrderCreated && (
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
 
@@ -43,10 +45,18 @@ const OrderPage = () => {
           <Order
             productsInCart={orderedProducts}
             allProductsPrice={allProductsPrice}
+            setIsOrderCreated={setIsOrderCreated}
+            removeCart={removeCart}
           />
         </>
-      ) : (
+      )}
+      {!cart && (
         <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
+      )}
+      {isOrderCreated && (
+        <p style={{ padding: "40px", textAlign: "center" }}>
+          Ваше замовлення створено
+        </p>
       )}
     </main>
   );
