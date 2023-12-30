@@ -7,6 +7,7 @@ import styles from "./OrderPage.module.scss";
 import Header from "@/frontend/components/consumers/OrderPageComponents/Header/Header";
 import Order from "@/frontend/components/consumers/OrderPageComponents/Order/Order";
 import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
+import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 
 const OrderPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
@@ -19,6 +20,7 @@ const OrderPage = () => {
 
   return (
     <main className={styles.main}>
+      <ToPreviousPage />
       {cart !== null && cart.length > 0 ? (
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />

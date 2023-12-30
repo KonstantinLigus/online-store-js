@@ -1,4 +1,6 @@
 @import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
 
 .title {
   font-size: 3rem;
@@ -7,6 +9,7 @@
 }
 
 .products {
+  @include wrapper;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, 1fr);
