@@ -1,1 +1,1 @@
-export { default as GET } from "@/backend/routes/user/signOut";
+export { signOut as GET } from "@/backend/routes/user/signOut";

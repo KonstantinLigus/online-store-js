@@ -1,0 +1,16 @@
+@import "@/styles/variables";
+
+.userInfo {
+  display: inline-block;
+  margin-right: $sm;
+}
+
+.userIconEmpty {
+  fill: none;
+  stroke: $icons-color;
+}
+
+.userIconFilled {
+  fill: $icons-color;
+  stroke: none;
+}

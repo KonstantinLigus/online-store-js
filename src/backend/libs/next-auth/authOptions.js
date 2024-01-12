@@ -41,10 +41,10 @@ const authOptions = {
     },
 
     async session({ session }) {
-      const { user } = await userControllers.getUserByField({
+      const { user: userFromDB } = await userControllers.getUserByField({
         email: session.user.email,
       });
-      session.user = user;
+      session.user = userFromDB;
       return session;
     },
   },

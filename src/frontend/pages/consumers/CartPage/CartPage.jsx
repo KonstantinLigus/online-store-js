@@ -32,12 +32,15 @@ const CartPage = () => {
 
           <div className={styles.linkToOrder}>
             <Link href="/order">
-              <p className={styles.button}>Оформити замовлення</p>
+              {/* <p className={styles.button}>Оформити замовлення</p> */}
+              <button className={styles.button} onClick={e => e.preventDefault}>
+                Оформити замовлення
+              </button>
             </Link>
           </div>
         </>
       )}
-      {cart !== null && (
+      {(cart === null || cart.length === 0) && (
         <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
       )}
     </main>

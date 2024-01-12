@@ -40,13 +40,8 @@
     }
 
     .inputText {
-      background-color: $bg-color;
+      @include input-1;
       margin: 0.5rem 0;
-      padding: 1rem;
-      width: 100%;
-      &::placeholder {
-        color: $measure-color;
-      }
     }
 
     .labelSelect {
@@ -68,10 +63,8 @@
     }
 
     .select {
-      background-color: $bg-color;
+      @include input-1;
       margin: 0.5rem 0;
-      padding: 1rem;
-      width: 100%;
     }
 
     .radioBtn {
@@ -93,27 +86,9 @@
     width: 100%;
 
     .formButton {
-      background-color: #a8a8a8;
-      border-radius: 30px;
-      color: $text-color;
-      font-size: 20px;
-      font-weight: 400;
-      margin: 12px 0;
+      @include button-1;
+      margin: 0.75rem 0;
       max-width: 500px;
-      padding: 1rem;
-      text-align: center;
-      width: 100%;
-
-      &:disabled {
-        opacity: 0.5;
-      }
-
-      &:enabled {
-        &:hover {
-          background-color: #888;
-          cursor: pointer;
-        }
-      }
     }
   }
 }

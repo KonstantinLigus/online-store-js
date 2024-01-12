@@ -41,18 +41,9 @@
     padding-bottom: 1rem !important;
 
     .button {
-      width: 100%;
-      padding: 16px 30px;
-      text-align: center;
-      background-color: #b6b3b3;
-      color: $text-color;
-      font-size: 20px;
-      font-weight: 500;
-      border-radius: 32px;
-
-      &:hover {
-        background-color: #9d9b9b;
-      }
+      @include button-1;
+      max-width: 100%;
+      text-decoration: none;
     }
   }
 }

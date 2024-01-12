@@ -1,0 +1,7 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+
+.submitBtn {
+  @include button-1;
+  max-width: 100%;
+}

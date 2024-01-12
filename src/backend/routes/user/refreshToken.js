@@ -1,7 +1,8 @@
 import userControllers from "@/backend/entities/users";
-import { createAndSetUserTokenToCookie } from "@/backend/libs/jwt/createUserToken";
+import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { verifyToken } from "@/backend/libs/jwt/verifyToken";
+import { setUserTokenToCookie } from "@/backend/libs/next";
 
 async function refreshToken(req) {
   const token = req.cookies.get("token");
@@ -17,7 +18,8 @@ async function refreshToken(req) {
   }
   const userFromDB = await userControllers.getUserByField({ _id: result._id });
   if (!userFromDB) throw new Error("User not found");
-  createAndSetUserTokenToCookie(userFromDB._id);
+  const newToken = createUserToken(userFromDB._id);
+  setUserTokenToCookie(newToken);
   return { message: "Token was refreshed successfully", status: 200 };
 }
 

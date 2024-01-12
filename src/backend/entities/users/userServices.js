@@ -8,7 +8,8 @@ export const userServices = Object.freeze({
 });
 
 async function getUserByField(objQuery) {
-  const user = await User.findOne(objQuery);
+  let user = await User.findOne(objQuery);
+  user = user ? user.toObject() : user;
   return user;
 }
 

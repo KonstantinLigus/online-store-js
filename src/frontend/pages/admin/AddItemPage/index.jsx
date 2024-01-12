@@ -1,4 +1,4 @@
-import { addProductSubmitForm } from "@/backend/server-actions/actions";
+import { addProductSubmitForm } from "@/backend/server-actions/aws/actions";
 
 export default function AddItemPage() {
   return (
