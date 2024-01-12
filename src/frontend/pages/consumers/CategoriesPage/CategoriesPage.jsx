@@ -5,6 +5,7 @@ import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 import Link from "next/link";
+import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 
 const allCategories = {
   vegetables: "овочі",
@@ -59,6 +60,7 @@ const CategoriesPage = () => {
 
   return (
     <div className={styles.categories}>
+      <ToPreviousPage />
       {data.map((item, index) => (
         <div key={index} className={styles.category}>
           <h2 key={index} className={styles.categoryName}>

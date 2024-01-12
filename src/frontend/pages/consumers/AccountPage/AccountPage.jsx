@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./AccountPage.module.scss";
 import ConsumerData from "@/frontend/components/consumers/AccountPageComponents/ConsumerData/ConsumerData";
+import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 
 const AccountPage = () => {
   const [consumerInfo, setConsumerInfo] = useState({
@@ -24,6 +25,7 @@ const AccountPage = () => {
 
   return (
     <div className={styles.container}>
+      <ToPreviousPage title="Особистий кабінет" />
       <ConsumerData consumer={consumerInfo} />
     </div>
   );
