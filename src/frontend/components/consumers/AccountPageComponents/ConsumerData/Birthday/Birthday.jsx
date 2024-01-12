@@ -2,9 +2,26 @@
 import React from "react";
 import styles from "../ConsumerData.module.scss";
 
-const Birthday = ({ consumer, changeData }) => {
+const Birthday = ({
+  consumerData,
+  consumerDataChanges,
+  setConsumerDataChanges,
+  setDataWasChanged,
+}) => {
   const handleChange = e => {
-    changeData(prev => ({
+    if (e.target.value !== consumerData.birthday) {
+      setDataWasChanged(prev => ({
+        ...prev,
+        birthday: true,
+      }));
+    } else {
+      setDataWasChanged(prev => ({
+        ...prev,
+        birthday: false,
+      }));
+    }
+
+    setConsumerDataChanges(prev => ({
       ...prev,
       birthday: e.target.value,
     }));
@@ -20,7 +37,7 @@ const Birthday = ({ consumer, changeData }) => {
         name="birthday"
         id="birthday"
         className={styles.inputText}
-        value={consumer.birthday}
+        value={consumerDataChanges.birthday}
         onChange={handleChange}
       />
     </>
