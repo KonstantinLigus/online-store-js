@@ -23,7 +23,6 @@ const OrderPage = () => {
   return (
     <main className={styles.main}>
       <ToPreviousPage />
-
       {cart?.length > 0 && !isOrderCreated && (
         <>
           <Header toggleSign={showProductsInCart} toggle={toggleProducts} />
