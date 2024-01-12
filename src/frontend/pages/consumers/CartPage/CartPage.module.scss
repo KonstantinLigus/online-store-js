@@ -7,30 +7,6 @@
   flex-direction: column;
   min-height: 100vh;
 
-  .header {
-    @include wrapper;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-
-    .btnBack {
-      align-items: center;
-      background-color: $cart-item-bg;
-      border-radius: 1.3rem;
-      display: flex;
-      font-size: 1.5rem;
-      font-weight: bold;
-      height: 2.6rem;
-      justify-content: center;
-      width: 2.6rem;
-      &:hover {
-        background-color: #9d9b9b;
-      }
-    }
-  }
-
   .productsWrapper {
     flex: 1 1 auto;
   }

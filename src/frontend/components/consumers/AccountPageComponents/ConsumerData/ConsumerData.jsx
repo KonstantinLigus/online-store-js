@@ -12,30 +12,69 @@ import Birthday from "./Birthday/Birthday";
 import DeliveryType from "./Delivery/DeliveryType";
 import Password from "./Password/Password";
 
-const OrderForm = props => {
-  const [consumer, setConsumer] = useState({ ...props.consumer });
+const dataChanging = {
+  firstName: false,
+  secondName: false,
+  surname: false,
+  customerPhone: false,
+  email: false,
+  birthday: false,
+  deliveryType: false,
+  region: false,
+  city: false,
+  postOffice: false,
+  street: false,
+  house: false,
+  flat: false,
+};
+const dataValidation = {
+  firstName: true,
+  secondName: true,
+  surname: true,
+  customerPhone: true,
+  email: true,
+  birthday: true,
+  deliveryType: true,
+  region: true,
+  city: true,
+  postOffice: true,
+  street: true,
+  house: true,
+  flat: true,
+};
 
-  const [firstNameIsValid, setFirstNameIsValid] = useState(true);
-  const [surnameIsValid, setSurnameIsValid] = useState(true);
-  const [phoneIsValid, setPhoneIsValid] = useState(true);
-  const [emailIsValid, setEmailIsValid] = useState(true);
+const ConsumerData = props => {
+  //const [consumer, setConsumer] = useState({ ...props.consumer }); - consumerData
+  const [consumerData, setConsumerData] = useState({ ...props.consumer });
+  const [consumerDataChanges, setConsumerDataChanges] = useState({
+    ...props.consumer,
+  });
+  const [dataWasChanged, setDataWasChanged] = useState({ ...dataChanging });
+  const [dataIsValid, setDataIsValid] = useState({ ...dataValidation });
 
-  const [regionIsValid, setRegionIsValid] = useState(false);
-  const [regionError, setRegionError] = useState(false);
+  const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
+  const [undoChangesDisabled, setUndoChangesDisabled] = useState(true);
 
-  const [cityIsValid, setCityIsValid] = useState(false);
-  const [cityError, setCityError] = useState(false);
+  const checkChanges = () => {
+    let wasChanged = false;
+    if (Object.values(dataWasChanged).some(i => i === true)) {
+      wasChanged = true;
+      setUndoChangesDisabled(false);
+    } else {
+      setUndoChangesDisabled(true);
+    }
+    if (Object.values(dataIsValid).some(i => i === false)) wasChanged = false;
+    wasChanged ? setSaveChangesDisabled(false) : setSaveChangesDisabled(true);
+  };
 
-  const [postOfficeIsValid, setPostOfficeIsValid] = useState(false);
-  const [postOfficeError, setPostOfficeError] = useState(false);
-
-  const [streetIsValid, setStreetIsValid] = useState(true);
-  const [houseIsValid, setHouseIsValid] = useState(true);
+  useEffect(() => {
+    checkChanges();
+  }, [dataWasChanged, dataIsValid]);
 
   const validateData = e => {
     e.preventDefault();
     let checked = true;
-
+    /*
     if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
       checked = false;
       setFirstNameIsValid(false);
@@ -82,75 +121,82 @@ const OrderForm = props => {
         }
       }
     }
-
+*/
     if (checked) sendOrder();
   };
 
   const sendOrder = () => {
-    // backend code for order rsending
-    // let orderForSending = {deliveryInfo: consumer, products: orderedProducts}
-    alert(
-      "Ваше замовлення прийнято!",
-      /*
-      +
-        Object.entries(consumer) +
-        Object.entries(orderedProducts) +
-        sendingTime,
-        */
-    );
+    alert("Ваше замовлення прийнято!");
+  };
+
+  const undoChanges = e => {
+    setConsumerDataChanges({ ...consumerData });
+    setDataWasChanged({ ...dataChanging });
+    setDataIsValid({ ...dataValidation });
   };
 
   return (
     <form action="GET" className={styles.form}>
       <Details title={"Контактна інформація"}>
         <Phone
-          consumer={consumer}
-          changeData={setConsumer}
-          phoneIsValid={phoneIsValid}
-          setPhoneIsValid={setPhoneIsValid}
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
         />
+
         <Email
-          consumer={consumer}
-          changeData={setConsumer}
-          emailIsValid={emailIsValid}
-          setEmailIsValid={setEmailIsValid}
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
         />
+
         <Surname
-          consumer={consumer}
-          changeData={setConsumer}
-          surnameIsValid={surnameIsValid}
-          setSurnameIsValid={setSurnameIsValid}
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
         />
+
         <FirstName
-          consumer={consumer}
-          changeData={setConsumer}
-          firstNameIsValid={firstNameIsValid}
-          setFirstNameIsValid={setFirstNameIsValid}
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
         />
-        <SecondName consumer={consumer} changeData={setConsumer} />
-        <Birthday consumer={consumer} changeData={setConsumer} />
+
+        <SecondName
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+        />
+
+        <Birthday
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+        />
       </Details>
 
       <Details title={"Адреса доставки"}>
         <DeliveryType
-          consumer={consumer}
-          changeData={setConsumer}
-          regionIsValid={regionIsValid}
-          setRegionIsValid={setRegionIsValid}
-          regionError={regionError}
-          setRegionError={setRegionError}
-          cityIsValid={cityIsValid}
-          setCityIsValid={setCityIsValid}
-          cityError={cityError}
-          setCityError={setCityError}
-          postOfficeIsValid={postOfficeIsValid}
-          setPostOfficeIsValid={setPostOfficeIsValid}
-          postOfficeError={postOfficeError}
-          setPostOfficeError={setPostOfficeError}
-          streetIsValid={streetIsValid}
-          setStreetIsValid={setStreetIsValid}
-          houseIsValid={houseIsValid}
-          setHouseIsValid={setHouseIsValid}
+          consumerData={consumerData}
+          consumerDataChanges={consumerDataChanges}
+          setConsumerDataChanges={setConsumerDataChanges}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
         />
       </Details>
 
@@ -160,15 +206,24 @@ const OrderForm = props => {
         <Password placeholder="Повторно введіть новий пароль*" />
       </Details>
 
-      <div className={styles.btnOrderWrapper}>
+      <div className={styles.buttonsWrapper}>
         <input
+          disabled={saveChangesDisabled}
           type="button"
           value="Зберегти зміни"
-          className={styles.btnOrder}
+          className={styles.formButton}
           onClick={e => validateData(e)}
+        />
+
+        <input
+          disabled={undoChangesDisabled}
+          type="button"
+          value="Скасувати зміни"
+          className={styles.formButton}
+          onClick={e => undoChanges(e)}
         />
       </div>
     </form>
   );
 };
-export default OrderForm;
+export default ConsumerData;
