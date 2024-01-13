@@ -44,11 +44,8 @@ const dataValidation = {
 };
 
 const ConsumerData = props => {
-  //const [consumer, setConsumer] = useState({ ...props.consumer }); - consumerData
   const [consumerData, setConsumerData] = useState({ ...props.consumer });
-  const [consumerDataChanges, setConsumerDataChanges] = useState({
-    ...props.consumer,
-  });
+
   const [dataWasChanged, setDataWasChanged] = useState({ ...dataChanging });
   const [dataIsValid, setDataIsValid] = useState({ ...dataValidation });
 
@@ -130,7 +127,7 @@ const ConsumerData = props => {
   };
 
   const undoChanges = e => {
-    setConsumerDataChanges({ ...consumerData });
+    setConsumerData({ ...props.consumer });
     setDataWasChanged({ ...dataChanging });
     setDataIsValid({ ...dataValidation });
   };
@@ -140,8 +137,7 @@ const ConsumerData = props => {
       <Details title={"Контактна інформація"}>
         <Phone
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
           dataIsValid={dataIsValid}
           setDataIsValid={setDataIsValid}
@@ -149,8 +145,7 @@ const ConsumerData = props => {
 
         <Email
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
           dataIsValid={dataIsValid}
           setDataIsValid={setDataIsValid}
@@ -158,8 +153,7 @@ const ConsumerData = props => {
 
         <Surname
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
           dataIsValid={dataIsValid}
           setDataIsValid={setDataIsValid}
@@ -167,8 +161,7 @@ const ConsumerData = props => {
 
         <FirstName
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
           dataIsValid={dataIsValid}
           setDataIsValid={setDataIsValid}
@@ -176,15 +169,13 @@ const ConsumerData = props => {
 
         <SecondName
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
         />
 
         <Birthday
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
         />
       </Details>
@@ -192,8 +183,7 @@ const ConsumerData = props => {
       <Details title={"Адреса доставки"}>
         <DeliveryType
           consumerData={consumerData}
-          consumerDataChanges={consumerDataChanges}
-          setConsumerDataChanges={setConsumerDataChanges}
+          setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
           dataIsValid={dataIsValid}
           setDataIsValid={setDataIsValid}

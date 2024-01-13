@@ -69,6 +69,7 @@ const ProductPage = ({ params }) => {
                   className={styles.measureRadioBtn}
                   checked={index === measure}
                   onChange={() => setMeasure(index)}
+                  hidden
                 />
                 <label htmlFor={index} className={styles.measureLabel}>
                   {item.value}

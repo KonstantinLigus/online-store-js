@@ -1,15 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
-const SecondName = ({
-  consumerData,
-  consumerDataChanges,
-  setConsumerDataChanges,
-  setDataWasChanged,
-}) => {
+const SecondName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
+  const [consumerSecondName, setConsumerSecondName] = useState(
+    consumerData.secondName,
+  );
+
   const handleChange = e => {
-    if (e.target.value !== consumerData.secondName) {
+    if (e.target.value !== consumerSecondName) {
       setDataWasChanged(prev => ({
         ...prev,
         secondName: true,
@@ -21,7 +20,7 @@ const SecondName = ({
       }));
     }
 
-    setConsumerDataChanges(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       secondName: e.target.value,
     }));
@@ -37,7 +36,7 @@ const SecondName = ({
         name="name"
         id="name"
         className={styles.inputText}
-        value={consumerDataChanges.secondName}
+        value={consumerData.secondName}
         onChange={handleChange}
       />
     </>

@@ -1,42 +1,51 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../ConsumerData.module.scss";
 import RegionAndCity from "./RegionAndCity";
 
+const deliveryTypes = [
+  "Нова Пошта - Відділення",
+  "Нова Пошта - доставка кур’єром",
+  "Самовивіз з магазину в Києві: вул. І.Мазепи, 37",
+];
+
 const DeliveryType = ({
   consumerData,
-  consumerDataChanges,
-  setConsumerDataChanges,
+  setConsumerData,
   setDataWasChanged,
   dataIsValid,
   setDataIsValid,
 }) => {
-  const deliveryTypes = [
-    "Нова Пошта - Відділення",
-    "Нова Пошта - доставка кур’єром",
-    "Самовивіз з магазину в Києві: вул. І.Мазепи, 37",
-  ];
+  const [consumerDeliveryType, setConsumerDeliveryType] = useState(
+    consumerData.deliveryType,
+  );
 
-  const [typeOfDelivery, setTypeOfDelivery] = useState("office");
-  const [regionIsAvailable, setRegionIsAvailable] = useState(true);
+  const [typeOfDelivery, setTypeOfDelivery] = useState(null);
+
+  useEffect(() => {
+    if (consumerData.deliveryType === deliveryTypes[0]) {
+      setTypeOfDelivery("office");
+    } else if (consumerData.deliveryType === deliveryTypes[1]) {
+      setTypeOfDelivery("courier");
+    } else {
+      setTypeOfDelivery("pickup");
+    }
+  }, []);
 
   const handleDeliveryType = e => {
     switch (e.target.value) {
       case deliveryTypes[0]:
-        setRegionIsAvailable(true);
         setTypeOfDelivery("office");
         break;
       case deliveryTypes[1]:
-        setRegionIsAvailable(true);
         setTypeOfDelivery("courier");
         break;
       case deliveryTypes[2]:
-        setRegionIsAvailable(false);
         setTypeOfDelivery("pickup");
         break;
     }
 
-    if (e.target.value !== consumerData.deliveryType) {
+    if (e.target.value !== consumerDeliveryType) {
       setDataWasChanged(prev => ({
         ...prev,
         deliveryType: true,
@@ -48,7 +57,7 @@ const DeliveryType = ({
       }));
     }
 
-    setConsumerDataChanges(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       deliveryType: e.target.value,
       region: "",
@@ -68,7 +77,7 @@ const DeliveryType = ({
       <select
         id="delivery"
         className={styles.select}
-        value={consumerDataChanges.deliveryType}
+        value={consumerData.deliveryType}
         onChange={handleDeliveryType}
       >
         {deliveryTypes.map(i => (
@@ -78,30 +87,16 @@ const DeliveryType = ({
         ))}
       </select>
 
-      {/*
-      {regionIsAvailable && (
+      {(typeOfDelivery === "office" || typeOfDelivery === "courier") && (
         <RegionAndCity
-          consumer={consumer}
-          changeData={changeData}
-          regionIsValid={regionIsValid}
-          setRegionIsValid={setRegionIsValid}
-          regionError={regionError}
-          setRegionError={setRegionError}
-          cityIsValid={cityIsValid}
-          setCityIsValid={setCityIsValid}
-          cityError={cityError}
-          setCityError={setCityError}
+          consumerData={consumerData}
+          setConsumerData={setConsumerData}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
           typeOfDelivery={typeOfDelivery}
-          setPostOfficeIsValid={setPostOfficeIsValid}
-          postOfficeError={postOfficeError}
-          setPostOfficeError={setPostOfficeError}
-          streetIsValid={streetIsValid}
-          setStreetIsValid={setStreetIsValid}
-          houseIsValid={houseIsValid}
-          setHouseIsValid={setHouseIsValid}
         />
       )}
-       */}
     </>
   );
 };

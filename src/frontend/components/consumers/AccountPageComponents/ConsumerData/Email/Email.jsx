@@ -1,15 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
 const Email = ({
   consumerData,
-  consumerDataChanges,
-  setConsumerDataChanges,
+  setConsumerData,
   setDataWasChanged,
   dataIsValid,
   setDataIsValid,
 }) => {
+  const [consumerEmail, setConsumerEmail] = useState(consumerData.email);
+
   const handleChange = e => {
     if (!/^\S+@\S+\.\S+$/.test(e.target.value)) {
       setDataIsValid(prev => ({
@@ -25,7 +26,7 @@ const Email = ({
       }
     }
 
-    if (e.target.value !== consumerData.email) {
+    if (e.target.value !== consumerEmail) {
       setDataWasChanged(prev => ({
         ...prev,
         email: true,
@@ -37,7 +38,7 @@ const Email = ({
       }));
     }
 
-    setConsumerDataChanges(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       email: e.target.value,
     }));
@@ -61,7 +62,7 @@ const Email = ({
         name="email"
         id="email"
         className={styles.inputText}
-        value={consumerDataChanges.email}
+        value={consumerData.email}
         onChange={handleChange}
       />
     </>

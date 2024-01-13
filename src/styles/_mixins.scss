@@ -21,3 +21,89 @@
     padding: 0 60px;
   }
 }
+
+@mixin input-1 {
+  background-color: $color-bg-light-2;
+  border: 2px solid $color-green-1;
+  border-radius: 0.75rem; // 12px
+  color: $color-gray-dark-1;
+  font-size: 1.125rem; // 18px
+  padding: 1.125rem 0.75rem;
+  outline: none;
+  width: 100%;
+  &::placeholder {
+    color: $color-gray-light-1;
+  }
+  &:hover {
+    border-color: $color-green-2;
+  }
+  &:focus {
+    border-color: $color-green-dark-1;
+  }
+  &:disabled {
+    border-color: $color-gray-light-1;
+    color: $color-gray-light-1;
+    cursor: default;
+    pointer-events: none;
+  }
+  &:invalid {
+    border-color: $color-red-1;
+  }
+}
+
+@mixin button-1 {
+  background-color: $color-green-1;
+  border: none;
+  border-radius: 2rem;
+  color: $color-gray-dark-1;
+  font-size: 1.5rem;
+  max-width: 500px;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+
+  &:disabled {
+    background-color: $color-green-light-1;
+    color: $color-gray-light-1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:enabled {
+    cursor: pointer;
+    &:hover {
+      background-color: $color-green-3;
+    }
+    &:active {
+      background-color: $color-green-dark-2;
+    }
+  }
+}
+
+@mixin button-2 {
+  background-color: $color-green-light-1;
+  border: none;
+  border-radius: 1rem;
+  color: $color-gray-dark-1;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  text-align: center;
+  width: 100%;
+
+  &:disabled {
+    background-color: $color-green-light-1;
+    color: $color-gray-light-1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:enabled {
+    cursor: pointer;
+    &:hover {
+      background-color: $color-green-3;
+    }
+    &:active {
+      background-color: $color-green-dark-2;
+    }
+  }
+}

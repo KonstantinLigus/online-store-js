@@ -2,15 +2,6 @@
 @import "../../../../styles/mixins";
 
 .submitBtn {
-  color: #000;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  border-radius: 32px;
-  background: #d9d9d9;
-  display: flex;
-  padding: 16px 58px;
-  align-items: center;
-  justify-content: center;
+  @include button-1;
+  max-width: 100%;
 }
