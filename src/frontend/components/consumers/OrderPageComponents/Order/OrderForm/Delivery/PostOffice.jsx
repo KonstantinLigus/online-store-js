@@ -63,13 +63,15 @@ const PostOffice = ({
         onChange={handleOffice}
         onKeyDown={handleKeyDown}
       />
-      <datalist id="office">
-        {offices.map(o => (
-          <option key={o.number} value={o.description}>
-            {o.description}
-          </option>
-        ))}
-      </datalist>
+      {offices && (
+        <datalist id="office">
+          {offices.map(o => (
+            <option key={o.number} value={o.description}>
+              {o.description}
+            </option>
+          ))}
+        </datalist>
+      )}
     </>
   );
 };
