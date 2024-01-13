@@ -31,61 +31,25 @@
       }
 
       .inputText {
-        background-color: $bg-color;
+        @include input-1;
         grid-column: 1/-1;
-        padding: 1rem;
-        text-align: left;
-        width: 100%;
-        &::placeholder {
-          color: $measure-color;
-        }
       }
 
       .btnPassword {
-        color: $text-color;
-        font-size: 16px;
-        text-align: center;
+        @include button-1;
+        margin: 12px 0;
         text-decoration: underline;
-        width: 100%;
-
-        &:hover {
-          cursor: pointer;
-        }
       }
 
       .btnSubmit {
-        background-color: #a8a8a8;
-        border-radius: 30px;
-        color: $text-color;
-        font-size: 20px;
-        font-weight: 400;
+        @include button-1;
         margin: 12px 0;
-        padding: 1rem;
-        text-align: center;
-        width: 100%;
-
-        &:hover {
-          background-color: #888;
-          cursor: pointer;
-        }
       }
     }
 
     .btnSignIn {
-      background-color: #a8a8a8;
-      border-radius: 30px;
-      color: $text-color;
-      font-size: 20px;
-      font-weight: 400;
+      @include button-1;
       margin: 12px 0;
-      padding: 1rem;
-      text-align: center;
-      width: 100%;
-
-      &:hover {
-        background-color: #888;
-        cursor: pointer;
-      }
     }
   }
 }

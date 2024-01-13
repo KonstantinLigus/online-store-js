@@ -4,15 +4,15 @@ import styles from "../ConsumerData.module.scss";
 
 const Phone = ({
   consumerData,
-  consumerDataChanges,
-  setConsumerDataChanges,
+  setConsumerData,
   setDataWasChanged,
   dataIsValid,
   setDataIsValid,
 }) => {
-  const [phoneNumber, setPhoneNumber] = useState(
-    consumerDataChanges.customerPhone,
+  const [consumerPhoneNumber, setConsumerPhoneNumber] = useState(
+    consumerData.customerPhone,
   );
+  const [phoneNumber, setPhoneNumber] = useState(consumerData.customerPhone);
 
   const handleClick = e => {
     if (e.target.value.length === 0) setPhoneNumber("+380");
@@ -37,7 +37,7 @@ const Phone = ({
           ...prev,
           customerPhone: true,
         }));
-        if (value === consumerData.customerPhone) {
+        if (value === consumerPhoneNumber) {
           setDataWasChanged(prev => ({
             ...prev,
             customerPhone: false,
@@ -54,7 +54,7 @@ const Phone = ({
     if (value.length > 3 && value.length < 18) {
       if (/\d/.test(valueLast)) {
         setPhoneNumber(value);
-        setConsumerDataChanges(prev => ({
+        setConsumerData(prev => ({
           ...prev,
           customerPhone: value,
         }));
@@ -70,7 +70,7 @@ const Phone = ({
           if (value.length === 6) {
             value = value.slice(0, 4);
             setPhoneNumber(value);
-            setConsumerDataChanges(prev => ({
+            setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
             }));
@@ -78,7 +78,7 @@ const Phone = ({
           if (value.length === 9) {
             value = value.slice(0, 8);
             setPhoneNumber(value);
-            setConsumerDataChanges(prev => ({
+            setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
             }));
@@ -86,7 +86,7 @@ const Phone = ({
           if (value.length === 13) {
             value = value.slice(0, 12);
             setPhoneNumber(value);
-            setConsumerDataChanges(prev => ({
+            setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
             }));
@@ -94,7 +94,7 @@ const Phone = ({
           if (value.length === 16) {
             value = value.slice(0, 15);
             setPhoneNumber(value);
-            setConsumerDataChanges(prev => ({
+            setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
             }));
@@ -108,7 +108,7 @@ const Phone = ({
           ) {
             value += " ";
             setPhoneNumber(value);
-            setConsumerDataChanges(prev => ({
+            setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
             }));
@@ -138,7 +138,7 @@ const Phone = ({
         name="tel"
         id="tel"
         className={styles.inputText}
-        value={consumerDataChanges.customerPhone}
+        value={consumerData.customerPhone}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onClick={handleClick}

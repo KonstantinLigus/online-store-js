@@ -5,27 +5,16 @@ import PostOffice from "./PostOffice";
 import ConsumerAddress from "./ConsumerAddress";
 
 const RegionAndCity = ({
-  consumer,
-  changeData,
-  regionIsValid,
-  setRegionIsValid,
-  regionError,
-  setRegionError,
-  cityIsValid,
-  setCityIsValid,
-  cityError,
-  setCityError,
+  consumerData,
+  setConsumerData,
+  setDataWasChanged,
+  dataIsValid,
+  setDataIsValid,
   typeOfDelivery,
-  setPostOfficeIsValid,
-  postOfficeError,
-  setPostOfficeError,
-  streetIsValid,
-  setStreetIsValid,
-  houseIsValid,
-  setHouseIsValid,
 }) => {
+  const [consumerRegion, setConsumerRegion] = useState(consumerData.region);
   const [regions, setRegions] = useState([]);
-  const [region, setRegion] = useState({});
+  const [region, setRegion] = useState(consumerData.region);
 
   const [cities, setCities] = useState([]);
 
@@ -39,15 +28,7 @@ const RegionAndCity = ({
   }, []);
 
   const handleRegion = e => {
-    if (regionError) setRegionError(false);
-    let region = regions.find(i => i.description === e.target.value);
-    if (regions.includes(region)) {
-      setRegion(region);
-      setRegionIsValid(true);
-    } else {
-      setRegionIsValid(false);
-    }
-    changeData(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       region: e.target.value,
       city: "",
@@ -59,26 +40,7 @@ const RegionAndCity = ({
   };
 
   const handleCity = e => {
-    if (cityError) setCityError(false);
-    if (e.target.value.length > 0) {
-      const fetchData = async () => {
-        const res = await fetch(
-          `api/novaPoshta/getCities?areaRef=${region.areaRef}&cityName=${e.target.value}`,
-        );
-        const { data } = await res.json();
-        setCities(data);
-        if (data) {
-          if (e.target.value === data[0].description) {
-            setCityIsValid(true);
-          } else {
-            setCityIsValid(false);
-          }
-        }
-      };
-      fetchData();
-    }
-
-    changeData(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       city: e.target.value,
       postOffice: "",
@@ -94,7 +56,9 @@ const RegionAndCity = ({
         Область:&nbsp;
         <span
           className={styles.invalidData}
-          style={regionError ? { display: "initial" } : { display: "none" }}
+          style={
+            dataIsValid.region ? { display: "none" } : { display: "initial" }
+          }
         >
           Виберіть область з випадаючого списку
         </span>
@@ -103,7 +67,7 @@ const RegionAndCity = ({
         list="region"
         name="region"
         className={styles.select}
-        value={consumer.region}
+        value={consumerData.region}
         onChange={handleRegion}
       />
       <datalist id="region">
@@ -114,56 +78,50 @@ const RegionAndCity = ({
         ))}
       </datalist>
 
-      {regionIsValid && consumer.region && (
-        <>
-          <label htmlFor="city" className={styles.labelSelect}>
-            Місто:&nbsp;
-            <span
-              className={styles.invalidData}
-              style={cityError ? { display: "initial" } : { display: "none" }}
-            >
-              Виберіть місто з випадаючого списку
-            </span>
-          </label>
-          <input
-            list="city"
-            name="city"
-            className={styles.select}
-            value={consumer.city}
-            onChange={handleCity}
-          />
-          {cities && (
-            <datalist id="city">
-              {cities.map(c => (
-                <option key={c.cityRef} value={c.description}>
-                  {c.description}
-                </option>
-              ))}
-            </datalist>
-          )}
+      <label htmlFor="city" className={styles.labelSelect}>
+        Місто:&nbsp;
+        <span
+          className={styles.invalidData}
+          style={
+            dataIsValid.city ? { display: "none" } : { display: "initial" }
+          }
+        >
+          Виберіть місто з випадаючого списку
+        </span>
+      </label>
+      <input
+        list="city"
+        name="city"
+        className={styles.select}
+        value={consumerData.city}
+        onChange={handleCity}
+      />
+      {cities && (
+        <datalist id="city">
+          {cities.map(c => (
+            <option key={c.cityRef} value={c.description}>
+              {c.description}
+            </option>
+          ))}
+        </datalist>
+      )}
 
-          {cityIsValid &&
-            consumer.city &&
-            (typeOfDelivery === "office" ? (
-              <PostOffice
-                consumer={consumer}
-                changeData={changeData}
-                city={cities[0].cityRef}
-                setPostOfficeIsValid={setPostOfficeIsValid}
-                postOfficeError={postOfficeError}
-                setPostOfficeError={setPostOfficeError}
-              />
-            ) : (
-              <ConsumerAddress
-                consumer={consumer}
-                changeData={changeData}
-                streetIsValid={streetIsValid}
-                setStreetIsValid={setStreetIsValid}
-                houseIsValid={houseIsValid}
-                setHouseIsValid={setHouseIsValid}
-              />
-            ))}
-        </>
+      {typeOfDelivery === "office" ? (
+        <PostOffice
+          consumerData={consumerData}
+          setConsumerData={setConsumerData}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
+        />
+      ) : (
+        <ConsumerAddress
+          consumerData={consumerData}
+          setConsumerData={setConsumerData}
+          setDataWasChanged={setDataWasChanged}
+          dataIsValid={dataIsValid}
+          setDataIsValid={setDataIsValid}
+        />
       )}
     </>
   );
