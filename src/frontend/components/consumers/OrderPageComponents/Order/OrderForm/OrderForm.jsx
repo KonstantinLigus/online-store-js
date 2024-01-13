@@ -13,7 +13,8 @@ import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
 
 const OrderForm = props => {
-  const { productsInCart, setIsOrderCreated, removeCart } = props;
+  const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
+    props;
   const [consumer, setConsumer] = useState({ ...props.consumer });
 
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
@@ -107,6 +108,10 @@ const OrderForm = props => {
     if (res.status === 201) {
       setIsOrderCreated(true);
       removeCart();
+      const {
+        order: { liqPayEncodedData },
+      } = await res.json();
+      setPaymentData(liqPayEncodedData);
     }
   };
 
