@@ -13,7 +13,7 @@ const AccountPage = () => {
     surname: "Іванчук",
     customerPhone: "+380 50 111 22 22",
     email: "mail@mail.com",
-    birthday: "01.01.2000",
+    birthday: "2000-01-01",
     deliveryType: "Нова Пошта - Відділення",
     region: "Київська",
     city: "Київ",

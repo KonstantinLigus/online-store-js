@@ -34,13 +34,13 @@ const CategoryPage = ({ params }) => {
   };
 
   return (
-    <div>
+    <div className={styles.category}>
       <ToPreviousPage title={currentCategory} />
       <h2 className={styles.title}>{currentCategory}</h2>
 
       <div className={styles.products}>
         {data.map(item => (
-          <ProductItem key={item._id} id={`/${item._id}`} {...item}>
+          <ProductItem key={item._id} id={item._id} {...item}>
             {cartChecker(item._id) ? (
               <Button
                 title="З кошика"

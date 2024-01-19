@@ -13,8 +13,7 @@ const DeliveryType = ({
   consumerData,
   setConsumerData,
   setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
+  city,
 }) => {
   const [consumerDeliveryType, setConsumerDeliveryType] = useState(
     consumerData.deliveryType,
@@ -36,12 +35,40 @@ const DeliveryType = ({
     switch (e.target.value) {
       case deliveryTypes[0]:
         setTypeOfDelivery("office");
+        setDataWasChanged(prev => ({
+          ...prev,
+          region: null,
+          city: null,
+          postOffice: null,
+          street: false,
+          house: false,
+          flat: false,
+        }));
         break;
       case deliveryTypes[1]:
         setTypeOfDelivery("courier");
+        setDataWasChanged(prev => ({
+          ...prev,
+          region: null,
+          city: null,
+          postOffice: false,
+          street: null,
+          house: null,
+          flat: false,
+        }));
         break;
       case deliveryTypes[2]:
         setTypeOfDelivery("pickup");
+        setDataWasChanged(prev => ({
+          ...prev,
+          region: false,
+          city: false,
+          postOffice: false,
+          street: false,
+          house: false,
+          flat: false,
+        }));
+
         break;
     }
 
@@ -71,7 +98,7 @@ const DeliveryType = ({
 
   return (
     <>
-      <label htmlFor="delivery" className={styles.labelSelect}>
+      <label htmlFor="delivery" className={styles.labelValid}>
         Спосіб доставки:
       </label>
       <select
@@ -92,8 +119,6 @@ const DeliveryType = ({
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
           typeOfDelivery={typeOfDelivery}
         />
       )}

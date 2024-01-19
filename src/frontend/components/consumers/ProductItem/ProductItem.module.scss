@@ -3,6 +3,24 @@
 .item {
   border-radius: 10px;
 
+  .imgContainer {
+    height: 100%;
+    position: relative;
+    width: 100%;
+
+    .cardImage {
+      display: block;
+      margin: auto;
+      position: relative;
+    }
+
+    .likeWrapper {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+  }
+
   .information {
     .title {
       text-align: left;

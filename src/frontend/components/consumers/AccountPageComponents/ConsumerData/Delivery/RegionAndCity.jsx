@@ -8,26 +8,61 @@ const RegionAndCity = ({
   consumerData,
   setConsumerData,
   setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
   typeOfDelivery,
 }) => {
-  const [consumerRegion, setConsumerRegion] = useState(consumerData.region);
   const [regions, setRegions] = useState([]);
-  const [region, setRegion] = useState(consumerData.region);
+  const [region, setRegion] = useState({});
+  const [regionsNames, setRegionsNames] = useState([]);
+  const [regionIsValid, setRegionIsValid] = useState(true);
 
   const [cities, setCities] = useState([]);
+  const [cityIsValid, setCityIsValid] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("api/novaPoshta/getAreas");
       const { data } = await res.json();
       setRegions(data);
+      setRegionsNames(data.map(i => i.description));
+      setRegion(data.find(i => i.description === consumerData.region));
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (consumerData.region === "") {
+      setRegionIsValid(false);
+      setCityIsValid(false);
+      document
+        .querySelector("input[name='region']")
+        .setCustomValidity("Invalid field.");
+      document
+        .querySelector("input[name='city']")
+        .setCustomValidity("Invalid field.");
+    }
+  }, [typeOfDelivery]);
+
+  const validateRegion = e => {
+    if (regionsNames.includes(e.target.value)) {
+      setRegionIsValid(true);
+      e.target.setCustomValidity("");
+      setDataWasChanged(prev => ({
+        ...prev,
+        region: true,
+      }));
+      setRegion(regions.find(i => i.description === e.target.value));
+    } else {
+      setRegionIsValid(false);
+      e.target.setCustomValidity("Invalid field.");
+      setDataWasChanged(prev => ({
+        ...prev,
+        region: null,
+      }));
+    }
+  };
+
   const handleRegion = e => {
+    validateRegion(e);
     setConsumerData(prev => ({
       ...prev,
       region: e.target.value,
@@ -40,6 +75,34 @@ const RegionAndCity = ({
   };
 
   const handleCity = e => {
+    if (e.target.value.length > 0) {
+      const fetchData = async () => {
+        const res = await fetch(
+          `api/novaPoshta/getCities?areaRef=${region.areaRef}&cityName=${e.target.value}`,
+        );
+        const { data } = await res.json();
+        setCities(data);
+        if (data) {
+          if (e.target.value === data[0].description) {
+            setCityIsValid(true);
+            e.target.setCustomValidity("");
+            setDataWasChanged(prev => ({
+              ...prev,
+              city: true,
+            }));
+          } else {
+            setCityIsValid(false);
+            e.target.setCustomValidity("Invalid field.");
+            setDataWasChanged(prev => ({
+              ...prev,
+              city: null,
+            }));
+          }
+        }
+      };
+      fetchData();
+    }
+
     setConsumerData(prev => ({
       ...prev,
       city: e.target.value,
@@ -52,16 +115,11 @@ const RegionAndCity = ({
 
   return (
     <>
-      <label htmlFor="region" className={styles.labelSelect}>
-        Область:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.region ? { display: "none" } : { display: "initial" }
-          }
-        >
-          Виберіть область з випадаючого списку
-        </span>
+      <label
+        htmlFor="region"
+        className={regionIsValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Область:
       </label>
       <input
         list="region"
@@ -78,16 +136,11 @@ const RegionAndCity = ({
         ))}
       </datalist>
 
-      <label htmlFor="city" className={styles.labelSelect}>
-        Місто:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.city ? { display: "none" } : { display: "initial" }
-          }
-        >
-          Виберіть місто з випадаючого списку
-        </span>
+      <label
+        htmlFor="city"
+        className={cityIsValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Місто:
       </label>
       <input
         list="city"
@@ -111,16 +164,15 @@ const RegionAndCity = ({
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
+          city={cities}
+          typeOfDelivery={typeOfDelivery}
         />
       ) : (
         <ConsumerAddress
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
+          typeOfDelivery={typeOfDelivery}
         />
       )}
     </>
