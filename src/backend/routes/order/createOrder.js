@@ -10,7 +10,7 @@ import { getCookie } from "@/backend/libs/next/cookieOperations";
 import { verifyToken } from "@/backend/libs/jwt/verifyToken";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
 import { createNewOrderMessage } from "@/backend/libs/send-grid/messages";
-import { FieldNotExistError } from "@/backend/helpers/errors";
+import { ParseError } from "@/backend/helpers/errors";
 import {
   orderDeliveryInfoByCourierSchema,
   orderDeliveryInfoToPostOfficeSchema,
@@ -19,7 +19,7 @@ import {
 async function createOrder(req) {
   const order = await req.json();
   if (!order.deliveryInfo)
-    throw new FieldNotExistError("order.deliveryInfo doesn't exist!");
+    throw new ParseError("order.deliveryInfo doesn't exist!");
   if (order.deliveryInfo.deliveryType === "Нова Пошта - Відділення")
     orderDeliveryInfoToPostOfficeSchema.parse(order);
   if (order.deliveryInfo.deliveryType === "Нова Пошта - доставка кур’єром")

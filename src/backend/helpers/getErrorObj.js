@@ -9,7 +9,7 @@ export function getError(err) {
     status = 400;
     error = { ...err.format() };
   }
-  if (err.name === "UserParseError" || err.name === "FieldNotExistError") {
+  if (err.name === "ParseError") {
     status = 400;
   }
   if (
@@ -17,7 +17,6 @@ export function getError(err) {
     err.name === "UserExistError" ||
     err.name === "EmailNotVerifiedError"
   ) {
-    error = { email: err.message };
     status = 400;
   }
   if (err.name === "UserNotFoundError") {
@@ -28,7 +27,6 @@ export function getError(err) {
     err.name === "WrongUserPasswordError" ||
     err.name === "PasswordsNotTheSameError"
   ) {
-    error = { password: err.message };
     status = 400;
   }
 

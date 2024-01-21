@@ -1,7 +1,7 @@
 export class UserExistError extends Error {
   name = "UserExistError";
   constructor(email) {
-    super(`Email: ${email} have already exist!`);
+    super(`email: ${email} have already exist!`);
   }
 }
 
@@ -22,7 +22,7 @@ export class WrongUserPasswordError extends Error {
 export class EmailNotVerifiedError extends Error {
   name = "EmailNotVerifiedError";
   constructor() {
-    super("Email was not verified!");
+    super("email was not verified!");
   }
 }
 
@@ -40,17 +40,10 @@ export class PasswordsNotTheSameError extends Error {
   }
 }
 
-export class UserParseError extends Error {
-  name = "UserParseError";
+export class ParseError extends Error {
+  name = "ParseError";
   constructor(error) {
     super();
     this.message = error;
-  }
-}
-
-export class FieldNotExistError extends Error {
-  name = "FieldNotExistError";
-  constructor(message) {
-    super(message);
   }
 }
