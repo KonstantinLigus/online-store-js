@@ -11,7 +11,7 @@ export async function createOrderEntry(req) {
   try {
     const newOrder = await req.json();
     if (!newOrder.deliveryInfo)
-      throw new ParseError("newOrder.deliveryInfo doesn't exist!");
+      throw new ParseError("deliveryInfo doesn't exist!");
     let result = null;
     if (newOrder.deliveryInfo.deliveryType === "Нова Пошта - Відділення")
       result = orderDeliveryInfoToPostOfficeSchema.safeParse(newOrder);

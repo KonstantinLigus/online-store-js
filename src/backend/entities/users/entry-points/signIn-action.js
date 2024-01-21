@@ -10,12 +10,7 @@ export async function signInAction(_prevState, formData) {
   try {
     const user = Object.fromEntries(formData.entries());
     const result = userSignInZodSchema.safeParse(user);
-    if (!result.success) {
-      const errObj = result.error.flatten();
-      const error =
-        errObj.formErrors.length > 0 ? errObj.formErrors : errObj.fieldErrors;
-      throw new ParseError(error);
-    }
+    if (!result.success) throw new ParseError(result.error);
     const userFromDB = await signIn(user);
     if (userFromDB) redirectToPage("/account");
   } catch (err) {

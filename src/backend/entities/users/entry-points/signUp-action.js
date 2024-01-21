@@ -9,16 +9,11 @@ import { userSignUpZodSchema } from "@/backend/libs/zod";
 export async function signUpAction(_prevState, formData) {
   try {
     const newUser = Object.fromEntries(formData.entries());
+    const result = userSignUpZodSchema.safeParse(newUser);
+    if (!result.success) throw new ParseError(result.error);
     const { password, passwordRepeat } = newUser;
     const isPaswdsTheSame = compareStrings(password, passwordRepeat);
     if (!isPaswdsTheSame) throw new PasswordsNotTheSameError();
-    const result = userSignUpZodSchema.safeParse(newUser);
-    if (!result.success) {
-      const errObj = result.error.flatten();
-      const error =
-        errObj.formErrors.length > 0 ? errObj.formErrors : errObj.fieldErrors;
-      throw new ParseError(error);
-    }
     const createdUser = await signUp(newUser);
     if (createdUser) redirectToPage("/account");
   } catch (err) {
