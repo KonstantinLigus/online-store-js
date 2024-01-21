@@ -13,18 +13,12 @@
     margin-top: 24px;
     gap: 8px;
     button {
-      border-radius: 32px;
-      background: #d9d9d9;
+      @include button-1;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
-      color: #000;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      padding: 8px 0;
+      gap: 0.5rem;
+      max-width: 100%;
     }
   }
   h2 {
@@ -47,32 +41,11 @@
       line-height: 15.6px;
       letter-spacing: 0.48px;
       input {
-        width: 100%;
-        color: #aeacac;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18.2px;
-        letter-spacing: 0.56px;
-        height: 42px;
-        flex-shrink: 0;
-        background: #eae7e7;
-        padding-left: 10px;
+        @include input-1;
       }
     }
     button {
-      color: #000;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      border-radius: 32px;
-      height: 40px;
-      background: #d9d9d9;
-      margin-top: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include button-1;
     }
   }
 }

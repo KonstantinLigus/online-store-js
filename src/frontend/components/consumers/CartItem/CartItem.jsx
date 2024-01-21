@@ -53,6 +53,7 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
                 className={styles.measureRadioBtn}
                 checked={index === measureCurrent}
                 onChange={() => updateMeasure(index)}
+                hidden
               />
               <label htmlFor={index + item._id} className={styles.measureLabel}>
                 {i.value} {i.unit}

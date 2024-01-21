@@ -6,6 +6,13 @@ import OrderForm from "./OrderForm/OrderForm";
 import RegularCustomer from "./RegularCustomer/RegularCustomer";
 
 const Order = props => {
+  // const {
+  //   productsInCart,
+  //   allProductsPrice,
+  //   setIsOrderCreated,
+  //   removeCart,
+  //   setPaymentData,
+  // } = props;
   const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [newCustomer, setNewCustomer] = useState(true);
   const [consumerInfo, setConsumerInfo] = useState({
@@ -65,10 +72,11 @@ const Order = props => {
       <div className={styles.formContainer}>
         <OrderForm
           consumer={consumerInfo}
-          productsInCart={props.productsInCart}
-          allProductsPrice={props.allProductsPrice}
-          setIsOrderCreated={props.setIsOrderCreated}
-          removeCart={props.removeCart}
+          // productsInCart={productsInCart}
+          // allProductsPrice={allProductsPrice}
+          // setIsOrderCreated={setIsOrderCreated}
+          // removeCart={removeCart}
+          {...props}
         />
         {!userAuthenticated && !newCustomer && <RegularCustomer />}
       </div>

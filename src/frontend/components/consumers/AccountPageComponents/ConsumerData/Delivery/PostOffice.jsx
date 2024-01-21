@@ -3,30 +3,16 @@ import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
 const PostOffice = ({
-  consumer,
-  changeData,
-  city,
-  setPostOfficeIsValid,
-  postOfficeError,
-  setPostOfficeError,
+  consumerData,
+  setConsumerData,
+  setDataWasChanged,
+  dataIsValid,
+  setDataIsValid,
 }) => {
   const [offices, setOffices] = useState([]);
 
   const handleOffice = e => {
-    if (postOfficeError) setPostOfficeError(false);
-    const fetchData = async () => {
-      const res = await fetch(`api/novaPoshta/getPostOffices?cityRef=${city}`);
-      const { data } = await res.json();
-      setOffices(data);
-      if (data.map(o => o.description).includes(e.target.value)) {
-        setPostOfficeIsValid(true);
-      } else {
-        setPostOfficeIsValid(false);
-      }
-    };
-    fetchData();
-
-    changeData(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       postOffice: e.target.value,
       street: "",
@@ -37,7 +23,7 @@ const PostOffice = ({
 
   const handleKeyDown = e => {
     if (e.key === "Backspace") {
-      changeData(prev => ({
+      setConsumerData(prev => ({
         ...prev,
         postOffice: "",
       }));
@@ -50,7 +36,11 @@ const PostOffice = ({
         Відділення:&nbsp;
         <span
           className={styles.invalidData}
-          style={postOfficeError ? { display: "initial" } : { display: "none" }}
+          style={
+            dataIsValid.postOffice
+              ? { display: "none" }
+              : { display: "initial" }
+          }
         >
           Виберіть відділення з випадаючого списку
         </span>
@@ -59,7 +49,7 @@ const PostOffice = ({
         list="office"
         name="office"
         className={styles.select}
-        value={consumer.postOffice}
+        value={consumerData.postOffice}
         onChange={handleOffice}
         onKeyDown={handleKeyDown}
       />

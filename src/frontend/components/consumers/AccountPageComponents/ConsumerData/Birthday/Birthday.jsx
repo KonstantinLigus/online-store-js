@@ -1,15 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
-const Birthday = ({
-  consumerData,
-  consumerDataChanges,
-  setConsumerDataChanges,
-  setDataWasChanged,
-}) => {
+const Birthday = ({ consumerData, setConsumerData, setDataWasChanged }) => {
+  const [consumerBirthday, setConsumerBirthday] = useState(
+    consumerData.birthday,
+  );
+
   const handleChange = e => {
-    if (e.target.value !== consumerData.birthday) {
+    if (e.target.value !== consumerBirthday) {
       setDataWasChanged(prev => ({
         ...prev,
         birthday: true,
@@ -21,7 +20,7 @@ const Birthday = ({
       }));
     }
 
-    setConsumerDataChanges(prev => ({
+    setConsumerData(prev => ({
       ...prev,
       birthday: e.target.value,
     }));
@@ -37,7 +36,7 @@ const Birthday = ({
         name="birthday"
         id="birthday"
         className={styles.inputText}
-        value={consumerDataChanges.birthday}
+        value={consumerData.birthday}
         onChange={handleChange}
       />
     </>
