@@ -1,15 +1,48 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../ConsumerData.module.scss";
 
 const ConsumerAddress = ({
   consumerData,
   setConsumerData,
   setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
+  typeOfDelivery,
 }) => {
+  const [streetIsValid, setStreetIsValid] = useState(true);
+  const [houseIsValid, setHouseIsValid] = useState(true);
+
+  useEffect(() => {
+    if (consumerData.region === "") {
+      setStreetIsValid(false);
+      setHouseIsValid(false);
+      document
+        .querySelector("input[name='street']")
+        .setCustomValidity("Invalid field.");
+      document
+        .querySelector("input[name='house']")
+        .setCustomValidity("Invalid field.");
+    }
+  }, [typeOfDelivery]);
+
   const handleStreet = e => {
+    if (e.target.value.length < 3) {
+      setStreetIsValid(false);
+      e.target.setCustomValidity("Invalid field.");
+      setDataWasChanged(prev => ({
+        ...prev,
+        street: null,
+      }));
+    } else {
+      {
+        setStreetIsValid(true);
+        e.target.setCustomValidity("");
+        setDataWasChanged(prev => ({
+          ...prev,
+          street: true,
+        }));
+      }
+    }
+
     setConsumerData(prev => ({
       ...prev,
       street: e.target.value,
@@ -19,6 +52,24 @@ const ConsumerAddress = ({
   };
 
   const handleHouse = e => {
+    if (e.target.value.length < 1) {
+      setHouseIsValid(false);
+      e.target.setCustomValidity("Invalid field.");
+      setDataWasChanged(prev => ({
+        ...prev,
+        house: null,
+      }));
+    } else {
+      {
+        setHouseIsValid(true);
+        e.target.setCustomValidity("");
+        setDataWasChanged(prev => ({
+          ...prev,
+          house: true,
+        }));
+      }
+    }
+
     setConsumerData(prev => ({
       ...prev,
       house: e.target.value,
@@ -27,6 +78,11 @@ const ConsumerAddress = ({
   };
 
   const handleFlat = e => {
+    setDataWasChanged(prev => ({
+      ...prev,
+      flat: true,
+    }));
+
     setConsumerData(prev => ({
       ...prev,
       flat: e.target.value,
@@ -35,16 +91,11 @@ const ConsumerAddress = ({
 
   return (
     <>
-      <label htmlFor="street" className={styles.labelText}>
-        Вулиця:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.street ? { display: "none" } : { display: "initial" }
-          }
-        >
-          Вкажіть вулицю
-        </span>
+      <label
+        htmlFor="street"
+        className={streetIsValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Вулиця:
       </label>
       <input
         type="text"
@@ -57,16 +108,11 @@ const ConsumerAddress = ({
 
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
         <div>
-          <label htmlFor="house" className={styles.labelText}>
-            Будинок:&nbsp;
-            <span
-              className={styles.invalidData}
-              style={
-                dataIsValid.house ? { display: "none" } : { display: "initial" }
-              }
-            >
-              Вкажіть № будинку
-            </span>
+          <label
+            htmlFor="house"
+            className={houseIsValid ? styles.labelValid : styles.labelInvalid}
+          >
+            Будинок:
           </label>
           <input
             type="text"
@@ -79,7 +125,7 @@ const ConsumerAddress = ({
         </div>
 
         <div>
-          <label htmlFor="flat" className={styles.labelText}>
+          <label htmlFor="flat" className={styles.labelValid}>
             Квартира:
           </label>
           <input

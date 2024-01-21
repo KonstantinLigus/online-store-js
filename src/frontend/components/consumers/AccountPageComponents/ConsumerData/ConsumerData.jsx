@@ -27,109 +27,26 @@ const dataChanging = {
   house: false,
   flat: false,
 };
-const dataValidation = {
-  firstName: true,
-  secondName: true,
-  surname: true,
-  customerPhone: true,
-  email: true,
-  birthday: true,
-  deliveryType: true,
-  region: true,
-  city: true,
-  postOffice: true,
-  street: true,
-  house: true,
-  flat: true,
-};
 
 const ConsumerData = props => {
   const [consumerData, setConsumerData] = useState({ ...props.consumer });
-
   const [dataWasChanged, setDataWasChanged] = useState({ ...dataChanging });
-  const [dataIsValid, setDataIsValid] = useState({ ...dataValidation });
-
   const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
-  const [undoChangesDisabled, setUndoChangesDisabled] = useState(true);
 
   const checkChanges = () => {
     let wasChanged = false;
-    if (Object.values(dataWasChanged).some(i => i === true)) {
-      wasChanged = true;
-      setUndoChangesDisabled(false);
-    } else {
-      setUndoChangesDisabled(true);
-    }
-    if (Object.values(dataIsValid).some(i => i === false)) wasChanged = false;
+    if (Object.values(dataWasChanged).some(i => i === true)) wasChanged = true;
+    if (Object.values(dataWasChanged).some(i => i === null)) wasChanged = false;
     wasChanged ? setSaveChangesDisabled(false) : setSaveChangesDisabled(true);
   };
 
   useEffect(() => {
     checkChanges();
-  }, [dataWasChanged, dataIsValid]);
+  }, [dataWasChanged]);
 
-  const validateData = e => {
+  const saveChanges = e => {
     e.preventDefault();
-    let checked = true;
-    /*
-    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
-      checked = false;
-      setFirstNameIsValid(false);
-    }
-    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.surname)) {
-      checked = false;
-      setSurnameIsValid(false);
-    }
-    if (consumer.customerPhone.length < 17) {
-      checked = false;
-      setPhoneIsValid(false);
-    }
-    if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
-      checked = false;
-      setEmailIsValid(false);
-    }
-
-    if (
-      consumer.deliveryType !==
-      "Самовивіз з магазину в Києві: вул. І.Мазепи, 37"
-    ) {
-      if (!regionIsValid) {
-        checked = false;
-        setRegionError(true);
-      }
-      if (!cityIsValid) {
-        checked = false;
-        setCityError(true);
-      } else {
-        if (consumer.deliveryType === "Нова Пошта - Відділення") {
-          if (!postOfficeIsValid || !consumer.postOffice) {
-            checked = false;
-            setPostOfficeError(true);
-          }
-        } else {
-          if (consumer.street.length < 3) {
-            checked = false;
-            setStreetIsValid(false);
-          }
-          if (!consumer.house) {
-            checked = false;
-            setHouseIsValid(false);
-          }
-        }
-      }
-    }
-*/
-    if (checked) sendOrder();
-  };
-
-  const sendOrder = () => {
-    alert("Ваше замовлення прийнято!");
-  };
-
-  const undoChanges = e => {
-    setConsumerData({ ...props.consumer });
-    setDataWasChanged({ ...dataChanging });
-    setDataIsValid({ ...dataValidation });
+    alert("Data is changed!");
   };
 
   return (
@@ -139,40 +56,27 @@ const ConsumerData = props => {
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
         />
-
         <Email
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
         />
-
         <Surname
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
         />
-
         <FirstName
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
         />
-
         <SecondName
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
         />
-
         <Birthday
           consumerData={consumerData}
           setConsumerData={setConsumerData}
@@ -185,8 +89,6 @@ const ConsumerData = props => {
           consumerData={consumerData}
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
-          dataIsValid={dataIsValid}
-          setDataIsValid={setDataIsValid}
         />
       </Details>
 
@@ -202,15 +104,7 @@ const ConsumerData = props => {
           type="button"
           value="Зберегти зміни"
           className={styles.formButton}
-          onClick={e => validateData(e)}
-        />
-
-        <input
-          disabled={undoChangesDisabled}
-          type="button"
-          value="Скасувати зміни"
-          className={styles.formButton}
-          onClick={e => undoChanges(e)}
+          onClick={e => saveChanges(e)}
         />
       </div>
     </form>

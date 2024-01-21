@@ -2,18 +2,22 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-.title {
-  font-size: 3rem;
-  text-align: center;
-  padding: 3rem 0;
-}
+.category {
+  padding-bottom: 5em;
 
-.products {
-  @include wrapper;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
-  @include lg-min {
-    grid-template-columns: repeat(4, 1fr);
+  .title {
+    font-size: 3rem;
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .products {
+    @include wrapper;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    @include lg-min {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }

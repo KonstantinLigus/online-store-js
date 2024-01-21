@@ -2,40 +2,34 @@
 import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
-const Email = ({
-  consumerData,
-  setConsumerData,
-  setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
-}) => {
+const Email = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   const [consumerEmail, setConsumerEmail] = useState(consumerData.email);
+  const [isValid, setIsValid] = useState(true);
 
   const handleChange = e => {
-    if (!/^\S+@\S+\.\S+$/.test(e.target.value)) {
-      setDataIsValid(prev => ({
+    if (e.target.value === consumerEmail) {
+      setDataWasChanged(prev => ({
         ...prev,
         email: false,
       }));
     } else {
-      if (!dataIsValid.email) {
-        setDataIsValid(prev => ({
+      if (/^\S+@\S+\.\S+$/.test(e.target.value)) {
+        if (!isValid) {
+          setIsValid(true);
+          e.target.setCustomValidity("");
+        }
+        setDataWasChanged(prev => ({
           ...prev,
           email: true,
         }));
+      } else {
+        setDataWasChanged(prev => ({
+          ...prev,
+          email: null,
+        }));
+        setIsValid(false);
+        e.target.setCustomValidity("Invalid field.");
       }
-    }
-
-    if (e.target.value !== consumerEmail) {
-      setDataWasChanged(prev => ({
-        ...prev,
-        email: true,
-      }));
-    } else {
-      setDataWasChanged(prev => ({
-        ...prev,
-        email: false,
-      }));
     }
 
     setConsumerData(prev => ({
@@ -46,16 +40,11 @@ const Email = ({
 
   return (
     <>
-      <label htmlFor="email" className={styles.labelText}>
-        Email:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.email ? { display: "none" } : { display: "initial" }
-          }
-        >
-          Введіть дійсний email
-        </span>
+      <label
+        htmlFor="email"
+        className={isValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Email:
       </label>
       <input
         type="email"

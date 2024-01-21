@@ -2,20 +2,19 @@
 import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
-const Phone = ({
-  consumerData,
-  setConsumerData,
-  setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
-}) => {
+const Phone = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   const [consumerPhoneNumber, setConsumerPhoneNumber] = useState(
     consumerData.customerPhone,
   );
-  const [phoneNumber, setPhoneNumber] = useState(consumerData.customerPhone);
+  const [isValid, setIsValid] = useState(true);
 
   const handleClick = e => {
-    if (e.target.value.length === 0) setPhoneNumber("+380");
+    if (e.target.value.length === 0) {
+      setConsumerData(prev => ({
+        ...prev,
+        customerPhone: "+380",
+      }));
+    }
   };
 
   const handleChange = e => {
@@ -23,20 +22,18 @@ const Phone = ({
     let valueLast = value[value.length - 1];
 
     if (value.length < 17) {
-      setDataIsValid(prev => ({
-        ...prev,
-        customerPhone: false,
-      }));
+      setIsValid(false);
+      e.target.setCustomValidity("Invalid field.");
       setDataWasChanged(prev => ({
         ...prev,
-        customerPhone: true,
+        customerPhone: null,
       }));
     } else {
-      if (!dataIsValid.customerPhone && /\d/.test(valueLast)) {
-        setDataIsValid(prev => ({
-          ...prev,
-          customerPhone: true,
-        }));
+      if (/\d/.test(valueLast)) {
+        if (!isValid) {
+          setIsValid(true);
+          e.target.setCustomValidity("");
+        }
         if (value === consumerPhoneNumber) {
           setDataWasChanged(prev => ({
             ...prev,
@@ -53,7 +50,6 @@ const Phone = ({
 
     if (value.length > 3 && value.length < 18) {
       if (/\d/.test(valueLast)) {
-        setPhoneNumber(value);
         setConsumerData(prev => ({
           ...prev,
           customerPhone: value,
@@ -69,7 +65,6 @@ const Phone = ({
         if (e.key === "Backspace") {
           if (value.length === 6) {
             value = value.slice(0, 4);
-            setPhoneNumber(value);
             setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
@@ -77,7 +72,6 @@ const Phone = ({
           }
           if (value.length === 9) {
             value = value.slice(0, 8);
-            setPhoneNumber(value);
             setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
@@ -85,7 +79,6 @@ const Phone = ({
           }
           if (value.length === 13) {
             value = value.slice(0, 12);
-            setPhoneNumber(value);
             setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
@@ -93,7 +86,6 @@ const Phone = ({
           }
           if (value.length === 16) {
             value = value.slice(0, 15);
-            setPhoneNumber(value);
             setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
@@ -107,7 +99,6 @@ const Phone = ({
             value.length === 14
           ) {
             value += " ";
-            setPhoneNumber(value);
             setConsumerData(prev => ({
               ...prev,
               customerPhone: value,
@@ -120,18 +111,11 @@ const Phone = ({
 
   return (
     <>
-      <label htmlFor="tel" className={styles.labelText}>
-        Номер телефону:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.customerPhone
-              ? { display: "none" }
-              : { display: "initial" }
-          }
-        >
-          Номер телефону повинен мати 12 цифр
-        </span>
+      <label
+        htmlFor="tel"
+        className={isValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Номер телефону:
       </label>
       <input
         type="tel"

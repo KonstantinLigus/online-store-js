@@ -2,64 +2,56 @@
 import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
-const FirstName = ({
-  consumerData,
-  setConsumerData,
-  setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
-}) => {
+const FirstName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   const [consumerFirstName, setConsumerFirstName] = useState(
     consumerData.firstName,
   );
+  const [isValid, setIsValid] = useState(true);
 
   const handleChange = e => {
-    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(e.target.value)) {
-      setDataIsValid(prev => ({
+    if (e.target.value === consumerFirstName) {
+      setDataWasChanged(prev => ({
         ...prev,
         firstName: false,
       }));
     } else {
-      if (!dataIsValid.firstName) {
-        setDataIsValid(prev => ({
+      if (/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(e.target.value)) {
+        if (!isValid) {
+          setIsValid(true);
+          e.target.setCustomValidity("");
+        }
+        setDataWasChanged(prev => ({
           ...prev,
           firstName: true,
         }));
+      } else {
+        setDataWasChanged(prev => ({
+          ...prev,
+          firstName: null,
+        }));
+        setIsValid(false);
+        e.target.setCustomValidity("Invalid field.");
       }
-    }
-
-    if (e.target.value !== consumerFirstName) {
-      setDataWasChanged(prev => ({
-        ...prev,
-        firstName: true,
-      }));
-    } else {
-      setDataWasChanged(prev => ({
-        ...prev,
-        firstName: false,
-      }));
     }
 
     setConsumerData(prev => ({
       ...prev,
       firstName: e.target.value,
     }));
+
+    console.log(e.target.getAttribute("title"));
   };
 
   return (
     <>
-      <label htmlFor="name" className={styles.labelText}>
-        Ім&apos;я:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.firstName ? { display: "none" } : { display: "initial" }
-          }
-        >
-          Ім&apos;я має мати не менше 2-х літер
-        </span>
+      <label
+        htmlFor="name"
+        className={isValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Ім&apos;я:
       </label>
       <input
+        autoCapitalize="true"
         type="text"
         name="name"
         id="name"

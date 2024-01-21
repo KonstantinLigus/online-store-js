@@ -1,28 +1,64 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../ConsumerData.module.scss";
 
 const PostOffice = ({
   consumerData,
   setConsumerData,
   setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
+  city,
+  typeOfDelivery,
 }) => {
   const [offices, setOffices] = useState([]);
+  const [isValid, setIsValid] = useState(true);
+
+  useEffect(() => {
+    if (consumerData.region === "") {
+      setIsValid(false);
+      document
+        .querySelector("input[name='office']")
+        .setCustomValidity("Invalid field.");
+    }
+  }, [typeOfDelivery]);
 
   const handleOffice = e => {
+    const fetchData = async () => {
+      const res = await fetch(
+        `api/novaPoshta/getPostOffices?cityRef=${city[0].cityRef}`,
+      );
+      const { data } = await res.json();
+      setOffices(data);
+      if (data.map(o => o.description).includes(e.target.value)) {
+        setIsValid(true);
+        e.target.setCustomValidity("");
+        setDataWasChanged(prev => ({
+          ...prev,
+          postOffice: true,
+        }));
+      } else {
+        setIsValid(false);
+        e.target.setCustomValidity("Invalid field.");
+        setDataWasChanged(prev => ({
+          ...prev,
+          postOffice: null,
+        }));
+      }
+    };
+    fetchData();
+
     setConsumerData(prev => ({
       ...prev,
       postOffice: e.target.value,
-      street: "",
-      house: "",
-      flat: "",
     }));
   };
 
   const handleKeyDown = e => {
     if (e.key === "Backspace") {
+      e.target.setCustomValidity("Invalid field.");
+      setDataWasChanged(prev => ({
+        ...prev,
+        postOffice: null,
+      }));
       setConsumerData(prev => ({
         ...prev,
         postOffice: "",
@@ -32,18 +68,11 @@ const PostOffice = ({
 
   return (
     <>
-      <label htmlFor="office" className={styles.labelSelect}>
-        Відділення:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.postOffice
-              ? { display: "none" }
-              : { display: "initial" }
-          }
-        >
-          Виберіть відділення з випадаючого списку
-        </span>
+      <label
+        htmlFor="office"
+        className={isValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Відділення:
       </label>
       <input
         list="office"
