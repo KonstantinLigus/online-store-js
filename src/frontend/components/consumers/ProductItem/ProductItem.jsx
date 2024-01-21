@@ -2,20 +2,26 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProductItem.module.scss";
+import LikeIcon from "../LikeIcon/LikeIcon";
 
 const ProductItem = ({ id, title, prices, mainImage, children }) => {
   return (
     <li className={styles.item}>
-      <Link href={`${id}`}>
-        <Image
-          className={styles.cardImage}
-          src={mainImage}
-          alt={title}
-          width={140}
-          height={140}
-          priority
-        />
-      </Link>
+      <div className={styles.imgContainer}>
+        <Link href={`${id}`}>
+          <Image
+            className={styles.cardImage}
+            src={mainImage}
+            alt={title}
+            width={140}
+            height={140}
+            priority
+          />
+        </Link>
+        <div className={styles.likeWrapper}>
+          <LikeIcon productId={id} />
+        </div>
+      </div>
       <div className={styles.information}>
         <Link href={`${id}`}>
           <h2 className={styles.title}>{title}</h2>

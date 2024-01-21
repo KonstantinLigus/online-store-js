@@ -71,7 +71,7 @@ const CategoriesPage = () => {
 
           <div className={styles.products}>
             {item.items.map(item => (
-              <ProductItem key={item._id} id={`/${item._id}`} {...item}>
+              <ProductItem key={item._id} id={item._id} {...item}>
                 {cartChecker(item._id) ? (
                   <Button
                     title="З кошика"

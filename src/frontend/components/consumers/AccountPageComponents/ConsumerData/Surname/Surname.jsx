@@ -2,40 +2,34 @@
 import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
-const Surname = ({
-  consumerData,
-  setConsumerData,
-  setDataWasChanged,
-  dataIsValid,
-  setDataIsValid,
-}) => {
+const Surname = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   const [consumerSurname, setConsumerSurname] = useState(consumerData.surname);
+  const [isValid, setIsValid] = useState(true);
 
   const handleChange = e => {
-    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(e.target.value)) {
-      setDataIsValid(prev => ({
+    if (e.target.value === consumerSurname) {
+      setDataWasChanged(prev => ({
         ...prev,
         surname: false,
       }));
     } else {
-      if (!dataIsValid.firstName) {
-        setDataIsValid(prev => ({
+      if (/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(e.target.value)) {
+        if (!isValid) {
+          setIsValid(true);
+          e.target.setCustomValidity("");
+        }
+        setDataWasChanged(prev => ({
           ...prev,
           surname: true,
         }));
+      } else {
+        setDataWasChanged(prev => ({
+          ...prev,
+          surname: null,
+        }));
+        setIsValid(false);
+        e.target.setCustomValidity("Invalid field.");
       }
-    }
-
-    if (e.target.value !== consumerSurname) {
-      setDataWasChanged(prev => ({
-        ...prev,
-        surname: true,
-      }));
-    } else {
-      setDataWasChanged(prev => ({
-        ...prev,
-        surname: false,
-      }));
     }
 
     setConsumerData(prev => ({
@@ -46,16 +40,11 @@ const Surname = ({
 
   return (
     <>
-      <label htmlFor="name" className={styles.labelText}>
-        Прізвище:&nbsp;
-        <span
-          className={styles.invalidData}
-          style={
-            dataIsValid.surname ? { display: "none" } : { display: "initial" }
-          }
-        >
-          Прізвище має мати не менше 2-х літер
-        </span>
+      <label
+        htmlFor="name"
+        className={isValid ? styles.labelValid : styles.labelInvalid}
+      >
+        Прізвище:
       </label>
       <input
         type="text"

@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
+import LikeIcon from "@/frontend/components/consumers/LikeIcon/LikeIcon";
 
 const ProductPage = ({ params }) => {
   const [data, setData] = useState(null);
@@ -38,12 +39,7 @@ const ProductPage = ({ params }) => {
             alt="product image"
           />
           <div className={styles.heartIconContainer}>
-            <Image
-              src="/assets/icon/heart-icon.svg"
-              alt="heart icon"
-              fill
-              className={styles.heartIcon}
-            />
+            <LikeIcon productId={data._id} />
           </div>
         </div>
 

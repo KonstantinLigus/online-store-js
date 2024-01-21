@@ -8,15 +8,15 @@ const Birthday = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   );
 
   const handleChange = e => {
-    if (e.target.value !== consumerBirthday) {
+    if (e.target.value === consumerBirthday) {
       setDataWasChanged(prev => ({
         ...prev,
-        birthday: true,
+        birthday: false,
       }));
     } else {
       setDataWasChanged(prev => ({
         ...prev,
-        birthday: false,
+        birthday: true,
       }));
     }
 
@@ -28,11 +28,11 @@ const Birthday = ({ consumerData, setConsumerData, setDataWasChanged }) => {
 
   return (
     <>
-      <label htmlFor="name" className={styles.labelText}>
+      <label htmlFor="name" className={styles.labelValid}>
         Дата народження:
       </label>
       <input
-        type="text"
+        type="date"
         name="birthday"
         id="birthday"
         className={styles.inputText}

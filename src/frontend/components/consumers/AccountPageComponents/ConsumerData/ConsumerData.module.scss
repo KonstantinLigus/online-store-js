@@ -29,37 +29,21 @@
       content: "\022C0";
     }
 
-    .labelText {
-      margin-top: 0.5rem;
+    .labelValid {
+      color: $color-gray-dark-1;
       display: block;
+      margin-top: 0.5rem;
+    }
 
-      span.invalidData {
-        color: red;
-        font-size: 0.9rem;
-      }
+    .labelInvalid {
+      color: $color-red-1;
+      display: block;
+      margin-top: 0.5rem;
     }
 
     .inputText {
       @include input-1;
       margin: 0.5rem 0;
-    }
-
-    .labelSelect {
-      margin-top: 0.5rem;
-      display: block;
-      width: 100%;
-
-      span.invalidData {
-        color: red;
-        font-size: 0.9rem;
-      }
-    }
-
-    .labelSelectDisabled {
-      color: #888;
-      margin-top: 0.5rem;
-      display: block;
-      width: 100%;
     }
 
     .select {

@@ -8,15 +8,15 @@ const SecondName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   );
 
   const handleChange = e => {
-    if (e.target.value !== consumerSecondName) {
+    if (e.target.value === consumerSecondName) {
       setDataWasChanged(prev => ({
         ...prev,
-        secondName: true,
+        secondName: false,
       }));
     } else {
       setDataWasChanged(prev => ({
         ...prev,
-        secondName: false,
+        secondName: true,
       }));
     }
 
@@ -28,7 +28,7 @@ const SecondName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
 
   return (
     <>
-      <label htmlFor="name" className={styles.labelText}>
+      <label htmlFor="name" className={styles.labelValid}>
         По-батькові:
       </label>
       <input
