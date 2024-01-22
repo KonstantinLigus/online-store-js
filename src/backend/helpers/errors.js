@@ -1,56 +1,84 @@
 export class UserExistError extends Error {
-  name = "UserExistError";
+  status = 400;
+  message;
   constructor(email) {
-    super(`Email: ${email} have already exist!`);
+    super();
+    this.message = { email: `email ${email} have already exist!` };
   }
 }
 
 export class UserNotFoundError extends Error {
-  name = "UserNotFoundError";
+  status = 404;
+  message;
   constructor() {
-    super("Wrong email!");
+    super();
+    this.message = { email: "Wrong email!" };
   }
 }
 
 export class WrongUserPasswordError extends Error {
-  name = "WrongUserPasswordError";
+  status = 400;
+  message;
   constructor() {
-    super("Wrong password!");
+    super();
+    this.message = { password: "Wrong password!" };
   }
 }
 
 export class EmailNotVerifiedError extends Error {
-  name = "EmailNotVerifiedError";
+  status = 400;
+  message;
   constructor() {
-    super("Email was not verified!");
+    super();
+    this.message = { email: "email was not verified!" };
   }
 }
 
 export class UserNotExistError extends Error {
-  name = "UserNotExistError";
+  status = 404;
   constructor() {
     super("User doesn't exist!");
   }
 }
 
 export class PasswordsNotTheSameError extends Error {
-  name = "PasswordsNotTheSameError";
+  status = 400;
+  message;
   constructor() {
-    super("Passwords don't the same!");
+    super();
+    this.message = { password: "Passwords don't match!" };
   }
 }
 
-export class UserParseError extends Error {
-  name = "UserParseError";
+export class ParseError extends Error {
+  status = 400;
+  message;
   constructor(error) {
     super();
-    this.message = error;
+    let errObj = error.flatten();
+    errObj =
+      errObj.formErrors.length > 0 ? errObj.formErrors : errObj.fieldErrors;
+    this.message = errObj;
   }
 }
 
 export class FieldNotExistError extends Error {
-  name = "FieldNotExistError";
+  status = 400;
   constructor(message) {
     super(message);
+  }
+}
+
+export class UpdateOrderError extends Error {
+  status = 400;
+  constructor() {
+    super("Empty order id or updated fields!");
+  }
+}
+
+export class WrongIdError extends Error {
+  status = 400;
+  constructor() {
+    super("Wrong id!");
   }
 }

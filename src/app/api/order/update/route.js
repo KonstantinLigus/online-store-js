@@ -1,1 +1,1 @@
-export { default as PATCH } from "@/backend/routes/order/updateOrder";
+export { updateOrderEntry as PATCH } from "@/backend/entities/orders/entry-points";

@@ -1,1 +1,1 @@
-export { default as POST } from "@/backend/routes/order/createOrder";
+export { createOrderEntry as POST } from "@/backend/entities/orders/entry-points";
