@@ -1,4 +1,3 @@
-import { userServices } from "../userServices";
 import {
   EmailNotVerifiedError,
   UserNotFoundError,
@@ -7,6 +6,7 @@ import {
 import { comparePassword } from "@/backend/libs/bcrypt";
 import { createUserToken } from "@/backend/libs/jwt";
 import { setUserTokenToCookie } from "@/backend/libs/next";
+import { userServices } from "../data-access/userServices";
 
 export async function signIn(user) {
   const { email, password } = user;
