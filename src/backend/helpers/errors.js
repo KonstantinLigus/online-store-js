@@ -68,3 +68,17 @@ export class FieldNotExistError extends Error {
     super(message);
   }
 }
+
+export class UpdateOrderError extends Error {
+  status = 400;
+  constructor() {
+    super("Empty order id or updated fields!");
+  }
+}
+
+export class WrongIdError extends Error {
+  status = 400;
+  constructor() {
+    super("Wrong id!");
+  }
+}
