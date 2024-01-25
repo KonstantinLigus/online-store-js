@@ -5,13 +5,20 @@
 .container {
   @include wrapper;
   align-items: center;
+  background-color: $color-bg-light-1;
+  border-bottom: 1px solid #999;
   display: flex;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  padding-bottom: 0.5em !important;
+  padding-top: 0.5em !important;
+  @media screen and (min-width: $burger-menu-screen-width) {
+    display: none;
+  }
 
   .btnBack {
     align-items: center;
-    background-color: $cart-item-bg;
+    background-color: $color-white;
+    border: 1px solid #999;
+    cursor: pointer;
     border-radius: 50%;
     display: flex;
     font-size: 18px;
@@ -19,8 +26,9 @@
     height: 30px;
     justify-content: center;
     width: 30px;
+
     &:hover {
-      background-color: #9d9b9b;
+      background-color: $color-gray-light-1;
     }
   }
 
