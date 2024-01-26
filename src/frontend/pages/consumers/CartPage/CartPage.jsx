@@ -15,6 +15,8 @@ const CartPage = () => {
     <main className={styles.main}>
       <ToPreviousPage title="Кошик" />
 
+      <h2 className={styles.title}>Кошик</h2>
+
       {cart !== null && cart.length > 0 && (
         <>
           <div className={styles.productsWrapper}>
@@ -41,7 +43,7 @@ const CartPage = () => {
         </>
       )}
       {(cart === null || cart.length === 0) && (
-        <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
+        <p className={styles.warning}>Ви ще нічого не додали в кошик!</p>
       )}
     </main>
   );

@@ -13,13 +13,13 @@ const PostOffice = ({
   const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
-    if (consumerData.region === "") {
+    if (consumerData.region === "" || consumerData.city === "") {
       setIsValid(false);
       document
         .querySelector("input[name='office']")
         .setCustomValidity("Invalid field.");
     }
-  }, [typeOfDelivery]);
+  }, [typeOfDelivery, consumerData.city]);
 
   const handleOffice = e => {
     const fetchData = async () => {

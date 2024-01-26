@@ -7,8 +7,20 @@
   flex-direction: column;
   min-height: 100vh;
 
+  .title {
+    display: none;
+    @media screen and (min-width: $burger-menu-screen-width) {
+      @include wrapper;
+      display: block;
+      font-size: 2em;
+      font-weight: 600;
+      margin-top: 1em;
+    }
+  }
+
   .productsWrapper {
     flex: 1 1 auto;
+    margin-top: 3em;
   }
 
   .price {
@@ -45,5 +57,10 @@
       max-width: 100%;
       text-decoration: none;
     }
+  }
+
+  .warning {
+    @include wrapper;
+    font-size: 1.5em;
   }
 }
