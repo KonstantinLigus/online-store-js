@@ -15,8 +15,14 @@
     @include wrapper;
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
+    list-style: none;
+    @include md-min {
+      grid-template-columns: repeat(2, 1fr);
+    }
     @include lg-min {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include xl-min {
       grid-template-columns: repeat(4, 1fr);
     }
   }

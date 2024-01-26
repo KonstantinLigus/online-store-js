@@ -5,6 +5,7 @@
 .cartPage {
   display: grid;
   gap: 2em;
+  list-style: none;
   @include wrapper;
   @include md-min {
     grid-template-columns: repeat(2, 1fr);

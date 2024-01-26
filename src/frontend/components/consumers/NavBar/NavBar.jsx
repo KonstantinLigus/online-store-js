@@ -63,7 +63,7 @@ export default function NavBar(props) {
               <Burger menuIsClicked={menuIsClicked} onClick={updateMenu} />
             </div>
             <Image
-              src="/assets/icon/search-icon.svg"
+              src="/assets/icon/icon-search.svg"
               width={18}
               height={18}
               alt="user icon"
@@ -80,7 +80,7 @@ export default function NavBar(props) {
             <UserBar token={props.token} />
             <Link href="/cart" style={{ marginLeft: "1rem" }}>
               <Image
-                src="/assets/icon/cart-icon.svg"
+                src="/assets/icon/icon-cart.svg"
                 width={24}
                 height={24}
                 alt="cart icon"
@@ -104,10 +104,10 @@ export default function NavBar(props) {
               <li className={styles.item}>
                 {link.title}
                 <Image
-                  src="/arrow-right.svg"
-                  alt="arrow-icon"
+                  src="/assets/icon/icon-arrow-right.svg"
                   width={24}
                   height={24}
+                  alt="arrow icon"
                   priority
                 />
               </li>

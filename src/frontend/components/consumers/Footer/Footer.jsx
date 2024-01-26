@@ -27,9 +27,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-
         <div className={styles.wrapper}>
-
           <div className={styles.section1}>
             <Link href="/">
               <h2>Logo</h2>
@@ -37,6 +35,7 @@ export default function Footer() {
             <p>Головна</p>
             <p>Про нас</p>
             <p>Акційні товари</p>
+            <p>Наш блог</p>
           </div>
 
           <div className={styles.section2}>
@@ -45,11 +44,10 @@ export default function Footer() {
             <p>+380 75 000 00 00</p>
             <p>ferma@gmail.com</p>
           </div>
-
         </div>
 
         <div className={styles.socialMedia}>
-          {icons.map((icon) => (
+          {icons.map(icon => (
             <Link key={icon.id} href={icon.url} target="_blank">
               <Image
                 className={styles.icon}
@@ -63,7 +61,6 @@ export default function Footer() {
         </div>
 
         <p className={styles.copyright}>Політика конфідеційності</p>
-        
       </div>
     </footer>
   );

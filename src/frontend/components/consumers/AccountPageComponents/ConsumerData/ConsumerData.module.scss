@@ -9,24 +9,28 @@
   width: 100%;
 
   .details {
+    margin-bottom: 1rem;
     margin-top: 1rem;
 
     .summary {
-      font-size: 20px;
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
       list-style: none;
-      position: relative;
 
-      &::after {
-        content: "\022C1";
-        cursor: pointer;
-        position: absolute;
-        right: 0;
-        top: 0;
+      > span {
+        font-size: 1.25em;
+      }
+
+      .angleIcon {
+        transition: 0.5s;
       }
     }
 
-    &[open] > .summary::after {
-      content: "\022C0";
+    &[open] .angleIcon {
+      transform: rotate(180deg);
+      transition: 0.5s;
     }
 
     .labelValid {

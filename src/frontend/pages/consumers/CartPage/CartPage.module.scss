@@ -11,16 +11,44 @@
     display: none;
     @media screen and (min-width: $burger-menu-screen-width) {
       @include wrapper;
-      display: block;
-      font-size: 2em;
-      font-weight: 600;
+      align-items: center;
+      display: flex;
+      gap: 1em;
       margin-top: 1em;
+
+      .btnBack {
+        align-items: center;
+        background-color: $color-white;
+        border: 1px solid #999;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        font-size: 18px;
+        font-weight: bold;
+        height: 30px;
+        justify-content: center;
+        width: 30px;
+
+        &:hover {
+          background-color: $color-gray-light-1;
+        }
+      }
+
+      .titleText {
+        font-size: 2em;
+        font-weight: 600;
+      }
     }
   }
 
   .productsWrapper {
     flex: 1 1 auto;
     margin-top: 3em;
+  }
+
+  .similarProducts {
+    @include wrapper;
+    padding-top: 5em !important;
   }
 
   .price {
@@ -31,7 +59,6 @@
     justify-content: space-between;
     margin-top: 1rem;
     padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
 
     .caption {
       color: $text-color;
@@ -48,9 +75,13 @@
   .linkToOrder {
     @include wrapper;
     background-color: $cart-item-bg;
-    margin-top: 1rem;
+
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
+
+    & > a {
+      text-decoration: none;
+    }
 
     .button {
       @include button-1;
