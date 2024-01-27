@@ -36,7 +36,7 @@ const SecondName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         name="name"
         id="name"
         className={styles.inputText}
-        value={consumerData.secondName}
+        defaultValue={consumerData.secondName}
         onChange={handleChange}
       />
     </>

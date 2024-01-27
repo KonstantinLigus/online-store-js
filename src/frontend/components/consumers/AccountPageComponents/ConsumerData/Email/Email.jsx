@@ -51,7 +51,7 @@ const Email = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         name="email"
         id="email"
         className={styles.inputText}
-        value={consumerData.email}
+        defaultValue={consumerData.email}
         onChange={handleChange}
       />
     </>

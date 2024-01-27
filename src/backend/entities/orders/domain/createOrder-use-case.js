@@ -1,3 +1,5 @@
+"use server";
+
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import authOptions from "@/backend/libs/next-auth/authOptions";
@@ -10,15 +12,15 @@ import { orderServices } from "../data-access/orderServices";
 import { createNewOrderMessage, sendEmail } from "@/backend/libs/send-grid";
 
 export async function createOrderCase(order) {
-  const session = await getServerSession(authOptions);
   let userId = null;
+  const session = await getServerSession(authOptions);
   if (session) {
-    const { user } = await userServices.getUserByField({
+    const user = await userServices.getUserByField({
       _id: session.user._id.toString(),
     });
     userId = user ? user._id.toString() : null;
   }
-  const token = getCookie("token");
+  const token = await getCookie("token");
   if (!session && token) {
     userId = verifyToken(token.value)._id;
   }

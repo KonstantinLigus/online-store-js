@@ -29,7 +29,7 @@ const DeliveryType = ({
     } else {
       setTypeOfDelivery("pickup");
     }
-  }, []);
+  }, [consumerData.deliveryType]);
 
   const handleDeliveryType = e => {
     switch (e.target.value) {

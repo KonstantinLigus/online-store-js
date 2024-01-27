@@ -1,12 +1,14 @@
+"use server";
+
 import { cookies } from "next/headers";
 
 const { TOKEN_LIFE_TIME } = process.env;
 
-export function deleteCookie(name) {
+export async function deleteCookie(name) {
   cookies().delete(name);
 }
 
-export function setUserTokenToCookie(token) {
+export async function setUserTokenToCookie(token) {
   cookies().set({
     name: "token",
     value: token,
@@ -15,6 +17,6 @@ export function setUserTokenToCookie(token) {
   });
 }
 
-export function getCookie(name) {
+export async function getCookie(name) {
   return cookies().get(name);
 }

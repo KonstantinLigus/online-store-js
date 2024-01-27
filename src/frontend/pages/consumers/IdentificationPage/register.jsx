@@ -11,12 +11,14 @@ const IdentificationPage = () => {
     <div className="container">
       <h2>Реєстрація</h2>
       <form action={formAction}>
-        <input placeholder="Ваше ім’я*" type="text" name="name" />
-        <p>{state?.name}</p>
+        <input placeholder="Ваше ім’я*" type="text" name="firstName" />
+        <p>{state?.firstName}</p>
+        <input placeholder="По-батькові*" type="text" name="secondName" />
+        <p>{state?.secondName}</p>
         <input placeholder="Ваше прізвище*" type="text" name="surname" />
         <p>{state?.surname}</p>
-        <input placeholder="Телефон*" type="tel" name="phone" />
-        <p>{state?.phone}</p>
+        <input placeholder="Телефон*" type="tel" name="customerPhone" />
+        <p>{state?.customerPhone}</p>
         <input placeholder="E-mail*" type="email" name="email" />
         <p>{state?.email}</p>
         <input placeholder="Пароль*" type="password" name="password" />

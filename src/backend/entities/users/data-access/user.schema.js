@@ -1,12 +1,17 @@
 import mongoose from "mongoose";
 
 const user = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
+    default: "",
+  },
+  secondName: {
+    type: String,
+    default: "",
   },
   surname: {
     type: String,
-    default: null,
+    default: "",
   },
   password: {
     type: String,
@@ -17,10 +22,13 @@ const user = new mongoose.Schema({
     unique: true,
   },
   image: { type: String, default: "" },
+  region: { type: String, default: "" },
   city: { type: String, default: "" },
-  deliveryMethod: { type: String, default: "" },
+  street: { type: String, default: "" },
+  flat: { type: String, default: "" },
+  deliveryType: { type: String, default: "" },
   postOffice: { type: String, default: "" },
-  phone: { type: String, default: "" },
+  customerPhone: { type: String, default: "" },
   birthday: { type: String, default: "" },
   verificationToken: {
     type: String,

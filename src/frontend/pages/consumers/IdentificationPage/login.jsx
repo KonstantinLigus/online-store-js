@@ -34,7 +34,7 @@ const LoginPage = () => {
         <Link href="/">Забули пароль?</Link>
         <Link href="register">Зареєструватись</Link>
       </div>
-      <label className="google-auth" htmlFor="">
+      <label className="google-auth">
         Також можна увійти через:
         <button onClick={signInWithGoogleClickHandle}>
           <Image
