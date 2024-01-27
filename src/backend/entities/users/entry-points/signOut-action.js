@@ -3,6 +3,6 @@
 import { deleteCookie, redirectToPage } from "@/backend/libs/next";
 
 export async function signOutAction() {
-  deleteCookie("token");
+  await deleteCookie("token");
   redirectToPage("/login");
 }

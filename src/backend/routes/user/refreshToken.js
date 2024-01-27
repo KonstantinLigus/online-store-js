@@ -19,7 +19,7 @@ async function refreshToken(req) {
   const userFromDB = await userControllers.getUserByField({ _id: result._id });
   if (!userFromDB) throw new Error("User not found");
   const newToken = createUserToken(userFromDB._id);
-  setUserTokenToCookie(newToken);
+  await setUserTokenToCookie(newToken);
   return { message: "Token was refreshed successfully", status: 200 };
 }
 

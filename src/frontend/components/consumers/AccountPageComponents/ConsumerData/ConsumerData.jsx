@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import styles from "./ConsumerData.module.scss";
 import Details from "./Details/Details";
 import Phone from "./Phone/Phone";
@@ -26,11 +25,13 @@ const dataChanging = {
   street: false,
   house: false,
   flat: false,
+  newPassword: false,
+  newPasswordRepeat: false,
 };
 
 const ConsumerData = props => {
-  const [consumerData, setConsumerData] = useState({ ...props.consumer });
-  const [dataWasChanged, setDataWasChanged] = useState({ ...dataChanging });
+  const [consumerData, setConsumerData] = useState(props.consumer);
+  const [dataWasChanged, setDataWasChanged] = useState(dataChanging);
   const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
 
   const checkChanges = () => {
@@ -42,11 +43,18 @@ const ConsumerData = props => {
 
   useEffect(() => {
     checkChanges();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataWasChanged]);
 
-  const saveChanges = e => {
+  const saveChanges = async e => {
     e.preventDefault();
-    alert("Data is changed!");
+    consumerData.customerPhone = consumerData.customerPhone.replace(/\s+/g, "");
+    const res = await fetch("/api/auth/updateUser", {
+      method: "POST",
+      body: JSON.stringify(consumerData),
+    });
+    const data = await res.json();
+    console.log(data);
   };
 
   return (
@@ -93,9 +101,27 @@ const ConsumerData = props => {
       </Details>
 
       <Details title={"Зміна паролю"}>
-        <Password placeholder="**********" />
-        <Password placeholder="Створіть новий пароль*" />
-        <Password placeholder="Повторно введіть новий пароль*" />
+        <Password
+          placeholder="Введіть старий пароль"
+          consumerData={consumerData}
+          setConsumerData={setConsumerData}
+          setDataWasChanged={setDataWasChanged}
+          paswdType="oldPassword"
+        />
+        <Password
+          placeholder="Введіть новий пароль"
+          consumerData={consumerData}
+          setConsumerData={setConsumerData}
+          setDataWasChanged={setDataWasChanged}
+          paswdType="newPassword"
+        />
+        <Password
+          placeholder="Повторно введіть новий пароль"
+          consumerData={consumerData}
+          setConsumerData={setConsumerData}
+          setDataWasChanged={setDataWasChanged}
+          paswdType="newPasswordRepeat"
+        />
       </Details>
 
       <div className={styles.buttonsWrapper}>

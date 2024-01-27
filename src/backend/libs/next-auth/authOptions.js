@@ -21,7 +21,7 @@ const authOptions = {
   callbacks: {
     async signIn({ profile }) {
       let {
-        given_name: name,
+        given_name: firstName,
         family_name: surname,
         email,
         picture: image,
@@ -31,9 +31,9 @@ const authOptions = {
       });
       if (!userFromDB) {
         await userControllers.createUser({
-          email,
-          name,
+          firstName,
           surname: surname || null,
+          email,
           image,
         });
       }

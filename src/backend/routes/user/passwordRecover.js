@@ -5,11 +5,11 @@ import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
 import { getRandomUUID } from "@/backend/libs/crypto/getRandomUUID";
 import { createPasswordRecoverMessage } from "@/backend/libs/send-grid/messages";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
-import { userPasswordRecoverZodSchema } from "@/backend/libs/zod/user.passwordRecover.schema";
+import { userEmailZodSchema } from "@/backend/libs/zod/user.email.schema";
 
 async function passwordRecover(req) {
   const userEmailObj = await req.json();
-  userPasswordRecoverZodSchema.parse(userEmailObj);
+  userEmailZodSchema.parse(userEmailObj);
   const { email } = userEmailObj;
   const { user: userFromDB, status } = await userControllers.getUserByField({
     email,

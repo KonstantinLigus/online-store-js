@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import styles from "../ConsumerData.module.scss";
 
 const FirstName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
-  const [consumerFirstName, setConsumerFirstName] = useState(
-    consumerData.firstName,
-  );
+  const [consumerFirstName] = useState(consumerData.firstName);
   const [isValid, setIsValid] = useState(true);
 
   const handleChange = e => {
@@ -38,8 +36,6 @@ const FirstName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
       ...prev,
       firstName: e.target.value,
     }));
-
-    console.log(e.target.getAttribute("title"));
   };
 
   return (
@@ -56,7 +52,7 @@ const FirstName = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         name="name"
         id="name"
         className={styles.inputText}
-        value={consumerData.firstName}
+        defaultValue={consumerData.firstName}
         onChange={handleChange}
       />
     </>

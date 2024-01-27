@@ -20,8 +20,9 @@ const UserBar = ({ token }) => {
 
   return (
     <>
-      {status === "authenticated" ||
-        (token && <button onClick={signOutClickHandler}>Sign out</button>)}
+      {(status === "authenticated" || token) && (
+        <button onClick={signOutClickHandler}>Sign out</button>
+      )}
       {status === "loading" && <p className={styles.userInfo}>Loading...</p>}
       <Link href="/login">
         <svg width={24} height={24} className={getStyles(status, token)}>

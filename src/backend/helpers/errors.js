@@ -82,3 +82,10 @@ export class WrongIdError extends Error {
     super("Wrong id!");
   }
 }
+
+export class UserNotAuthorizedError extends Error {
+  status = 400;
+  constructor() {
+    super("Not authorized!");
+  }
+}
