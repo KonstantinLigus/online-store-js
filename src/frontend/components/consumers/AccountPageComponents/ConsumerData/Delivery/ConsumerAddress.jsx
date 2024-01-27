@@ -5,6 +5,7 @@ import styles from "../ConsumerData.module.scss";
 const ConsumerAddress = ({
   consumerData,
   setConsumerData,
+  dataWasChanged,
   setDataWasChanged,
   typeOfDelivery,
 }) => {
@@ -12,7 +13,11 @@ const ConsumerAddress = ({
   const [houseIsValid, setHouseIsValid] = useState(true);
 
   useEffect(() => {
-    if (consumerData.region === "") {
+    if (
+      consumerData.region === "" ||
+      consumerData.city === "" ||
+      dataWasChanged.city === null
+    ) {
       setStreetIsValid(false);
       setHouseIsValid(false);
       document
@@ -22,7 +27,7 @@ const ConsumerAddress = ({
         .querySelector("input[name='house']")
         .setCustomValidity("Invalid field.");
     }
-  }, [typeOfDelivery]);
+  }, [typeOfDelivery, consumerData.city, dataWasChanged.city]);
 
   const handleStreet = e => {
     if (e.target.value.length < 3) {
@@ -49,6 +54,15 @@ const ConsumerAddress = ({
       house: "",
       flat: "",
     }));
+
+    setDataWasChanged(prev => ({
+      ...prev,
+      house: null,
+    }));
+    setHouseIsValid(false);
+    document
+      .querySelector("input[name='house']")
+      .setCustomValidity("Invalid field.");
   };
 
   const handleHouse = e => {

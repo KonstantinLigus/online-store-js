@@ -96,6 +96,7 @@ const ConsumerData = props => {
         <DeliveryType
           consumerData={consumerData}
           setConsumerData={setConsumerData}
+          dataWasChanged={dataWasChanged}
           setDataWasChanged={setDataWasChanged}
         />
       </Details>

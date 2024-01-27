@@ -69,7 +69,7 @@ const CategoriesPage = () => {
             </Link>
           </h2>
 
-          <div className={styles.products}>
+          <ul className={styles.products}>
             {item.items.map(item => (
               <ProductItem key={item._id} id={item._id} {...item}>
                 {cartChecker(item._id) ? (
@@ -82,7 +82,7 @@ const CategoriesPage = () => {
                 )}
               </ProductItem>
             ))}
-          </div>
+          </ul>
         </div>
       ))}
     </div>

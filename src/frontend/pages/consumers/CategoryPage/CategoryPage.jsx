@@ -38,7 +38,7 @@ const CategoryPage = ({ params }) => {
       <ToPreviousPage title={currentCategory} />
       <h2 className={styles.title}>{currentCategory}</h2>
 
-      <div className={styles.products}>
+      <ul className={styles.products}>
         {data.map(item => (
           <ProductItem key={item._id} id={item._id} {...item}>
             {cartChecker(item._id) ? (
@@ -51,7 +51,7 @@ const CategoryPage = ({ params }) => {
             )}
           </ProductItem>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
