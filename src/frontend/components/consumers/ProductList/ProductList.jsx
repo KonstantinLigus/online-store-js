@@ -34,12 +34,26 @@ const ProductList = ({ title, className }) => {
             pagination={{
               type: "fraction",
             }}
-            slidesPerView={2}
-            spaceBetween={8}
+            slidesPerView={1}
+            spaceBetween={40}
             navigation={true}
             modules={[Pagination]}
             loop={true}
             className={styles.mySwiper}
+            breakpoints={{
+              // when window width is >= 576px
+              576: {
+                slidesPerView: 2,
+              },
+              // when window width is >= 768px
+              768: {
+                slidesPerView: 3,
+              },
+              // when window width is >= 992px
+              992: {
+                slidesPerView: 4,
+              },
+            }}
           >
             {data.map(item => (
               <SwiperSlide key={item._id}>

@@ -2,9 +2,36 @@
 @import "../../../../../src/styles/mixins";
 @import "../../../../../src/styles/responsive";
 
-.main {
+.order {
+  @include wrapper;
   display: flex;
   flex-direction: column;
+
+  .details {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+    .summary {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+
+      > span {
+        font-size: 1.75em;
+      }
+
+      .angleIcon {
+        transition: 0.5s;
+      }
+    }
+
+    &[open] .angleIcon {
+      transform: rotate(180deg);
+      transition: 0.5s;
+    }
+  }
 
   .price {
     @include wrapper;

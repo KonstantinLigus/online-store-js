@@ -10,18 +10,29 @@
     width: 100%;
 
     .categoryName {
-      font-size: 28px;
+      font-size: 1.75em;
       margin: 1em auto;
       text-align: center;
       text-transform: capitalize;
+
+      & > a {
+        color: $color-gray-dark-1;
+        text-decoration: none;
+      }
     }
 
     .products {
       @include wrapper;
       display: grid;
       gap: 20px;
-      grid-template-columns: repeat(2, 1fr);
+      list-style: none;
+      @include md-min {
+        grid-template-columns: repeat(2, 1fr);
+      }
       @include lg-min {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @include xl-min {
         grid-template-columns: repeat(4, 1fr);
       }
     }
