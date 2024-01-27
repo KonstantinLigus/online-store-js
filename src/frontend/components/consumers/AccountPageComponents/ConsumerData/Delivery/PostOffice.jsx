@@ -5,6 +5,7 @@ import styles from "../ConsumerData.module.scss";
 const PostOffice = ({
   consumerData,
   setConsumerData,
+  dataWasChanged,
   setDataWasChanged,
   city,
   typeOfDelivery,
@@ -13,13 +14,17 @@ const PostOffice = ({
   const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
-    if (consumerData.region === "") {
+    if (
+      consumerData.region === "" ||
+      consumerData.city === "" ||
+      dataWasChanged.city === null
+    ) {
       setIsValid(false);
       document
         .querySelector("input[name='office']")
         .setCustomValidity("Invalid field.");
     }
-  }, [typeOfDelivery]);
+  }, [typeOfDelivery, consumerData.city, dataWasChanged.city]);
 
   const handleOffice = e => {
     const fetchData = async () => {

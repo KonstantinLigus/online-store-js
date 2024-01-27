@@ -51,7 +51,7 @@ const Surname = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         name="name"
         id="name"
         className={styles.inputText}
-        value={consumerData.surname}
+        defaultValue={consumerData.surname}
         onChange={handleChange}
       />
     </>

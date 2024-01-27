@@ -25,7 +25,7 @@ async function signUp(req) {
   await sendEmail(message);
   const { user: createdUser, status } = await userControllers.createUser(user);
   const token = createUserToken(createdUser._id);
-  setUserTokenToCookie(token);
+  await setUserTokenToCookie(token);
   delete createdUser._id;
   delete createdUser.password;
   delete createdUser.verificationToken;

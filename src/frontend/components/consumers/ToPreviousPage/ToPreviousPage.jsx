@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import Image from "next/image";
 import styles from "./ToPreviousPage.module.scss";
 
 const ToPreviousPage = ({ title }) => {
@@ -9,7 +11,13 @@ const ToPreviousPage = ({ title }) => {
         onClick={() => history.back()}
         className={styles.btnBack}
       >
-        &#129120;
+        <Image
+          src="/assets/icon/icon-arrow-left.svg"
+          width={28}
+          height={28}
+          alt="arrow icon"
+          priority
+        />
       </button>
       <p className={styles.title}>{title}</p>
     </div>

@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const userPasswordRecoverZodSchema = z.object({
+export const userEmailZodSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
 });

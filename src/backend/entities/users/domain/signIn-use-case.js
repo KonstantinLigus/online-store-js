@@ -21,7 +21,7 @@ export async function signIn(user) {
   if (!isPasswordMatch) throw new WrongUserPasswordError();
   if (userFromDB.verificationToken) throw new EmailNotVerifiedError();
   const token = createUserToken(userFromDB._id);
-  setUserTokenToCookie(token);
+  await setUserTokenToCookie(token);
   delete userFromDB._id;
   delete userFromDB.password;
   delete userFromDB.verificationToken;

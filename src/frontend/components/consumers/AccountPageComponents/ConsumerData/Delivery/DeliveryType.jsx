@@ -12,8 +12,8 @@ const deliveryTypes = [
 const DeliveryType = ({
   consumerData,
   setConsumerData,
+  dataWasChanged,
   setDataWasChanged,
-  city,
 }) => {
   const [consumerDeliveryType, setConsumerDeliveryType] = useState(
     consumerData.deliveryType,
@@ -29,7 +29,7 @@ const DeliveryType = ({
     } else {
       setTypeOfDelivery("pickup");
     }
-  }, []);
+  }, [consumerData.deliveryType]);
 
   const handleDeliveryType = e => {
     switch (e.target.value) {
@@ -118,6 +118,7 @@ const DeliveryType = ({
         <RegionAndCity
           consumerData={consumerData}
           setConsumerData={setConsumerData}
+          dataWasChanged={dataWasChanged}
           setDataWasChanged={setDataWasChanged}
           typeOfDelivery={typeOfDelivery}
         />

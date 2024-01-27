@@ -7,6 +7,7 @@ import { redirectToPage } from "@/backend/libs/next";
 import { userSignUpZodSchema } from "@/backend/libs/zod";
 
 export async function signUpAction(_prevState, formData) {
+  let createdUser = null;
   try {
     const newUser = Object.fromEntries(formData.entries());
     const result = userSignUpZodSchema.safeParse(newUser);
@@ -14,9 +15,9 @@ export async function signUpAction(_prevState, formData) {
     const { password, passwordRepeat } = newUser;
     const isPaswdsTheSame = compareStrings(password, passwordRepeat);
     if (!isPaswdsTheSame) throw new PasswordsNotTheSameError();
-    const createdUser = await signUp(newUser);
-    if (createdUser) redirectToPage("/account");
+    createdUser = await signUp(newUser);
   } catch (err) {
     return getError(err).error;
   }
+  if (createdUser) redirectToPage("/account");
 }

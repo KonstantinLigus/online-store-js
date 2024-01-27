@@ -36,7 +36,7 @@ const Birthday = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         name="birthday"
         id="birthday"
         className={styles.inputText}
-        value={consumerData.birthday}
+        defaultValue={consumerData.birthday}
         onChange={handleChange}
       />
     </>

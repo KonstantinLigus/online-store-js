@@ -122,7 +122,7 @@ const Phone = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         name="tel"
         id="tel"
         className={styles.inputText}
-        value={consumerData.customerPhone}
+        defaultValue={consumerData.customerPhone}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onClick={handleClick}

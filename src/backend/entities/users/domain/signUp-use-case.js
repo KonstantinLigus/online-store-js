@@ -20,7 +20,7 @@ export async function signUp(newUser) {
   await sendEmail(message);
   const createdUser = await userServices.createUser(newUser);
   const token = createUserToken(createdUser._id);
-  setUserTokenToCookie(token);
+  await setUserTokenToCookie(token);
   delete createdUser._id;
   delete createdUser.password;
   delete createdUser.verificationToken;

@@ -7,6 +7,7 @@ import ConsumerAddress from "./ConsumerAddress";
 const RegionAndCity = ({
   consumerData,
   setConsumerData,
+  dataWasChanged,
   setDataWasChanged,
   typeOfDelivery,
 }) => {
@@ -30,7 +31,7 @@ const RegionAndCity = ({
   }, []);
 
   useEffect(() => {
-    if (consumerData.region === "") {
+    if (dataWasChanged.region === null) {
       setRegionIsValid(false);
       setCityIsValid(false);
       document
@@ -40,7 +41,7 @@ const RegionAndCity = ({
         .querySelector("input[name='city']")
         .setCustomValidity("Invalid field.");
     }
-  }, [typeOfDelivery]);
+  }, [typeOfDelivery, dataWasChanged.region]);
 
   const validateRegion = e => {
     if (regionsNames.includes(e.target.value)) {
@@ -72,6 +73,18 @@ const RegionAndCity = ({
       house: "",
       flat: "",
     }));
+
+    typeOfDelivery === "office"
+      ? setDataWasChanged(prev => ({
+          ...prev,
+          city: null,
+          postOffice: null,
+        }))
+      : setDataWasChanged(prev => ({
+          ...prev,
+          street: null,
+          house: null,
+        }));
   };
 
   const handleCity = e => {
@@ -101,6 +114,13 @@ const RegionAndCity = ({
         }
       };
       fetchData();
+    } else {
+      setCityIsValid(false);
+      e.target.setCustomValidity("Invalid field.");
+      setDataWasChanged(prev => ({
+        ...prev,
+        city: null,
+      }));
     }
 
     setConsumerData(prev => ({
@@ -163,6 +183,7 @@ const RegionAndCity = ({
         <PostOffice
           consumerData={consumerData}
           setConsumerData={setConsumerData}
+          dataWasChanged={dataWasChanged}
           setDataWasChanged={setDataWasChanged}
           city={cities}
           typeOfDelivery={typeOfDelivery}
@@ -171,6 +192,7 @@ const RegionAndCity = ({
         <ConsumerAddress
           consumerData={consumerData}
           setConsumerData={setConsumerData}
+          dataWasChanged={dataWasChanged}
           setDataWasChanged={setDataWasChanged}
           typeOfDelivery={typeOfDelivery}
         />
