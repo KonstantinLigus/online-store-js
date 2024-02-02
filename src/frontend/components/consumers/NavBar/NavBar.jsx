@@ -3,8 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./NavBar.module.scss";
 import Burger from "@/frontend/components/consumers/Burger/Burger";
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import UserBar from "@/frontend/pages/consumers/UserBar/UserBar";
+import SearchDialog from "./SearchDialog/SearchDialog";
 
 const links = [
   {
@@ -47,12 +48,7 @@ const links = [
 export default function NavBar(props) {
   const [menuIsClicked, setMenuIsClicked] = useState(false);
   const updateMenu = () => setMenuIsClicked(!menuIsClicked);
-
   const [isSearchClicked, setIsSearchClicked] = useState(false);
-  const searching = e => {
-    e.preventDefault();
-    setIsSearchClicked(false);
-  };
 
   return (
     <header className={styles.header}>
@@ -68,7 +64,7 @@ export default function NavBar(props) {
               height={18}
               alt="user icon"
               priority
-              onClick={() => setIsSearchClicked(!isSearchClicked)}
+              onClick={() => setIsSearchClicked(true)}
             />
           </div>
 
@@ -116,18 +112,9 @@ export default function NavBar(props) {
         </ul>
       </nav>
 
-      <div
-        className={
-          isSearchClicked
-            ? `${styles.searchContainer} ${styles.visible}`
-            : `${styles.searchContainer} ${styles.hidden}`
-        }
-      >
-        <form action="GET" onSubmit={searching} className={styles.search}>
-          <input type="text" placeholder="Пошук..." />
-          <input type="submit" value="Шукати" />
-        </form>
-      </div>
+      {isSearchClicked && (
+        <SearchDialog setIsSearchClicked={setIsSearchClicked} />
+      )}
     </header>
   );
 }
