@@ -10,6 +10,9 @@ import { userServices } from "@/backend/entities/users/data-access/userServices"
 import authOptions from "@/backend/libs/next-auth/authOptions";
 import { getCookie } from "@/backend/libs/next";
 import { verifyToken } from "@/backend/libs/jwt";
+import LikedProducts from "@/frontend/components/consumers/AccountPageComponents/LikedProducts/LikedProducts";
+
+import { useLike } from "@/hooks/useLike";
 
 const AccountPage = async () => {
   let user = null;
@@ -50,10 +53,13 @@ const AccountPage = async () => {
   //   newPasswordRepeat: "",
   // });
 
+  const { liked } = useLike();
+
   return (
     <div className={styles.container}>
       <ToPreviousPage title="Особистий кабінет" />
       <ConsumerData consumer={user} />
+      {liked && <LikedProducts likedProducts={liked} />}
     </div>
   );
 };
