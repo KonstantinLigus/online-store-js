@@ -1,0 +1,78 @@
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/variables";
+
+.wrapper {
+  background-color: #7777;
+  backdrop-filter: blur(1px);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  .container {
+    @include wrapper;
+    background-color: $color-bg-light-1;
+    height: fit-content;
+    max-height: 100vh;
+    padding-top: 1em !important;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    @include md-min {
+      max-height: 80vh;
+      top: 10vh;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    .searchBar {
+      align-items: center;
+      display: flex;
+      gap: 2em;
+      justify-content: space-between;
+      margin-bottom: 1em !important;
+
+      .input {
+        @include input-1;
+        max-width: 600px;
+      }
+
+      .closeIcon {
+        cursor: pointer;
+      }
+    }
+
+    .itemsContainer {
+      height: 100%;
+      margin-bottom: 1em;
+      overflow-y: auto;
+
+      .items {
+        align-items: center;
+        border-top: 1px solid $color-green-1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2em;
+        overflow: auto;
+        padding: 2em;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.productContainer {
+  & > a {
+    color: $color-gray-dark-1;
+    text-decoration: none;
+  }
+
+  .productTitle {
+    font-size: 1em;
+    margin-top: 0.5em;
+  }
+}

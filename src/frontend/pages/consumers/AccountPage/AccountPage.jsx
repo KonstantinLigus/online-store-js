@@ -1,15 +1,14 @@
 // "use client";
 import "@/global-styles/globals.css";
-// import { useState } from "react";
 import styles from "./AccountPage.module.scss";
 import ConsumerData from "@/frontend/components/consumers/AccountPageComponents/ConsumerData/ConsumerData";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
-// import { useSearchParams } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { userServices } from "@/backend/entities/users/data-access/userServices";
 import authOptions from "@/backend/libs/next-auth/authOptions";
 import { getCookie } from "@/backend/libs/next";
 import { verifyToken } from "@/backend/libs/jwt";
+import LikedProducts from "@/frontend/components/consumers/AccountPageComponents/LikedProducts/LikedProducts";
 
 const AccountPage = async () => {
   let user = null;
@@ -54,6 +53,7 @@ const AccountPage = async () => {
     <div className={styles.container}>
       <ToPreviousPage title="Особистий кабінет" />
       <ConsumerData consumer={user} />
+      <LikedProducts />
     </div>
   );
 };

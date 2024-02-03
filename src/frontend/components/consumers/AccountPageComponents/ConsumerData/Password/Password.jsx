@@ -18,15 +18,17 @@ const OldPassword = ({
         [paswdType]: value,
       }));
     const newPaswdAction = () => {
-      let isOldPaswdAndNewPaswdDifferent = oldPassword !== newPassword;
-      if (oldPassword === "" && newPassword === "")
+      let isOldPaswdAndNewPaswdDifferent =
+        oldPassword !== newPassword ? true : null;
+      if (oldPassword === undefined && newPassword === undefined)
         isOldPaswdAndNewPaswdDifferent = false;
       setDataWasChangedAction(isOldPaswdAndNewPaswdDifferent);
     };
 
     const newPaswdRepeatAction = () => {
-      let isNewPaswdAndRepeatNewPaswdSame = newPassword === newPasswordRepeat;
-      if (newPassword === "" && newPasswordRepeat === "")
+      let isNewPaswdAndRepeatNewPaswdSame =
+        newPassword === newPasswordRepeat ? true : null;
+      if (newPassword === undefined && newPasswordRepeat === undefined)
         isNewPaswdAndRepeatNewPaswdSame = false;
       setDataWasChangedAction(isNewPaswdAndRepeatNewPaswdSame);
     };
