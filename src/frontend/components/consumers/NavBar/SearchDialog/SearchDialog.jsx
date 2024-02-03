@@ -3,54 +3,21 @@ import Image from "next/image";
 import styles from "./SearchDialog.module.scss";
 import React, { useState } from "react";
 import FoundProduct from "./FoundProduct";
+import { debounce } from "@/frontend/helpers";
 
 export default function SearchDialog({ setIsSearchClicked }) {
-  const [products, setProducts] = useState([]);
   const [filtredProducts, setFiltredProducts] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
 
-  const handleChange = e => {
-    if (e.target.value.length === 1 && searchValue.length === 2) {
-      setProducts([]);
-      setFiltredProducts([]);
-    } else if (e.target.value.length === 2) {
-      if (e.target.value !== searchValue.slice(0, 2)) {
-        const fetchData = async () => {
-          const res = await fetch("api/items");
-          const { items } = await res.json();
-          setProducts(
-            items.filter(i =>
-              i.title.toLowerCase().includes(e.target.value.toLowerCase()),
-            ),
-          );
-          setFiltredProducts(
-            items.filter(i =>
-              i.title.toLowerCase().includes(e.target.value.toLowerCase()),
-            ),
-          );
-        };
-        fetchData();
-        //console.log("request to server");
-      } else {
-        setFiltredProducts(products);
-        //console.log("request to 'products'");
-      }
-    } else if (e.target.value.length > 2) {
-      setFiltredProducts(
-        products.filter(i =>
-          i.title.toLowerCase().includes(e.target.value.toLowerCase()),
-        ),
-      );
-    }
-
-    setSearchValue(e.target.value);
+  const handleInputChange = async e => {
+    const productTitle = e.target.value;
+    const res = await fetch(`api/items?title=${productTitle}`);
+    const { items } = await res.json();
+    setFiltredProducts(items);
   };
 
   const closeSearch = () => {
     setIsSearchClicked(false);
-    setProducts([]);
     setFiltredProducts([]);
-    setSearchValue("");
   };
 
   return (
@@ -67,7 +34,11 @@ export default function SearchDialog({ setIsSearchClicked }) {
             alt="search"
             priority
           />
-          <input type="text" className={styles.input} onChange={handleChange} />
+          <input
+            type="text"
+            className={styles.input}
+            onChange={debounce(handleInputChange, 1000)}
+          />
           <Image
             src="/assets/icon/icon-close.svg"
             width={18}

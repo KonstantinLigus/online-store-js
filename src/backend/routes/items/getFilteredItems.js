@@ -3,14 +3,14 @@ import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 
 export async function getFilteredItems(req) {
   const { searchParams } = new URL(req.url);
-  const category = searchParams.get("category");
-  let data = [];
-  if (category) {
-    data = await itemsControllers.getAllItemsByField({ category });
-  }
-  if (!category) {
-    data = await itemsControllers.getAllItemsByField({});
-  }
+
+  let objQuery = {};
+  if (searchParams.size !== 0)
+    searchParams.forEach((value, key) =>
+      Object.assign(objQuery, { [key]: new RegExp(value, "i") }),
+    );
+
+  const data = await itemsControllers.getAllItemsByField(objQuery);
   return data;
 }
 
