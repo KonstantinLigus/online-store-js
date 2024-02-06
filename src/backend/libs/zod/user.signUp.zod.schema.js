@@ -3,22 +3,22 @@ import { z } from "zod";
 export const userSignUpZodSchema = z.object({
   firstName: z
     .string()
-    .min(1, { message: "The name must contain at least 1 character!" }),
-  secondName: z
-    .string()
-    .min(1, { message: "The name must contain at least 1 character!" }),
-  surname: z
-    .string()
-    .min(1, { message: "The surname must contain at least 1 character!" }),
+    .min(1, { message: "Ім'я повинне складатись мінімум з 1 символа" }),
+  secondName: z.string().min(1, {
+    message: "По-батькові повинне складатися мінімум з 1 символа",
+  }),
+  surname: z.string().min(1, {
+    message: "Прізвище повинне складатися мінімум з 1 символа",
+  }),
   password: z
     .string()
-    .min(7, { message: "The password must contain at least 7 characters!" }),
+    .min(7, { message: "Пароль повинен складатися мінімум з 7 символів" }),
   passwordRepeat: z
     .string()
-    .min(7, { message: "The password must contain at least 7 characters!" }),
-  email: z.string().email({ message: "Invalid email address" }),
+    .min(7, { message: "Пароль повинен складатися мінімум з 7 символів" }),
+  email: z.string().email({ message: "Невірний формат email" }),
   customerPhone: z
     .string()
-    .length(13, { message: "Must be exactly 13 characters long. " })
-    .regex(/^\+380\d{9}$/, { message: "Must begin with +380" }),
+    .length(13, { message: "Номер повинен складатися з 13 цифр. " })
+    .regex(/^\+380\d{9}$/, { message: "Повинен починатися з +380" }),
 });
