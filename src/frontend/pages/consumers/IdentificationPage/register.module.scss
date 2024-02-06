@@ -1,5 +1,6 @@
-@import "../../../../styles/responsive";
-@import "../../../../styles/mixins";
+@import "@/styles/responsive";
+@import "@/styles/mixins";
+
 .container {
   @include wrapper;
   h2 {
@@ -17,5 +18,8 @@
     input {
       @include input-1;
     }
+  }
+  p {
+    @include invalidData;
   }
 }

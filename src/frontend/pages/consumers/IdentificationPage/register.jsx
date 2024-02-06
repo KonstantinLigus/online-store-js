@@ -2,13 +2,13 @@
 
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
-import "./register.scss";
+import styles from "./register.module.scss";
 import { signUpAction } from "@/backend/entities/users/entry-points";
 
 const IdentificationPage = () => {
   const [state, formAction] = useFormState(signUpAction, null);
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h2>Реєстрація</h2>
       <form action={formAction}>
         <input placeholder="Ваше ім’я*" type="text" name="firstName" />
