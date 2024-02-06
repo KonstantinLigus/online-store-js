@@ -12,7 +12,7 @@ export class UserNotFoundError extends Error {
   message;
   constructor() {
     super();
-    this.message = { email: "Wrong email!" };
+    this.message = { email: "email не знайдено" };
   }
 }
 
@@ -21,7 +21,7 @@ export class WrongUserPasswordError extends Error {
   message;
   constructor() {
     super();
-    this.message = { password: "Wrong password!" };
+    this.message = { password: "Невірний пароль" };
   }
 }
 
@@ -30,7 +30,7 @@ export class EmailNotVerifiedError extends Error {
   message;
   constructor() {
     super();
-    this.message = { email: "email was not verified!" };
+    this.message = { email: "email не підтверджений" };
   }
 }
 
