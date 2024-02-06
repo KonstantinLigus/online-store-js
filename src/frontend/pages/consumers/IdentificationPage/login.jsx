@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import "./login.scss";
+import styles from "./login.module.scss";
 import { signInAction } from "@/backend/entities/users/entry-points";
 
 const LoginPage = () => {
@@ -15,7 +15,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h2>Вхід особистого кабінету</h2>
       <form action={formAction}>
         <label>
@@ -30,11 +30,11 @@ const LoginPage = () => {
         <p>{state?.password}</p>
         <button type="submit">Увійти</button>
       </form>
-      <div className="nav-fomr">
+      <div className={styles.nav_form}>
         <Link href="/">Забули пароль?</Link>
         <Link href="register">Зареєструватись</Link>
       </div>
-      <label className="google-auth">
+      <label className={styles.google_auth}>
         Також можна увійти через:
         <button onClick={signInWithGoogleClickHandle}>
           <Image

@@ -1,6 +1,6 @@
-@import "../../../../../../styles/mixins";
-@import "../../../../../../styles/responsive";
-@import "../../../../../../styles/variables";
+@import "@/styles/mixins";
+@import "@/styles/responsive";
+@import "@/styles/variables";
 
 .form {
   display: grid;
@@ -39,8 +39,7 @@
       display: block;
 
       span.invalidData {
-        color: red;
-        font-size: 0.9rem;
+        @include invalidData;
       }
     }
 
@@ -55,8 +54,7 @@
       width: 100%;
 
       span.invalidData {
-        color: red;
-        font-size: 0.9rem;
+        @include invalidData;
       }
     }
 
