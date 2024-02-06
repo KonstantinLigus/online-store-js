@@ -1,5 +1,5 @@
-@import "../../../../styles/responsive";
-@import "../../../../styles/mixins";
+@import "@/styles/responsive";
+@import "@/styles/mixins";
 .container {
   @include wrapper;
   .nav_form {
