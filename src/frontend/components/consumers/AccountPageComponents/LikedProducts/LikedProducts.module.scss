@@ -1,0 +1,59 @@
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/variables";
+
+.details {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+
+  .summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+
+    > span {
+      font-size: 1.25em;
+    }
+
+    .angleIcon {
+      transition: 0.5s;
+    }
+  }
+
+  &[open] .angleIcon {
+    transform: rotate(180deg);
+    transition: 0.5s;
+  }
+
+  .products {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1em;
+    width: 100%;
+  }
+}
+
+.productContainer {
+  position: relative;
+
+  & > a {
+    color: $color-gray-dark-1;
+    text-decoration: none;
+  }
+
+  .productTitle {
+    font-size: 1em;
+    margin-top: 0.5em;
+  }
+
+  .heartIconContainer {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}

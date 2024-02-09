@@ -4,9 +4,12 @@
 
 .form {
   margin: auto;
-  padding: 1rem;
+
   max-width: 500px;
   width: 100%;
+  @include lg-min {
+    margin: 0;
+  }
 
   .details {
     margin-bottom: 1rem;
