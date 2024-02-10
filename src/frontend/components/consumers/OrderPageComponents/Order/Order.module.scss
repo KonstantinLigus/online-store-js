@@ -8,6 +8,9 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
   padding: 0 !important;
+  @include xl-min {
+    width: 450px;
+  }
 
   .nav {
     display: flex;
@@ -18,14 +21,16 @@
 
       .customerOn {
         align-items: center;
-        background-color: #aaa;
-        border: 2px solid #333;
-        border-radius: 1rem;
+        background-color: $color-green-light-2;
+        border: 2px solid $color-green-dark-2;
+        border-radius: 3rem;
+        color: $color-green-dark-2;
         display: flex;
         justify-content: center;
         flex: 1;
         font-size: 1rem;
         margin: 1rem;
+        outline: 4px solid $color-green-1;
 
         p {
           pointer-events: none;
@@ -34,9 +39,9 @@
 
       .customerOff {
         align-items: center;
-        border: 2px solid #333;
-        border-radius: 1rem;
-        color: #777;
+        border: 2px solid $color-green-dark-2;
+        border-radius: 3rem;
+        color: $color-green-dark-2;
         display: flex;
         flex: 1;
         justify-content: center;

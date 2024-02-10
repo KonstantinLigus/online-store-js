@@ -10,6 +10,11 @@
   @include lg-min {
     gap: 1em;
     grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+  }
+  @include xl-min {
+    gap: 1em;
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .fieldset {
@@ -24,7 +29,7 @@
 
       span {
         align-items: center;
-        background-color: $cart-item-bg;
+        background-color: $color-green-1;
         border-radius: 1rem;
         display: inline-flex;
         height: 2rem;
