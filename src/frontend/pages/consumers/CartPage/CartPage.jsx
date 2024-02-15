@@ -5,9 +5,9 @@ import { useCart } from "@/hooks/useCart";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./CartPage.module.scss";
-import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
+import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
 
 const CartPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
@@ -36,11 +36,17 @@ const CartPage = () => {
       {cart !== null && cart.length > 0 && (
         <>
           <div className={styles.productsWrapper}>
-            <ProductsInCart
-              cart={cart}
-              removeFromCart={removeFromCart}
-              updateCartItem={updateCartItem}
-            />
+            <ul className={styles.products}>
+              {cart.map(item => (
+                <CartItem
+                  className={styles.cartItem}
+                  key={item._id}
+                  item={item}
+                  removeFromCart={removeFromCart}
+                  updateCartItem={updateCartItem}
+                />
+              ))}
+            </ul>
           </div>
 
           <div className={styles.similarProducts}>

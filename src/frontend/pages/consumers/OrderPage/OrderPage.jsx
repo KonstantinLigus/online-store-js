@@ -5,10 +5,10 @@ import { useCart } from "@/hooks/useCart";
 import Image from "next/image";
 import styles from "./OrderPage.module.scss";
 import Order from "@/frontend/components/consumers/OrderPageComponents/Order/Order";
-import ProductsInCart from "@/frontend/components/consumers/ProductsInCart/ProductsInCart";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 import Button from "@/frontend/components/consumers/Button/Button";
 import { Payment } from "@/frontend/components/consumers/Payment/Payment";
+import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
 
 const OrderPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem, removeCart } =
@@ -27,42 +27,55 @@ const OrderPage = () => {
 
   return (
     <>
-      <ToPreviousPage />
+      <ToPreviousPage title="Оформлення замовлення" />
       <div className={styles.order}>
         {cart?.length > 0 && !isOrderCreated && (
           <>
-            <details className={styles.details}>
-              <summary className={styles.summary}>
-                <span>Ваше замовлення</span>
-                <Image
-                  src="/assets/icon/icon-angle-down.svg"
-                  alt="heart icon"
-                  width={24}
-                  height={24}
-                  className={styles.angleIcon}
-                />
-              </summary>
-              <ProductsInCart
-                cart={cart}
-                removeFromCart={removeFromCart}
-                updateCartItem={updateCartItem}
+            <p className={styles.titleText}>Оформлення замовлення</p>
+
+            <div className={styles.orderContainer}>
+              <div className={styles.orderDetails}>
+                <details className={styles.details}>
+                  <summary className={styles.summary}>
+                    <span>Ваше замовлення</span>
+                    <Image
+                      src="/assets/icon/icon-angle-down.svg"
+                      alt="heart icon"
+                      width={24}
+                      height={24}
+                      className={styles.angleIcon}
+                    />
+                  </summary>
+                  <ul className={styles.cartItems}>
+                    {cart.map(item => (
+                      <CartItem
+                        className={styles.cartItem}
+                        key={item._id}
+                        item={item}
+                        removeFromCart={removeFromCart}
+                        updateCartItem={updateCartItem}
+                      />
+                    ))}
+                  </ul>
+                </details>
+
+                <div className={styles.price}>
+                  <p className={styles.caption}>Всього до сплати:</p>
+                  <p className={styles.sum}>{totalPrice} грн</p>
+                </div>
+              </div>
+
+              <Order
+                productsInCart={orderedProducts}
+                allProductsPrice={allProductsPrice}
+                setIsOrderCreated={setIsOrderCreated}
+                removeCart={removeCart}
+                setPaymentData={setPaymentData}
               />
-            </details>
-
-            <div className={styles.price}>
-              <p className={styles.caption}>Всього до сплати:</p>
-              <p className={styles.sum}>{totalPrice} грн</p>
             </div>
-
-            <Order
-              productsInCart={orderedProducts}
-              allProductsPrice={allProductsPrice}
-              setIsOrderCreated={setIsOrderCreated}
-              removeCart={removeCart}
-              setPaymentData={setPaymentData}
-            />
           </>
         )}
+
         {!cart && (
           <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
         )}

@@ -11,8 +11,10 @@ const AccountPage = async () => {
   return (
     <div className={styles.container}>
       <ToPreviousPage title="Особистий кабінет" />
-      <ConsumerData consumer={user} />
-      <LikedProducts />
+      <div className={styles.accoyntData}>
+        <ConsumerData consumer={user} />
+        <LikedProducts />
+      </div>
     </div>
   );
 };
