@@ -1,16 +1,32 @@
 @import "@/styles/variables";
 
+.userBarContainer {
+  display: flex;
+  align-items: center;
+  gap: $s;
+}
 .userInfo {
   display: inline-block;
-  margin-right: $sm;
+  margin-right: $s;
+}
+
+.userIcon {
+  height: 24px;
+  width: 24px;
 }
 
 .userIconEmpty {
-  fill: none;
+  @extend .userIcon;
+  color: transparent;
   stroke: $icons-color;
 }
 
 .userIconFilled {
-  fill: $icons-color;
+  @extend .userIcon;
+  color: $icons-color;
   stroke: none;
+}
+.userSignOutBtn {
+  width: auto;
+  margin: 0;
 }
