@@ -4,13 +4,22 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import styles from "./userBar.module.scss";
 import { signOutAction } from "@/backend/entities/users/entry-points/signOut-action";
+import Button from "@/frontend/components/consumers/Button/Button";
+import Image from "next/image";
 
 const UserBar = ({ token }) => {
   const { status } = useSession();
 
-  const getStyles = (status, token) => {
+  const getUserStyles = () => {
     if (status === "unauthenticated" && !token) return styles.userIconEmpty;
     if (status === "authenticated" || token) return styles.userIconFilled;
+    return styles.userIconEmpty;
+  };
+
+  const getURL = () => {
+    if (status === "unauthenticated" && !token) return "/login";
+    if (status === "authenticated" || token) return "/account";
+    return "/login";
   };
 
   const signOutClickHandler = async () => {
@@ -19,17 +28,30 @@ const UserBar = ({ token }) => {
   };
 
   return (
-    <>
+    <div className={styles.userBarContainer}>
       {(status === "authenticated" || token) && (
-        <button onClick={signOutClickHandler}>Sign out</button>
+        <Button
+          onClick={signOutClickHandler}
+          title="Вийти"
+          className={styles.userSignOutBtn}
+        />
       )}
       {status === "loading" && <p className={styles.userInfo}>Loading...</p>}
-      <Link href="/login">
-        <svg width={24} height={24} className={getStyles(status, token)}>
-          <use href="assets/icon/user-icon.svg#user" />
+      <Link href={getURL()}>
+        <svg className={getUserStyles()}>
+          <use href="assets/icon/icon-person-outline.svg#user" />
         </svg>
       </Link>
-    </>
+      <Link href="/cart">
+        <Image
+          src="/assets/icon/icon-cart.svg"
+          width={24}
+          height={24}
+          alt="cart icon"
+          priority
+        />
+      </Link>
+    </div>
   );
 };
 

@@ -1,0 +1,17 @@
+@import "@/styles/mixins";
+@import "@/styles/responsive";
+@import "@/styles/variables";
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid lightblue;
+  border-right-color: $color-green-dark-4;
+  animation: s2 1.5s infinite linear;
+}
+@keyframes s2 {
+  to {
+    transform: rotate(1turn);
+  }
+}

@@ -1,0 +1,57 @@
+@import "@/styles/responsive";
+@import "@/styles/mixins";
+@import "@/styles/variables";
+
+.Field__input {
+  @include input-1;
+  margin-bottom: $s;
+}
+.Field__pswdInput {
+  @include input-1;
+}
+
+.Field__label_marginBottom {
+  display: block;
+  margin-bottom: $s;
+}
+
+.Field__label:has(+ input:valid) {
+  @include validData;
+}
+.Field__label:has(+ input:invalid) {
+  @include invalidData;
+}
+.Field__errorMsg {
+  @include invalidData;
+}
+input:invalid + .Field__errorMsg,
+.Field__pswdContainer:has(input:invalid) + .Field__errorMsg {
+  display: block;
+}
+input:valid + .Field__errorMsg,
+.Field__pswdContainer:has(input:valid) + .Field__errorMsg {
+  display: none;
+}
+.Field__pswdContainer {
+  margin-bottom: $s;
+  position: relative;
+}
+
+.Field__pswdShowBtn {
+  position: absolute;
+  top: 50%;
+  right: $s;
+  transform: translateY(-50%);
+  background: transparent;
+  @include button-icon;
+}
+.Field__pswdShowIcon {
+  width: 24px;
+  height: 24px;
+}
+.Field__pswdShowIcon_hidden {
+  color: $color-gray-light-1;
+}
+.Field__pswdShowIcon_visible {
+  color: $color-gray-dark-1;
+}

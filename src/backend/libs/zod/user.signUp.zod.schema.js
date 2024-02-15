@@ -1,14 +1,16 @@
 import { z } from "zod";
 
+const nameRegExp = new RegExp(process.env.NEXT_PUBLIC_NAME_PATTERN);
+
 export const userSignUpZodSchema = z.object({
-  firstName: z
-    .string()
-    .min(1, { message: "Ім'я повинне складатись мінімум з 1 символа" }),
-  secondName: z.string().min(1, {
-    message: "По-батькові повинне складатися мінімум з 1 символа",
+  firstName: z.string().regex(nameRegExp, {
+    message: "Ім'я повинне складатись мінімум з 2 символів",
   }),
-  surname: z.string().min(1, {
-    message: "Прізвище повинне складатися мінімум з 1 символа",
+  secondName: z.string().regex(nameRegExp, {
+    message: "По-батькові повинне складатися мінімум з 2 символів",
+  }),
+  surname: z.string().regex(nameRegExp, {
+    message: "Прізвище повинне складатися мінімум з 2 символів",
   }),
   password: z
     .string()
@@ -19,6 +21,6 @@ export const userSignUpZodSchema = z.object({
   email: z.string().email({ message: "Невірний формат email" }),
   customerPhone: z
     .string()
-    .length(13, { message: "Номер повинен складатися з 13 цифр. " })
+    .length(13, { message: "Телефон повинен складатися з 13 цифр символів. " })
     .regex(/^\+380\d{9}$/, { message: "Повинен починатися з +380" }),
 });

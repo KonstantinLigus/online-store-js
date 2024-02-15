@@ -4,21 +4,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 body {
-  font-family:
-    Montserrat,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    Fira Sans,
-    Droid Sans,
-    Helvetica Neue,
-    sans-serif;
   min-width: 260px;
   min-height: 100vh;
 }

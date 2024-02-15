@@ -22,5 +22,5 @@ async function updateUser(filter, updateObj) {
   const updatedUser = await User.findOneAndUpdate(filter, updateObj, {
     new: true,
   });
-  return updatedUser;
+  return updatedUser.toObject();
 }

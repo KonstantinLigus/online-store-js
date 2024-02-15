@@ -1,0 +1,23 @@
+@import "@/styles/responsive";
+@import "@/styles/mixins";
+@import "@/styles/variables";
+
+.RegisterForm__container {
+  @include wrapper;
+}
+.RegisterForm__title {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.RegisterForm__form {
+  margin-top: 19px;
+}
+.RegisterForm__fieldset {
+  margin-bottom: $m;
+}
+.RegisterForm__errorMsg {
+  @include invalidData;
+}
