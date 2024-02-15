@@ -1,12 +1,15 @@
-@import "../../../../../styles/mixins";
-@import "../../../../../styles/responsive";
-@import "../../../../../styles/variables";
+@import "@/styles/mixins";
+@import "@/styles/responsive";
+@import "@/styles/variables";
 
 .form {
   margin: auto;
-  padding: 1rem;
+
   max-width: 500px;
   width: 100%;
+  @include lg-min {
+    margin: 0;
+  }
 
   .details {
     margin-bottom: 1rem;
@@ -79,4 +82,8 @@
       max-width: 500px;
     }
   }
+}
+.messageStatus {
+  @include fonts($color: $color-green-dark-3);
+  text-align: center;
 }

@@ -8,104 +8,18 @@ const Phone = ({ consumerData, setConsumerData, setDataWasChanged }) => {
   );
   const [isValid, setIsValid] = useState(true);
 
-  const handleClick = e => {
-    if (e.target.value.length === 0) {
+  const handleInputChange = e => {
+    let { value } = e.target;
+
+    if (value.length <= 4) value = "+380";
+
+    if (/^\+\d+$/.test(value)) setConsumerPhoneNumber(value);
+
+    if (/^\+380\d{9}$/.test(value)) {
       setConsumerData(prev => ({
         ...prev,
-        customerPhone: "+380",
+        customerPhone: value,
       }));
-    }
-  };
-
-  const handleChange = e => {
-    let value = e.target.value;
-    let valueLast = value[value.length - 1];
-
-    if (value.length < 17) {
-      setIsValid(false);
-      e.target.setCustomValidity("Invalid field.");
-      setDataWasChanged(prev => ({
-        ...prev,
-        customerPhone: null,
-      }));
-    } else {
-      if (/\d/.test(valueLast)) {
-        if (!isValid) {
-          setIsValid(true);
-          e.target.setCustomValidity("");
-        }
-        if (value === consumerPhoneNumber) {
-          setDataWasChanged(prev => ({
-            ...prev,
-            customerPhone: false,
-          }));
-        } else {
-          setDataWasChanged(prev => ({
-            ...prev,
-            customerPhone: true,
-          }));
-        }
-      }
-    }
-
-    if (value.length > 3 && value.length < 18) {
-      if (/\d/.test(valueLast)) {
-        setConsumerData(prev => ({
-          ...prev,
-          customerPhone: value,
-        }));
-      }
-    }
-  };
-
-  const handleKeyDown = e => {
-    if (/\d/.test(e.key) || e.key === "Backspace") {
-      let value = e.target.value;
-      if (value.length > 3 && value.length < 18) {
-        if (e.key === "Backspace") {
-          if (value.length === 6) {
-            value = value.slice(0, 4);
-            setConsumerData(prev => ({
-              ...prev,
-              customerPhone: value,
-            }));
-          }
-          if (value.length === 9) {
-            value = value.slice(0, 8);
-            setConsumerData(prev => ({
-              ...prev,
-              customerPhone: value,
-            }));
-          }
-          if (value.length === 13) {
-            value = value.slice(0, 12);
-            setConsumerData(prev => ({
-              ...prev,
-              customerPhone: value,
-            }));
-          }
-          if (value.length === 16) {
-            value = value.slice(0, 15);
-            setConsumerData(prev => ({
-              ...prev,
-              customerPhone: value,
-            }));
-          }
-        } else {
-          if (
-            value.length === 4 ||
-            value.length === 7 ||
-            value.length === 11 ||
-            value.length === 14
-          ) {
-            value += " ";
-            setConsumerData(prev => ({
-              ...prev,
-              customerPhone: value,
-            }));
-          }
-        }
-      }
     }
   };
 
@@ -121,11 +35,10 @@ const Phone = ({ consumerData, setConsumerData, setDataWasChanged }) => {
         type="tel"
         name="tel"
         id="tel"
+        pattern="^\+380\d{9}$"
         className={styles.inputText}
-        defaultValue={consumerData.customerPhone}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        onClick={handleClick}
+        value={consumerPhoneNumber}
+        onChange={handleInputChange}
       />
     </>
   );

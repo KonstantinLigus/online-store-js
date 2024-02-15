@@ -48,7 +48,6 @@ const CategoriesPage = () => {
       products.push(await conservation.json());
       products.push(await milk.json());
 
-      console.log(products[0].items);
       setData(products);
     };
     fetchData();

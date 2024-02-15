@@ -1,8 +1,7 @@
 @import "variables";
 @import "responsive";
 
-@mixin fonts($family, $weight, $size, $color) {
-  font-family: $family, sans-serif;
+@mixin fonts($weight: 500, $size: 1.125rem, $color: $color-black) {
   font-weight: $weight;
   font-size: $size;
   color: $color;
@@ -108,7 +107,17 @@
   }
 }
 
+@mixin button-icon {
+  background: transparent;
+  cursor: pointer;
+}
+
 @mixin invalidData {
-  color: red;
-  font-size: 0.9rem;
+  color: $color-red-1;
+  font-weight: $semi-bold;
+}
+
+@mixin validData {
+  color: $color-green-dark-3;
+  font-weight: $semi-bold;
 }

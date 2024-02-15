@@ -1,2 +1,1 @@
-import LoginPage from "@/frontend/pages/consumers/IdentificationPage/login"
-export default LoginPage
+export { default } from "@/frontend/pages/consumers/LoginPage";

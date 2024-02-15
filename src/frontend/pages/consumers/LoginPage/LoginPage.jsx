@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./login.module.scss";
+import styles from "./LoginPage.module.scss";
 import { signInAction } from "@/backend/entities/users/entry-points";
 
 const LoginPage = () => {

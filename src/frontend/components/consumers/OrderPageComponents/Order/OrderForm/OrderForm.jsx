@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import styles from "./OrderForm.module.scss";
 import Fieldset from "./Fieldset/Fieldset";
 import Phone from "./Phone/Phone";
@@ -15,7 +14,7 @@ import Comment from "./Comment/Comment";
 const OrderForm = props => {
   const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
     props;
-  const [consumer, setConsumer] = useState({ ...props.consumer });
+  const [consumer, setConsumer] = useState(props.consumer);
 
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
   const [surnameIsValid, setSurnameIsValid] = useState(true);

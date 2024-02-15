@@ -1,18 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import styles from "./Order.module.scss";
 import OrderForm from "./OrderForm/OrderForm";
 import RegularCustomer from "./RegularCustomer/RegularCustomer";
 
 const Order = props => {
-  // const {
-  //   productsInCart,
-  //   allProductsPrice,
-  //   setIsOrderCreated,
-  //   removeCart,
-  //   setPaymentData,
-  // } = props;
   const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [newCustomer, setNewCustomer] = useState(true);
   const [consumerInfo, setConsumerInfo] = useState({
@@ -31,22 +23,6 @@ const Order = props => {
     paymentMethod: "card",
     comment: "",
   });
-
-  /*  if user is authenticated:
-  useEffect(() => {
-    if (*** user is authenticated ***) {
-    
-      *** backend logic ***
-
-      setConsumerInfo(prev => ({
-        ...prev,
-        *** changing data - user's info from database ***
-      }));
-      setUserAuthenticated(true);
-      setNewCustomer(false);
-    }
-  }, []) 
-  */
 
   return (
     <div className={styles.wrapper}>
@@ -70,14 +46,7 @@ const Order = props => {
       </div>
 
       <div className={styles.formContainer}>
-        <OrderForm
-          consumer={consumerInfo}
-          // productsInCart={productsInCart}
-          // allProductsPrice={allProductsPrice}
-          // setIsOrderCreated={setIsOrderCreated}
-          // removeCart={removeCart}
-          {...props}
-        />
+        <OrderForm consumer={consumerInfo} {...props} />
         {!userAuthenticated && !newCustomer && <RegularCustomer />}
       </div>
     </div>
