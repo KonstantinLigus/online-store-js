@@ -71,19 +71,7 @@ export default function NavBar(props) {
           <Link href="/" prefetch={false} className={styles.logo}>
             <span>Logo</span>
           </Link>
-
-          <div>
-            <UserBar token={props.token} />
-            <Link href="/cart" style={{ marginLeft: "1rem" }}>
-              <Image
-                src="/assets/icon/icon-cart.svg"
-                width={24}
-                height={24}
-                alt="cart icon"
-                priority
-              />
-            </Link>
-          </div>
+          <UserBar token={props.token} />
         </div>
       </div>
 

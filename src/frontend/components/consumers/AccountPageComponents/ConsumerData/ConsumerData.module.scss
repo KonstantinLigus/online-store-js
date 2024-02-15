@@ -1,6 +1,6 @@
-@import "../../../../../styles/mixins";
-@import "../../../../../styles/responsive";
-@import "../../../../../styles/variables";
+@import "@/styles/mixins";
+@import "@/styles/responsive";
+@import "@/styles/variables";
 
 .form {
   margin: auto;
@@ -82,4 +82,8 @@
       max-width: 500px;
     }
   }
+}
+.messageStatus {
+  @include fonts($color: $color-green-dark-3);
+  text-align: center;
 }

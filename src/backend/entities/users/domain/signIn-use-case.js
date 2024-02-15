@@ -22,8 +22,6 @@ export async function signIn(user) {
   if (userFromDB.verificationToken) throw new EmailNotVerifiedError();
   const token = createUserToken(userFromDB._id);
   await setUserTokenToCookie(token);
-  delete userFromDB._id;
-  delete userFromDB.password;
-  delete userFromDB.verificationToken;
-  return userFromDB;
+
+  return true;
 }

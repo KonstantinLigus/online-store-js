@@ -8,21 +8,26 @@ import { setUserTokenToCookie } from "@/backend/libs/next";
 
 export async function signUp(newUser) {
   const { email, password } = newUser;
+
   const userFromDB = await userServices.getUserByField({ email });
+
   if (userFromDB) throw new UserExistError(email);
+
   const verificationToken = getRandomUUID();
+
   newUser.password = await getHashedPassword(password);
   newUser.verificationToken = verificationToken;
+
+  const createdUser = await userServices.createUser(newUser);
+
+  const token = createUserToken(createdUser._id);
+  await setUserTokenToCookie(token);
+
   const message = createVerifyEmailMessage({
     email,
     verificationToken,
   });
   await sendEmail(message);
-  const createdUser = await userServices.createUser(newUser);
-  const token = createUserToken(createdUser._id);
-  await setUserTokenToCookie(token);
-  delete createdUser._id;
-  delete createdUser.password;
-  delete createdUser.verificationToken;
-  return createdUser;
+
+  return true;
 }

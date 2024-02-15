@@ -10,6 +10,7 @@ import Surname from "./Surname/Surname";
 import Birthday from "./Birthday/Birthday";
 import DeliveryType from "./Delivery/DeliveryType";
 import Password from "./Password/Password";
+import Loader from "../../Loader";
 
 const dataChanging = {
   firstName: false,
@@ -33,6 +34,7 @@ const ConsumerData = props => {
   const [consumerData, setConsumerData] = useState(props.consumer);
   const [dataWasChanged, setDataWasChanged] = useState(dataChanging);
   const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
+  const [isSaved, setIsSaved] = useState(false);
 
   const checkChanges = () => {
     let wasChanged = false;
@@ -53,8 +55,7 @@ const ConsumerData = props => {
       method: "POST",
       body: JSON.stringify(consumerData),
     });
-    const data = await res.json();
-    console.log(data);
+    if (res.ok) setIsSaved(true);
   };
 
   return (
@@ -125,6 +126,8 @@ const ConsumerData = props => {
         />
       </Details>
 
+      {isSaved && <p className={styles.messageStatus}>Данні бережено</p>}
+      <Loader />
       <div className={styles.buttonsWrapper}>
         <input
           disabled={saveChangesDisabled}
