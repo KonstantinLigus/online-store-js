@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
 import styles from "./RegisterPage.module.scss";
@@ -8,7 +9,7 @@ import Name from "@/frontend/components/consumers/Fields/Name";
 import Phone from "@/frontend/components/consumers/Fields/Phone";
 import Email from "@/frontend/components/consumers/Fields/Email";
 import Password from "@/frontend/components/consumers/Fields/Password";
-import { useEffect, useState } from "react";
+import { getObject } from "@/frontend/helpers";
 
 const userFields = [
   "firstName",
@@ -20,31 +21,29 @@ const userFields = [
   "customerPhone",
 ];
 
-const getUserObject = () => {
-  const user = {};
-  userFields.forEach(field => Object.assign(user, { [field]: "" }));
-  return user;
-};
 const RegistrationPage = () => {
   const [state, formAction] = useFormState(signUpAction, null);
-  const [userState, setUserState] = useState(getUserObject);
+
+  const [userState, setUserState] = useState(() => getObject(userFields));
   const [isDisabled, setIsDisabled] = useState(true);
   const [pswdErrMesg, setPswdErrMesg] = useState(false);
 
   useEffect(() => {
-    for (const field of Object.values(userState)) {
-      if (userState.password !== userState.passwordRepeat) {
-        setIsDisabled(true);
-        setPswdErrMesg(true);
-      } else {
-        setPswdErrMesg(false);
-      }
+    if (userState.password !== userState.passwordRepeat) {
+      setIsDisabled(true);
+      setPswdErrMesg(true);
+      return;
+    } else {
+      setPswdErrMesg(false);
+    }
 
+    for (const field of Object.values(userState)) {
       if (field === "") {
         setIsDisabled(true);
         return;
       }
     }
+
     setIsDisabled(false);
   }, [userState]);
 
@@ -103,7 +102,7 @@ const RegistrationPage = () => {
             </p>
           )}
         </fieldset>
-        <SubmitButton name="Зареєструватись" disabled={isDisabled} />
+        <SubmitButton disabled={isDisabled}>Зареєструватись</SubmitButton>
       </form>
     </div>
   );

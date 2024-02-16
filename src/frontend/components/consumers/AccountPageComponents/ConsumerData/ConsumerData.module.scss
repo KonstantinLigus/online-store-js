@@ -84,6 +84,6 @@
   }
 }
 .messageStatus {
-  @include fonts($color: $color-green-dark-3);
+  @include fonts($weight: 500, $color: $color-green-dark-3);
   text-align: center;
 }

@@ -2,11 +2,6 @@
 @import "@/styles/mixins";
 .container {
   @include wrapper;
-  .nav_form {
-    margin-top: 24px;
-    display: flex;
-    justify-content: space-between;
-  }
   .google_auth {
     display: flex;
     flex-direction: column;
@@ -51,4 +46,30 @@
   p {
     @include invalidData;
   }
+}
+.LoginForm___title {
+  @include fonts($size: $font-size-xl);
+}
+.RegisterForm__form {
+  margin-top: $m;
+}
+.LoginForm__fieldset {
+  margin-bottom: $m;
+}
+.LoginForm__container {
+  @include wrapper;
+}
+.LoginForm__errorMsg {
+  @include invalidData;
+}
+.LoginForm__nav {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.LoginForm__alternateAuth {
+  display: flex;
+  flex-direction: column;
+  margin-top: $m;
+  gap: $s;
 }
