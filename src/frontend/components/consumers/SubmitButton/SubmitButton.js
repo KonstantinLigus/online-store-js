@@ -1,10 +1,17 @@
 "use client";
-
+import { useFormStatus } from "react-dom";
 import styles from "./submitButton.module.scss";
 
-export function SubmitButton({ children, disabled }) {
+export default function SubmitButton({ children, disabled, onClick }) {
+  const { pending } = useFormStatus();
+
   return (
-    <button type="submit" className={styles.submitBtn} disabled={disabled}>
+    <button
+      type="submit"
+      className={styles.submitBtn}
+      disabled={disabled || pending}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

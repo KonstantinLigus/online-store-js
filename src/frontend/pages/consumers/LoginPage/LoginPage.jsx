@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
-import styles from "./LoginPage.module.scss";
-import { signInAction } from "@/backend/entities/users/entry-points";
 import Email from "@/frontend/components/consumers/Fields/Email";
 import Password from "@/frontend/components/consumers/Fields/Password";
-import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
+import SubmitButton from "@/frontend/components/consumers/SubmitButton/SubmitButton";
+import Button from "@/frontend/components/consumers/Button/Button";
+import { signInAction } from "@/backend/entities/users/entry-points";
 import { getObject } from "@/frontend/helpers";
+import styles from "./LoginPage.module.scss";
+import GoogleSignInButton from "@/frontend/components/consumers/GoogleSignInButton";
 
 const userFields = ["password", "email"];
 
@@ -57,18 +59,10 @@ const LoginPage = () => {
         <Link href="/">Забули пароль?</Link>
         <Link href="register">Зареєструватись</Link>
       </div>
-      <label className={styles.LoginForm__alternateAuth}>
+      <p className={styles.LoginForm__alternateAuth}>
         Також можна увійти через:
-        <SubmitButton onClick={signInWithGoogleClickHandle}>
-          <Image
-            alt="logo-img"
-            src="/assets/icon/icon-google.svg"
-            width={24}
-            height={24}
-          ></Image>
-          Google
-        </SubmitButton>
-      </label>
+      </p>
+      <GoogleSignInButton onClick={signInWithGoogleClickHandle} />
     </div>
   );
 };

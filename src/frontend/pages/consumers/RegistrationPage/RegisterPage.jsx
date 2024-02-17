@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import { SubmitButton } from "@/frontend/components/consumers/SubmitButton/SubmitButton";
-import styles from "./RegisterPage.module.scss";
-import { signUpAction } from "@/backend/entities/users/entry-points";
+import SubmitButton from "@/frontend/components/consumers/SubmitButton/SubmitButton";
 import Name from "@/frontend/components/consumers/Fields/Name";
 import Phone from "@/frontend/components/consumers/Fields/Phone";
 import Email from "@/frontend/components/consumers/Fields/Email";
 import Password from "@/frontend/components/consumers/Fields/Password";
+import { signUpAction } from "@/backend/entities/users/entry-points";
 import { getObject } from "@/frontend/helpers";
+import styles from "./RegisterPage.module.scss";
 
 const userFields = [
   "firstName",
