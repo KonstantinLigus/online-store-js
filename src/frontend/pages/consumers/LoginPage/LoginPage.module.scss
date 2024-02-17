@@ -1,54 +1,27 @@
 @import "@/styles/responsive";
 @import "@/styles/mixins";
-.container {
+
+.LoginForm___title {
+  @include fonts($size: $font-size-xl);
+  margin-bottom: $m;
+}
+.RegisterForm__form {
+  margin-bottom: $m;
+}
+.LoginForm__fieldset {
+  margin-bottom: $m;
+}
+.LoginForm__container {
   @include wrapper;
-  .nav_form {
-    margin-top: 24px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .google_auth {
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
-    gap: 8px;
-    button {
-      @include button-1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      max-width: 100%;
-    }
-  }
-  h2 {
-    color: #000;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  form {
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    label {
-      color: #000;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 15.6px;
-      letter-spacing: 0.48px;
-      input {
-        @include input-1;
-      }
-    }
-    button {
-      @include button-1;
-    }
-  }
-  p {
-    @include invalidData;
-  }
+}
+.LoginForm__errorMsg {
+  @include invalidData;
+}
+.LoginForm__nav {
+  margin-bottom: $m;
+  display: flex;
+  justify-content: space-between;
+}
+.LoginForm__alternateAuth {
+  margin-bottom: $s;
 }
