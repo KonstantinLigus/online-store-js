@@ -1,7 +1,11 @@
 @import "variables";
 @import "responsive";
 
-@mixin fonts($weight: 500, $size: 1.125rem, $color: $color-black) {
+@mixin fonts(
+  $weight: $font-weight-normal,
+  $size: 1.125rem,
+  $color: $color-black
+) {
   font-weight: $weight;
   font-size: $size;
   color: $color;
@@ -51,6 +55,10 @@
 }
 
 @mixin button-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $s;
   background-color: $color-green-1;
   border: none;
   border-radius: 2rem;
@@ -80,6 +88,10 @@
 }
 
 @mixin button-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $s;
   background-color: $color-green-light-1;
   border: none;
   border-radius: 1rem;
@@ -114,10 +126,10 @@
 
 @mixin invalidData {
   color: $color-red-1;
-  font-weight: $semi-bold;
+  font-weight: $font-weight-medium;
 }
 
 @mixin validData {
   color: $color-green-dark-3;
-  font-weight: $semi-bold;
+  font-weight: $font-weight-medium;
 }

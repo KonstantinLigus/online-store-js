@@ -127,7 +127,7 @@ const ConsumerData = props => {
       </Details>
 
       {isSaved && <p className={styles.messageStatus}>Данні бережено</p>}
-      <Loader />
+      {/* <Loader /> */}
       <div className={styles.buttonsWrapper}>
         <input
           disabled={saveChangesDisabled}
