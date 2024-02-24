@@ -14,6 +14,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>{children}</SessionProvider>
+        <div id="modal-root" />
       </body>
     </html>
   );

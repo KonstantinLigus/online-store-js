@@ -6,9 +6,6 @@ export const userSignUpZodSchema = z.object({
   firstName: z.string().regex(nameRegExp, {
     message: "Ім'я повинне складатись мінімум з 2 символів",
   }),
-  secondName: z.string().regex(nameRegExp, {
-    message: "По-батькові повинне складатися мінімум з 2 символів",
-  }),
   surname: z.string().regex(nameRegExp, {
     message: "Прізвище повинне складатися мінімум з 2 символів",
   }),
