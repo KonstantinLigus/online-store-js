@@ -1,6 +1,6 @@
-@import '../../../../styles/responsive';
-@import '../../../../styles/mixins';
-@import '../../../../styles/variables';
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
 
 .burgerContainer {
   display: flex;
@@ -16,28 +16,28 @@
   .burger {
     width: 16px;
     height: 2px;
-    background-color: $text-color;
+    background-color: $color-gray-dark-1;
     border-radius: 50px;
 
     &.clicked {
       &:nth-child(1) {
         transform: translateY(2px) rotate(-45deg);
-        transition: ease-out .5s;
+        transition: ease-out 0.5s;
       }
 
       &:nth-child(2) {
-       display: none;
+        display: none;
       }
 
       &:nth-child(3) {
         transform: translateY(-3px) rotate(45deg);
-        transition: ease-out .5s;
+        transition: ease-out 0.5s;
       }
     }
 
     &.unClicked {
       transform: rotate(0) translate(0);
-      transition: ease-out .5s;
+      transition: ease-out 0.5s;
     }
   }
 }

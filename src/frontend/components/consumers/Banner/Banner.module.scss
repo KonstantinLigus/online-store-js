@@ -1,9 +1,9 @@
-@import '../../../../styles/responsive';
-@import '../../../../styles/mixins';
-@import '../../../../styles/variables';
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
 
 .banner {
-  background-color: $bg-color;
+  background-color: #efefef;
   padding-top: 33px;
   padding-bottom: 49px;
   .wrapper {
@@ -35,7 +35,7 @@
       align-items: center;
 
       .bannerTitle {
-        color: $text-color;
+        color: $color-gray-dark-1;
         font-size: 32px;
         font-weight: 400;
         @include md-min {
@@ -52,14 +52,14 @@
       .button {
         background-color: transparent;
         border-radius: 40px;
-        border: 2px solid $text-color;
-        color: $text-color;
+        border: 2px solid $color-gray-dark-1;
+        color: $color-gray-dark-1;
         font-weight: 600;
         padding: 8px 20px;
         margin-top: 24px;
 
         &:hover {
-          background-color: #00B207;
+          background-color: #00b207;
         }
       }
     }
