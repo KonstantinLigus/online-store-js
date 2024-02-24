@@ -8,6 +8,12 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   min-width: 260px;
   min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }

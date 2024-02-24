@@ -1,15 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import styles from "./ConsumerData.module.scss";
 import Details from "./Details/Details";
 import Phone from "./Phone/Phone";
 import Email from "./Email/Email";
 import FirstName from "./FirstName/FirstName";
-import SecondName from "./SecondName/SecondName";
 import Surname from "./Surname/Surname";
 import Birthday from "./Birthday/Birthday";
 import DeliveryType from "./Delivery/DeliveryType";
 import Password from "./Password/Password";
+import Modal from "../../Modal";
 import Loader from "../../Loader";
 
 const dataChanging = {
@@ -35,6 +35,8 @@ const ConsumerData = props => {
   const [dataWasChanged, setDataWasChanged] = useState(dataChanging);
   const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
+
+  const [isPending, startTransition] = useTransition();
 
   const checkChanges = () => {
     let wasChanged = false;
@@ -81,11 +83,6 @@ const ConsumerData = props => {
           setConsumerData={setConsumerData}
           setDataWasChanged={setDataWasChanged}
         />
-        <SecondName
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          setDataWasChanged={setDataWasChanged}
-        />
         <Birthday
           consumerData={consumerData}
           setConsumerData={setConsumerData}
@@ -126,15 +123,19 @@ const ConsumerData = props => {
         />
       </Details>
 
-      {isSaved && <p className={styles.messageStatus}>Данні бережено</p>}
-      {/* <Loader /> */}
+      <Modal isOpen={isSaved} setIsOpen={() => setIsSaved(false)}>
+        <p className={styles.messageStatus}>Данні збережено</p>
+      </Modal>
+      <Modal isOpen={isPending}>
+        <Loader />
+      </Modal>
       <div className={styles.buttonsWrapper}>
         <input
           disabled={saveChangesDisabled}
           type="button"
           value="Зберегти зміни"
           className={styles.formButton}
-          onClick={e => saveChanges(e)}
+          onClick={e => startTransition(() => saveChanges(e))}
         />
       </div>
     </form>
