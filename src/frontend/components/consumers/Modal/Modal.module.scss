@@ -1,0 +1,26 @@
+@import "@/styles/responsive";
+@import "@/styles/mixins";
+@import "@/styles/variables";
+
+.Modal__container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #8080801a;
+}
+.Modal__window {
+  padding: $m;
+  background: $color-bg-light-1;
+}
+.Modal__closeIcon {
+  display: block;
+  margin-left: auto;
+  margin-bottom: $m;
+  width: 16px;
+  height: 16px;
+}

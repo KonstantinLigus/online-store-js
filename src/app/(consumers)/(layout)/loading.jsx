@@ -1,1 +1,1 @@
-export { default } from "@/frontend/components/consumers/Loader";
+export { default } from "@/frontend/pages/consumers/LoadPage";

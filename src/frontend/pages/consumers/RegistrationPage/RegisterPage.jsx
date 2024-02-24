@@ -13,7 +13,6 @@ import styles from "./RegisterPage.module.scss";
 
 const userFields = [
   "firstName",
-  "secondName",
   "surname",
   "password",
   "passwordRepeat",
@@ -55,12 +54,6 @@ const RegistrationPage = () => {
           <Name name="firstName" setState={setUserState} />
           {state?.firstName && (
             <p className={styles.RegisterForm__errorMsg}>{state?.firstName}</p>
-          )}
-        </fieldset>
-        <fieldset className={styles.RegisterForm__fieldset}>
-          <Name name="secondName" setState={setUserState} />
-          {state?.secondName && (
-            <p className={styles.RegisterForm__errorMsg}>{state?.secondName}</p>
           )}
         </fieldset>
         <fieldset className={styles.RegisterForm__fieldset}>
