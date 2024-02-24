@@ -82,7 +82,7 @@
       }
 
       .counterValue {
-        color: $text-color;
+        color: $color-gray-dark-1;
         font-size: 1.25rem;
         margin: 0 0.75rem;
       }
@@ -93,7 +93,7 @@
       color: $color-red-1;
 
       span {
-        color: $text-color;
+        color: $color-gray-dark-1;
         font-size: 0.875rem;
         margin-right: 0.5rem;
         text-decoration: line-through;

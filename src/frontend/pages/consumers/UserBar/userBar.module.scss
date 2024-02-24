@@ -18,12 +18,12 @@
 .userIconEmpty {
   @extend .userIcon;
   color: transparent;
-  stroke: $icons-color;
+  stroke: $color-black;
 }
 
 .userIconFilled {
   @extend .userIcon;
-  color: $icons-color;
+  color: $color-black;
   stroke: none;
 }
 .userSignOutBtn {
