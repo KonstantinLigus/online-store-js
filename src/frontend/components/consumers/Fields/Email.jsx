@@ -9,7 +9,7 @@ const Email = ({ initValue, setState }) => {
   const [email, setEmail] = useState(initValue || "");
 
   const handleInputChange = e => {
-    let { value } = e.target;
+    const { value } = e.target;
 
     setEmail(value);
 
@@ -27,7 +27,7 @@ const Email = ({ initValue, setState }) => {
   };
 
   return (
-    <fieldset>
+    <div>
       <label
         htmlFor="email"
         className={`${styles.Field__label_marginBottom} ${styles.Field__label}`}
@@ -44,7 +44,7 @@ const Email = ({ initValue, setState }) => {
         onChange={handleInputChange}
       />
       <p className={styles.Field__errorMsg}>Невірний формат email</p>
-    </fieldset>
+    </div>
   );
 };
 

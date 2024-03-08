@@ -15,10 +15,12 @@
   margin-bottom: $s;
 }
 
-.Field__label:has(+ input:valid) {
+.Field__label:has(+ input:valid),
+.Field__label:has(+ .Field__pswdContainer input:valid) {
   @include validData;
 }
-.Field__label:has(+ input:invalid) {
+.Field__label:has(+ input:invalid),
+.Field__label:has(+ .Field__pswdContainer input:invalid) {
   @include invalidData;
 }
 .Field__errorMsg {

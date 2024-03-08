@@ -39,18 +39,18 @@ const LoginPage = () => {
     <div className={styles.LoginForm__container}>
       <h2 className={styles.LoginForm___title}>Вхід особистого кабінету</h2>
       <form action={formAction} className={styles.RegisterForm__form}>
-        <fieldset className={styles.LoginForm__fieldset}>
+        <div className={styles.LoginForm__inputWrapper}>
           <Email setState={setUserState} />
           {state?.email && (
             <p className={styles.LoginForm__errorMsg}>{state?.email}</p>
           )}
-        </fieldset>
-        <fieldset className={styles.LoginForm__fieldset}>
+        </div>
+        <div className={styles.LoginForm__inputWrapper}>
           <Password name="password" setState={setUserState} />
           {state?.password && (
             <p className={styles.LoginForm__errorMsg}>{state?.password}</p>
           )}
-        </fieldset>
+        </div>
         <SubmitButton disabled={isDisabled}>Увійти</SubmitButton>
       </form>
       <div className={styles.LoginForm__nav}>
