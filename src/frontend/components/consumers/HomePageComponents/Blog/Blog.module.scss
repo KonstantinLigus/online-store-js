@@ -1,0 +1,30 @@
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/responsive";
+
+.container {
+  @include wrapper;
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+    @include lg-min {
+      font-size: 2.2rem;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .articles {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    @include md-min {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
