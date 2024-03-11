@@ -32,7 +32,7 @@ const DeliveryInputOptions = ({ initValue, setState, type }) => {
         ...prev,
         [getOptionRef()]: e.target.getAttribute("data-ref"),
       }));
-    inputRef.current.value = e.target.innerHTML;
+    inputRef.current.value = e.target.textContent;
   };
 
   const getName = () =>
