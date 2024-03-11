@@ -133,3 +133,7 @@
   color: $color-green-dark-3;
   font-weight: $font-weight-medium;
 }
+
+@mixin shadow {
+  box-shadow: 0 0 1rem #aaa;
+}

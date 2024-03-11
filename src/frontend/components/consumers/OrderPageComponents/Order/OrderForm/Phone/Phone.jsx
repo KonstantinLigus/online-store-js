@@ -1,9 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../OrderForm.module.scss";
 
 const Phone = ({ consumer, changeData, phoneIsValid, setPhoneIsValid }) => {
   const [phoneNumber, setPhoneNumber] = useState(consumer.customerPhone);
+
+  useEffect(() => {
+    setPhoneNumber(consumer.customerPhone);
+  }, [consumer]);
 
   const handleClick = e => {
     if (e.target.value.length === 0) setPhoneNumber("+380");

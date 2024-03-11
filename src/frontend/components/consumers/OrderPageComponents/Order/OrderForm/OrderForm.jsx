@@ -1,15 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./OrderForm.module.scss";
 import Fieldset from "./Fieldset/Fieldset";
-import Phone from "./Phone/Phone";
-import Email from "./Email/Email";
+// import Phone from "./Phone/Phone";
+// import Email from "./Email/Email";
 import FirstName from "./FirstName/FirstName";
 import SecondName from "./SecondName/SecondName";
-import Surname from "./Surname/Surname";
+// import Surname from "./Surname/Surname";
 import DeliveryType from "./Delivery/DeliveryType";
 import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
+import { getUserAction } from "@/backend/entities/users/entry-points";
+import Phone from "../../../Fields/Phone";
+import Email from "../../../Fields/Email";
+import Name from "../../../Fields/Name";
+import DeliveryInputOptions from "../../../Fields/DeliveryInputOptions";
 
 const OrderForm = props => {
   const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
@@ -18,8 +23,8 @@ const OrderForm = props => {
 
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
   const [surnameIsValid, setSurnameIsValid] = useState(true);
-  const [phoneIsValid, setPhoneIsValid] = useState(true);
-  const [emailIsValid, setEmailIsValid] = useState(true);
+  // const [phoneIsValid, setPhoneIsValid] = useState(true);
+  // const [emailIsValid, setEmailIsValid] = useState(true);
 
   const [regionIsValid, setRegionIsValid] = useState(false);
   const [regionError, setRegionError] = useState(false);
@@ -32,6 +37,14 @@ const OrderForm = props => {
 
   const [streetIsValid, setStreetIsValid] = useState(true);
   const [houseIsValid, setHouseIsValid] = useState(true);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const userData = await getUserAction();
+      if (userData) setConsumer(userData);
+    };
+    getUserData();
+  }, []);
 
   const validateData = async e => {
     e.preventDefault();
@@ -117,34 +130,21 @@ const OrderForm = props => {
   return (
     <form action="GET" className={styles.form}>
       <Fieldset number={1} title={"Особисті дані"}>
-        <Phone
-          consumer={consumer}
-          changeData={setConsumer}
-          phoneIsValid={phoneIsValid}
-          setPhoneIsValid={setPhoneIsValid}
+        <Phone initValue={consumer.customerPhone} setState={setConsumer} />
+        <Email initValue={consumer.email} setState={setConsumer} />
+        <Name
+          name="surname"
+          initValue={consumer.surname}
+          setState={setConsumer}
         />
-        <Email
-          consumer={consumer}
-          changeData={setConsumer}
-          emailIsValid={emailIsValid}
-          setEmailIsValid={setEmailIsValid}
+        <Name
+          name="firstName"
+          initValue={consumer.firstName}
+          setState={setConsumer}
         />
-        <Surname
-          consumer={consumer}
-          changeData={setConsumer}
-          surnameIsValid={surnameIsValid}
-          setSurnameIsValid={setSurnameIsValid}
-        />
-        <FirstName
-          consumer={consumer}
-          changeData={setConsumer}
-          firstNameIsValid={firstNameIsValid}
-          setFirstNameIsValid={setFirstNameIsValid}
-        />
-        <SecondName consumer={consumer} changeData={setConsumer} />
       </Fieldset>
       <Fieldset number={2} title={"Доставка"}>
-        <DeliveryType
+        {/* <DeliveryType
           consumer={consumer}
           changeData={setConsumer}
           regionIsValid={regionIsValid}
@@ -163,7 +163,8 @@ const OrderForm = props => {
           setStreetIsValid={setStreetIsValid}
           houseIsValid={houseIsValid}
           setHouseIsValid={setHouseIsValid}
-        />
+        /> */}
+        <DeliveryInputOptions type="region" />
       </Fieldset>
       <Fieldset number={3} title={"Оплата"}>
         <Payment consumer={consumer} changeData={setConsumer} />

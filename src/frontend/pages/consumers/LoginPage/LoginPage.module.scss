@@ -16,6 +16,7 @@
 }
 .LoginForm__errorMsg {
   @include invalidData;
+  margin-top: $s;
 }
 .LoginForm__nav {
   margin-bottom: $m;

@@ -5,10 +5,6 @@ const user = new mongoose.Schema({
     type: String,
     default: "",
   },
-  secondName: {
-    type: String,
-    default: "",
-  },
   surname: {
     type: String,
     default: "",

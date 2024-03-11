@@ -41,12 +41,12 @@ const Password = ({ initValue, setState, name }) => {
       >
         {getName()}:
       </label>
-      <div className={styles.Field__pswdContainer}>
+      <div className={styles.Field__inputWrapper}>
         <input
           type={pswdTypeToggle ? "text" : "password"}
           id={name}
           name={name}
-          className={styles.Field__pswdInput}
+          className={styles.Field__input}
           value={password}
           onChange={handleInputChange}
           minLength={7}

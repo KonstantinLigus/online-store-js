@@ -16,4 +16,5 @@
 }
 .RegisterForm__errorMsg {
   @include invalidData;
+  margin-top: $s;
 }
