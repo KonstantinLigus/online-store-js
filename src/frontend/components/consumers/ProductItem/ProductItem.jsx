@@ -8,13 +8,13 @@ const ProductItem = ({ id, title, prices, mainImage, children }) => {
   return (
     <li className={styles.item}>
       <div className={styles.imgContainer}>
-        <Link href={`${id}`}>
+        <Link href={`/${id}`}>
           <Image
             className={styles.cardImage}
             src={mainImage}
             alt={title}
-            width={140}
-            height={140}
+            width={300}
+            height={300}
             priority
           />
         </Link>
@@ -23,7 +23,7 @@ const ProductItem = ({ id, title, prices, mainImage, children }) => {
         </div>
       </div>
       <div className={styles.information}>
-        <Link href={`${id}`}>
+        <Link href={`/${id}`}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
         <div className={styles.priceContainer}>

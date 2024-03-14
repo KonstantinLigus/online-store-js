@@ -7,6 +7,7 @@ import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 import LikeIcon from "@/frontend/components/consumers/LikeIcon/LikeIcon";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
 
 const ProductPage = ({ params }) => {
   const [data, setData] = useState(null);
@@ -36,12 +37,17 @@ const ProductPage = ({ params }) => {
           <h2 className={styles.productName}>{data.title}</h2>
 
           <div className={styles.imageContainer}>
-            <Image
-              className={styles.imageProduct}
-              src={data.mainImage}
-              fill
-              alt="product image"
-            />
+            {data.images.length > 1 ? (
+              <Slider images={data.images} />
+            ) : (
+              <Image
+                className={styles.imageProduct}
+                src={data.mainImage}
+                fill
+                alt="product image"
+              />
+            )}
+
             <div className={styles.heartIconContainer}>
               <LikeIcon productId={data._id} />
             </div>
