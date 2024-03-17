@@ -18,10 +18,10 @@ export const orderDeliveryInfoToPostOfficeSchema = productsZodSchema.extend({
       message:
         "Surname must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
     }),
-    region: z.string(),
-    city: z.string(),
     deliveryType: z.enum(["Нова Пошта - Відділення"]),
-    postOffice: z.string(),
+    region: z.string(),
+    city: z.object({ areaRef: z.string(), name: z.string() }),
+    postOffice: z.object({ cityRef: z.string(), name: z.string() }),
     customerPhone: z
       .string()
       .length(13, { message: "Must be exactly 13 characters long" })
