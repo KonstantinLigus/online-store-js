@@ -15,6 +15,7 @@ import Phone from "../../../Fields/Phone";
 import Email from "../../../Fields/Email";
 import Name from "../../../Fields/Name";
 import DeliveryInputOptions from "../../../Fields/DeliveryInputOptions";
+import DelivetyFields from "../../../DelivetyFieldsSet/DelivetyFields";
 
 const OrderForm = props => {
   const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
@@ -164,7 +165,7 @@ const OrderForm = props => {
           houseIsValid={houseIsValid}
           setHouseIsValid={setHouseIsValid}
         /> */}
-        <DeliveryInputOptions type="region" />
+        <DelivetyFields consumer={consumer} setConsumer={setConsumer} />
       </Fieldset>
       <Fieldset number={3} title={"Оплата"}>
         <Payment consumer={consumer} changeData={setConsumer} />

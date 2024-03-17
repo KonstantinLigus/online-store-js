@@ -1,38 +1,101 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./Field.module.scss";
 import { debounce } from "@/frontend/helpers";
 
-const DeliveryInputOptions = ({ initValue, setState, type }) => {
-  const [defaultValue, setDefaultValue] = useState(initValue);
+const DeliveryInputOptions = ({
+  initValue,
+  setState,
+  type,
+  dataRef,
+  setRef,
+}) => {
+  const [value, setValue] = useState(initValue);
   const [optionsList, setOptionsList] = useState([]);
-  const inputRef = useRef(null);
+
+  const debouncedRegionsFetch = useMemo(
+    () =>
+      debounce(async value => {
+        const res = await fetch("api/novaPoshta/getAreas");
+        const { data } = await res.json();
+
+        const filteredData = data.filter(option =>
+          option.description.toLowerCase().includes(value.toLowerCase()),
+        );
+        setOptionsList(filteredData);
+
+        value.length === 0 && setOptionsList([]);
+      }, 1000),
+    [],
+  );
+
+  const debouncedCityFetch = useMemo(
+    () =>
+      debounce(async value => {
+        const res = await fetch(
+          `api/novaPoshta/getCities?areaRef=${dataRef}&cityName=${value}`,
+        );
+        const { data } = await res.json();
+
+        data && setOptionsList(data);
+
+        value.length === 0 && setOptionsList([]);
+      }, 1000),
+    [dataRef],
+  );
+
+  const debouncedPostOfficesFetch = useMemo(
+    () =>
+      debounce(async value => {
+        const res = await fetch(
+          `api/novaPoshta/getPostOffices?cityRef=${dataRef}`,
+        );
+        const { data } = await res.json();
+
+        data && setOptionsList(data);
+
+        value.length === 0 && setOptionsList([]);
+      }, 1000),
+    [dataRef],
+  );
 
   useEffect(() => {
-    setDefaultValue(initValue);
+    setValue(initValue);
   }, [initValue]);
 
   const handleInputChange = async e => {
     const { value } = e.target;
 
-    const res = await fetch("api/novaPoshta/getAreas");
-    const { data } = await res.json();
+    setValue(value);
 
-    const filteredData = data.filter(option =>
-      option.description.toLowerCase().includes(value.toLowerCase()),
-    );
-    setOptionsList(filteredData);
-    value.length === 0 && setOptionsList([]);
+    if (initValue) {
+      setState(prev => ({ ...prev, region: "", city: "", postOffice: "" }));
+      setRef && setRef({});
+    }
+
+    if (type === "region") debouncedRegionsFetch(value);
+    if (type === "city") debouncedCityFetch(value);
+    if (type === "postOffice") debouncedPostOfficesFetch(value);
   };
 
   const handleOptionClick = e => {
+    const { textContent } = e.target;
+
     setOptionsList([]);
+
     setState &&
       setState(prev => ({
         ...prev,
-        [getOptionRef()]: e.target.getAttribute("data-ref"),
+        [type]: textContent,
       }));
-    inputRef.current.value = e.target.textContent;
+
+    setValue(textContent);
+
+    setRef &&
+      setRef(prev => ({
+        ...prev,
+        [type]: e.target.dataset.refs,
+      }));
   };
 
   const getName = () =>
@@ -41,7 +104,9 @@ const DeliveryInputOptions = ({ initValue, setState, type }) => {
     (type === "postOffice" && "Відділення");
 
   const getOptionRef = () =>
-    (type === "region" && "areaRef") || (type === "city" && "cityRef");
+    (type === "region" && "areaRef") ||
+    (type === "city" && "cityRef") ||
+    (type === "postOffice" && "number");
 
   return (
     <>
@@ -56,22 +121,21 @@ const DeliveryInputOptions = ({ initValue, setState, type }) => {
           name={type}
           id={type}
           type="text"
-          pattern={"^[А-ЯЄІЇа-яєії']+$"}
+          pattern={"^[^A-Za-z]+$"}
           autoComplete="off"
-          defaultValue={defaultValue || ""}
+          value={value || ""}
+          onChange={handleInputChange}
           className={styles.Field__input}
-          onChange={debounce(handleInputChange, 1000)}
-          ref={inputRef}
         />
         <p className={styles.Field__errorMsg}>
-          Оберіть область з випадаючого списку
+          Оберіть {getName()} з випадаючого списку
         </p>
-        {setOptionsList.length > 0 && (
+        {optionsList?.length > 0 && (
           <ul className={styles.Field__optionList}>
             {optionsList.map(option => (
               <li
                 key={option[getOptionRef()]}
-                data-ref={option[getOptionRef()]}
+                data-refs={option[getOptionRef()]}
                 onClick={handleOptionClick}
               >
                 {option.description}
