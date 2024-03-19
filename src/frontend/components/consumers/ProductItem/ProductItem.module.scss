@@ -1,18 +1,33 @@
 @import "../../../../../src/styles/variables";
+@import "../../../../../src/styles/mixins";
+@import "../../../../../src/styles/responsive";
 
 .item {
   border-radius: 10px;
   height: fit-content;
 
   .imgContainer {
-    height: 100%;
-    position: relative;
+    height: 200px;
+    overflow: hidden;
     width: 100%;
 
-    .cardImage {
+    a {
       display: block;
-      margin: auto;
-      position: relative;
+      width: 100%;
+
+      .cardImage {
+        display: block;
+        max-height: 200px;
+        margin: auto;
+        object-fit: contain;
+        object-position: center;
+        position: relative;
+        transition: all 0.4s;
+        width: 100%;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
     }
 
     .likeWrapper {
@@ -23,40 +38,68 @@
   }
 
   .information {
+    a {
+      text-decoration: none;
+    }
+
     .title {
       text-align: left;
       color: $color-gray-dark-1;
-      font-size: 12px;
+      font-size: 1rem;
       font-weight: 400;
+      margin-block: 0.75rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s;
+      white-space: nowrap;
+      @include lg-min {
+        font-size: 1.125rem;
+      }
+      &:hover {
+        color: $color-green-dark-2;
+      }
     }
 
     .priceContainer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 4px;
+      margin-bottom: 1rem;
 
       .actionPrice {
-        color: red;
-        font-size: 12px;
+        color: $color-red-1;
+        font-size: 1rem;
         font-weight: 400;
+        @include lg-min {
+          font-size: 1.125rem;
+        }
 
         span {
           color: $color-gray-dark-1;
+          font-size: 0.875rem;
           margin-right: 0.5rem;
           text-decoration: line-through;
+          @include lg-min {
+            font-size: 1rem;
+          }
         }
       }
 
       .price {
         color: $color-gray-dark-1;
-        font-size: 12px;
+        font-size: 1rem;
         font-weight: 400;
+        @include lg-min {
+          font-size: 1.125rem;
+        }
       }
 
       .unit {
-        color: #afafaf;
-        font-size: 12px;
+        color: $color-gray-light-1;
+        font-size: 1rem;
+        @include lg-min {
+          font-size: 1.125rem;
+        }
       }
     }
   }

@@ -1,0 +1,56 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.container {
+  height: 100%;
+  position: relative;
+  width: 100%;
+
+  .image {
+    object-fit: contain;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .slideNumber {
+    font-size: 1rem;
+    left: 1rem;
+    position: absolute;
+    top: 1rem;
+  }
+
+  .btn {
+    align-items: center;
+    background-color: #78cd7dbb;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    height: 4rem;
+    opacity: 0.4;
+    position: absolute;
+    transform: translateY(-50%);
+    transition: all 0.2s;
+    top: 50%;
+    width: 4rem;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .btnPrev {
+    left: 0;
+    img {
+      transform: translateX(-3px);
+    }
+  }
+
+  .btnNext {
+    right: 0;
+    img {
+      transform: translateX(3px);
+    }
+  }
+}

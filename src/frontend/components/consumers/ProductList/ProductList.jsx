@@ -42,7 +42,7 @@ const ProductList = ({ title, className }) => {
             className={styles.mySwiper}
             breakpoints={{
               // when window width is >= 576px
-              576: {
+              440: {
                 slidesPerView: 2,
               },
               // when window width is >= 768px

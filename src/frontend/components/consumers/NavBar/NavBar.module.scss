@@ -90,6 +90,7 @@
         &:hover {
           background-color: $color-green-3;
           @media screen and (min-width: $burger-menu-screen-width) {
+            color: $color-green-dark-2;
             background-color: transparent;
           }
         }
