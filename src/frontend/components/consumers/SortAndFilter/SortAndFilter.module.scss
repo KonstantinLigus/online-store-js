@@ -1,0 +1,98 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.container {
+  @include wrapper;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+  .buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .button {
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      justify-content: center;
+      outline: none;
+
+      .buttonText {
+        color: $color-gray-dark-1;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .dialogs {
+    height: 0;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    .filter {
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .sort {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.dialogContainer {
+  background-color: $color-bg-light-1;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 1rem #5558;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  .dialogTitle {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    .dialogTitleName {
+      color: $color-gray-dark-1;
+      font-size: 1rem;
+    }
+
+    .dialogTitleIcon {
+      cursor: pointer;
+    }
+  }
+
+  .sortItems {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .sortItem {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: space-between;
+      list-style: none;
+
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+}

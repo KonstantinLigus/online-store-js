@@ -7,21 +7,24 @@
   height: fit-content;
 
   .imgContainer {
-    height: 200px;
+    aspect-ratio: 1/1;
+    //height: 200px;
     overflow: hidden;
+    position: relative;
     width: 100%;
 
     a {
       display: block;
+      height: 100%;
       width: 100%;
 
       .cardImage {
         display: block;
-        max-height: 200px;
+        //max-height: 300px;
+        height: 100%;
         margin: auto;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
-        position: relative;
         transition: all 0.4s;
         width: 100%;
         &:hover {

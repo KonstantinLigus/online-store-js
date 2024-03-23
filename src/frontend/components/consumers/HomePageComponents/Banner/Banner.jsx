@@ -1,26 +1,48 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import styles from "./Banner.module.scss";
 
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+
 const Banner = () => {
   return (
-    <section className={styles.banner}>
-      <div className={styles.wrapper}>
-        <Image
-          src="assets/banner.svg"
-          width={300}
-          height={200}
-          alt="banner"
-          priority
-          className={styles.image}
-        />
-        <div className={styles.information}>
-          <h1 className={styles.bannerTitle}>
-            Звільнімо Смак з Натуральними Продуктами!
-          </h1>
-          <button className={styles.button}>Замовити</button>
-        </div>
-      </div>
+    <section>
+      <Swiper
+        pagination={{
+          type: "fraction",
+        }}
+        slidesPerView={1}
+        spaceBetween={20}
+        navigation={true}
+        modules={[Pagination]}
+        loop={true}
+        className={styles.mySwiper}
+      >
+        <SwiperSlide>
+          <div className={`${styles.slide} ${styles.slide1}`}>
+            <h1 className={styles.slideTitle}>
+              Звільнимо Смак з Натуральними Продуктами!
+            </h1>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className={`${styles.slide} ${styles.slide2}`}>
+            <h1 className={styles.slideTitle}>
+              Звільнимо Смак з Натуральними Продуктами!
+            </h1>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className={`${styles.slide} ${styles.slide3}`}>
+            <h1 className={styles.slideTitle}>
+              Звільнимо Смак з Натуральними Продуктами!
+            </h1>
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </section>
   );
 };
