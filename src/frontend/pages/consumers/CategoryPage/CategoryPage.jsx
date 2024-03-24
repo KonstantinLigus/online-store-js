@@ -5,6 +5,7 @@ import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import SortAndFilter from "@/frontend/components/consumers/SortAndFilter/SortAndFilter";
 
 const allCategories = {
   vegetables: "овочі",
@@ -36,6 +37,7 @@ const CategoryPage = ({ params }) => {
   return (
     <div className={styles.category}>
       <ToPreviousPage title={currentCategory} />
+      <SortAndFilter data={data} setData={setData} />
       <h2 className={styles.title}>{currentCategory}</h2>
 
       <ul className={styles.products}>

@@ -1,0 +1,55 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.container {
+  background-color: $color-bg-light-1;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 1rem #5558;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  .title {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    .titleName {
+      color: $color-gray-dark-1;
+      font-size: 1rem;
+    }
+
+    .titleIcon {
+      cursor: pointer;
+    }
+  }
+
+  .details {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+    .summary {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+
+      > span {
+        font-size: 1rem;
+      }
+
+      .angleIcon {
+        transition: 0.5s;
+      }
+    }
+
+    &[open] .angleIcon {
+      transform: rotate(180deg);
+      transition: 0.5s;
+    }
+  }
+}

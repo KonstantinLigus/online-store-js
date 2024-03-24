@@ -1,7 +1,7 @@
-import Banner from "@/frontend/components/consumers/Banner/Banner";
-import About from "@/frontend/components/consumers/About/About";
+import Banner from "@/frontend/components/consumers/HomePageComponents/Banner/Banner";
+import About from "@/frontend/components/consumers/HomePageComponents/About/About";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
-import Blog from "@/frontend/components/consumers/Blog/Blog";
+import Blog from "@/frontend/components/consumers/HomePageComponents/Blog/Blog";
 import styles from "@/frontend/pages/consumers/HomePage/HomePage.module.scss";
 import { PaymentExample } from "@/frontend/components/consumers/PaymentExample/PaymentExample";
 

@@ -29,13 +29,28 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.section1}>
-            <Link href="/">
-              <h2>Logo</h2>
+            <Link href="/" className={styles.logo}>
+              <Image
+                src="/assets/logo.svg"
+                width={160}
+                height={65}
+                alt="user icon"
+                priority
+              />
             </Link>
-            <p>Головна</p>
-            <p>Про нас</p>
-            <p>Акційні товари</p>
-            <p>Наш блог</p>
+
+            <nav>
+              <ul className={styles.list}>
+                <li className={styles.listItem}>
+                  <Link href="/">Головна</Link>
+                </li>
+                <li className={styles.listItem}>Про нас</li>
+                <li className={styles.listItem}>Акційні товари</li>
+                <li className={styles.listItem}>
+                  <Link href="/blog">Наш блог</Link>
+                </li>
+              </ul>
+            </nav>
           </div>
 
           <div className={styles.section2}>
