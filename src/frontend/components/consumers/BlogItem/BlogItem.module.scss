@@ -3,87 +3,74 @@
 @import "../../../../styles/variables";
 
 .wrapper {
-  background-color: #eee;
+  background-color: #888;
   border-radius: 1rem;
-  padding: 1rem;
+  overflow: hidden;
+  position: relative;
 
-  .article {
-    .title {
-      color: $color-gray-dark-1;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      text-align: center;
+  .imageWrapper {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
 
-      a {
-        color: inherit;
-        text-decoration: none;
-        transition: all 0.2s;
-        width: 100%;
-        &:hover {
-          color: $color-green-dark-2;
-        }
-      }
+    .image {
+      display: block;
+      mix-blend-mode: multiply;
+      object-fit: cover;
     }
+  }
+  .articleWrapper {
+    height: 100%;
+    padding: 2rem;
 
-    .content {
-      container: content / inline-size;
-      height: 360px;
-      overflow: hidden;
+    .article {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      height: 100%;
+      justify-content: space-between;
       position: relative;
-      width: 100%;
 
-      &::before {
-        background-image: linear-gradient(transparent, #eee 90%);
-        bottom: 0;
-        content: "";
-        height: 40px;
-        left: 0;
-        position: absolute;
-        width: 100%;
-      }
+      .title {
+        color: $color-white;
+        font-size: 1.5rem;
+        text-align: center;
 
-      .imageWrapper {
-        height: 200px;
-        margin-bottom: 1rem;
-        overflow: hidden;
-        position: relative;
-
-        .image {
-          display: block;
-          object-fit: cover;
-          position: relative !important;
-          transition: all 0.4s;
+        a {
+          color: inherit;
+          text-decoration: none;
+          transition: all 0.2s;
+          width: 100%;
           &:hover {
-            transform: scale(1.1);
+            color: $color-green-1;
           }
         }
       }
 
-      .articleText {
-        line-height: 1.5;
+      .content {
+        color: $color-white;
+
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+
+        .articleText {
+          line-height: 1.5;
+        }
+      }
+
+      .articleLink {
+        color: $color-white;
+        display: block;
+        font-size: 1.125rem;
+        text-align: right;
+        text-decoration: none;
+        transition: all 0.2s;
+        &:hover {
+          color: $color-green-1;
+        }
       }
     }
-  }
-
-  .articleLink {
-    color: $color-gray-dark-1;
-    display: block;
-    font-size: 1.125rem;
-    margin-top: 0.25rem;
-    text-align: right;
-    text-decoration: none;
-    transition: all 0.2s;
-    &:hover {
-      color: $color-green-dark-2;
-    }
-  }
-}
-
-@container content (min-width: 450px) {
-  .imageWrapper {
-    float: left;
-    height: 360px !important;
-    margin-right: 1rem;
-    width: 250px;
   }
 }

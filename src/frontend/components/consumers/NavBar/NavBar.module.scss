@@ -7,9 +7,8 @@
   z-index: 50;
 
   .headerContainer {
-    background-color: #eee;
-    border-bottom: 1px solid $color-gray-light-1;
-    padding: 1em 0;
+    background-color: rgba($color-green-1, 0.5);
+    padding: 0.5rem 0;
 
     .headerItems {
       align-items: center;
@@ -42,7 +41,7 @@
 
   .navigation {
     background-color: $color-bg-light-1;
-    border-bottom: 1px solid $color-gray-light-1;
+    border-bottom: 1px solid $color-green-dark-2;
     padding: 1em 0;
     position: absolute;
     width: 100%;

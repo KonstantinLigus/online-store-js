@@ -30,7 +30,13 @@ export default function Footer() {
         <div className={styles.wrapper}>
           <div className={styles.section1}>
             <Link href="/" className={styles.logo}>
-              <span>Logo</span>
+              <Image
+                src="/assets/logo.svg"
+                width={160}
+                height={65}
+                alt="user icon"
+                priority
+              />
             </Link>
 
             <nav>

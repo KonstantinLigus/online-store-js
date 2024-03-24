@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./About.module.scss";
+import Button from "../../Button/Button";
 
 const About = () => {
   const items = [
@@ -27,8 +28,8 @@ const About = () => {
   ];
   return (
     <section className={styles.about}>
-      <h2>Про нас</h2>
-      <p>
+      <h2 className={styles.title}>Про нас</h2>
+      <p className={styles.info}>
         Насолоджуйтеся найсвіжішими та найсмачнішими продуктами від маленьких
         фермерських господарств з нашого сайту. Ми пропонуємо вам:
       </p>
@@ -46,6 +47,7 @@ const About = () => {
           </div>
         ))}
       </div>
+      <Button title={"Дізнатись більше"} className={styles.readMoreBtn} />
     </section>
   );
 };

@@ -69,7 +69,13 @@ export default function NavBar(props) {
           </div>
 
           <Link href="/" prefetch={false} className={styles.logo}>
-            <span>Logo</span>
+            <Image
+              src="/assets/logo.svg"
+              width={120}
+              height={48}
+              alt="user icon"
+              priority
+            />
           </Link>
           <UserBar token={props.token} />
         </div>

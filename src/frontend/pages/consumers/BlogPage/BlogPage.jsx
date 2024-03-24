@@ -14,8 +14,7 @@ const BlogPage = () => {
       інфекцією. Людям, навпаки, належить ще багато дізнатися про поживні \
       властивості меду. Лише кілька десятиліть тому мед не відносили до надзвичайно \
       корисних продуктів за межами базового харчування, каже ентомолог Мей Беренбаум \
-      з Університету Іллінойсу в Урбана-Шампейн. "Навіть пасічники та дослідники \
-      бджіл вважали його нічим іншим як цукровою водою".`,
+      з Університету Іллінойсу в Урбана-Шампейн.`,
       imageAlt: "honey",
       image: "/assets/blog-page/delicious-honey.jpg",
       linkTo: "/blog/honey",
@@ -30,8 +29,7 @@ const BlogPage = () => {
       tempus tincidunt lectus. Nam pharetra, odio quis sodales porta, diam orci \
       aliquet neque, ut placerat dui mauris ut tellus. Nulla porttitor dui at \
       arcu vestibulum aliquam. Nulla eget ipsum vel orci interdum porta at sed \
-      lorem. Morbi efficitur tempus mi in fringilla. Proin tristique ante id erat \
-      rhoncus, eget hendrerit turpis ultrices.",
+      lorem. Morbi efficitur tempus mi in fringilla.",
       imageAlt: "honey",
       image: "/assets/blog-page/variety-of-dairy-products.jpg",
       linkTo: "/blog/honey",
@@ -46,8 +44,7 @@ const BlogPage = () => {
       tempus tincidunt lectus. Nam pharetra, odio quis sodales porta, diam orci \
       aliquet neque, ut placerat dui mauris ut tellus. Nulla porttitor dui at \
       arcu vestibulum aliquam. Nulla eget ipsum vel orci interdum porta at sed \
-      lorem. Morbi efficitur tempus mi in fringilla. Proin tristique ante id erat \
-      rhoncus, eget hendrerit turpis ultrices.",
+      lorem. Morbi efficitur tempus mi in fringilla.",
       imageAlt: "honey",
       image: "/assets/blog-page/green-fruits.jpg",
       linkTo: "/blog/honey",
@@ -62,8 +59,7 @@ const BlogPage = () => {
       tempus tincidunt lectus. Nam pharetra, odio quis sodales porta, diam orci \
       aliquet neque, ut placerat dui mauris ut tellus. Nulla porttitor dui at \
       arcu vestibulum aliquam. Nulla eget ipsum vel orci interdum porta at sed \
-      lorem. Morbi efficitur tempus mi in fringilla. Proin tristique ante id erat \
-      rhoncus, eget hendrerit turpis ultrices.",
+      lorem. Morbi efficitur tempus mi in fringilla.",
       imageAlt: "honey",
       image: "/assets/blog-page/set-of-nuts.jpg",
       linkTo: "/blog/honey",
@@ -78,8 +74,7 @@ const BlogPage = () => {
       tempus tincidunt lectus. Nam pharetra, odio quis sodales porta, diam orci \
       aliquet neque, ut placerat dui mauris ut tellus. Nulla porttitor dui at \
       arcu vestibulum aliquam. Nulla eget ipsum vel orci interdum porta at sed \
-      lorem. Morbi efficitur tempus mi in fringilla. Proin tristique ante id erat \
-      rhoncus, eget hendrerit turpis ultrices.",
+      lorem. Morbi efficitur tempus mi in fringilla.",
       imageAlt: "honey",
       image: "/assets/blog-page/delicious-pieces-of-cheese.jpg",
       linkTo: "/blog/honey",
@@ -94,8 +89,7 @@ const BlogPage = () => {
       tempus tincidunt lectus. Nam pharetra, odio quis sodales porta, diam orci \
       aliquet neque, ut placerat dui mauris ut tellus. Nulla porttitor dui at \
       arcu vestibulum aliquam. Nulla eget ipsum vel orci interdum porta at sed \
-      lorem. Morbi efficitur tempus mi in fringilla. Proin tristique ante id erat \
-      rhoncus, eget hendrerit turpis ultrices.",
+      lorem. Morbi efficitur tempus mi in fringilla.",
       imageAlt: "honey",
       image: "/assets/blog-page/vegetables-on-wooden-table.jpg",
       linkTo: "/blog/honey",

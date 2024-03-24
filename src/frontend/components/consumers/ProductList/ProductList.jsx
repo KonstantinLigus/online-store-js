@@ -35,7 +35,7 @@ const ProductList = ({ title, className }) => {
               type: "fraction",
             }}
             slidesPerView={1}
-            spaceBetween={40}
+            spaceBetween={16}
             navigation={true}
             modules={[Pagination]}
             loop={true}
