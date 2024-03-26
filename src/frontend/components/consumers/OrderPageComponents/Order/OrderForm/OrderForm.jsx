@@ -15,17 +15,17 @@ import Phone from "../../../Fields/Phone";
 import Email from "../../../Fields/Email";
 import Name from "../../../Fields/Name";
 import DeliveryInputOptions from "../../../Fields/DeliveryInputOptions";
-import DelivetyFields from "../../../DelivetyFieldsSet/DelivetyFields";
+import DeliveryFields from "../../../DelivetyFieldsSet/DeliveryFields";
 
 const OrderForm = props => {
   const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
     props;
   const [consumer, setConsumer] = useState(props.consumer);
-
+  console.log(consumer);
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
   const [surnameIsValid, setSurnameIsValid] = useState(true);
-  // const [phoneIsValid, setPhoneIsValid] = useState(true);
-  // const [emailIsValid, setEmailIsValid] = useState(true);
+  const [phoneIsValid, setPhoneIsValid] = useState(true);
+  const [emailIsValid, setEmailIsValid] = useState(true);
 
   const [regionIsValid, setRegionIsValid] = useState(false);
   const [regionError, setRegionError] = useState(false);
@@ -165,7 +165,7 @@ const OrderForm = props => {
           houseIsValid={houseIsValid}
           setHouseIsValid={setHouseIsValid}
         /> */}
-        <DelivetyFields consumer={consumer} setConsumer={setConsumer} />
+        <DeliveryFields consumer={consumer} setConsumer={setConsumer} />
       </Fieldset>
       <Fieldset number={3} title={"Оплата"}>
         <Payment consumer={consumer} changeData={setConsumer} />

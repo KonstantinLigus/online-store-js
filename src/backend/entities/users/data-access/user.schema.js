@@ -18,17 +18,20 @@ const user = new mongoose.Schema({
     unique: true,
   },
   image: { type: String, default: "" },
-  region: { type: String, default: "" },
-  city: {
-    areaRef: { type: String, default: "" },
+  region: {
     name: { type: String, default: "" },
+    ref: { type: String, default: "" },
+  },
+  city: {
+    name: { type: String, default: "" },
+    ref: { type: String, default: "" },
   },
   street: { type: String, default: "" },
   flat: { type: String, default: "" },
   deliveryType: { type: String, default: "" },
   postOffice: {
-    cityRef: { type: String, default: "" },
     name: { type: String, default: "" },
+    ref: { type: String, default: "" },
   },
   customerPhone: { type: String, default: "" },
   birthday: { type: String, default: "" },

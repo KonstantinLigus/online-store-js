@@ -11,19 +11,21 @@ export const orderSchema = new mongoose.Schema({
   ],
   deliveryInfo: {
     firstName: { type: String, required: true },
-    secondName: { type: String, required: true },
     surname: { type: String, required: true },
-    region: { type: String, required: true },
-    city: {
-      areaRef: { type: String, default: "" },
+    region: {
       name: { type: String, default: "" },
+      ref: { type: String, default: "" },
+    },
+    city: {
+      name: { type: String, default: "" },
+      ref: { type: String, default: "" },
     },
     street: { type: String, default: "" },
     house: { type: String, default: "" },
     flat: { type: String, default: "" },
     postOffice: {
-      cityRef: { type: String, default: "" },
       name: { type: String, default: "" },
+      ref: { type: String, default: "" },
     },
     deliveryType: { type: String, required: true },
     customerPhone: { type: String, required: true },
