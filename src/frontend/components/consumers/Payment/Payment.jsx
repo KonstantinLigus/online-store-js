@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 
 export const Payment = ({ dataAndSignatureObj, setPaymentData }) => {
   const [isScript, setIsScript] = useState(false);
-  useEffect(() => setIsScript(true), [dataAndSignatureObj]);
+
+  useEffect(() => setIsScript(true), []);
 
   const successPaymentHandler = async ({ order_id, end_date }) => {
     await fetch(`/api/order/update?id=${order_id}`, {

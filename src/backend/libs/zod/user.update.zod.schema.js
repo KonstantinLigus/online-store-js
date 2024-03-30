@@ -33,6 +33,7 @@ export const updateUserSchema = z
     house: z.string(),
     flat: z.string(),
     postOffice: z.object({ cityRef: z.string(), name: z.string() }),
+    paymentMethod: z.enum(["card", "cash"]),
     password: z.string(),
   })
   .partial();

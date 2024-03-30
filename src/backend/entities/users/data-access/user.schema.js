@@ -34,6 +34,7 @@ const user = new mongoose.Schema({
     ref: { type: String, default: "" },
   },
   customerPhone: { type: String, default: "" },
+  paymentMethod: { type: String, default: "card" },
   birthday: { type: String, default: "" },
   verificationToken: {
     type: String,

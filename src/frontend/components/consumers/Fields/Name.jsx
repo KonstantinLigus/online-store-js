@@ -9,7 +9,7 @@ const Name = ({ initValue, setState, name }) => {
   const [nameState, setNameState] = useState(initValue || "");
 
   useEffect(() => {
-    setNameState(initValue);
+    setNameState(initValue || "");
   }, [initValue]);
 
   const handleInputChange = e => {

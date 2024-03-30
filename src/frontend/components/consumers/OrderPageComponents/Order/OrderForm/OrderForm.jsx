@@ -14,14 +14,13 @@ import { getUserAction } from "@/backend/entities/users/entry-points";
 import Phone from "../../../Fields/Phone";
 import Email from "../../../Fields/Email";
 import Name from "../../../Fields/Name";
-import DeliveryInputOptions from "../../../Fields/DeliveryInputOptions";
 import DeliveryFields from "../../../DelivetyFieldsSet/DeliveryFields";
+import PaymentChecker from "../../../Fields/PaymentChecker";
 
 const OrderForm = props => {
   const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
     props;
   const [consumer, setConsumer] = useState(props.consumer);
-  console.log(consumer);
   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
   const [surnameIsValid, setSurnameIsValid] = useState(true);
   const [phoneIsValid, setPhoneIsValid] = useState(true);
@@ -49,56 +48,57 @@ const OrderForm = props => {
 
   const validateData = async e => {
     e.preventDefault();
-    let checked = true;
+    // let checked = true;
 
-    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
-      checked = false;
-      setFirstNameIsValid(false);
-    }
-    if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.surname)) {
-      checked = false;
-      setSurnameIsValid(false);
-    }
-    if (consumer.customerPhone.length < 17) {
-      checked = false;
-      setPhoneIsValid(false);
-    }
-    if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
-      checked = false;
-      setEmailIsValid(false);
-    }
+    // if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
+    //   checked = false;
+    //   setFirstNameIsValid(false);
+    // }
+    // if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.surname)) {
+    //   checked = false;
+    //   setSurnameIsValid(false);
+    // }
+    // if (consumer.customerPhone.length < 17) {
+    //   checked = false;
+    //   setPhoneIsValid(false);
+    // }
+    // if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
+    //   checked = false;
+    //   setEmailIsValid(false);
+    // }
 
-    if (
-      consumer.deliveryType !==
-      "Самовивіз з магазину в Києві: вул. І.Мазепи, 37"
-    ) {
-      if (!regionIsValid) {
-        checked = false;
-        setRegionError(true);
-      }
-      if (!cityIsValid) {
-        checked = false;
-        setCityError(true);
-      } else {
-        if (consumer.deliveryType === "Нова Пошта - Відділення") {
-          if (!postOfficeIsValid || !consumer.postOffice) {
-            checked = false;
-            setPostOfficeError(true);
-          }
-        } else {
-          if (consumer.street.length < 3) {
-            checked = false;
-            setStreetIsValid(false);
-          }
-          if (!consumer.house) {
-            checked = false;
-            setHouseIsValid(false);
-          }
-        }
-      }
-    }
+    // if (
+    //   consumer.deliveryType !==
+    //   "Самовивіз з магазину в Києві: вул. І.Мазепи, 37"
+    // ) {
+    //   if (!regionIsValid) {
+    //     checked = false;
+    //     setRegionError(true);
+    //   }
+    //   if (!cityIsValid) {
+    //     checked = false;
+    //     setCityError(true);
+    //   } else {
+    //     if (consumer.deliveryType === "Нова Пошта - Відділення") {
+    //       if (!postOfficeIsValid || !consumer.postOffice) {
+    //         checked = false;
+    //         setPostOfficeError(true);
+    //       }
+    //     } else {
+    //       if (consumer.street.length < 3) {
+    //         checked = false;
+    //         setStreetIsValid(false);
+    //       }
+    //       if (!consumer.house) {
+    //         checked = false;
+    //         setHouseIsValid(false);
+    //       }
+    //     }
+    //   }
+    // }
 
-    if (checked) await sendOrder();
+    // if (checked) await sendOrder();
+    await sendOrder();
   };
 
   const sendOrder = async () => {
@@ -112,7 +112,12 @@ const OrderForm = props => {
         : i.prices[i.measure].price,
     }));
     // backend code for order rsending
-    consumer.customerPhone = consumer.customerPhone.replace(/\s+/g, "");
+    // consumer.customerPhone = consumer.customerPhone.replace(/\s+/g, "");
+    delete consumer._id;
+    delete consumer.birthday;
+    delete consumer.image;
+    consumer.paymentMethod = "card";
+
     let orderForSending = { deliveryInfo: consumer, products: orderedProducts };
     const res = await fetch("/api/order/create", {
       method: "POST",
@@ -121,9 +126,7 @@ const OrderForm = props => {
     if (res.status === 201) {
       setIsOrderCreated(true);
       removeCart();
-      const {
-        order: { liqPayEncodedData },
-      } = await res.json();
+      const { liqPayEncodedData } = await res.json();
       setPaymentData(liqPayEncodedData);
     }
   };
@@ -168,8 +171,9 @@ const OrderForm = props => {
         <DeliveryFields consumer={consumer} setConsumer={setConsumer} />
       </Fieldset>
       <Fieldset number={3} title={"Оплата"}>
-        <Payment consumer={consumer} changeData={setConsumer} />
-        <Comment consumer={consumer} changeData={setConsumer} />
+        {/* <Payment consumer={consumer} changeData={setConsumer} /> */}
+        <PaymentChecker consumer={consumer} setConsumer={setConsumer} />
+        <Comment consumer={consumer} setConsumer={setConsumer} />
       </Fieldset>
       <div className={styles.btnOrderWrapper}>
         <input

@@ -70,3 +70,30 @@ input:valid + .Field__errorMsg,
     background: $color-green-2;
   }
 }
+// ===========inserted==========
+.labelText {
+  margin-top: 0.5rem;
+  display: block;
+
+  span.invalidData {
+    @include invalidData;
+  }
+}
+.inputText {
+  @include input-1;
+  margin: 0.5rem 0;
+}
+.radioBtn {
+  appearance: none;
+  color: #555;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #555;
+  border-radius: 50%;
+
+  &:checked {
+    background: radial-gradient(#555 50%, #fff 50%);
+  }
+}
+
+// ===========inserted==========
