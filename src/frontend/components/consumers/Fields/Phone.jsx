@@ -9,7 +9,7 @@ const Phone = ({ initValue, setState }) => {
   const [phone, setPhone] = useState(initValue || "");
 
   useEffect(() => {
-    setPhone(initValue);
+    setPhone(initValue || "");
   }, [initValue]);
 
   const handleInputChange = e => {

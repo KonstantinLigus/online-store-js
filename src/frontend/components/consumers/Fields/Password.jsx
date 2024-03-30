@@ -2,8 +2,8 @@
 import { useState } from "react";
 import styles from "./Field.module.scss";
 
-const Password = ({ initValue, setState, name }) => {
-  const [password, setPassword] = useState(initValue || "");
+const Password = ({ setState, name }) => {
+  const [password, setPassword] = useState("");
   const [pswdTypeToggle, setPswdTypeToggle] = useState(false);
 
   const handleInputChange = e => {

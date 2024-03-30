@@ -9,7 +9,7 @@ const Email = ({ initValue, setState }) => {
   const [email, setEmail] = useState(initValue || "");
 
   useEffect(() => {
-    setEmail(initValue);
+    setEmail(initValue || "");
   }, [initValue]);
 
   const handleInputChange = e => {
