@@ -45,4 +45,9 @@
       }
     }
   }
+
+  .button {
+    @include button-2;
+    margin-top: 2rem;
+  }
 }
