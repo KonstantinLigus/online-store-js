@@ -7,20 +7,13 @@ export const orderDeliveryInfoByCourierSchema = productsZodSchema.extend({
       message:
         "First name must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
     }),
-    secondName: z
-      .string()
-      .regex(/^[A-ZА-ЯІЇ][a-zа-яії'-]+$/g, {
-        message:
-          "Second name must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
-      })
-      .optional(),
     surname: z.string().regex(/^[A-ZА-ЯІЇ][a-zа-яії'-]+$/g, {
       message:
         "Surname must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
     }),
-    region: z.string(),
-    city: z.string(),
     deliveryType: z.enum(["Нова Пошта - доставка кур’єром"]),
+    region: z.object({ ref: z.string(), name: z.string() }),
+    city: z.object({ ref: z.string(), name: z.string() }),
     street: z.string(),
     house: z.string(),
     flat: z.string(),

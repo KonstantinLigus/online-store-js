@@ -6,26 +6,28 @@ import { Payment } from "../Payment/Payment";
 const paymentExample = {
   products: [
     {
-      _id: "64f1fd1285a65597f40a4828",
+      productName: "яблуко Чемпіон",
+      _id: "652528b3a850903c68a676ab",
       quantity: 2,
-      value: "1 кг",
-      price: 50,
+      value: "100 г",
+      price: 10,
     },
     {
-      _id: "64f1fe2185a65597f40a482a",
+      productName: "морква",
+      _id: "652528b3a850903c68a676aa",
       quantity: 3,
-      value: "1 кг",
-      price: 60,
+      value: "100 г",
+      price: 12,
     },
   ],
   deliveryInfo: {
     firstName: "Олексій",
     secondName: "Вікторович",
     surname: "Дмитренко",
-    region: "Київска",
-    city: "Київ",
-    deliveryType: "Нова пошта",
-    postOffice: 43,
+    region: { name: "Київська", ref: "dcaadb64-4b33-11e4-ab6d-005056801329" },
+    city: { name: "Київ", ref: "e718a680-4b33-11e4-ab6d-005056801329" },
+    deliveryType: "Нова Пошта - Відділення",
+    postOffice: { name: "Відділення №1: вул. Пирогівський шлях, 135", ref: "" },
     customerPhone: "+380949568123",
     email: "user@gmail.com",
     paymentMethod: "card",
@@ -43,9 +45,8 @@ export const PaymentExample = () => {
       method: "POST",
       body: JSON.stringify(paymentExample),
     });
-    const {
-      order: { liqPayEncodedData },
-    } = await res.json();
+    const { liqPayEncodedData } = await res.json();
+
     setDataAndSignatureObj(liqPayEncodedData);
   };
   const payForOrderBtnClickHandler = () => setIsShowPayment(true);
