@@ -1,0 +1,86 @@
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/variables";
+
+.bannerTitle {
+  color: $color-white;
+  font-size: 2.5rem;
+  font-weight: 400;
+  @include md-min {
+    font-size: 3rem;
+  }
+  @include lg-min {
+    font-size: 3.5rem;
+  }
+  @include xl-min {
+    font-size: 4rem;
+  }
+}
+
+.slide {
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  @include md-min {
+    height: 600px;
+  }
+  @include lg-min {
+    height: 700px;
+  }
+  @include xl-min {
+    height: 800px;
+  }
+
+  .slideTitle {
+    color: $color-white;
+    font-size: 2.5rem;
+    font-weight: 400;
+    padding: 0 3rem 0 3rem;
+    text-align: center;
+    max-width: 1000px;
+    @include md-min {
+      font-size: 3rem;
+    }
+    @include lg-min {
+      font-size: 3.5rem;
+    }
+    @include xl-min {
+      font-size: 4rem;
+    }
+  }
+}
+
+.slide1 {
+  background-image: url("/assets/home-page/banner/hero-1-mobile.webp");
+  background-color: #00000030;
+  background-blend-mode: darken;
+  @include lg-min {
+    background-image: url("/assets/home-page/banner/hero-1-desktop.webp");
+  }
+}
+
+.slide2 {
+  background-image: url("/assets/home-page/banner/hero-2-mobile.webp");
+  background-color: #00000030;
+  background-blend-mode: darken;
+  @include lg-min {
+    background-image: url("/assets/home-page/banner/hero-2-desktop.webp");
+  }
+}
+
+.slide3 {
+  background-image: url("/assets/home-page/banner/hero-3-mobile.webp");
+  background-color: #00000030;
+  background-blend-mode: darken;
+  @include lg-min {
+    background-image: url("/assets/home-page/banner/hero-3-desktop.webp");
+  }
+}
+
+.mySwiper {
+  text-align: center;
+}

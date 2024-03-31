@@ -1,0 +1,42 @@
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/variables";
+
+.article {
+  @include wrapper;
+
+  .title {
+    display: block;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 1rem auto 0 auto;
+    text-align: center;
+  }
+
+  .articleContainer {
+    width: 100%;
+
+    .imageWrapper {
+      height: 500px;
+      margin-block: 2rem;
+      position: relative;
+
+      .image {
+        display: block;
+        object-fit: cover;
+        position: relative !important;
+      }
+    }
+
+    h2,
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 400;
+    }
+
+    p {
+      line-height: 1.5;
+      margin-block: 0.5rem;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import SortAndFilter from "@/frontend/components/consumers/SortAndFilter/SortAndFilter";
 
 const allCategories = {
   vegetables: "овочі",
@@ -16,7 +17,8 @@ const allCategories = {
 };
 
 const CategoryPage = ({ params }) => {
-  const [data, setData] = useState([]);
+  const [sortedProducts, setSortedProducts] = useState([]);
+  const [filtredProducts, setFiltredProducts] = useState([]);
   const { cart, addToCart, removeFromCart } = useCart();
   const currentCategory = allCategories[params.name];
 
@@ -24,7 +26,8 @@ const CategoryPage = ({ params }) => {
     const fetchData = async () => {
       const res = await fetch(`../api/items?category=${currentCategory}`);
       const { items } = await res.json();
-      setData(items);
+      setSortedProducts(items);
+      setFiltredProducts(items);
     };
     fetchData();
   }, [currentCategory]);
@@ -36,10 +39,16 @@ const CategoryPage = ({ params }) => {
   return (
     <div className={styles.category}>
       <ToPreviousPage title={currentCategory} />
+      <SortAndFilter
+        sortedProducts={sortedProducts}
+        setSortedProducts={setSortedProducts}
+        filtredProducts={filtredProducts}
+        setFiltredProducts={setFiltredProducts}
+      />
       <h2 className={styles.title}>{currentCategory}</h2>
 
       <ul className={styles.products}>
-        {data.map(item => (
+        {filtredProducts.map(item => (
           <ProductItem key={item._id} id={item._id} {...item}>
             {cartChecker(item._id) ? (
               <Button
