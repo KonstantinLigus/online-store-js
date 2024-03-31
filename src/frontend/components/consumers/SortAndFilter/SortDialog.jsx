@@ -2,58 +2,109 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./SortDialog.module.scss";
 
-const SortDialog = ({ data, setData, toggleSort }) => {
-  const toSort = value => {
-    let products = Array.from(data);
-    switch (value) {
+const SortDialog = ({
+  toggleSort,
+  sortedProducts,
+  setSortedProducts,
+  filtredProducts,
+  setFiltredProducts,
+}) => {
+  const [sortType, setSortType] = useState(1);
+
+  const sortPopularFirst = list => {
+    alert("Спочатку популярні");
+  };
+
+  const sortActionFirst = list => {
+    list.sort(function (a, b) {
+      if (!a.prices[0].actionPrice && b.prices[0].actionPrice) {
+        return 1;
+      }
+      if (a.prices[0].actionPrice && !b.prices[0].actionPrice) {
+        return -1;
+      }
+      return 0;
+    });
+  };
+
+  const sortByRating = list => {
+    alert("За рейтингом");
+  };
+
+  const sortAtoZ = list => {
+    list.sort(function (a, b) {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      }
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  const sortZtoA = list => {
+    list.sort(function (a, b) {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return 1;
+      }
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return -1;
+      }
+      return 0;
+    });
+  };
+
+  const sortCheapFirst = list => {
+    list.sort(
+      (a, b) =>
+        (a.prices[0].actionPrice ?? a.prices[0].price) -
+        (b.prices[0].actionPrice ?? b.prices[0].price),
+    );
+  };
+
+  const sortExpensiveFirst = list => {
+    list.sort(
+      (a, b) =>
+        (b.prices[0].actionPrice ?? b.prices[0].price) -
+        (a.prices[0].actionPrice ?? a.prices[0].price),
+    );
+  };
+
+  const toSort = () => {
+    let sortedList = Array.from(sortedProducts);
+    let filtredList = Array.from(filtredProducts);
+    switch (sortType) {
       case 1:
-        alert("Спочатку популярні");
+        sortPopularFirst();
         break;
       case 2:
-        alert("Спочатку акційні");
+        sortActionFirst(sortedList);
+        sortActionFirst(filtredList);
         break;
       case 3:
-        alert("За рейтингом");
+        sortByRating();
         break;
       case 4:
-        products.sort(function (a, b) {
-          if (a.title.toLowerCase() < b.title.toLowerCase()) {
-            return -1;
-          }
-          if (a.title.toLowerCase() > b.title.toLowerCase()) {
-            return 1;
-          }
-          return 0;
-        });
+        sortAtoZ(sortedList);
+        sortAtoZ(filtredList);
         break;
       case 5:
-        products.sort(function (a, b) {
-          if (a.title.toLowerCase() < b.title.toLowerCase()) {
-            return 1;
-          }
-          if (a.title.toLowerCase() > b.title.toLowerCase()) {
-            return -1;
-          }
-          return 0;
-        });
+        sortZtoA(sortedList);
+        sortZtoA(filtredList);
         break;
       case 6:
-        products.sort(
-          (a, b) =>
-            (a.prices[0].actionPrice ?? a.prices[0].price) -
-            (b.prices[0].actionPrice ?? b.prices[0].price),
-        );
+        sortCheapFirst(sortedList);
+        sortCheapFirst(filtredList);
         break;
       case 7:
-        products.sort(
-          (a, b) =>
-            (b.prices[0].actionPrice ?? b.prices[0].price) -
-            (a.prices[0].actionPrice ?? a.prices[0].price),
-        );
+        sortExpensiveFirst(sortedList);
+        sortExpensiveFirst(filtredList);
         break;
     }
-    setData(products);
-    //setSortIsOPen(!sortIsOpen);
+    setSortedProducts(sortedList);
+    setFiltredProducts(filtredList);
+    toggleSort();
   };
 
   return (
@@ -70,6 +121,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
           onClick={toggleSort}
         />
       </div>
+
       <ul className={styles.sortItems}>
         <li className={styles.sortItem}>
           <label htmlFor="sortRadio1">Спочатку популярні</label>
@@ -78,7 +130,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio1"
             value={"1"}
-            onChange={() => toSort(1)}
+            onChange={() => setSortType(1)}
           />
         </li>
         <li className={styles.sortItem}>
@@ -88,7 +140,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio2"
             value={"2"}
-            onChange={() => toSort(2)}
+            onChange={() => setSortType(2)}
           />
         </li>
         <li className={styles.sortItem}>
@@ -98,7 +150,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio3"
             value={"3"}
-            onChange={() => toSort(3)}
+            onChange={() => setSortType(3)}
           />
         </li>
         <li className={styles.sortItem}>
@@ -108,7 +160,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio4"
             value={"4"}
-            onChange={() => toSort(4)}
+            onChange={() => setSortType(4)}
           />
         </li>
         <li className={styles.sortItem}>
@@ -118,7 +170,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio5"
             value={"5"}
-            onChange={() => toSort(5)}
+            onChange={() => setSortType(5)}
           />
         </li>
         <li className={styles.sortItem}>
@@ -128,7 +180,7 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio6"
             value={"6"}
-            onChange={() => toSort(6)}
+            onChange={() => setSortType(6)}
           />
         </li>
         <li className={styles.sortItem}>
@@ -138,10 +190,14 @@ const SortDialog = ({ data, setData, toggleSort }) => {
             name="sort"
             id="sortRadio7"
             value={"7"}
-            onChange={() => toSort(7)}
+            onChange={() => setSortType(7)}
           />
         </li>
       </ul>
+
+      <button type="button" className={styles.button} onClick={toSort}>
+        Застосувати
+      </button>
     </div>
   );
 };
