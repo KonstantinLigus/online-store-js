@@ -10,6 +10,7 @@ import { createOrderCase } from "../domain";
 export async function createOrderEntry(req) {
   try {
     const newOrder = await req.json();
+
     if (!newOrder.deliveryInfo)
       throw new ParseError("deliveryInfo doesn't exist!");
     let result = null;
@@ -18,6 +19,7 @@ export async function createOrderEntry(req) {
     if (newOrder.deliveryInfo.deliveryType === "Нова Пошта - доставка кур’єром")
       result = orderDeliveryInfoByCourierSchema.safeParse(newOrder);
     if (!result.success) throw new ParseError(result.error);
+
     const createdOrder = await createOrderCase(newOrder);
     return NextResponse.json(createdOrder, { status: 201 });
   } catch (err) {

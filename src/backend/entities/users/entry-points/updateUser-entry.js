@@ -3,8 +3,10 @@
 import { NextResponse } from "next/server";
 import { ParseError } from "@/backend/helpers/errors";
 import { updateUserSchema } from "@/backend/libs/zod";
-import { updateUser } from "../domain/updateUser-use-case";
 import { getError } from "@/backend/helpers";
+import { getUserIdFromNextAuth } from "../domain/getUserIdFromNextAuth-use-case";
+import { redirectToPage } from "@/backend/libs/next";
+import { getUserIdFromToken } from "../domain/getUserIdFromToken-use-case";
 
 export async function updateUserEntry(req) {
   try {
@@ -17,8 +19,10 @@ export async function updateUserEntry(req) {
     const result = updateUserSchema.safeParse(userData);
     if (!result.success) throw new ParseError(result.error);
 
-    const updatedUser = await updateUser(userData);
+    const userId = (await getUserIdFromNextAuth()) || getUserIdFromToken();
+    if (!userId) redirectToPage("/login");
 
+    const updatedUser = await updatedUser(userId, userData);
     return NextResponse.json(updatedUser, { status: 200 });
   } catch (err) {
     const { error, status } = getError(err);

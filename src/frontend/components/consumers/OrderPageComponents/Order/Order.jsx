@@ -7,22 +7,6 @@ import RegularCustomer from "./RegularCustomer/RegularCustomer";
 const Order = props => {
   const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [newCustomer, setNewCustomer] = useState(true);
-  const [consumerInfo, setConsumerInfo] = useState({
-    firstName: "",
-    secondName: "",
-    surname: "",
-    deliveryType: "Нова Пошта - Відділення",
-    region: "",
-    city: "",
-    postOffice: "",
-    street: "",
-    house: "",
-    flat: "",
-    customerPhone: "",
-    email: "",
-    paymentMethod: "card",
-    comment: "",
-  });
 
   return (
     <div className={styles.wrapper}>
@@ -46,7 +30,7 @@ const Order = props => {
       </div>
 
       <div className={styles.formContainer}>
-        <OrderForm consumer={consumerInfo} {...props} />
+        <OrderForm {...props} />
         {!userAuthenticated && !newCustomer && <RegularCustomer />}
       </div>
     </div>

@@ -4,7 +4,12 @@ import styles from "./SortAndFilter.module.scss";
 import SortDialog from "./SortDialog";
 import FilterDialog from "./FilterDialog";
 
-const SortAndFilter = ({ data, setData }) => {
+const SortAndFilter = ({
+  sortedProducts,
+  setSortedProducts,
+  filtredProducts,
+  setFiltredProducts,
+}) => {
   const [filterIsOpen, setFilterIsOPen] = useState(false);
   const [sortIsOpen, setSortIsOPen] = useState(false);
 
@@ -49,16 +54,22 @@ const SortAndFilter = ({ data, setData }) => {
         {filterIsOpen && (
           <div className={styles.filter}>
             <FilterDialog
-              data={data}
-              setData={setData}
               toggleFilter={toggleFilter}
+              sortedProducts={sortedProducts}
+              setFiltredProducts={setFiltredProducts}
             />
           </div>
         )}
 
         {sortIsOpen && (
           <div className={styles.sort}>
-            <SortDialog data={data} setData={setData} toggleSort={toggleSort} />
+            <SortDialog
+              toggleSort={toggleSort}
+              sortedProducts={sortedProducts}
+              setSortedProducts={setSortedProducts}
+              filtredProducts={filtredProducts}
+              setFiltredProducts={setFiltredProducts}
+            />
           </div>
         )}
       </div>

@@ -2,8 +2,8 @@
 import { useState } from "react";
 import styles from "./Field.module.scss";
 
-const Password = ({ initValue, setState, name }) => {
-  const [password, setPassword] = useState(initValue || "");
+const Password = ({ setState, name }) => {
+  const [password, setPassword] = useState("");
   const [pswdTypeToggle, setPswdTypeToggle] = useState(false);
 
   const handleInputChange = e => {
@@ -41,12 +41,12 @@ const Password = ({ initValue, setState, name }) => {
       >
         {getName()}:
       </label>
-      <div className={styles.Field__pswdContainer}>
+      <div className={styles.Field__inputWrapper}>
         <input
           type={pswdTypeToggle ? "text" : "password"}
           id={name}
           name={name}
-          className={styles.Field__pswdInput}
+          className={styles.Field__input}
           value={password}
           onChange={handleInputChange}
           minLength={7}

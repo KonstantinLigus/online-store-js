@@ -4,10 +4,6 @@
 
 .Field__input {
   @include input-1;
-  margin-bottom: $s;
-}
-.Field__pswdInput {
-  @include input-1;
 }
 
 .Field__label_marginBottom {
@@ -15,25 +11,27 @@
   margin-bottom: $s;
 }
 
-.Field__label:has(+ input:valid) {
+.Field__label:has(+ input:valid),
+.Field__label:has(+ .Field__inputWrapper input:valid) {
   @include validData;
 }
-.Field__label:has(+ input:invalid) {
+.Field__label:has(+ input:invalid),
+.Field__label:has(+ .Field__inputWrapper input:invalid) {
   @include invalidData;
 }
 .Field__errorMsg {
   @include invalidData;
 }
 input:invalid + .Field__errorMsg,
-.Field__pswdContainer:has(input:invalid) + .Field__errorMsg {
+.Field__inputWrapper:has(input:invalid) + .Field__errorMsg {
   display: block;
+  margin-top: $s;
 }
 input:valid + .Field__errorMsg,
-.Field__pswdContainer:has(input:valid) + .Field__errorMsg {
+.Field__inputWrapper:has(input:valid) + .Field__errorMsg {
   display: none;
 }
-.Field__pswdContainer {
-  margin-bottom: $s;
+.Field__inputWrapper {
   position: relative;
 }
 
@@ -55,3 +53,60 @@ input:valid + .Field__errorMsg,
 .Field__pswdShowIcon_visible {
   color: $color-gray-dark-1;
 }
+.Field__optionList {
+  max-height: 200px;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  overflow: auto;
+  list-style: none;
+  background: $color-bg-light-2;
+  @include shadow;
+  & > li {
+    padding: $s $m;
+    cursor: pointer;
+  }
+  & > li:hover {
+    background: $color-green-2;
+  }
+}
+// ===========inserted==========
+.labelText {
+  margin-top: 0.5rem;
+  display: block;
+
+  span.invalidData {
+    @include invalidData;
+  }
+}
+.inputText {
+  @include input-1;
+  margin: 0.5rem 0;
+}
+.radioBtn {
+  appearance: none;
+  color: #555;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #555;
+  border-radius: 50%;
+
+  &:checked {
+    background: radial-gradient(#555 50%, #fff 50%);
+  }
+}
+.labelSelect {
+  margin-top: 0.5rem;
+  display: block;
+  width: 100%;
+
+  span.invalidData {
+    @include invalidData;
+  }
+}
+.select {
+  @include input-1;
+  margin: 0.5rem 0;
+}
+
+// ===========inserted==========

@@ -17,7 +17,7 @@ export async function getAtreas() {
     return NextResponse.json({ errors }, { status: 400 });
   }
   const filteredData = data.map(({ Ref, Description, RegionType }) => ({
-    areaRef: Ref,
+    ref: Ref,
     description: Description,
     regionType: RegionType,
   }));

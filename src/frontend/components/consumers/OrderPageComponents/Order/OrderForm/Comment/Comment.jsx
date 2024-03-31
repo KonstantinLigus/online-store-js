@@ -2,9 +2,9 @@
 import React from "react";
 import styles from "../OrderForm.module.scss";
 
-const Comment = ({ consumer, changeData }) => {
+const Comment = ({ consumer, setConsumer }) => {
   const handleChange = e => {
-    changeData(prev => ({
+    setConsumer(prev => ({
       ...prev,
       comment: e.target.value,
     }));

@@ -28,8 +28,10 @@
   }
 
   .details {
+    border-bottom: 1px solid #aaa;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    padding-bottom: 1rem;
 
     .summary {
       align-items: center;
@@ -51,5 +53,23 @@
       transform: rotate(180deg);
       transition: 0.5s;
     }
+  }
+
+  .action {
+    display: flex;
+    justify-content: space-between;
+
+    &__label {
+      cursor: pointer;
+    }
+
+    &__checkbox {
+      cursor: pointer;
+    }
+  }
+
+  .button {
+    @include button-2;
+    margin-top: 2rem;
   }
 }

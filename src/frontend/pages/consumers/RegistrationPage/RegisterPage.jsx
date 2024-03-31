@@ -8,7 +8,7 @@ import Phone from "@/frontend/components/consumers/Fields/Phone";
 import Email from "@/frontend/components/consumers/Fields/Email";
 import Password from "@/frontend/components/consumers/Fields/Password";
 import { signUpAction } from "@/backend/entities/users/entry-points";
-import { getObject } from "@/frontend/helpers";
+import { getObject, isObjectFieldEqualsToValue } from "@/frontend/helpers";
 import styles from "./RegisterPage.module.scss";
 
 const userFields = [
@@ -36,11 +36,9 @@ const RegistrationPage = () => {
       setPswdErrMesg(false);
     }
 
-    for (const field of Object.values(userState)) {
-      if (field === "") {
-        setIsDisabled(true);
-        return;
-      }
+    if (isObjectFieldEqualsToValue(userState, "")) {
+      setIsDisabled(true);
+      return;
     }
 
     setIsDisabled(false);
@@ -50,39 +48,39 @@ const RegistrationPage = () => {
     <div className={styles.RegisterForm__container}>
       <h2 className={styles.RegisterForm__title}>Реєстрація</h2>
       <form action={formAction} className={styles.RegisterForm__form}>
-        <fieldset className={styles.RegisterForm__fieldset}>
+        <div className={styles.RegisterForm__inputWrapper}>
           <Name name="firstName" setState={setUserState} />
           {state?.firstName && (
             <p className={styles.RegisterForm__errorMsg}>{state?.firstName}</p>
           )}
-        </fieldset>
-        <fieldset className={styles.RegisterForm__fieldset}>
+        </div>
+        <div className={styles.RegisterForm__inputWrapper}>
           <Name name="surname" setState={setUserState} />
           {state?.surname && (
             <p className={styles.RegisterForm__errorMsg}>{state?.surname}</p>
           )}
-        </fieldset>
-        <fieldset className={styles.RegisterForm__fieldset}>
+        </div>
+        <div className={styles.RegisterForm__inputWrapper}>
           <Phone setState={setUserState} />
           {state?.customerPhone && (
             <p className={styles.RegisterForm__errorMsg}>
               {state?.customerPhone}
             </p>
           )}
-        </fieldset>
-        <fieldset className={styles.RegisterForm__fieldset}>
+        </div>
+        <div className={styles.RegisterForm__inputWrapper}>
           <Email setState={setUserState} />
           {state?.email && (
             <p className={styles.RegisterForm__errorMsg}>{state?.email}</p>
           )}
-        </fieldset>
-        <fieldset className={styles.RegisterForm__fieldset}>
+        </div>
+        <div className={styles.RegisterForm__inputWrapper}>
           <Password name="password" setState={setUserState} />
           {state?.password && (
             <p className={styles.RegisterForm__errorMsg}>{state?.password}</p>
           )}
-        </fieldset>
-        <fieldset className={styles.RegisterForm__fieldset}>
+        </div>
+        <div className={styles.RegisterForm__inputWrapper}>
           <Password name="passwordRepeat" setState={setUserState} />
           {state?.passwordRepeat && (
             <p className={styles.RegisterForm__errorMsg}>
@@ -94,7 +92,7 @@ const RegistrationPage = () => {
               Паролі не співпадають
             </p>
           )}
-        </fieldset>
+        </div>
         <SubmitButton disabled={isDisabled}>Зареєструватись</SubmitButton>
       </form>
     </div>

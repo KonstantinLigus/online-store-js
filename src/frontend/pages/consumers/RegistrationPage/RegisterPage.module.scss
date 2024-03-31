@@ -11,9 +11,10 @@
 .RegisterForm__form {
   margin-top: $m;
 }
-.RegisterForm__fieldset {
+.RegisterForm__inputWrapper {
   margin-bottom: $m;
 }
 .RegisterForm__errorMsg {
   @include invalidData;
+  margin-top: $s;
 }

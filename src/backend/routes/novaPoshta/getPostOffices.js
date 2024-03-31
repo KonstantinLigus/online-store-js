@@ -32,12 +32,14 @@ export async function getPostOffices(req) {
   }
   const filteredData = data.map(
     ({
+      Ref,
       Description,
       ShortAddress,
       Number,
       SettlementAreaDescription,
       SettlementRegionsDescription,
     }) => ({
+      ref: Ref,
       description: Description,
       areaDescription: SettlementAreaDescription,
       regionDescription: SettlementRegionsDescription,

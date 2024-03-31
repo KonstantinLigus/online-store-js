@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Field.module.scss";
 
 const NEXT_PUBLIC_EMAIL_PATTERN = process.env.NEXT_PUBLIC_EMAIL_PATTERN;
@@ -8,15 +8,14 @@ const emailRegExp = new RegExp(NEXT_PUBLIC_EMAIL_PATTERN);
 const Email = ({ initValue, setState }) => {
   const [email, setEmail] = useState(initValue || "");
 
+  useEffect(() => {
+    setEmail(initValue || "");
+  }, [initValue]);
+
   const handleInputChange = e => {
-    let { value } = e.target;
+    const { value } = e.target;
 
     setEmail(value);
-
-    setState(prev => ({
-      ...prev,
-      email: "",
-    }));
 
     if (emailRegExp.test(value)) {
       setState(prev => ({
@@ -27,7 +26,7 @@ const Email = ({ initValue, setState }) => {
   };
 
   return (
-    <fieldset>
+    <>
       <label
         htmlFor="email"
         className={`${styles.Field__label_marginBottom} ${styles.Field__label}`}
@@ -44,7 +43,7 @@ const Email = ({ initValue, setState }) => {
         onChange={handleInputChange}
       />
       <p className={styles.Field__errorMsg}>Невірний формат email</p>
-    </fieldset>
+    </>
   );
 };
 

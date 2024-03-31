@@ -8,7 +8,7 @@
 .RegisterForm__form {
   margin-bottom: $m;
 }
-.LoginForm__fieldset {
+.LoginForm__inputWrapper {
   margin-bottom: $m;
 }
 .LoginForm__container {
@@ -16,6 +16,7 @@
 }
 .LoginForm__errorMsg {
   @include invalidData;
+  margin-top: $s;
 }
 .LoginForm__nav {
   margin-bottom: $m;

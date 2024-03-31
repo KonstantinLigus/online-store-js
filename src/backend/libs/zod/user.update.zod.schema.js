@@ -28,11 +28,12 @@ export const updateUserSchema = z
       "Самовивіз з магазину в Києві: вул. І.Мазепи, 37",
     ]),
     region: z.string(),
-    city: z.string(),
+    city: z.object({ areaRef: z.string(), name: z.string() }),
     street: z.string(),
     house: z.string(),
     flat: z.string(),
-    postOffice: z.string(),
+    postOffice: z.object({ cityRef: z.string(), name: z.string() }),
+    paymentMethod: z.enum(["card", "cash"]),
     password: z.string(),
   })
   .partial();

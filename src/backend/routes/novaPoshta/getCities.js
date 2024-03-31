@@ -41,7 +41,7 @@ export async function getCities(req) {
       AreaDescription,
       RegionsDescription,
     }) => ({
-      cityRef: Ref,
+      ref: Ref,
       description: Description,
       regionDescription: RegionsDescription,
       areaDescription: AreaDescription,

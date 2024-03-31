@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Field.module.scss";
 
 const NEXT_PUBLIC_PHONE_PATTERN = process.env.NEXT_PUBLIC_PHONE_PATTERN;
@@ -8,14 +8,13 @@ const phoneRegExp = new RegExp(NEXT_PUBLIC_PHONE_PATTERN);
 const Phone = ({ initValue, setState }) => {
   const [phone, setPhone] = useState(initValue || "");
 
+  useEffect(() => {
+    setPhone(initValue || "");
+  }, [initValue]);
+
   const handleInputChange = e => {
     let { value } = e.target;
     const { length } = value;
-
-    setState(prev => ({
-      ...prev,
-      customerPhone: "",
-    }));
 
     if (length === 1 && /\d/.test(value)) {
       setPhone(`+380${value}`);
