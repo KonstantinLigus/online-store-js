@@ -8,7 +8,7 @@ import Phone from "@/frontend/components/consumers/Fields/Phone";
 import Email from "@/frontend/components/consumers/Fields/Email";
 import Password from "@/frontend/components/consumers/Fields/Password";
 import { signUpAction } from "@/backend/entities/users/entry-points";
-import { getObject } from "@/frontend/helpers";
+import { getObject, isObjectFieldEqualsToValue } from "@/frontend/helpers";
 import styles from "./RegisterPage.module.scss";
 
 const userFields = [
@@ -36,11 +36,9 @@ const RegistrationPage = () => {
       setPswdErrMesg(false);
     }
 
-    for (const field of Object.values(userState)) {
-      if (field === "") {
-        setIsDisabled(true);
-        return;
-      }
+    if (isObjectFieldEqualsToValue(userState, "")) {
+      setIsDisabled(true);
+      return;
     }
 
     setIsDisabled(false);

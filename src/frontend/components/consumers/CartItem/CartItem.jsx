@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CartItem.module.scss";
+import { useCart } from "@/hooks/useCart";
 
 const CartItem = ({ item, removeFromCart, updateCartItem }) => {
   const [measureCurrent, setMeasureCurrent] = useState(item.measure);

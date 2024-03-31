@@ -7,102 +7,45 @@ import Fieldset from "./Fieldset/Fieldset";
 import FirstName from "./FirstName/FirstName";
 import SecondName from "./SecondName/SecondName";
 // import Surname from "./Surname/Surname";
-import DeliveryType from "./Delivery/DeliveryType";
+// import DeliveryType from "./Delivery/DeliveryType";
 import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
 import { getUserAction } from "@/backend/entities/users/entry-points";
 import Phone from "../../../Fields/Phone";
 import Email from "../../../Fields/Email";
 import Name from "../../../Fields/Name";
-import DeliveryFields from "../../../DelivetyFieldsSet/DeliveryFields";
+import DeliveryFields from "../../../Fields/DeliveryFields";
 import PaymentChecker from "../../../Fields/PaymentChecker";
+import DeliveryType from "../../../Fields/DeliveryType";
+
+const userInitValues = {
+  firstName: "",
+  secondName: "",
+  surname: "",
+  deliveryType: "Нова Пошта - Відділення",
+  region: { name: "", ref: "" },
+  city: { name: "", ref: "" },
+  postOffice: { name: "", ref: "" },
+  street: "",
+  house: "",
+  flat: "",
+  customerPhone: "",
+  email: "",
+  paymentMethod: "card",
+  comment: "",
+};
 
 const OrderForm = props => {
-  const { productsInCart, setIsOrderCreated, removeCart, setPaymentData } =
-    props;
-  const [consumer, setConsumer] = useState(props.consumer);
-  const [firstNameIsValid, setFirstNameIsValid] = useState(true);
-  const [surnameIsValid, setSurnameIsValid] = useState(true);
-  const [phoneIsValid, setPhoneIsValid] = useState(true);
-  const [emailIsValid, setEmailIsValid] = useState(true);
-
-  const [regionIsValid, setRegionIsValid] = useState(false);
-  const [regionError, setRegionError] = useState(false);
-
-  const [cityIsValid, setCityIsValid] = useState(false);
-  const [cityError, setCityError] = useState(false);
-
-  const [postOfficeIsValid, setPostOfficeIsValid] = useState(false);
-  const [postOfficeError, setPostOfficeError] = useState(false);
-
-  const [streetIsValid, setStreetIsValid] = useState(true);
-  const [houseIsValid, setHouseIsValid] = useState(true);
-
-  useEffect(() => {
-    const getUserData = async () => {
-      const userData = await getUserAction();
-      if (userData) setConsumer(userData);
-    };
-    getUserData();
-  }, []);
+  const { user, cart, setIsOrderCreated, removeCart, setPaymentData } = props;
+  const [consumer, setConsumer] = useState(user || userInitValues);
 
   const validateData = async e => {
     e.preventDefault();
-    // let checked = true;
-
-    // if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.firstName)) {
-    //   checked = false;
-    //   setFirstNameIsValid(false);
-    // }
-    // if (!/(^[A-ZА-ЯІЇ][a-zа-яії'-]+$)/g.test(consumer.surname)) {
-    //   checked = false;
-    //   setSurnameIsValid(false);
-    // }
-    // if (consumer.customerPhone.length < 17) {
-    //   checked = false;
-    //   setPhoneIsValid(false);
-    // }
-    // if (!/^\S+@\S+\.\S+$/.test(consumer.email)) {
-    //   checked = false;
-    //   setEmailIsValid(false);
-    // }
-
-    // if (
-    //   consumer.deliveryType !==
-    //   "Самовивіз з магазину в Києві: вул. І.Мазепи, 37"
-    // ) {
-    //   if (!regionIsValid) {
-    //     checked = false;
-    //     setRegionError(true);
-    //   }
-    //   if (!cityIsValid) {
-    //     checked = false;
-    //     setCityError(true);
-    //   } else {
-    //     if (consumer.deliveryType === "Нова Пошта - Відділення") {
-    //       if (!postOfficeIsValid || !consumer.postOffice) {
-    //         checked = false;
-    //         setPostOfficeError(true);
-    //       }
-    //     } else {
-    //       if (consumer.street.length < 3) {
-    //         checked = false;
-    //         setStreetIsValid(false);
-    //       }
-    //       if (!consumer.house) {
-    //         checked = false;
-    //         setHouseIsValid(false);
-    //       }
-    //     }
-    //   }
-    // }
-
-    // if (checked) await sendOrder();
     await sendOrder();
   };
 
   const sendOrder = async () => {
-    let orderedProducts = productsInCart.map(i => ({
+    let orderedProducts = cart.map(i => ({
       _id: i._id,
       productName: i.title,
       quantity: i.quantity,
@@ -111,8 +54,6 @@ const OrderForm = props => {
         ? i.prices[i.measure].actionPrice
         : i.prices[i.measure].price,
     }));
-    // backend code for order rsending
-    // consumer.customerPhone = consumer.customerPhone.replace(/\s+/g, "");
     delete consumer._id;
     delete consumer.birthday;
     delete consumer.image;
@@ -148,30 +89,13 @@ const OrderForm = props => {
         />
       </Fieldset>
       <Fieldset number={2} title={"Доставка"}>
-        {/* <DeliveryType
-          consumer={consumer}
-          changeData={setConsumer}
-          regionIsValid={regionIsValid}
-          setRegionIsValid={setRegionIsValid}
-          regionError={regionError}
-          setRegionError={setRegionError}
-          cityIsValid={cityIsValid}
-          setCityIsValid={setCityIsValid}
-          cityError={cityError}
-          setCityError={setCityError}
-          postOfficeIsValid={postOfficeIsValid}
-          setPostOfficeIsValid={setPostOfficeIsValid}
-          postOfficeError={postOfficeError}
-          setPostOfficeError={setPostOfficeError}
-          streetIsValid={streetIsValid}
-          setStreetIsValid={setStreetIsValid}
-          houseIsValid={houseIsValid}
-          setHouseIsValid={setHouseIsValid}
-        /> */}
+        <DeliveryType
+          initValue={consumer.deliveryType}
+          setConsumer={setConsumer}
+        />
         <DeliveryFields consumer={consumer} setConsumer={setConsumer} />
       </Fieldset>
       <Fieldset number={3} title={"Оплата"}>
-        {/* <Payment consumer={consumer} changeData={setConsumer} /> */}
         <PaymentChecker consumer={consumer} setConsumer={setConsumer} />
         <Comment consumer={consumer} setConsumer={setConsumer} />
       </Fieldset>

@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
-import DeliveryInputOptions from "../Fields/DeliveryInputOptions";
+import DeliveryInputOptions from "./DeliveryInputOptions";
+import ConsumerAddress from "./ConsumerAddress";
+import deliveryTypes from "./deliveryTypes";
+
+const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
 const DelivetyFields = ({ consumer, setConsumer }) => {
-  const { region, city, postOffice } = consumer;
+  const { region, city, postOffice, deliveryType } = consumer;
   const [deliveryData, setDeliveryData] = useState({
     region,
     city,
     postOffice,
   });
-  useEffect(() => {
-    setDeliveryData({
-      region,
-      city,
-      postOffice,
-    });
-  }, [city, postOffice, region]);
 
   useEffect(() => {
     setConsumer(prev => {
@@ -46,12 +43,15 @@ const DelivetyFields = ({ consumer, setConsumer }) => {
       if (prevPostOfficeName.length > currentPostOfficeName.length)
         return {
           ...prev,
-          postOffice: { ref: deliveryData.postOffice.ref, name: "" },
+          postOffice: { ref: "", name: "" },
         };
-      if (prevPostOfficeName !== currentPostOfficeName)
+      if (prevPostOfficeName.length < currentPostOfficeName.length)
         return {
           ...prev,
-          postOffice: { ref: "", name: currentPostOfficeName },
+          postOffice: {
+            ref: deliveryData.postOffice.ref,
+            name: deliveryData.postOffice.name,
+          },
         };
       return prev;
     });
@@ -93,31 +93,39 @@ const DelivetyFields = ({ consumer, setConsumer }) => {
 
   return (
     <>
-      <DeliveryInputOptions
-        name="Область"
-        deliveryData={deliveryData}
-        setDeliveryData={setDeliveryData}
-        fetchAndSetData={getAreas}
-        type="region"
-      />
-      {region.ref && (
-        <DeliveryInputOptions
-          name="Місто"
-          deliveryData={deliveryData}
-          setDeliveryData={setDeliveryData}
-          fetchAndSetData={getSities}
-          type="city"
-        />
+      {deliveryType !== storeDelivery && (
+        <>
+          <DeliveryInputOptions
+            name="Область"
+            initValue={region.name}
+            setDeliveryData={setDeliveryData}
+            fetchAndSetData={getAreas}
+            type="region"
+          />
+          {region.ref && (
+            <DeliveryInputOptions
+              name="Місто"
+              initValue={city.name}
+              setDeliveryData={setDeliveryData}
+              fetchAndSetData={getSities}
+              type="city"
+            />
+          )}
+          {deliveryType === postOfficeDelivery && region.ref && city.ref && (
+            <DeliveryInputOptions
+              name="Відділення"
+              initValue={postOffice.name}
+              setDeliveryData={setDeliveryData}
+              fetchAndSetData={getPostOffices}
+              type="postOffice"
+            />
+          )}
+          {deliveryType === courierDelivery && region.ref && city.ref && (
+            <ConsumerAddress consumer={consumer} setConsumer={setConsumer} />
+          )}
+        </>
       )}
-      {region.ref && city.ref && (
-        <DeliveryInputOptions
-          name="Відділення"
-          deliveryData={deliveryData}
-          setDeliveryData={setDeliveryData}
-          fetchAndSetData={getPostOffices}
-          type="postOffice"
-        />
-      )}
+      {deliveryType === storeDelivery && null}
     </>
   );
 };

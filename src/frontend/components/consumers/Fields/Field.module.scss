@@ -95,5 +95,18 @@ input:valid + .Field__errorMsg,
     background: radial-gradient(#555 50%, #fff 50%);
   }
 }
+.labelSelect {
+  margin-top: 0.5rem;
+  display: block;
+  width: 100%;
+
+  span.invalidData {
+    @include invalidData;
+  }
+}
+.select {
+  @include input-1;
+  margin: 0.5rem 0;
+}
 
 // ===========inserted==========

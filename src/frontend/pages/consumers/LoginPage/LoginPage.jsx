@@ -8,7 +8,7 @@ import Email from "@/frontend/components/consumers/Fields/Email";
 import Password from "@/frontend/components/consumers/Fields/Password";
 import SubmitButton from "@/frontend/components/consumers/SubmitButton/SubmitButton";
 import { signInAction } from "@/backend/entities/users/entry-points";
-import { getObject } from "@/frontend/helpers";
+import { getObject, isObjectFieldEqualsToValue } from "@/frontend/helpers";
 import styles from "./LoginPage.module.scss";
 import GoogleSignInButton from "@/frontend/components/consumers/GoogleSignInButton";
 
@@ -21,11 +21,9 @@ const LoginPage = () => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    for (const field of Object.values(userState)) {
-      if (field === "") {
-        setIsDisabled(true);
-        return;
-      }
+    if (isObjectFieldEqualsToValue(userState, "")) {
+      setIsDisabled(true);
+      return;
     }
 
     setIsDisabled(false);

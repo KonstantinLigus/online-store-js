@@ -27,6 +27,7 @@ const user = new mongoose.Schema({
     ref: { type: String, default: "" },
   },
   street: { type: String, default: "" },
+  house: { type: String, default: "" },
   flat: { type: String, default: "" },
   deliveryType: { type: String, default: "" },
   postOffice: {

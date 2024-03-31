@@ -1,26 +1,32 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./Field.module.scss";
 import { debounce } from "@/frontend/helpers";
 
 const DeliveryInputOptions = ({
   name,
-  deliveryData,
+  initValue,
   setDeliveryData,
   fetchAndSetData,
   type,
 }) => {
   const [optionsList, setOptionsList] = useState([]);
+  const [value, setValue] = useState(initValue || "");
 
-  const debouncedFetch = useMemo(
-    () => debounce(fetchAndSetData(setOptionsList), 1000),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setValue(initValue || "");
+  }, [initValue]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedFetch = useCallback(
+    debounce(fetchAndSetData(setOptionsList), 1000),
     [],
   );
 
   const handleInputChange = async e => {
     const { value } = e.target;
 
+    setValue(value);
     setDeliveryData(prev => ({ ...prev, [type]: { name: value, ref: "" } }));
     debouncedFetch(value);
   };
@@ -50,7 +56,7 @@ const DeliveryInputOptions = ({
           type="text"
           pattern={"^[^A-Za-z]+$"}
           autoComplete="off"
-          value={deliveryData[type].name || ""}
+          value={value}
           onChange={handleInputChange}
           className={styles.Field__input}
         />
@@ -59,12 +65,9 @@ const DeliveryInputOptions = ({
         </p>
         {optionsList?.length > 0 && (
           <ul className={styles.Field__optionList}>
-            {optionsList.map(option => (
-              <li
-                key={option.ref}
-                onClick={e => handleOptionClick(e, option.ref)}
-              >
-                {option.description}
+            {optionsList.map(({ description, ref }) => (
+              <li key={ref} onClick={e => handleOptionClick(e, ref)}>
+                {description}
               </li>
             ))}
           </ul>

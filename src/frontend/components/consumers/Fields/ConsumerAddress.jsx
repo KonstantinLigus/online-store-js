@@ -1,18 +1,9 @@
 "use client";
-import React, { useState } from "react";
 import styles from "./Field.module.scss";
 
-const ConsumerAddress = ({
-  consumer,
-  changeData,
-  streetIsValid,
-  setStreetIsValid,
-  houseIsValid,
-  setHouseIsValid,
-}) => {
+const ConsumerAddress = ({ consumer, setConsumer }) => {
   const handleStreet = e => {
-    if (!streetIsValid) setStreetIsValid(true);
-    changeData(prev => ({
+    setConsumer(prev => ({
       ...prev,
       street: e.target.value,
       house: "",
@@ -21,8 +12,7 @@ const ConsumerAddress = ({
   };
 
   const handleHouse = e => {
-    if (!houseIsValid) setHouseIsValid(true);
-    changeData(prev => ({
+    setConsumer(prev => ({
       ...prev,
       house: e.target.value,
       flat: "",
@@ -30,7 +20,7 @@ const ConsumerAddress = ({
   };
 
   const handleFlat = e => {
-    changeData(prev => ({
+    setConsumer(prev => ({
       ...prev,
       flat: e.target.value,
     }));
@@ -40,19 +30,19 @@ const ConsumerAddress = ({
     <>
       <label htmlFor="street" className={styles.labelText}>
         Вулиця:&nbsp;
-        <span
+        {/* <span
           className={styles.invalidData}
           style={streetIsValid ? { display: "none" } : { display: "initial" }}
         >
           Вкажіть вулицю
-        </span>
+        </span> */}
       </label>
       <input
         type="text"
         name="street"
         id="street"
         className={styles.inputText}
-        value={consumer.street}
+        defaultValue={consumer.street}
         onChange={handleStreet}
       />
 
@@ -60,21 +50,21 @@ const ConsumerAddress = ({
         <div>
           <label htmlFor="house" className={styles.labelText}>
             Будинок:&nbsp;
-            <span
+            {/* <span
               className={styles.invalidData}
               style={
                 houseIsValid ? { display: "none" } : { display: "initial" }
               }
             >
               Вкажіть № будинку
-            </span>
+            </span> */}
           </label>
           <input
             type="text"
             name="house"
             id="house"
             className={styles.inputText}
-            value={consumer.house}
+            defaultValue={consumer.house}
             onChange={handleHouse}
           />
         </div>
@@ -88,7 +78,7 @@ const ConsumerAddress = ({
             name="flat"
             id="flat"
             className={styles.inputText}
-            value={consumer.flat}
+            defaultValue={consumer.flat}
             onChange={handleFlat}
           />
         </div>
