@@ -1,0 +1,63 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-block: 1rem;
+}
+
+.control {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+
+  &__number {
+    border: 2px solid $color-green-1;
+    border-radius: 1rem;
+    color: $color-gray-light-1;
+    font-size: 1rem;
+    outline: none;
+    padding: 0.5rem;
+    width: 100px;
+  }
+}
+
+.sliders {
+  position: relative;
+
+  &__range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    min-width: 1.5rem;
+    position: absolute;
+    background-color: $color-green-3;
+    pointer-events: none;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      pointer-events: all;
+      width: 1.25rem;
+      height: 1.25rem;
+      background-color: $color-green-3;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      -webkit-appearance: none;
+      pointer-events: all;
+      width: 1.25rem;
+      height: 1.25rem;
+      background-color: $color-green-3;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./FilterDialog.module.scss";
+import PriceRange from "./PriceRange";
 
 const FilterDialog = ({ toggleFilter, sortedProducts, setFiltredProducts }) => {
+  const [minProductPrice, setMinProductPrice] = useState(0);
+  const [maxProductPrice, setMaxProductPrice] = useState(100);
+  const [minUserPrice, setMinUserPrice] = useState(0);
+  const [maxUserPrice, setMaxUserPrice] = useState(100);
   const [isAction, setIsAction] = useState(false);
+
+  useEffect(() => {
+    let prices = sortedProducts.map(
+      i => i.prices[0].actionPrice ?? i.prices[0].price,
+    );
+    setMinProductPrice(Math.min(...prices));
+    setMinUserPrice(Math.min(...prices));
+    setMaxProductPrice(Math.max(...prices));
+    setMaxUserPrice(Math.max(...prices));
+  }, []);
 
   const toFilter = () => {
     let filtredList = Array.from(sortedProducts);
+
+    if (minUserPrice > minProductPrice) {
+      filtredList = filtredList.filter(
+        item =>
+          (item.prices[0].actionPrice ?? item.prices[0].price) >= minUserPrice,
+      );
+    }
+
+    if (maxUserPrice < maxProductPrice) {
+      filtredList = filtredList.filter(
+        item =>
+          (item.prices[0].actionPrice ?? item.prices[0].price) <= maxUserPrice,
+      );
+    }
 
     if (isAction) {
       filtredList = filtredList.filter(
@@ -44,7 +73,14 @@ const FilterDialog = ({ toggleFilter, sortedProducts, setFiltredProducts }) => {
             className={styles.angleIcon}
           />
         </summary>
-        <p>Ціна</p>
+        <PriceRange
+          minProductPrice={minProductPrice}
+          maxProductPrice={maxProductPrice}
+          minUserPrice={minUserPrice}
+          setMinUserPrice={setMinUserPrice}
+          maxUserPrice={maxUserPrice}
+          setMaxUserPrice={setMaxUserPrice}
+        />
       </details>
 
       <details className={styles.details}>
