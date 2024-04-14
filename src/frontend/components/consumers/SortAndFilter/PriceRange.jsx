@@ -8,20 +8,37 @@ const PriceRange = ({
   setMinUserPrice,
   maxUserPrice,
   setMaxUserPrice,
+  minInputPrice,
+  setMinInputPrice,
+  maxInputPrice,
+  setMaxInputPrice,
 }) => {
-  const handleMinPrice = value => {
+  const inputMinPrice = value => {
     value = +value;
     maxUserPrice = +maxUserPrice;
+    setMinInputPrice(value.toString());
     if (value >= minProductPrice && value <= maxUserPrice) {
       setMinUserPrice(value);
     }
   };
 
-  const handleMaxPrice = value => {
+  const inputMaxPrice = value => {
+    console.log(value);
     value = +value;
     maxUserPrice = +maxUserPrice;
+    setMaxInputPrice(value.toString());
     if (value >= minUserPrice && value <= maxProductPrice)
       setMaxUserPrice(value);
+  };
+
+  const rangeMinPrice = value => {
+    setMinInputPrice(value);
+    setMinUserPrice(value);
+  };
+
+  const rangeMaxPrice = value => {
+    setMaxInputPrice(value);
+    setMaxUserPrice(value);
   };
 
   return (
@@ -30,22 +47,22 @@ const PriceRange = ({
         <input
           type="number"
           id="fromInput"
-          min={minProductPrice}
+          min={0}
           max={maxUserPrice}
-          value={minUserPrice}
+          value={minInputPrice}
           onChange={e => {
-            handleMinPrice(e.target.value);
+            inputMinPrice(e.target.value);
           }}
           className={styles.control__number}
         />
         <input
           type="number"
           id="toInput"
-          min={minUserPrice}
+          min={0}
           max={maxProductPrice}
-          value={maxUserPrice}
+          value={maxInputPrice}
           onChange={e => {
-            handleMaxPrice(e.target.value);
+            inputMaxPrice(e.target.value);
           }}
           className={styles.control__number}
         />
@@ -59,7 +76,7 @@ const PriceRange = ({
           max={maxUserPrice}
           value={minUserPrice}
           onChange={e => {
-            setMinUserPrice(e.target.value);
+            rangeMinPrice(e.target.value);
           }}
           style={{
             width: `${
@@ -77,7 +94,7 @@ const PriceRange = ({
           max={maxProductPrice}
           value={maxUserPrice}
           onChange={e => {
-            setMaxUserPrice(e.target.value);
+            rangeMaxPrice(e.target.value);
           }}
           style={{
             width: `${

@@ -44,6 +44,7 @@ const CategoryPage = ({ params }) => {
         setSortedProducts={setSortedProducts}
         filtredProducts={filtredProducts}
         setFiltredProducts={setFiltredProducts}
+        categories={[]}
       />
       <h2 className={styles.title}>{currentCategory}</h2>
 

@@ -33,12 +33,13 @@
     -webkit-appearance: none;
     appearance: none;
     height: 2px;
-    min-width: 1.5rem;
+    min-width: calc(1.25rem + 1px);
     position: absolute;
     background-color: $color-green-3;
     pointer-events: none;
 
     &::-webkit-slider-thumb {
+      appearance: none;
       -webkit-appearance: none;
       pointer-events: all;
       width: 1.25rem;
@@ -47,9 +48,11 @@
       border: none;
       border-radius: 50%;
       cursor: pointer;
+      outline: none;
     }
 
     &::-moz-range-thumb {
+      appearance: none;
       -webkit-appearance: none;
       pointer-events: all;
       width: 1.25rem;
