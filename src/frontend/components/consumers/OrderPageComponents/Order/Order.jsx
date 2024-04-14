@@ -5,7 +5,6 @@ import OrderForm from "./OrderForm/OrderForm";
 import LoginForm from "../../LoginForm";
 
 const Order = props => {
-  // const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [isCustomerAuthenticated, setIsCustomerAuthenticated] = useState(true);
 
   return (
@@ -43,8 +42,7 @@ const Order = props => {
 
       <div className={styles.formContainer}>
         {isCustomerAuthenticated && <OrderForm {...props} />}
-        {!isCustomerAuthenticated && <LoginForm callbackUrl="/account" />}
-        {/* {React.cloneElement(children, { ...props })} */}
+        {!isCustomerAuthenticated && <LoginForm callbackUrl="/order" />}
       </div>
     </div>
   );
