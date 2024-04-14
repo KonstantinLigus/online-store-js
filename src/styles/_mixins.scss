@@ -119,6 +119,28 @@
   }
 }
 
+@mixin checkbox-1 {
+  appearance: none;
+  border: 2px solid $color-green-dark-2;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 16px;
+  position: relative;
+  width: 16px;
+  &:checked::after {
+    content: "";
+    border: 2px solid $color-green-dark-2;
+    border-right: none;
+    border-top: none;
+    bottom: 4px;
+    height: 6px;
+    left: 2px;
+    position: absolute;
+    transform: rotate(-45deg);
+    width: 10px;
+  }
+}
+
 @mixin button-icon {
   background: transparent;
   cursor: pointer;
