@@ -13,7 +13,7 @@ export const itemSchema = new mongoose.Schema({
   ],
   images: { type: [String] },
   mainImage: { type: String },
-  category: { type: [String], required: true },
+  category: { type: String, required: true },
   label: { type: [String] },
   producer: { type: String },
 });
