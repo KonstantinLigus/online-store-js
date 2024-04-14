@@ -2,25 +2,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "./OrderForm.module.scss";
 import Fieldset from "./Fieldset/Fieldset";
-// import Phone from "./Phone/Phone";
-// import Email from "./Email/Email";
-import FirstName from "./FirstName/FirstName";
-import SecondName from "./SecondName/SecondName";
-// import Surname from "./Surname/Surname";
-// import DeliveryType from "./Delivery/DeliveryType";
-import Payment from "./Payment/Payment";
 import Comment from "./Comment/Comment";
-import { getUserAction } from "@/backend/entities/users/entry-points";
 import Phone from "../../../Fields/Phone";
 import Email from "../../../Fields/Email";
 import Name from "../../../Fields/Name";
 import DeliveryFields from "../../../Fields/DeliveryFields";
 import PaymentChecker from "../../../Fields/PaymentChecker";
 import DeliveryType from "../../../Fields/DeliveryType";
+import { isObjectFieldEqualsToValue } from "@/frontend/helpers";
+import deliveryTypes from "../../../Fields/deliveryTypes";
+
+const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
 const userInitValues = {
   firstName: "",
-  secondName: "",
   surname: "",
   deliveryType: "Нова Пошта - Відділення",
   region: { name: "", ref: "" },
@@ -38,13 +33,29 @@ const userInitValues = {
 const OrderForm = props => {
   const { user, cart, setIsOrderCreated, removeCart, setPaymentData } = props;
   const [consumer, setConsumer] = useState(user || userInitValues);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (consumer.deliveryType === postOfficeDelivery) {
+      delete consumer.street;
+      delete consumer.house;
+      delete consumer.flat;
+    }
+    if (consumer.deliveryType === courierDelivery) {
+      delete consumer.postOffice;
+    }
+
+    !consumer.comment && delete consumer.comment;
+    delete consumer.birthday;
+    delete consumer.image;
+
+    const isEmpty = isObjectFieldEqualsToValue(consumer, "");
+    setIsDisabled(isEmpty);
+  }, [consumer]);
 
   const validateData = async e => {
-    e.preventDefault();
-    await sendOrder();
-  };
-
-  const sendOrder = async () => {
+    // e.preventDefault();
+    // await sendOrder();
     let orderedProducts = cart.map(i => ({
       _id: i._id,
       productName: i.title,
@@ -54,9 +65,10 @@ const OrderForm = props => {
         ? i.prices[i.measure].actionPrice
         : i.prices[i.measure].price,
     }));
-    delete consumer._id;
-    delete consumer.birthday;
-    delete consumer.image;
+    consumer._id && delete consumer._id;
+    consumer.birthday && delete consumer.birthday;
+    consumer.image && delete consumer.image;
+
     consumer.paymentMethod = "card";
 
     let orderForSending = { deliveryInfo: consumer, products: orderedProducts };
@@ -70,7 +82,10 @@ const OrderForm = props => {
       const { liqPayEncodedData } = await res.json();
       setPaymentData(liqPayEncodedData);
     }
+
+    // const sendOrder = async () => {
   };
+  // };
 
   return (
     <form action="GET" className={styles.form}>
@@ -105,6 +120,7 @@ const OrderForm = props => {
           value="Оформити замовлення"
           className={styles.btnOrder}
           onClick={e => validateData(e)}
+          disabled={isDisabled}
         />
       </div>
     </form>

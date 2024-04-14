@@ -8,13 +8,15 @@ import { signIn } from "../domain/signIn-use-case";
 
 export async function signInAction(_prevState, formData) {
   let isUserFromDB = null;
+  let callbackUrl = null;
   try {
     const user = Object.fromEntries(formData.entries());
+    callbackUrl = user.callbackUrl;
     const result = userSignInZodSchema.safeParse(user);
     if (!result.success) throw new ParseError(result.error);
     isUserFromDB = await signIn(user);
   } catch (err) {
     return getError(err).error;
   }
-  if (isUserFromDB) redirectToPage("/account");
+  if (isUserFromDB) redirectToPage(callbackUrl);
 }

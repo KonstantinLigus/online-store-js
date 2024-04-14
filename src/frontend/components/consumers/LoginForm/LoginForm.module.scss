@@ -1,0 +1,28 @@
+@import "@/styles/responsive";
+@import "@/styles/mixins";
+
+.LoginForm___title {
+  @include fonts($size: $font-size-xl);
+  margin-bottom: $m;
+}
+.LoginForm___form {
+  margin-bottom: $m;
+}
+.LoginForm__inputWrapper {
+  margin-bottom: $m;
+}
+.LoginForm__container {
+  @include wrapper;
+}
+.LoginForm__errorMsg {
+  @include invalidData;
+  margin-top: $s;
+}
+.LoginForm__nav {
+  margin-bottom: $m;
+  display: flex;
+  justify-content: space-between;
+}
+.LoginForm__alternateAuth {
+  margin-bottom: $s;
+}
