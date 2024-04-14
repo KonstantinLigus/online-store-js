@@ -2,27 +2,39 @@
 import React, { useState } from "react";
 import styles from "./Order.module.scss";
 import OrderForm from "./OrderForm/OrderForm";
-import RegularCustomer from "./RegularCustomer/RegularCustomer";
+import LoginForm from "../../LoginForm";
 
 const Order = props => {
-  const [userAuthenticated, setUserAuthenticated] = useState(false);
-  const [newCustomer, setNewCustomer] = useState(true);
+  // const [userAuthenticated, setUserAuthenticated] = useState(false);
+  const [isCustomerAuthenticated, setIsCustomerAuthenticated] = useState(true);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.nav}>
         <div className={styles.authenticated}>
-          {!userAuthenticated && (
+          {!props.user && (
             <>
               <div
-                className={newCustomer ? styles.customerOn : styles.customerOff}
+                className={
+                  isCustomerAuthenticated
+                    ? styles.customerOn
+                    : styles.customerOff
+                }
               >
-                <p onClick={() => setNewCustomer(true)}>Я новий покупець</p>
+                <p onClick={() => setIsCustomerAuthenticated(true)}>
+                  Я новий покупець
+                </p>
               </div>
               <div
-                className={newCustomer ? styles.customerOff : styles.customerOn}
+                className={
+                  isCustomerAuthenticated
+                    ? styles.customerOff
+                    : styles.customerOn
+                }
               >
-                <p onClick={() => setNewCustomer(false)}>Я постійний клієнт</p>
+                <p onClick={() => setIsCustomerAuthenticated(false)}>
+                  Я постійний клієнт
+                </p>
               </div>
             </>
           )}
@@ -30,8 +42,9 @@ const Order = props => {
       </div>
 
       <div className={styles.formContainer}>
-        <OrderForm {...props} />
-        {!userAuthenticated && !newCustomer && <RegularCustomer />}
+        {isCustomerAuthenticated && <OrderForm {...props} />}
+        {!isCustomerAuthenticated && <LoginForm callbackUrl="/account" />}
+        {/* {React.cloneElement(children, { ...props })} */}
       </div>
     </div>
   );
