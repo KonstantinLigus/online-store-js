@@ -68,11 +68,6 @@
     }
   }
 
-  .similarProducts {
-    @include wrapper;
-    padding-top: 5em !important;
-  }
-
   .price {
     @include wrapper;
     align-items: center;
@@ -116,4 +111,9 @@
     @include wrapper;
     font-size: 1.5em;
   }
+}
+
+.similarProducts {
+  @include wrapper;
+  padding-top: 5em !important;
 }
