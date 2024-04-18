@@ -75,7 +75,6 @@ const CategoriesPage = () => {
       for (let i of data)
         producersList.push({ id: i._id, producer: i.name, selected: false });
       setProducers(producersList);
-      console.log(producersList);
     };
     fetchData();
   }, []);

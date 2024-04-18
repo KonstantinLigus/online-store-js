@@ -38,11 +38,13 @@
   &__text_wrapper {
     color: $color-gray-dark-1;
     font-size: 1rem;
-    overflow: auto;
+    overflow: hidden;
     position: relative;
-
     @media screen and (min-width: $burger-menu-screen-width) {
       color: $color-gray-light-1;
+    }
+    @media (pointer: coarse) {
+      overflow: auto;
     }
   }
 
