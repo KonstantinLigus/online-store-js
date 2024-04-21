@@ -48,14 +48,21 @@ const CartPage = () => {
               ))}
             </ul>
           </div>
+        </>
+      )}
 
-          <div className={styles.similarProducts}>
-            <ProductList
-              className={styles.productList}
-              title="Вас може зацікавити:"
-            />
-          </div>
+      {(cart === null || cart.length === 0) && (
+        <p className={styles.warning}>Ви ще нічого не додали в кошик!</p>
+      )}
+      <div className={styles.similarProducts}>
+        <ProductList
+          className={styles.productList}
+          title="Вас може зацікавити:"
+        />
+      </div>
 
+      {cart !== null && cart.length > 0 && (
+        <>
           <div className={styles.price}>
             <p className={styles.caption}>Всього до сплати:</p>
             <p className={styles.sum}>{totalPrice} грн</p>
@@ -67,9 +74,6 @@ const CartPage = () => {
             </Link>
           </div>
         </>
-      )}
-      {(cart === null || cart.length === 0) && (
-        <p className={styles.warning}>Ви ще нічого не додали в кошик!</p>
       )}
     </main>
   );

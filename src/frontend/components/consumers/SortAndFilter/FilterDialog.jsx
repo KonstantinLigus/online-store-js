@@ -3,12 +3,15 @@ import Image from "next/image";
 import styles from "./FilterDialog.module.scss";
 import PriceRange from "./PriceRange";
 import CategoriesFilter from "./CategoriesFilter";
+import ProducersFilter from "./ProducersFilter";
 
 const FilterDialog = ({
   toggleFilter,
   sortedProducts,
   setFiltredProducts,
+  setFiltredProductsLength,
   categories,
+  producers,
 }) => {
   const [minProductPrice, setMinProductPrice] = useState(0);
   const [maxProductPrice, setMaxProductPrice] = useState(100);
@@ -23,6 +26,8 @@ const FilterDialog = ({
   const [grocery, setGrocery] = useState(false);
   const [conservation, setConservation] = useState(false);
   const [milk, setMilk] = useState(false);
+
+  const [selectedProducers, setSelectedProducers] = useState([]);
 
   const [isAction, setIsAction] = useState(false);
 
@@ -63,8 +68,12 @@ const FilterDialog = ({
       if (grocery) allCategories.push("бакалія");
       if (conservation) allCategories.push("консервація");
       if (milk) allCategories.push("молоко");
-      filtredList = filtredList.filter(i =>
-        i.category.some(value => allCategories.includes(value)),
+      filtredList = filtredList.filter(i => allCategories.includes(i.category));
+    }
+
+    if (selectedProducers.length > 0) {
+      filtredList = filtredList.filter(item =>
+        selectedProducers.includes(item.producer),
       );
     }
 
@@ -75,15 +84,16 @@ const FilterDialog = ({
     }
 
     setFiltredProducts(filtredList);
+    setFiltredProductsLength(filtredList.length);
     toggleFilter();
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <p className={styles.titleName}>Фільтри</p>
+        <p className={styles.title__name}>Фільтри</p>
         <Image
-          className={styles.titleIcon}
+          className={styles.title__icon}
           src="/assets/icon/icon-close.svg"
           alt="sort icon"
           width={16}
@@ -94,14 +104,14 @@ const FilterDialog = ({
       </div>
 
       <details className={styles.details}>
-        <summary className={styles.summary}>
-          <span>Ціна</span>
+        <summary className={styles.details__summary}>
+          <span className={styles.details__summary_span}>Ціна</span>
           <Image
             src="/assets/icon/icon-angle-down.svg"
             alt="heart icon"
             width={16}
             height={16}
-            className={styles.angleIcon}
+            className={styles.details__angleIcon}
           />
         </summary>
         <PriceRange
@@ -120,14 +130,14 @@ const FilterDialog = ({
 
       {categories.length > 0 && (
         <details className={styles.details}>
-          <summary className={styles.summary}>
-            <span>Категорії</span>
+          <summary className={styles.details__summary}>
+            <span className={styles.details__summary_span}>Категорії</span>
             <Image
               src="/assets/icon/icon-angle-down.svg"
               alt="heart icon"
               width={16}
               height={16}
-              className={styles.angleIcon}
+              className={styles.details__angleIcon}
             />
           </summary>
           <CategoriesFilter
@@ -148,21 +158,28 @@ const FilterDialog = ({
       )}
 
       <details className={styles.details}>
-        <summary className={styles.summary}>
-          <span>Виробник</span>
+        <summary className={styles.details__summary}>
+          <span className={styles.details__summary_span}>Виробник</span>
           <Image
             src="/assets/icon/icon-angle-down.svg"
             alt="heart icon"
             width={16}
             height={16}
-            className={styles.angleIcon}
+            className={styles.details__angleIcon}
           />
         </summary>
-        <p>Виробник</p>
+        <ProducersFilter
+          producers={producers}
+          selectedProducers={selectedProducers}
+          setSelectedProducers={setSelectedProducers}
+        />
       </details>
 
-      <div className={styles.action}>
-        <label htmlFor="action" className={styles.action__label}>
+      <div className={styles.checkbox}>
+        <label
+          htmlFor="action"
+          className={`${styles.checkbox__label} ${styles.checkbox__label_color_black}`}
+        >
           Акційні товари
         </label>
         <input
@@ -170,7 +187,7 @@ const FilterDialog = ({
           name="action"
           id="action"
           onChange={() => setIsAction(!isAction)}
-          className={styles.action__checkbox}
+          className={styles.checkbox__checkbox}
         />
       </div>
 
