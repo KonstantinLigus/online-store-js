@@ -6,7 +6,7 @@ import ProductList from "@/frontend/components/consumers/ProductList/ProductList
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 import LikeIcon from "@/frontend/components/consumers/LikeIcon/LikeIcon";
-import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
 
 const ProductPage = ({ params }) => {
@@ -31,7 +31,11 @@ const ProductPage = ({ params }) => {
   return (
     data && (
       <>
-        <ToPreviousPage title={data.title} />
+        <PathToPage
+          categories={true}
+          category={data.category}
+          product={data.title}
+        />
 
         <div className={styles.productCard}>
           <h2 className={styles.productName}>{data.title}</h2>
