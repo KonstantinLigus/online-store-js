@@ -1,4 +1,4 @@
-import userControllers from "@/backend/entities/users";
+import userServices from "@/backend/entities/users/data-access/userServices";
 import { UserNotFoundError } from "@/backend/helpers/errors";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
@@ -11,13 +11,13 @@ async function passwordRecover(req) {
   const userEmailObj = await req.json();
   userEmailZodSchema.parse(userEmailObj);
   const { email } = userEmailObj;
-  const { user: userFromDB, status } = await userControllers.getUserByField({
+  const { user: userFromDB, status } = await userServices.getUserByField({
     email,
   });
   if (!userFromDB) throw new UserNotFoundError();
   const newPassword = getRandomUUID().substring(0, 8);
   const newHashedPassword = await getHashedPassword(newPassword);
-  await userControllers.updateUser({ email }, { password: newHashedPassword });
+  await userServices.updateUser({ email }, { password: newHashedPassword });
   const messageWithNewPassword = createPasswordRecoverMessage({
     email,
     newPassword,
