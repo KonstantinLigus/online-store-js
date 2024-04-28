@@ -5,7 +5,7 @@ import Loader from "@/frontend/components/consumers/Loader";
 import { useFormStatus } from "react-dom";
 import styles from "./submitButton.module.scss";
 
-export default function SubmitButton({ children, disabled, onClick }) {
+export default function SubmitButton({ children, disabled }) {
   const { pending } = useFormStatus();
 
   return (
@@ -14,7 +14,6 @@ export default function SubmitButton({ children, disabled, onClick }) {
         type="submit"
         className={styles.submitBtn}
         disabled={disabled || pending}
-        onClick={onClick}
       >
         {children}
       </button>

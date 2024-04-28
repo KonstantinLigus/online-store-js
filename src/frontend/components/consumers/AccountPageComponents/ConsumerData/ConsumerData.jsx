@@ -2,15 +2,22 @@
 import React, { useState, useEffect, useTransition } from "react";
 import styles from "./ConsumerData.module.scss";
 import Details from "./Details/Details";
-import Phone from "./Phone/Phone";
-import Email from "./Email/Email";
-import FirstName from "./FirstName/FirstName";
-import Surname from "./Surname/Surname";
-import Birthday from "./Birthday/Birthday";
-import DeliveryType from "./Delivery/DeliveryType";
-import Password from "./Password/Password";
+// import Phone from "./Phone/Phone";
+// import Email from "./Email/Email";
+// import FirstName from "./FirstName/FirstName";
+// import Surname from "./Surname/Surname";
+// import Birthday from "./Birthday/Birthday";
+// import DeliveryType from "./Delivery/DeliveryType";
+// import Password from "./Password/Password";
 import Modal from "../../Modal";
 import Loader from "../../Loader";
+import Phone from "../../Fields/Phone";
+import { isObjectFieldEqualsToValue } from "@/frontend/helpers";
+import Email from "../../Fields/Email";
+import Name from "../../Fields/Name";
+import DeliveryType from "../../Fields/DeliveryType";
+import DeliveryFields from "../../Fields/DeliveryFields";
+import deliveryTypes from "../../Fields/deliveryTypes";
 
 const dataChanging = {
   firstName: false,
@@ -30,29 +37,49 @@ const dataChanging = {
   newPasswordRepeat: false,
 };
 
-const ConsumerData = props => {
-  const [consumerData, setConsumerData] = useState(props.consumer);
-  const [dataWasChanged, setDataWasChanged] = useState(dataChanging);
-  const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
+const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
+
+const ConsumerData = ({ user }) => {
+  const [consumerData, setConsumerData] = useState(user);
+  // const [dataWasChanged, setDataWasChanged] = useState(dataChanging);
+  // const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [isPending, startTransition] = useTransition();
 
-  const checkChanges = () => {
-    let wasChanged = false;
-    if (Object.values(dataWasChanged).some(i => i === true)) wasChanged = true;
-    if (Object.values(dataWasChanged).some(i => i === null)) wasChanged = false;
-    wasChanged ? setSaveChangesDisabled(false) : setSaveChangesDisabled(true);
-  };
+  // const checkChanges = () => {
+  //   let wasChanged = false;
+  //   if (Object.values(dataWasChanged).some(i => i === true)) wasChanged = true;
+  //   if (Object.values(dataWasChanged).some(i => i === null)) wasChanged = false;
+  //   wasChanged ? setSaveChangesDisabled(false) : setSaveChangesDisabled(true);
+  // };
 
+  // useEffect(() => {
+  //   checkChanges();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dataWasChanged]);
   useEffect(() => {
-    checkChanges();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataWasChanged]);
+    if (consumerData.deliveryType === postOfficeDelivery) {
+      delete consumerData.street;
+      delete consumerData.house;
+      delete consumerData.flat;
+    }
+    if (consumerData.deliveryType === courierDelivery) {
+      delete consumerData.postOffice;
+    }
+
+    !consumerData.comment && delete consumerData.comment;
+    delete consumerData.birthday;
+    delete consumerData.image;
+
+    const isEmpty = isObjectFieldEqualsToValue(consumerData, "");
+    setIsDisabled(isEmpty);
+  }, [consumerData]);
 
   const saveChanges = async e => {
     e.preventDefault();
-    consumerData.customerPhone = consumerData.customerPhone.replace(/\s+/g, "");
+    // consumerData.customerPhone = consumerData.customerPhone.replace(/\s+/g, "");
     const res = await fetch("/api/auth/updateUser", {
       method: "POST",
       body: JSON.stringify(consumerData),
@@ -64,42 +91,31 @@ const ConsumerData = props => {
     <form action="GET" className={styles.form}>
       <Details title={"Контактна інформація"}>
         <Phone
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          setDataWasChanged={setDataWasChanged}
+          initValue={consumerData.customerPhone}
+          setState={setConsumerData}
         />
-        <Email
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          setDataWasChanged={setDataWasChanged}
+        <Email initValue={consumerData.email} setState={setConsumerData} />
+        <Name
+          name="surname"
+          initValue={consumerData.surname}
+          setState={setConsumerData}
         />
-        <Surname
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          setDataWasChanged={setDataWasChanged}
-        />
-        <FirstName
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          setDataWasChanged={setDataWasChanged}
-        />
-        <Birthday
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          setDataWasChanged={setDataWasChanged}
+        <Name
+          name="firstName"
+          initValue={consumerData.firstName}
+          setState={setConsumerData}
         />
       </Details>
 
       <Details title={"Адреса доставки"}>
         <DeliveryType
-          consumerData={consumerData}
-          setConsumerData={setConsumerData}
-          dataWasChanged={dataWasChanged}
-          setDataWasChanged={setDataWasChanged}
+          initValue={consumerData.deliveryType}
+          setConsumer={setConsumerData}
         />
+        <DeliveryFields consumer={consumerData} setConsumer={setConsumerData} />
       </Details>
 
-      <Details title={"Зміна паролю"}>
+      {/* <Details title={"Зміна паролю"}>
         <Password
           placeholder="Введіть старий пароль"
           consumerData={consumerData}
@@ -121,7 +137,7 @@ const ConsumerData = props => {
           setDataWasChanged={setDataWasChanged}
           paswdType="newPasswordRepeat"
         />
-      </Details>
+      </Details> */}
 
       <Modal isOpen={isSaved} setIsOpen={() => setIsSaved(false)}>
         <p className={styles.messageStatus}>Данні збережено</p>
@@ -131,7 +147,7 @@ const ConsumerData = props => {
       </Modal>
       <div className={styles.buttonsWrapper}>
         <input
-          disabled={saveChangesDisabled}
+          disabled={isDisabled}
           type="button"
           value="Зберегти зміни"
           className={styles.formButton}

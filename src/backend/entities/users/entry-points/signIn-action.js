@@ -18,5 +18,5 @@ export async function signInAction(_prevState, formData) {
   } catch (err) {
     return getError(err).error;
   }
-  if (isUserFromDB) redirectToPage(callbackUrl);
+  if (isUserFromDB && callbackUrl) redirectToPage(callbackUrl, "replace");
 }

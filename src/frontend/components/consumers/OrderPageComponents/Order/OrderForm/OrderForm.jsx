@@ -54,8 +54,6 @@ const OrderForm = props => {
   }, [consumer]);
 
   const validateData = async e => {
-    // e.preventDefault();
-    // await sendOrder();
     let orderedProducts = cart.map(i => ({
       _id: i._id,
       productName: i.title,
@@ -82,10 +80,7 @@ const OrderForm = props => {
       const { liqPayEncodedData } = await res.json();
       setPaymentData(liqPayEncodedData);
     }
-
-    // const sendOrder = async () => {
   };
-  // };
 
   return (
     <form action="GET" className={styles.form}>
