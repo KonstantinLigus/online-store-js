@@ -12,7 +12,15 @@ const SortDialog = ({
   const [sortType, setSortType] = useState(1);
 
   const sortPopularFirst = list => {
-    alert("Спочатку популярні");
+    list.sort(function (a, b) {
+      if (a.label.includes("популярні") < b.label.includes("популярні")) {
+        return 1;
+      }
+      if (a.label.includes("популярні") > b.label.includes("популярні")) {
+        return -1;
+      }
+      return 0;
+    });
   };
 
   const sortActionFirst = list => {
@@ -76,7 +84,8 @@ const SortDialog = ({
     let filtredList = Array.from(filtredProducts);
     switch (sortType) {
       case 1:
-        sortPopularFirst();
+        sortPopularFirst(sortedList);
+        sortPopularFirst(filtredList);
         break;
       case 2:
         sortActionFirst(sortedList);
@@ -107,6 +116,16 @@ const SortDialog = ({
     toggleSort();
   };
 
+  const parameters = [
+    ["Спочатку популярні", "popular", 1],
+    ["Спочатку акційні", "sale", 2],
+    ["За рейтингом", "rating", 3],
+    ["Від А до Я", "aToZ", 4],
+    ["Від Я до А", "zToA", 5],
+    ["Спочатку дешевші", "cheapFirst", 6],
+    ["Спочатку дорожчі", "expensiveFirst", 7],
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -123,76 +142,18 @@ const SortDialog = ({
       </div>
 
       <ul className={styles.sortItems}>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio1">Спочатку популярні</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio1"
-            value={"1"}
-            onChange={() => setSortType(1)}
-          />
-        </li>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio2">Спочатку акційні</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio2"
-            value={"2"}
-            onChange={() => setSortType(2)}
-          />
-        </li>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio3">За рейтингом</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio3"
-            value={"3"}
-            onChange={() => setSortType(3)}
-          />
-        </li>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio4">Від А до Я</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio4"
-            value={"4"}
-            onChange={() => setSortType(4)}
-          />
-        </li>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio5">Від Я до А</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio5"
-            value={"5"}
-            onChange={() => setSortType(5)}
-          />
-        </li>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio6">Спочатку дешевші</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio6"
-            value={"6"}
-            onChange={() => setSortType(6)}
-          />
-        </li>
-        <li className={styles.sortItem}>
-          <label htmlFor="sortRadio7">Спочатку дорожчі</label>
-          <input
-            type="radio"
-            name="sort"
-            id="sortRadio7"
-            value={"7"}
-            onChange={() => setSortType(7)}
-          />
-        </li>
+        {parameters.map(item => (
+          <li className={styles.sortItem} key={item[1]}>
+            <label htmlFor={item[1]}>{item[0]}</label>
+            <input
+              type="radio"
+              name="sort"
+              id={item[1]}
+              value={item[2]}
+              onChange={() => setSortType(item[2])}
+            />
+          </li>
+        ))}
       </ul>
 
       <button type="button" className={styles.button} onClick={toSort}>

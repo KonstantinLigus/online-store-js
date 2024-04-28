@@ -5,18 +5,9 @@ import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 import Link from "next/link";
-import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import SortAndFilter from "@/frontend/components/consumers/SortAndFilter/SortAndFilter";
-/*
-const allCategories = {
-  vegetables: "овочі",
-  fruits: "фрукти та ягоди",
-  nuts: "горіхи",
-  grocery: "бакалія",
-  conservation: "консервація",
-  milk: "молоко",
-};
-*/
+import NoFiltredProducts from "@/frontend/components/consumers/SortAndFilter/NoFiltredProducts";
 
 const allCategories = [
   "овочі",
@@ -39,7 +30,9 @@ const linkCategories = {
 const CategoriesPage = () => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const [filtredProducts, setFiltredProducts] = useState([]);
+  const [filtredProductsLength, setFiltredProductsLength] = useState(1);
   const [productsByCategories, setProductsByCategories] = useState([]);
+  const [producers, setProducers] = useState([]);
   const { cart, addToCart, removeFromCart } = useCart();
 
   const sortByCategories = list => {
@@ -53,16 +46,14 @@ const CategoriesPage = () => {
     };
 
     for (let i of list) {
-      for (let j of i.category) {
-        if (allCategories.includes(j)) productsByCategories[j].push(i);
-      }
+      if (allCategories.includes(i.category))
+        productsByCategories[i.category].push(i);
     }
 
     for (let i of Object.keys(productsByCategories)) {
       if (productsByCategories[i].length === 0) delete productsByCategories[i];
     }
 
-    console.log(productsByCategories);
     return productsByCategories;
   };
 
@@ -77,6 +68,13 @@ const CategoriesPage = () => {
       setSortedProducts(items);
       setFiltredProducts(items);
       setProductsByCategories(sortByCategories(items));
+
+      const producers = await fetch("api/producers");
+      let data = await producers.json();
+      let producersList = [];
+      for (let i of data)
+        producersList.push({ id: i._id, producer: i.name, selected: false });
+      setProducers(producersList);
     };
     fetchData();
   }, []);
@@ -87,36 +85,42 @@ const CategoriesPage = () => {
 
   return (
     <div className={styles.categories}>
-      <ToPreviousPage />
+      <PathToPage />
       <SortAndFilter
         sortedProducts={sortedProducts}
         setSortedProducts={setSortedProducts}
         filtredProducts={filtredProducts}
         setFiltredProducts={setFiltredProducts}
+        setFiltredProductsLength={setFiltredProductsLength}
         categories={allCategories}
+        producers={producers}
       />
-      {Object.keys(productsByCategories).map((item, index) => (
-        <div key={index} className={styles.category}>
-          <h2 key={index} className={styles.categoryName}>
-            <Link href={`/category/${linkCategories[item]}`}>{item}</Link>
-          </h2>
+      {filtredProductsLength > 0 ? (
+        Object.keys(productsByCategories).map((item, index) => (
+          <div key={index} className={styles.category}>
+            <h2 key={index} className={styles.categoryName}>
+              <Link href={`/category/${linkCategories[item]}`}>{item}</Link>
+            </h2>
 
-          <ul className={styles.products}>
-            {productsByCategories[item].map(item => (
-              <ProductItem key={item._id} id={item._id} {...item}>
-                {cartChecker(item._id) ? (
-                  <Button
-                    title="З кошика"
-                    onClick={() => removeFromCart(item._id)}
-                  />
-                ) : (
-                  <Button title="До кошика" onClick={() => addToCart(item)} />
-                )}
-              </ProductItem>
-            ))}
-          </ul>
-        </div>
-      ))}
+            <ul className={styles.products}>
+              {productsByCategories[item].map(item => (
+                <ProductItem key={item._id} id={item._id} {...item}>
+                  {cartChecker(item._id) ? (
+                    <Button
+                      title="З кошика"
+                      onClick={() => removeFromCart(item._id)}
+                    />
+                  ) : (
+                    <Button title="До кошика" onClick={() => addToCart(item)} />
+                  )}
+                </ProductItem>
+              ))}
+            </ul>
+          </div>
+        ))
+      ) : (
+        <NoFiltredProducts />
+      )}
     </div>
   );
 };

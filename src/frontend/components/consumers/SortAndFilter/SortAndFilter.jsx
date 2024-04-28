@@ -9,7 +9,9 @@ const SortAndFilter = ({
   setSortedProducts,
   filtredProducts,
   setFiltredProducts,
+  setFiltredProductsLength,
   categories,
+  producers,
 }) => {
   const [filterIsOpen, setFilterIsOPen] = useState(false);
   const [sortIsOpen, setSortIsOPen] = useState(false);
@@ -58,7 +60,9 @@ const SortAndFilter = ({
               toggleFilter={toggleFilter}
               sortedProducts={sortedProducts}
               setFiltredProducts={setFiltredProducts}
+              setFiltredProductsLength={setFiltredProductsLength}
               categories={categories}
+              producers={producers}
             />
           </div>
         )}
