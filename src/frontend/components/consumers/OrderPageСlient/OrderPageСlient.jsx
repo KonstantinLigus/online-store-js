@@ -24,7 +24,7 @@ const OrderPageClient = ({ user }) => {
 
   return (
     <>
-      <ToPreviousPage title="Оформлення замовлення" />
+      {/* <ToPreviousPage title="Оформлення замовлення" /> */}
       <div className={styles.order}>
         {cart?.length > 0 && !isOrderCreated && (
           <>
@@ -87,7 +87,6 @@ const OrderPageClient = ({ user }) => {
             setPaymentData={setPaymentData}
           />
         )}
-        {/* <Order /> */}
       </div>
     </>
   );
