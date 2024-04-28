@@ -18,7 +18,7 @@ const DelivetyFields = ({ consumer, setConsumer }) => {
       const {
         region: { name: prevRegionName },
         city: { name: prevCityName },
-        postOffice: { name: prevPostOfficeName },
+        // postOffice: { name: prevPostOfficeName },
       } = prev;
 
       const {
@@ -40,12 +40,12 @@ const DelivetyFields = ({ consumer, setConsumer }) => {
           city: deliveryData.city,
           postOffice: { ref: "", name: "" },
         };
-      if (prevPostOfficeName.length > currentPostOfficeName.length)
+      if (prev.postOffice?.name.length > currentPostOfficeName.length)
         return {
           ...prev,
           postOffice: { ref: "", name: "" },
         };
-      if (prevPostOfficeName.length < currentPostOfficeName.length)
+      if (prev.postOffice?.name.length < currentPostOfficeName.length)
         return {
           ...prev,
           postOffice: {

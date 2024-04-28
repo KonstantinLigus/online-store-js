@@ -1,4 +1,4 @@
-import userControllers from "@/backend/entities/users";
+import userServices from "@/backend/entities/users/data-access/userServices";
 import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { verifyToken } from "@/backend/libs/jwt/verifyToken";
@@ -16,7 +16,7 @@ async function refreshToken(req) {
     const invalidTokenDataError = new Error("Invalid data in token");
     invalidTokenDataError.name = "invalidTokenDataError";
   }
-  const userFromDB = await userControllers.getUserByField({ _id: result._id });
+  const userFromDB = await userServices.getUserByField({ _id: result._id });
   if (!userFromDB) throw new Error("User not found");
   const newToken = createUserToken(userFromDB._id);
   await setUserTokenToCookie(newToken);

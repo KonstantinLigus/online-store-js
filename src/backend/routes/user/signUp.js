@@ -1,5 +1,5 @@
 import { userSignUpZodSchema } from "@/backend/libs/zod/user.signUp.zod.schema";
-import userControllers from "@/backend/entities/users";
+import userServices from "@/backend/entities/users/data-access/userServices";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
@@ -13,7 +13,7 @@ async function signUp(req) {
   const user = await req.json();
   userSignUpZodSchema.parse(user);
   const { password, email } = user;
-  const { user: userFromDB } = await userControllers.getUserByField({ email });
+  const { user: userFromDB } = await userServices.getUserByField({ email });
   if (userFromDB) throw new UserExistError(email);
   user.password = await getHashedPassword(password);
   const verificationToken = getRandomUUID();
@@ -23,7 +23,7 @@ async function signUp(req) {
     verificationToken,
   });
   await sendEmail(message);
-  const { user: createdUser, status } = await userControllers.createUser(user);
+  const { user: createdUser, status } = await userServices.createUser(user);
   const token = createUserToken(createdUser._id);
   await setUserTokenToCookie(token);
   delete createdUser._id;

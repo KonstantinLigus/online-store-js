@@ -1,4 +1,4 @@
-import userControllers from "@/backend/entities/users";
+import userServices from "@/backend/entities/users/data-access/userServices";
 import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { userSignInZodSchema } from "@/backend/libs/zod/user.signIn.schema";
@@ -14,7 +14,7 @@ async function signIn(req) {
   const user = await req.json();
   userSignInZodSchema.parse(user);
   const { email, password } = user;
-  const { user: userFromDB, status } = await userControllers.getUserByField({
+  const { user: userFromDB, status } = await userServices.getUserByField({
     email,
   });
   if (!userFromDB) throw new UserNotFoundError();
