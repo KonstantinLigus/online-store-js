@@ -19,12 +19,12 @@ const OrderPageClient = ({ user }) => {
 
   const onToggleBtnClick = () => {
     setIsPaymentShown(!isPaymentShown);
-    if (isPaymentShown) setPaymentData(false);
+    // if (isPaymentShown) setPaymentData(false);
   };
 
   return (
     <>
-      {/* <ToPreviousPage title="Оформлення замовлення" /> */}
+      <ToPreviousPage title="Оформлення замовлення" />
       <div className={styles.order}>
         {cart?.length > 0 && !isOrderCreated && (
           <>
@@ -69,16 +69,17 @@ const OrderPageClient = ({ user }) => {
           </>
         )}
 
-        {!cart && (
+        {cart?.length === 0 && (
           <h1 className={styles.warning}>Ви ще нічого не додали в кошик!</h1>
         )}
         {isOrderCreated && (
           <p className={styles.warning}>Ваше замовлення створено</p>
         )}
-        {isOrderCreated && paymentData && (
+        {isOrderCreated && paymentData && !isPaymentShown && (
           <Button
-            title={isPaymentShown ? "Закрити вікно оплати" : "Оплатити"}
+            title="Оплатити"
             onClick={onToggleBtnClick}
+            className={styles.buttonPayment}
           />
         )}
         {isPaymentShown && paymentData && (

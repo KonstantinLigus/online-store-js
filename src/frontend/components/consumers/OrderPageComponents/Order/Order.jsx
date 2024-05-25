@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React  from "react";
 import styles from "./Order.module.scss";
 import OrderForm from "./OrderForm/OrderForm";
-import LoginForm from "../../LoginForm";
 import Link from "next/link";
 
 const Order = props => {
@@ -13,9 +12,7 @@ const Order = props => {
           {!props.user && (
             <>
               <div className={styles.customerOn}>
-                <Link href="/login?callbackUrl=/order" scroll={false}>
-                  Я постійний клієнт
-                </Link>
+                <Link href="/login?callbackUrl=/order">Я постійний клієнт</Link>
               </div>
             </>
           )}

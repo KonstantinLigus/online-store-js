@@ -5,6 +5,7 @@ import { ParseError } from "@/backend/helpers/errors";
 import { redirectToPage } from "@/backend/libs/next";
 import { userSignInZodSchema } from "@/backend/libs/zod";
 import { signIn } from "../domain/signIn-use-case";
+import { revalidatePath } from "next/cache";
 
 export async function signInAction(_prevState, formData) {
   let isUserFromDB = null;
