@@ -1,5 +1,5 @@
 import { userSignUpZodSchema } from "@/backend/libs/zod/user.signUp.zod.schema";
-import userServices from "@/backend/entities/users/data-access/userServices";
+import { userServices } from "@/backend/entities/users/data-access/userServices";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { sendEmail } from "@/backend/libs/send-grid/send-email";
