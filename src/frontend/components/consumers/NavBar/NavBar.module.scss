@@ -7,7 +7,7 @@
   z-index: 50;
 
   .headerContainer {
-    background-color: rgba($color-green-1, 0.5);
+    background-color: rgba(#005d36, 0.25);
     padding: 0.5rem 0;
 
     .headerItems {
@@ -41,7 +41,7 @@
 
   .navigation {
     background-color: $color-bg-light-1;
-    border-bottom: 1px solid $color-green-dark-2;
+    border-bottom: 1px solid $color-orange-500; //$color-green-dark-2
     padding: 1em 0;
     position: absolute;
     width: 100%;
@@ -69,7 +69,8 @@
 
       .item {
         align-items: center;
-        background-color: $color-green-1;
+        //background-color: $color-green-1;
+        background-color: $color-orange-500;
         border: none;
         border-radius: 3em;
         color: $color-gray-dark-1;
@@ -87,9 +88,10 @@
         }
 
         &:hover {
-          background-color: $color-green-3;
+          //background-color: $color-green-3;
+          background-color: $color-orange-300;
           @media screen and (min-width: $burger-menu-screen-width) {
-            color: $color-green-dark-2;
+            color: $color-orange-500; //$color-green-dark-2
             background-color: transparent;
           }
         }
