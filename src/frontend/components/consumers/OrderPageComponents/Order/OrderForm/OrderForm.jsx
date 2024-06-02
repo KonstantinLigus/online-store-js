@@ -11,6 +11,7 @@ import PaymentChecker from "../../../Fields/PaymentChecker";
 import DeliveryType from "../../../Fields/DeliveryType";
 import { isObjectFieldEqualsToValue } from "@/frontend/helpers";
 import deliveryTypes from "../../../Fields/deliveryTypes";
+import { useRouter } from "next/navigation";
 
 const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
@@ -31,6 +32,12 @@ const userInitValues = {
 };
 
 const OrderForm = props => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.refresh();
+  }, [router]);
+
   const { user, cart, setIsOrderCreated, removeCart, setPaymentData } = props;
   const [consumer, setConsumer] = useState(user || userInitValues);
   const [isDisabled, setIsDisabled] = useState(true);

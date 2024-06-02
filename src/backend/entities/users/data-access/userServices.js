@@ -11,12 +11,14 @@ export const userServices = Object.freeze({
 async function getUserByField(objQuery) {
   let user = await User.findOne(objQuery);
   user = user ? user.toObject() : user;
+  if (user) user._id = user._id.toString();
   return user;
 }
 
 async function getUserById(id) {
   let user = await User.findById(id);
   user = user ? user.toObject() : user;
+  if (user) user._id = user._id.toString();
   return user;
 }
 

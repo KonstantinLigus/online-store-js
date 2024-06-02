@@ -2,77 +2,94 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
+@mixin footerText {
+  font-size: 1rem;
+  line-height: 2;
+  text-decoration: none;
+  @include md-min {
+    font-size: 1.125rem;
+  }
+}
+
 .footer {
-  background-color: $color-green-1;
-  padding: 20px 0;
-  margin-top: 16px;
+  background-color: rgba($color-green-dark-3, 0.35);
+  background-image: url("/assets/footer-bg-pattern.png");
+  background-repeat: repeat;
+  padding-block: 2rem;
 
-  .container {
+  &__inner {
     @include wrapper;
+  }
 
-    .wrapper {
-      align-items: flex-end;
-      display: flex;
-      justify-content: space-between;
+  &__logo {
+    cursor: pointer;
+    display: block;
+    margin-bottom: 1rem;
+    width: 160px;
+    @include md-min {
+      margin-bottom: 2rem;
+      width: 220px;
+    }
+    @include xl-min {
+      width: 330px;
+    }
+
+    &Img {
+      display: block;
+      height: auto;
       width: 100%;
-
-      .section1 {
-        height: 100%;
-
-        .logo {
-          cursor: pointer;
-          color: $color-gray-dark-1;
-          font-size: 24px;
-          font-weight: 400;
-          text-decoration: none;
-        }
-
-        .list {
-          color: $color-gray-dark-1;
-          list-style: none;
-          margin-top: 1rem;
-
-          .listItem {
-            font-size: 0.9rem;
-            line-height: 2rem;
-            text-decoration: none;
-            @include md-min {
-              font-size: 1.1rem;
-            }
-
-            a {
-              color: inherit;
-              text-decoration: none;
-            }
-
-            &:hover {
-              color: $color-green-dark-2;
-            }
-          }
-        }
-      }
-
-      .section2 {
-        height: 100%;
-      }
-
-      p {
-        font-size: 0.9rem;
-        line-height: 2rem;
-        @include md-min {
-          font-size: 1.1rem;
-        }
-      }
-    }
-
-    .socialMedia {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem 0;
-    }
-
-    .copyright {
-      font-size: 0.8rem;
     }
   }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    @include md-min {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+  }
+}
+
+.contacts {
+  margin-bottom: 1rem;
+  @include md-min {
+    margin-bottom: 2rem;
+  }
+
+  &__item {
+    @include footerText();
+  }
+}
+
+.links {
+  &__list {
+    color: $color-gray-dark-1;
+    list-style: none;
+  }
+
+  &__item {
+    @include footerText();
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      color: $color-orange-500;
+    }
+  }
+}
+
+.social {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1rem;
+  @include md-min {
+    padding-block: 0;
+  }
+}
+
+.copyright {
+  font-size: 0.875rem;
 }
