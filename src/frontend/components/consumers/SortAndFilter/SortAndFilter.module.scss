@@ -31,7 +31,7 @@
       }
     }
   }
-  /*
+
   .dialogs {
     height: 0;
     position: relative;
@@ -39,19 +39,25 @@
     z-index: 1;
 
     .filter {
-      left: 0;
+      left: -1rem;
       position: absolute;
       top: 0;
+      @include lg-min {
+        left: 0;
+      }
     }
 
     .sort {
       position: absolute;
-      right: 0;
+      right: -1rem;
       top: 0;
+      @include lg-min {
+        right: 0;
+      }
     }
   }
-  */
 
+  /*
   .dialogs {
     height: 0;
     position: fixed;
@@ -83,6 +89,7 @@
       }
     }
   }
+  */
 }
 
 .dialogContainer {

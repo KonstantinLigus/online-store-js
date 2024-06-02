@@ -70,9 +70,9 @@ export default function NavBar(props) {
 
           <Link href="/" prefetch={false} className={styles.logo}>
             <Image
-              src="/assets/logo.svg"
-              width={120}
-              height={48}
+              src="/assets/Logo.png"
+              width={220}
+              height={44}
               alt="user icon"
               priority
             />
