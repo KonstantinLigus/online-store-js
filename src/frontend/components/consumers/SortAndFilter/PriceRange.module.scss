@@ -16,7 +16,7 @@
   justify-content: space-between;
 
   &__number {
-    border: 2px solid $color-green-1;
+    border: 2px solid $color-orange-300; //$color-green-1
     border-radius: 1rem;
     color: $color-gray-light-1;
     font-size: 1rem;
@@ -35,7 +35,7 @@
     height: 2px;
     min-width: calc(1.25rem + 1px);
     position: absolute;
-    background-color: $color-green-3;
+    background-color: $color-orange-300; //$color-green-3
     pointer-events: none;
 
     &::-webkit-slider-thumb {
@@ -44,7 +44,7 @@
       pointer-events: all;
       width: 1.25rem;
       height: 1.25rem;
-      background-color: $color-green-3;
+      background-color: $color-orange-300; //$color-green-3
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -57,7 +57,7 @@
       pointer-events: all;
       width: 1.25rem;
       height: 1.25rem;
-      background-color: $color-green-3;
+      background-color: $color-orange-300; //$color-green-3
       border: none;
       border-radius: 50%;
       cursor: pointer;

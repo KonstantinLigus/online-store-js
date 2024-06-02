@@ -39,17 +39,57 @@
     z-index: 1;
 
     .filter {
-      left: 0;
+      left: -1rem;
       position: absolute;
       top: 0;
+      @include lg-min {
+        left: 0;
+      }
+    }
+
+    .sort {
+      position: absolute;
+      right: -1rem;
+      top: 0;
+      @include lg-min {
+        right: 0;
+      }
+    }
+  }
+
+  /*
+  .dialogs {
+    height: 0;
+    position: fixed;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    @include md-min {
+      position: relative;
+    }
+
+    .filter {
+      left: 0;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      @include md-min {
+        top: 0;
+      }
     }
 
     .sort {
       position: absolute;
       right: 0;
-      top: 0;
+      bottom: 0;
+      width: 100%;
+      @include md-min {
+        top: 0;
+      }
     }
   }
+  */
 }
 
 .dialogContainer {

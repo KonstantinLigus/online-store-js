@@ -59,7 +59,8 @@
   align-items: center;
   justify-content: center;
   gap: $s;
-  background-color: $color-green-1;
+  //background-color: $color-green-1;
+  background-color: $color-orange-500;
   border: none;
   border-radius: 2rem;
   color: $color-gray-dark-1;
@@ -70,7 +71,8 @@
   width: 100%;
 
   &:disabled {
-    background-color: $color-green-light-1;
+    //background-color: $color-green-light-1;
+    background-color: $color-orange-200;
     color: $color-gray-light-1;
     pointer-events: none;
     user-select: none;
@@ -79,10 +81,12 @@
   &:enabled {
     cursor: pointer;
     &:hover {
-      background-color: $color-green-3;
+      //background-color: $color-green-3;
+      background-color: $color-orange-300;
     }
     &:active {
-      background-color: $color-green-dark-2;
+      //background-color: $color-green-dark-2;
+      background-color: $color-orange-300;
     }
   }
 }
@@ -92,7 +96,8 @@
   align-items: center;
   justify-content: center;
   gap: $s;
-  background-color: $color-green-1;
+  //background-color: $color-green-1;
+  background-color: $color-orange-500;
   border: none;
   border-radius: 1rem;
   color: $color-gray-dark-1;
@@ -102,7 +107,8 @@
   width: 100%;
 
   &:disabled {
-    background-color: $color-green-light-1;
+    //background-color: $color-green-light-1;
+    background-color: $color-orange-200;
     color: $color-gray-light-1;
     pointer-events: none;
     user-select: none;
@@ -111,17 +117,19 @@
   &:enabled {
     cursor: pointer;
     &:hover {
-      background-color: $color-green-3;
+      //background-color: $color-green-3;
+      background-color: $color-orange-300;
     }
     &:active {
-      background-color: $color-green-dark-2;
+      //background-color: $color-green-dark-2;
+      background-color: $color-orange-300;
     }
   }
 }
 
 @mixin checkbox-1 {
   appearance: none;
-  border: 2px solid $color-green-dark-2;
+  border: 2px solid $color-orange-300; //$color-green-dark-2
   border-radius: 4px;
   cursor: pointer;
   height: 16px;
@@ -129,7 +137,7 @@
   width: 16px;
   &:checked::after {
     content: "";
-    border: 2px solid $color-green-dark-2;
+    border: 2px solid $color-orange-300; //$color-green-dark-2
     border-right: none;
     border-top: none;
     bottom: 4px;
