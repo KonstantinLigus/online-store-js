@@ -22,6 +22,7 @@ const userFields = [
 
 const RegistrationPage = () => {
   const [state, formAction] = useFormState(signUpAction, null);
+  // const [state, setState] = useState(null);
 
   const [userState, setUserState] = useState(() => getObject(userFields));
   const [isDisabled, setIsDisabled] = useState(true);
@@ -44,10 +45,32 @@ const RegistrationPage = () => {
     setIsDisabled(false);
   }, [userState]);
 
+  // const onFormSubmit = async e => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await fetch("api/auth/signUp", {
+  //       method: "POST",
+  //       body: JSON.stringify(userState),
+  //     });
+  //     const data = await res.json();
+  //     if (data.status !== 200) {
+  //       const err = new Error();
+  //       err.error = data.error;
+  //       throw err;
+  //     }
+  //     e.currentTarget.reset();
+  //   } catch (err) {
+  //     setState(() => err.error);
+  //   }
+  // };
+
   return (
     <div className={styles.RegisterForm__container}>
       <h2 className={styles.RegisterForm__title}>Реєстрація</h2>
-      <form action={formAction} className={styles.RegisterForm__form}>
+      <form
+        action={formAction} /* onSubmit={onFormSubmit} */
+        className={styles.RegisterForm__form}
+      >
         <div className={styles.RegisterForm__inputWrapper}>
           <Name name="firstName" setState={setUserState} />
           {state?.firstName && (

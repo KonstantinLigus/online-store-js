@@ -5,10 +5,10 @@ export function getError(err) {
     error = `item with id: ${err.value} was not found`;
     status = 404;
   }
-  // if (err.name === "ZodError") {
-  //   status = 400;
-  //   error = { ...err.flatten().fieldErrors };
-  // }
+  if (err.name === "ZodError") {
+    status = 400;
+    error = { ...err.flatten().fieldErrors };
+  }
   // if (err.name === "UserParseError" || err.name === "FieldNotExistError") {
   //   status = 400;
   // }
