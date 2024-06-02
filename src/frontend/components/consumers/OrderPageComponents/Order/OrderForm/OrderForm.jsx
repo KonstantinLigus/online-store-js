@@ -34,13 +34,17 @@ const userInitValues = {
 const OrderForm = props => {
   const router = useRouter();
 
-  useEffect(() => {
-    router.refresh();
-  }, [router]);
-
   const { user, cart, setIsOrderCreated, removeCart, setPaymentData } = props;
   const [consumer, setConsumer] = useState(user || userInitValues);
   const [isDisabled, setIsDisabled] = useState(true);
+
+  // useEffect(() => {
+  //   router.refresh();
+  // }, [router, user]);
+
+  useEffect(() => {
+    setConsumer(() => user || userInitValues);
+  }, [user]);
 
   useEffect(() => {
     if (consumer.deliveryType === postOfficeDelivery) {
@@ -90,7 +94,7 @@ const OrderForm = props => {
   };
 
   return (
-    <form action="GET" className={styles.form}>
+    <form className={styles.form}>
       <Fieldset number={1} title={"Особисті дані"}>
         <Phone initValue={consumer.customerPhone} setState={setConsumer} />
         <Email initValue={consumer.email} setState={setConsumer} />

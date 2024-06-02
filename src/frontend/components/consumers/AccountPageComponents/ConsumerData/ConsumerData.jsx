@@ -2,13 +2,6 @@
 import React, { useState, useEffect, useTransition } from "react";
 import styles from "./ConsumerData.module.scss";
 import Details from "./Details/Details";
-// import Phone from "./Phone/Phone";
-// import Email from "./Email/Email";
-// import FirstName from "./FirstName/FirstName";
-// import Surname from "./Surname/Surname";
-// import Birthday from "./Birthday/Birthday";
-// import DeliveryType from "./Delivery/DeliveryType";
-// import Password from "./Password/Password";
 import Modal from "../../Modal";
 import Loader from "../../Loader";
 import Phone from "../../Fields/Phone";
@@ -41,24 +34,11 @@ const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
 const ConsumerData = ({ user }) => {
   const [consumerData, setConsumerData] = useState(user);
-  // const [dataWasChanged, setDataWasChanged] = useState(dataChanging);
-  // const [saveChangesDisabled, setSaveChangesDisabled] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
 
   const [isPending, startTransition] = useTransition();
 
-  // const checkChanges = () => {
-  //   let wasChanged = false;
-  //   if (Object.values(dataWasChanged).some(i => i === true)) wasChanged = true;
-  //   if (Object.values(dataWasChanged).some(i => i === null)) wasChanged = false;
-  //   wasChanged ? setSaveChangesDisabled(false) : setSaveChangesDisabled(true);
-  // };
-
-  // useEffect(() => {
-  //   checkChanges();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [dataWasChanged]);
   useEffect(() => {
     if (consumerData.deliveryType === postOfficeDelivery) {
       delete consumerData.street;

@@ -1,1 +1,1 @@
-export { default as POST } from "@/backend/routes/user/signIn";
+export { default as POST } from "@/backend/entities/users/entry-points/signIn-entry";

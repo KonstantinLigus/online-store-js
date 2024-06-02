@@ -8,9 +8,9 @@ const nameRegExp = RegExp(NEXT_PUBLIC_NAME_PATTERN);
 const Name = ({ initValue, setState, name }) => {
   const [nameState, setNameState] = useState(initValue || "");
 
-  // useEffect(() => {
-  //   setNameState(initValue || "");
-  // }, [initValue]);
+  useEffect(() => {
+    setNameState(initValue || "");
+  }, [initValue]);
 
   const handleInputChange = e => {
     let { value } = e.target;

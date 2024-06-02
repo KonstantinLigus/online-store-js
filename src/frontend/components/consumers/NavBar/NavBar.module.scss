@@ -7,8 +7,11 @@
   z-index: 50;
 
   .headerContainer {
-    background-color: rgba($color-green-1, 0.5);
-    padding: 0.5rem 0;
+    background-color: rgba($color-green-dark-3, 0.25);
+    padding: 0.75rem 0;
+    @include lg-min {
+      padding: 1rem 0;
+    }
 
     .headerItems {
       align-items: center;
@@ -31,17 +34,22 @@
 
       .logo {
         cursor: pointer;
-        color: $color-gray-dark-1;
-        font-size: 24px;
-        font-weight: 400;
-        text-decoration: none;
+        width: 140px;
+        @include lg-min {
+          width: 240px;
+        }
+        & > img {
+          display: block;
+          height: auto;
+          width: 100%;
+        }
       }
     }
   }
 
   .navigation {
     background-color: $color-bg-light-1;
-    border-bottom: 1px solid $color-green-dark-2;
+    border-bottom: 1px solid $color-orange-500; //$color-green-dark-2
     padding: 1em 0;
     position: absolute;
     width: 100%;
@@ -69,16 +77,18 @@
 
       .item {
         align-items: center;
-        background-color: $color-green-1;
+        //background-color: $color-green-1;
+        background-color: $color-orange-500;
         border: none;
         border-radius: 3em;
-        color: $color-gray-dark-1;
+        color: $color-white;
         display: flex;
         font-size: 1em;
         justify-content: space-between;
         padding: 0.5em 1em;
         @media screen and (min-width: $burger-menu-screen-width) {
           background-color: transparent;
+          color: $color-gray-dark-1;
           padding: 0;
 
           > img {
@@ -87,9 +97,10 @@
         }
 
         &:hover {
-          background-color: $color-green-3;
+          //background-color: $color-green-3;
+          background-color: $color-orange-300;
           @media screen and (min-width: $burger-menu-screen-width) {
-            color: $color-green-dark-2;
+            color: $color-orange-500; //$color-green-dark-2
             background-color: transparent;
           }
         }

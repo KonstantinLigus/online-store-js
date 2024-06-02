@@ -16,22 +16,23 @@
 
   &__button {
     align-items: center;
-    background-color: $color-white;
-    border: 1px solid #999;
+    background-color: $color-orange-500;
+    border: none;
+    border-radius: 0.5rem;
     cursor: pointer;
-    border-radius: 50%;
     display: flex;
     font-size: 18px;
     font-weight: bold;
-    height: 30px;
+    height: 2rem;
     justify-content: center;
     margin-right: 1rem;
-    width: 30px;
+    outline: none;
+    width: 2rem;
     @media screen and (min-width: $burger-menu-screen-width) {
       display: none;
     }
     &:hover {
-      background-color: $color-gray-light-1;
+      background-color: $color-orange-300;
     }
   }
 
@@ -64,7 +65,7 @@
     transition: 0.4s;
     min-width: fit-content;
     &:hover {
-      color: $color-green-dark-2;
+      color: $color-orange-300;
     }
   }
 
