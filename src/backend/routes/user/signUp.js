@@ -13,7 +13,7 @@ async function signUp(req) {
   const user = await req.json();
   userSignUpZodSchema.parse(user);
   const { password, email } = user;
-  const { user: userFromDB } = await userServices.getUserByField({ email });
+  const userFromDB = await userServices.getUserByField({ email });
   if (userFromDB) throw new UserExistError(email);
   user.password = await getHashedPassword(password);
   const verificationToken = getRandomUUID();
@@ -23,13 +23,12 @@ async function signUp(req) {
     verificationToken,
   });
   await sendEmail(message);
-  const { user: createdUser, status } = await userServices.createUser(user);
+  const createdUser = await userServices.createUser(user);
   const token = createUserToken(createdUser._id);
   await setUserTokenToCookie(token);
-  delete createdUser._id;
   delete createdUser.password;
   delete createdUser.verificationToken;
-  return { createdUser, status };
+  return { createdUser, status: 201, redirectTo: "/account" };
 }
 
 export default getTryCatchWrapper(signUp);
