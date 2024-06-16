@@ -6,7 +6,6 @@ import Email from "../Fields/Email";
 import Password from "../Fields/Password";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import GoogleSignInButton from "../GoogleSignInButton";
-import { signInAction } from "@/backend/entities/users/entry-points";
 import { getObject, isObjectFieldEqualsToValue } from "@/frontend/helpers";
 import styles from "./LoginForm.module.scss";
 import { useRouter } from "next/navigation";
@@ -14,7 +13,6 @@ import { useRouter } from "next/navigation";
 const userFields = ["password", "email"];
 
 const LoginForm = ({ callbackUrl }) => {
-  // const [state, formAction] = useFormState(signInAction, null);
   const [state, setState] = useState(null);
 
   const [userState, setUserState] = useState(() => getObject(userFields));
@@ -59,11 +57,7 @@ const LoginForm = ({ callbackUrl }) => {
   return (
     <div className={styles.LoginForm__container}>
       <h2 className={styles.LoginForm___title}>Вхід особистого кабінету</h2>
-      <form
-        /* action={formAction} */
-        onSubmit={onFormSubmit}
-        className={styles.LoginForm___form}
-      >
+      <form onSubmit={onFormSubmit} className={styles.LoginForm___form}>
         <div className={styles.LoginForm__inputWrapper}>
           <Email setState={setUserState} />
           {state?.email && (
@@ -80,7 +74,7 @@ const LoginForm = ({ callbackUrl }) => {
         <SubmitButton disabled={isDisabled}>Увійти</SubmitButton>
       </form>
       <div className={styles.LoginForm__nav}>
-        <Link href="/">Забули пароль?</Link>
+        <Link href="/password-recovery">Забули пароль?</Link>
         <Link href="register">Зареєструватись</Link>
       </div>
       <p className={styles.LoginForm__alternateAuth}>

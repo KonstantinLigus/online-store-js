@@ -8,9 +8,9 @@ export function getTryCatchWrapper(callback) {
       const { status, redirectTo, ...data } = await callback(...args);
       if (redirectTo) return redirectToPage(redirectTo);
       return NextResponse.json(data, { status });
-    } catch (error) {
-      const { status, ...errorData } = getError(error);
-      return NextResponse.json(errorData, { status });
+    } catch (err) {
+      const { status, ...error } = getError(err);
+      return NextResponse.json(error, { status });
     }
   };
 }

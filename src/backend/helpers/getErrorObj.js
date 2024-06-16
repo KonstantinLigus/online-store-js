@@ -20,10 +20,10 @@ export function getError(err) {
   //   error = { email: err.message };
   //   status = 400;
   // }
-  // if (err.name === "UserNotFoundError") {
-  //   error = { email: err.message };
-  //   status = 404;
-  // }
+  if (err.name === "UserNotFoundError") {
+    error = { email: err.message };
+    status = 404;
+  }
   // if (
   //   err.name === "WrongUserPasswordError" ||
   //   err.name === "PasswordsNotTheSameError"
