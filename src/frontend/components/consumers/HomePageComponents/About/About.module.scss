@@ -12,7 +12,7 @@
   margin-top: 15px;
   margin-bottom: 16px;
 
-  .title {
+  &__title {
     color: $color-gray-dark-1;
     font-size: 1.75rem;
     font-weight: 400;
@@ -25,70 +25,106 @@
     }
   }
 
-  .info {
+  &__info {
     color: $color-gray-dark-1;
     font-size: 1.125rem;
+    line-height: 1.5;
     margin-bottom: 2rem;
-    max-width: 900px;
     text-align: center;
     @include lg-min {
+      font-size: 1.25rem;
+    }
+    @include xxl-min {
       font-size: 1.5rem;
     }
   }
 
-  .items {
+  &__items {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    @include md-min {
+    @include lg-min {
       grid-template-columns: repeat(4, 1fr);
-    }
-
-    .item {
-      padding: 1rem;
-      text-align: center;
-
-      p {
-        margin-top: 1rem;
-      }
     }
 
     div:nth-child(1) {
       border-right: 1px solid #000;
       border-bottom: 1px solid #000;
-      @include md-min {
-        border-bottom: none;
+      @include lg-min {
+        border: none;
       }
     }
 
     div:nth-child(2) {
       border-left: 1px solid #000;
       border-bottom: 1px solid #000;
-      @include md-min {
-        border-bottom: none;
-        border-right: 1px solid #000;
+      @include lg-min {
+        border: none;
       }
     }
 
     div:nth-child(3) {
       border-right: 1px solid #000;
       border-top: 1px solid #000;
-      @include md-min {
-        border-top: none;
-        border-left: 1px solid #000;
+      @include lg-min {
+        border: none;
       }
     }
 
     div:nth-child(4) {
       border-left: 1px solid #000;
       border-top: 1px solid #000;
-      @include md-min {
-        border-top: none;
+      @include lg-min {
+        border: none;
       }
     }
   }
 
-  .readMoreBtn {
+  &__btn {
     @include button-1;
     margin-top: 3rem;
+  }
+}
+
+.item {
+  padding: 1rem;
+  text-align: center;
+  @include md-min {
+    padding: 1.5rem;
+  }
+  @include xxl-min {
+    padding: 1rem 2rem;
+  }
+
+  &__img {
+    display: block;
+    height: 80px;
+    margin: auto;
+    width: auto;
+    @include md-min {
+      height: 120px;
+    }
+    @include xl-min {
+      height: 160px;
+    }
+    @include xxl-min {
+      height: 200px;
+    }
+  }
+
+  &__text {
+    color: $color-gray-dark-1;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 1rem;
+    @include md-min {
+      font-size: 1.25rem;
+    }
+    @include xl-min {
+      margin-top: 1.5rem;
+    }
+    @include xxl-min {
+      font-size: 1.5rem;
+    }
   }
 }
