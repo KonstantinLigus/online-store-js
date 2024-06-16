@@ -1,4 +1,4 @@
-import userServices from "@/backend/entities/users/data-access/userServices";
+import { userServices } from "@/backend/entities/users/data-access/userServices";
 import { UserNotFoundError } from "@/backend/helpers/errors";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { getHashedPassword } from "@/backend/libs/bcrypt/getHashPassword";
@@ -11,7 +11,7 @@ async function passwordRecover(req) {
   const userEmailObj = await req.json();
   userEmailZodSchema.parse(userEmailObj);
   const { email } = userEmailObj;
-  const { user: userFromDB, status } = await userServices.getUserByField({
+  const userFromDB = await userServices.getUserByField({
     email,
   });
   if (!userFromDB) throw new UserNotFoundError();
@@ -23,7 +23,7 @@ async function passwordRecover(req) {
     newPassword,
   });
   await sendEmail(messageWithNewPassword);
-  return { message: `New password was sent to ${email}`, status };
+  return { message: `New password was sent to ${email}`, status: 200 };
 }
 
 export default getTryCatchWrapper(passwordRecover);
