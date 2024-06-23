@@ -5,7 +5,6 @@ import { useCart } from "@/hooks/useCart";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./CartPage.module.scss";
-import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
 
@@ -14,13 +13,11 @@ const CartPage = () => {
 
   return (
     <main className={styles.main}>
-      <ToPreviousPage title="Кошик" />
-
-      <div className={styles.title}>
+      <div className={styles.headline}>
         <button
           type="button"
           onClick={() => history.back()}
-          className={styles.btnBack}
+          className={styles.headline__button}
         >
           <Image
             src="/assets/icon/icon-arrow-left.svg"
@@ -30,7 +27,7 @@ const CartPage = () => {
             priority
           />
         </button>
-        <p className={styles.titleText}>Кошик</p>
+        <p className={styles.headline__text}>Кошик</p>
       </div>
 
       {cart !== null && cart.length > 0 && (
@@ -52,7 +49,17 @@ const CartPage = () => {
       )}
 
       {(cart === null || cart.length === 0) && (
-        <p className={styles.warning}>Ви ще нічого не додали в кошик!</p>
+        <div className={styles.productsWrapper}>
+          <div className={styles.emptyCart}>
+            <div className={styles.emptyCart__icon}></div>
+            <p className={styles.emptyCart__text}>
+              У вашому кошику немає товарів
+            </p>
+            <Link href="/categories" className={styles.emptyCart__link}>
+              Обрати товар
+            </Link>
+          </div>
+        </div>
       )}
       <div className={styles.similarProducts}>
         <ProductList
