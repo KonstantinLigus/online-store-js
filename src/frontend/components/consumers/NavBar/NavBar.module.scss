@@ -3,8 +3,13 @@
 @import "../../../../../src/styles/variables";
 
 .header {
+  min-width: 260px;
   position: relative;
   z-index: 50;
+  @include lg-min {
+    background-image: url("/assets/footer-bg-pattern.png");
+    background-repeat: repeat;
+  }
 
   .headerContainer {
     background-color: rgba($color-green-dark-3, 0.25);
