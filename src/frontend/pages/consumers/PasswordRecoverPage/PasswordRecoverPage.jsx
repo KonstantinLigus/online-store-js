@@ -1,7 +1,5 @@
 import PasswordRecoveryForm from "@/frontend/components/consumers/PasswordRecoveryForm";
 
-const PasswordRecoverPage = () => {
-  return <PasswordRecoveryForm />;
-};
+const PasswordRecoverPage = () => <PasswordRecoveryForm />;
 
 export default PasswordRecoverPage;

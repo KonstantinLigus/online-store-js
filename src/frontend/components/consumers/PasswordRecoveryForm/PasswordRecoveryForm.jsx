@@ -30,7 +30,7 @@ const PasswordRecoveryForm = () => {
     const form = e.currentTarget;
     e.preventDefault();
     try {
-      const res = await fetch("api/auth/passwordRecover", {
+      const res = await fetch("/api/auth/password/recover", {
         method: "POST",
         body: JSON.stringify(userState),
       });
@@ -40,14 +40,13 @@ const PasswordRecoveryForm = () => {
         err.error = data.error;
         throw err;
       }
-      // router.push(callbackUrl);
-      // router.refresh();
       setStatusState(() => ({ successMsg: data.message, errorMsg: "" }));
       setUserState(() => getObject(userFields));
       setIsModalOpen(prev => !prev);
     } catch (err) {
       setStatusState(() => ({ errorMsg: err.error.email, successMsg: "" }));
     }
+    form.reset();
   };
 
   const tuggleModal = () => setIsModalOpen(prev => !prev);

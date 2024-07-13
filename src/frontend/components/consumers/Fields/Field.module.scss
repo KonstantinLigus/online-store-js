@@ -1,6 +1,6 @@
-@import "@/styles/responsive";
-@import "@/styles/mixins";
-@import "@/styles/variables";
+@import "@/styles/_responsive";
+@import "@/styles/_mixins";
+@import "@/styles/_variables";
 
 .Field__input {
   @include input-1;
@@ -32,6 +32,9 @@ input:valid + .Field__errorMsg,
   display: none;
 }
 .Field__inputWrapper {
+  &:not(:last-of-type) {
+    margin-bottom: $s;
+  }
   position: relative;
 }
 
