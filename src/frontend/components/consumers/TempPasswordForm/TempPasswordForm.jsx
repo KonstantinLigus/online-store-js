@@ -11,22 +11,15 @@ import { getUserAction } from "@/backend/entities/users/entry-points";
 import { useRouter } from "next/navigation";
 
 const status = ["successMsg", "errorMsg"];
-// chooseInitFields = firstField =>
-//   (firstField === "oldPassword" && [
-//     "oldPassword", "newPassword", "repeatNewPassword",
-//   ]) ||
-//   (firstField === "tempPassword" && ["oldPassword"]) ||
-//   (firstField === "none" && ["newPassword", "repeatNewPassword"]);
-
 const userFields = ["oldPassword", "newPassword", "repeatNewPassword"];
 
-const PasswordChangeForm = ({
-  isOldPasswPresent = true,
-
-  //   = false,
-  firstField = "oldPassword",
-}) => {
-  // const userFields = chooseInitFields(firstField);
+const PasswordChangeForm = (
+  {
+    // isOldPasswPresent = true,
+    // isOldPasswAsTemp = false,
+    // firstField = "oldPassword",
+  },
+) => {
   const [statusState, setStatusState] = useState(() => getObject(status));
   const [userState, setUserState] = useState(() => getObject(userFields));
   const [isDisabled, setIsDisabled] = useState(true);
@@ -89,35 +82,15 @@ const PasswordChangeForm = ({
 
   return (
     <div className={styles.PasswordChangeForm__container}>
-      <h2 className={styles.PasswordChangeForm___title}>Зміна паролю</h2>
       <form
         onSubmit={onFormSubmit}
         className={styles.PasswordChangeForm___form}
       >
         <div className={styles.PasswordChangeForm__inputWrapper}>
-          {isOldPasswPresent && (
-            <Password setState={setUserState} name={firstField} />
-          )}
-          {isOldPasswPresent && statusState.errorMsg && (
-            <p className={styles.PasswordChangeForm__errorMsg}>
-              {statusState.errorMsg}
-            </p>
-          )}
-          <Password setState={setUserState} name="newPassword" />
+          <Password setState={setUserState} name="tempPassword" />
           {statusState.errorMsg && (
             <p className={styles.PasswordChangeForm__errorMsg}>
               {statusState.errorMsg}
-            </p>
-          )}
-          <Password setState={setUserState} name="repeatNewPassword" />
-          {statusState.errorMsg && (
-            <p className={styles.PasswordChangeForm__errorMsg}>
-              {statusState.errorMsg}
-            </p>
-          )}
-          {pswdErrMesg && (
-            <p className={styles.PasswordChangeForm__errorMsg}>
-              Паролі не співпадають
             </p>
           )}
         </div>

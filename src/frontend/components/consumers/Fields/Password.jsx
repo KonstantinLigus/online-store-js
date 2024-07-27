@@ -29,7 +29,8 @@ const Password = ({ setState, name }) => {
     (name === "passwordRepeat" && "Повторити пароль") ||
     (name === "oldPassword" && "Старий пароль") ||
     (name === "newPassword" && "Новий пароль") ||
-    (name === "repeatNewPassword" && "Повторити новий пароль");
+    (name === "repeatNewPassword" && "Повторити новий пароль") ||
+    (name === "tempPassword" && "Тимчасовий пароль");
 
   const getIconStyle = () =>
     pswdTypeToggle
