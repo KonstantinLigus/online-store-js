@@ -20,12 +20,7 @@ const status = ["successMsg", "errorMsg"];
 
 const userFields = ["oldPassword", "newPassword", "repeatNewPassword"];
 
-const PasswordChangeForm = ({
-  isOldPasswPresent = true,
-
-  //   = false,
-  firstField = "oldPassword",
-}) => {
+const PasswordChangeForm = ({ oldPassw = "", emailForSendTempPassw }) => {
   // const userFields = chooseInitFields(firstField);
   const [statusState, setStatusState] = useState(() => getObject(status));
   const [userState, setUserState] = useState(() => getObject(userFields));
@@ -41,8 +36,14 @@ const PasswordChangeForm = ({
       if (!user) return router.push("/login");
       setUserState(prevState => ({ ...prevState, email: user.email }));
     };
-    getUser();
-  }, [router]);
+    if (!oldPassw) getUser();
+    if (oldPassw)
+      setUserState(prevSate => ({
+        ...prevSate,
+        oldPassword: oldPassw,
+        email: emailForSendTempPassw,
+      }));
+  }, [emailForSendTempPassw, oldPassw, router]);
 
   useEffect(() => {
     if (userState.newPassword !== userState.repeatNewPassword) {
@@ -79,6 +80,7 @@ const PasswordChangeForm = ({
       setStatusState(() => ({ successMsg: data.message, errorMsg: "" }));
       setUserState(() => getObject(userFields));
       setIsModalOpen(prev => !prev);
+      if (oldPassw) router.push("/login");
     } catch (err) {
       setStatusState(() => ({ errorMsg: err.error.password, successMsg: "" }));
     }
@@ -89,16 +91,16 @@ const PasswordChangeForm = ({
 
   return (
     <div className={styles.PasswordChangeForm__container}>
-      <h2 className={styles.PasswordChangeForm___title}>Зміна паролю</h2>
+      <h2 className={styles.PasswordChangeForm___title}>
+        {oldPassw ? "Створення нового паролю" : "Зміна паролю"}
+      </h2>
       <form
         onSubmit={onFormSubmit}
         className={styles.PasswordChangeForm___form}
       >
         <div className={styles.PasswordChangeForm__inputWrapper}>
-          {isOldPasswPresent && (
-            <Password setState={setUserState} name={firstField} />
-          )}
-          {isOldPasswPresent && statusState.errorMsg && (
+          {!oldPassw && <Password setState={setUserState} name="oldPassword" />}
+          {!oldPassw && statusState.errorMsg && (
             <p className={styles.PasswordChangeForm__errorMsg}>
               {statusState.errorMsg}
             </p>
@@ -124,13 +126,15 @@ const PasswordChangeForm = ({
         <SubmitButton disabled={isDisabled}>Відправити пароль</SubmitButton>
       </form>
       <div className={styles.PasswordChangeForm__nav}>
-        <Link href="register">Зареєструватись</Link>
+        <Link href="/register"> Зареєструватись</Link>
       </div>
-      <Modal isOpen={isModalOpen} setIsOpen={tuggleModal}>
-        <p className={styles.PasswordChangeForm___success_msg}>
-          {statusState.successMsg}
-        </p>
-      </Modal>
+      {!oldPassw && (
+        <Modal isOpen={isModalOpen} setIsOpen={tuggleModal}>
+          <p className={styles.PasswordChangeForm___success_msg}>
+            {statusState.successMsg}
+          </p>
+        </Modal>
+      )}
     </div>
   );
 };

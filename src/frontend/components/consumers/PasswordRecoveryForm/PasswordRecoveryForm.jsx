@@ -69,7 +69,9 @@ const PasswordRecoveryForm = ({ setEmailForSendTempPassw }) => {
             </p>
           )}
         </div>
-        <SubmitButton disabled={isDisabled}>Нагадати </SubmitButton>
+        <SubmitButton disabled={isDisabled}>
+          Відправити тимчасовий пароль
+        </SubmitButton>
       </form>
       <div className={styles.PasswordRecoveryForm__nav}>
         <Link href="register">Зареєструватись</Link>

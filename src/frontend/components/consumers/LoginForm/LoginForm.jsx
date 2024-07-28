@@ -74,7 +74,7 @@ const LoginForm = ({ callbackUrl }) => {
         <SubmitButton disabled={isDisabled}>Увійти</SubmitButton>
       </form>
       <div className={styles.LoginForm__nav}>
-        <Link href="/password-recovery">Забули пароль?</Link>
+        <Link href="/password/recovery">Забули пароль?</Link>
         <Link href="register">Зареєструватись</Link>
       </div>
       <p className={styles.LoginForm__alternateAuth}>
