@@ -17,6 +17,7 @@ export default async function signInRoute(req) {
         { status: 400 },
       );
     const isUserFromDB = await signInRouteHelper(user);
+    console.log({ isUserFromDB });
     if (isUserFromDB)
       return NextResponse.json({ revalidate: true, status: 200 });
   } catch (err) {

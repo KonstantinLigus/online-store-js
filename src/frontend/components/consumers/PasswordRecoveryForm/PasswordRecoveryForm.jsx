@@ -6,16 +6,16 @@ import { getObject, isObjectFieldEqualsToValue } from "@/frontend/helpers";
 import Email from "../Fields/Email";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import styles from "./PasswordRecoveryForm.module.scss";
-import Modal from "../Modal";
+// import Modal from "../Modal";
 
 const userFields = ["email"];
 const status = ["successMsg", "errorMsg"];
 
-const PasswordRecoveryForm = () => {
+const PasswordRecoveryForm = ({ setEmailForSendTempPassw }) => {
   const [statusState, setStatusState] = useState(() => getObject(status));
   const [userState, setUserState] = useState(() => getObject(userFields));
   const [isDisabled, setIsDisabled] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (isObjectFieldEqualsToValue(userState, "")) {
@@ -30,7 +30,7 @@ const PasswordRecoveryForm = () => {
     const form = e.currentTarget;
     e.preventDefault();
     try {
-      const res = await fetch("api/auth/passwordRecover", {
+      const res = await fetch("/api/auth/password/recover", {
         method: "POST",
         body: JSON.stringify(userState),
       });
@@ -40,17 +40,17 @@ const PasswordRecoveryForm = () => {
         err.error = data.error;
         throw err;
       }
-      // router.push(callbackUrl);
-      // router.refresh();
       setStatusState(() => ({ successMsg: data.message, errorMsg: "" }));
       setUserState(() => getObject(userFields));
       setIsModalOpen(prev => !prev);
     } catch (err) {
       setStatusState(() => ({ errorMsg: err.error.email, successMsg: "" }));
     }
+    form.reset();
+    setEmailForSendTempPassw(userState.email);
   };
 
-  const tuggleModal = () => setIsModalOpen(prev => !prev);
+  // const tuggleModal = () => setIsModalOpen(prev => !prev);
 
   return (
     <div className={styles.PasswordRecoveryForm__container}>
@@ -69,16 +69,18 @@ const PasswordRecoveryForm = () => {
             </p>
           )}
         </div>
-        <SubmitButton disabled={isDisabled}>Відправити пароль</SubmitButton>
+        <SubmitButton disabled={isDisabled}>
+          Відправити тимчасовий пароль
+        </SubmitButton>
       </form>
       <div className={styles.PasswordRecoveryForm__nav}>
         <Link href="register">Зареєструватись</Link>
       </div>
-      <Modal isOpen={isModalOpen} setIsOpen={tuggleModal}>
+      {/* <Modal isOpen={isModalOpen} setIsOpen={tuggleModal}>
         <p className={styles.PasswordRecoveryForm___success_msg}>
           {statusState.successMsg}
         </p>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
