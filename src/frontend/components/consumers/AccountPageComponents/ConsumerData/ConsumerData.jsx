@@ -48,7 +48,14 @@ const ConsumerData = ({ user }) => {
     if (consumerData.deliveryType === courierDelivery) {
       delete consumerData.postOffice;
     }
-
+    if (consumerData.deliveryType === storeDelivery) {
+      delete consumerData.street;
+      delete consumerData.house;
+      delete consumerData.flat;
+      delete consumerData.postOffice;
+      delete consumerData.region;
+      delete consumerData.city;
+    }
     !consumerData.comment && delete consumerData.comment;
     delete consumerData.birthday;
     delete consumerData.image;
@@ -92,7 +99,12 @@ const ConsumerData = ({ user }) => {
           initValue={consumerData.deliveryType}
           setConsumer={setConsumerData}
         />
-        <DeliveryFields consumer={consumerData} setConsumer={setConsumerData} />
+        {consumerData.deliveryType !== storeDelivery && (
+          <DeliveryFields
+            consumer={consumerData}
+            setConsumer={setConsumerData}
+          />
+        )}
       </Details>
 
       {/* <Details title={"Зміна паролю"}>
