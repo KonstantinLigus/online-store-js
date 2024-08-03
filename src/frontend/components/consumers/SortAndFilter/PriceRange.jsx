@@ -23,23 +23,25 @@ const PriceRange = ({
   };
 
   const inputMaxPrice = value => {
-    console.log(value);
     value = +value;
-    maxUserPrice = +maxUserPrice;
+    if (value > maxProductPrice) {
+      rangeMaxPrice(maxProductPrice);
+    }
     setMaxInputPrice(value.toString());
-    if (value >= minUserPrice && value <= maxProductPrice)
+    if (value >= minUserPrice && value <= maxProductPrice) {
       setMaxUserPrice(value);
+    }
   };
 
-  const rangeMinPrice = value => {
+  function rangeMinPrice(value) {
     setMinInputPrice(value);
     setMinUserPrice(value);
-  };
+  }
 
-  const rangeMaxPrice = value => {
+  function rangeMaxPrice(value) {
     setMaxInputPrice(value);
     setMaxUserPrice(value);
-  };
+  }
 
   return (
     <div className={styles.container}>

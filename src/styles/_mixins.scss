@@ -97,17 +97,18 @@
   justify-content: center;
   gap: $s;
   //background-color: $color-green-1;
-  background-color: $color-orange-500;
-  border: none;
-  border-radius: 1rem;
-  color: $color-gray-dark-1;
+  background-color: $color-white;
+  border: 1px solid $color-orange-300;
+  border-radius: 3rem;
+  color: $color-orange-500;
   font-size: 0.875rem;
+  outline: 3px solid rgba($color-orange-200, 0);
   padding: 0.5rem;
   text-align: center;
+  transition: all 0.2s;
   width: 100%;
 
   &:disabled {
-    //background-color: $color-green-light-1;
     background-color: $color-orange-200;
     color: $color-gray-light-1;
     pointer-events: none;
@@ -117,12 +118,11 @@
   &:enabled {
     cursor: pointer;
     &:hover {
-      //background-color: $color-green-3;
-      background-color: $color-orange-300;
+      border-color: $color-orange-400;
     }
     &:active {
-      //background-color: $color-green-dark-2;
-      background-color: $color-orange-300;
+      background-color: $color-orange-200;
+      outline: 3px solid rgba($color-orange-200, 0.4);
     }
   }
 }

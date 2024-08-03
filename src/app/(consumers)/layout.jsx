@@ -1,8 +1,8 @@
 import "@/global-styles/globals.css";
-import { Inter } from "next/font/google";
+import { Wix_Madefor_Display } from "next/font/google";
 import SessionProvider from "@/frontend/pages/consumers/SessionProvider/SessionProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Wix_Madefor_Display({ weight: "400", subsets: ["latin"] });
 
 export const metadata = {
   title: "Store",
@@ -12,7 +12,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <SessionProvider>{children}</SessionProvider>
         <div id="modal-root" />
       </body>
