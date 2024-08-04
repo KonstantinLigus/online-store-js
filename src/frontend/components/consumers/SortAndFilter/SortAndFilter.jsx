@@ -55,27 +55,37 @@ const SortAndFilter = ({
 
       <div className={styles.dialogs}>
         {filterIsOpen && (
-          <div className={styles.filter}>
-            <FilterDialog
-              toggleFilter={toggleFilter}
-              sortedProducts={sortedProducts}
-              setFiltredProducts={setFiltredProducts}
-              setFiltredProductsLength={setFiltredProductsLength}
-              categories={categories}
-              producers={producers}
-            />
+          <div className={styles.dialogs__dialog} onClick={toggleFilter}>
+            <div
+              className={styles.dialogs__dialog_inner}
+              onClick={event => event.stopPropagation()}
+            >
+              <FilterDialog
+                toggleFilter={toggleFilter}
+                sortedProducts={sortedProducts}
+                setFiltredProducts={setFiltredProducts}
+                setFiltredProductsLength={setFiltredProductsLength}
+                categories={categories}
+                producers={producers}
+              />
+            </div>
           </div>
         )}
 
         {sortIsOpen && (
-          <div className={styles.sort}>
-            <SortDialog
-              toggleSort={toggleSort}
-              sortedProducts={sortedProducts}
-              setSortedProducts={setSortedProducts}
-              filtredProducts={filtredProducts}
-              setFiltredProducts={setFiltredProducts}
-            />
+          <div className={styles.dialogs__dialog} onClick={toggleSort}>
+            <div
+              className={`${styles.dialogs__dialog_inner} ${styles.dialogs__dialog_inner_sort} `}
+              onClick={event => event.stopPropagation()}
+            >
+              <SortDialog
+                toggleSort={toggleSort}
+                sortedProducts={sortedProducts}
+                setSortedProducts={setSortedProducts}
+                filtredProducts={filtredProducts}
+                setFiltredProducts={setFiltredProducts}
+              />
+            </div>
           </div>
         )}
       </div>

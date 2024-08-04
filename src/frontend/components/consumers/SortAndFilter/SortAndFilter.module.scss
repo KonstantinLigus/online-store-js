@@ -34,62 +34,35 @@
 
   .dialogs {
     height: 0;
-    position: relative;
     width: 100%;
     z-index: 1;
 
-    .filter {
-      left: -1rem;
-      position: absolute;
-      top: 0;
-      @include lg-min {
-        left: 0;
-      }
-    }
-
-    .sort {
-      position: absolute;
-      right: -1rem;
-      top: 0;
-      @include lg-min {
-        right: 0;
-      }
-    }
-  }
-
-  /*
-  .dialogs {
-    height: 0;
-    position: fixed;
-    bottom: -1rem;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-    @include md-min {
-      position: relative;
-    }
-
-    .filter {
+    &__dialog {
+      background-color: rgba($color-black, 0.2);
+      height: 100vh;
       left: 0;
-      position: absolute;
-      bottom: 0;
+      position: fixed;
+      top: 0;
       width: 100%;
-      @include md-min {
-        top: 0;
-      }
-    }
+      z-index: 50;
 
-    .sort {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      @include md-min {
-        top: 0;
+      &_inner {
+        background-color: $color-bg-light-1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        height: 100%;
+        max-width: 300px;
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
+        width: 100%;
+
+        &_sort {
+          margin-left: auto;
+        }
       }
     }
   }
-  */
 }
 
 .dialogContainer {

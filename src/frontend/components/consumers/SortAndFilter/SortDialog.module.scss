@@ -2,61 +2,49 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-.container {
-  background-color: $color-bg-light-1;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  box-shadow: 0px 0px 1rem #5558;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  width: 100%;
-  @include md-min {
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    margin-left: auto;
-    max-width: 260px;
+.title {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  padding-inline: 1.5rem;
+
+  &__name {
+    color: $color-gray-dark-1;
+    font-size: 1rem;
   }
 
-  .title {
+  &__icon {
+    cursor: pointer;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+  padding-inline: 1.5rem;
+
+  &__item {
     align-items: center;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
-
-    .titleName {
-      color: $color-gray-dark-1;
-      font-size: 1rem;
-    }
-
-    .titleIcon {
-      cursor: pointer;
-    }
+    list-style: none;
   }
 
-  .sortItems {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
-    .sortItem {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-      justify-content: space-between;
-      list-style: none;
-
-      label {
-        cursor: pointer;
-      }
-    }
+  &__label {
+    cursor: pointer;
   }
+}
 
-  .button {
+.button {
+  padding-inline: 1.5rem;
+  &__button {
     @include button-2;
-    color: $color-white;
-    margin-top: 2rem;
   }
 }

@@ -127,11 +127,11 @@ const SortDialog = ({
   ];
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.title}>
-        <p className={styles.titleName}>Сортування</p>
+        <p className={styles.title__name}>Сортування</p>
         <Image
-          className={styles.titleIcon}
+          className={styles.title__icon}
           src="/assets/icon/icon-close.svg"
           alt="sort icon"
           width={16}
@@ -141,10 +141,12 @@ const SortDialog = ({
         />
       </div>
 
-      <ul className={styles.sortItems}>
+      <ul className={styles.items}>
         {parameters.map(item => (
-          <li className={styles.sortItem} key={item[1]}>
-            <label htmlFor={item[1]}>{item[0]}</label>
+          <li className={styles.items__item} key={item[1]}>
+            <label htmlFor={item[1]} className={styles.items__label}>
+              {item[0]}
+            </label>
             <input
               type="radio"
               name="sort"
@@ -156,10 +158,16 @@ const SortDialog = ({
         ))}
       </ul>
 
-      <button type="button" className={styles.button} onClick={toSort}>
-        Застосувати
-      </button>
-    </div>
+      <div className={styles.button}>
+        <button
+          type="button"
+          className={styles.button__button}
+          onClick={toSort}
+        >
+          Застосувати
+        </button>
+      </div>
+    </>
   );
 };
 

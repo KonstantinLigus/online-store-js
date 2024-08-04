@@ -89,7 +89,7 @@ const FilterDialog = ({
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.title}>
         <p className={styles.title__name}>Фільтри</p>
         <Image
@@ -103,98 +103,110 @@ const FilterDialog = ({
         />
       </div>
 
-      <details className={styles.details}>
-        <summary className={styles.details__summary}>
-          <span className={styles.details__summary_span}>Ціна</span>
-          <Image
-            src="/assets/icon/icon-angle-down.svg"
-            alt="heart icon"
-            width={16}
-            height={16}
-            className={styles.details__angleIcon}
-          />
-        </summary>
-        <PriceRange
-          minProductPrice={minProductPrice}
-          maxProductPrice={maxProductPrice}
-          minUserPrice={minUserPrice}
-          setMinUserPrice={setMinUserPrice}
-          maxUserPrice={maxUserPrice}
-          setMaxUserPrice={setMaxUserPrice}
-          minInputPrice={minInputPrice}
-          setMinInputPrice={setMinInputPrice}
-          maxInputPrice={maxInputPrice}
-          setMaxInputPrice={setMaxInputPrice}
-        />
-      </details>
-
-      {categories.length > 0 && (
-        <details className={styles.details}>
-          <summary className={styles.details__summary}>
-            <span className={styles.details__summary_span}>Категорії</span>
+      <div className={styles.items}>
+        <details className={styles.items__details}>
+          <summary className={styles.items__details__summary}>
+            <span className={styles.items__details__summary_span}>Ціна</span>
             <Image
               src="/assets/icon/icon-angle-down.svg"
               alt="heart icon"
               width={16}
               height={16}
-              className={styles.details__angleIcon}
+              className={styles.items__details__angleIcon}
             />
           </summary>
-          <CategoriesFilter
-            vegetables={vegetables}
-            setVegetables={setVegetables}
-            fruits={fruits}
-            setFruits={setFruits}
-            nuts={nuts}
-            setNuts={setNuts}
-            grocery={grocery}
-            setGrocery={setGrocery}
-            conservation={conservation}
-            setConservation={setConservation}
-            milk={milk}
-            setMilk={setMilk}
+          <PriceRange
+            minProductPrice={minProductPrice}
+            maxProductPrice={maxProductPrice}
+            minUserPrice={minUserPrice}
+            setMinUserPrice={setMinUserPrice}
+            maxUserPrice={maxUserPrice}
+            setMaxUserPrice={setMaxUserPrice}
+            minInputPrice={minInputPrice}
+            setMinInputPrice={setMinInputPrice}
+            maxInputPrice={maxInputPrice}
+            setMaxInputPrice={setMaxInputPrice}
           />
         </details>
-      )}
 
-      <details className={styles.details}>
-        <summary className={styles.details__summary}>
-          <span className={styles.details__summary_span}>Виробник</span>
-          <Image
-            src="/assets/icon/icon-angle-down.svg"
-            alt="heart icon"
-            width={16}
-            height={16}
-            className={styles.details__angleIcon}
+        {categories.length > 0 && (
+          <details className={styles.items__details}>
+            <summary className={styles.items__details__summary}>
+              <span className={styles.items__details__summary_span}>
+                Категорії
+              </span>
+              <Image
+                src="/assets/icon/icon-angle-down.svg"
+                alt="heart icon"
+                width={16}
+                height={16}
+                className={styles.items__details__angleIcon}
+              />
+            </summary>
+            <CategoriesFilter
+              vegetables={vegetables}
+              setVegetables={setVegetables}
+              fruits={fruits}
+              setFruits={setFruits}
+              nuts={nuts}
+              setNuts={setNuts}
+              grocery={grocery}
+              setGrocery={setGrocery}
+              conservation={conservation}
+              setConservation={setConservation}
+              milk={milk}
+              setMilk={setMilk}
+            />
+          </details>
+        )}
+
+        <details className={styles.items__details}>
+          <summary className={styles.items__details__summary}>
+            <span className={styles.items__details__summary_span}>
+              Виробник
+            </span>
+            <Image
+              src="/assets/icon/icon-angle-down.svg"
+              alt="heart icon"
+              width={16}
+              height={16}
+              className={styles.items__details__angleIcon}
+            />
+          </summary>
+          <ProducersFilter
+            producers={producers}
+            selectedProducers={selectedProducers}
+            setSelectedProducers={setSelectedProducers}
           />
-        </summary>
-        <ProducersFilter
-          producers={producers}
-          selectedProducers={selectedProducers}
-          setSelectedProducers={setSelectedProducers}
-        />
-      </details>
+        </details>
 
-      <div className={styles.checkbox}>
-        <label
-          htmlFor="action"
-          className={`${styles.checkbox__label} ${styles.checkbox__label_color_black}`}
-        >
-          Акційні товари
-        </label>
-        <input
-          type="checkbox"
-          name="action"
-          id="action"
-          onChange={() => setIsAction(!isAction)}
-          className={styles.checkbox__checkbox}
-        />
+        <div className={styles.checkbox}>
+          <label
+            htmlFor="action"
+            className={`${styles.checkbox__label} ${styles.checkbox__label_color_black}`}
+          >
+            Акційні товари
+          </label>
+          <input
+            type="checkbox"
+            name="action"
+            id="action"
+            onChange={() => setIsAction(!isAction)}
+            className={styles.checkbox__checkbox}
+          />
+        </div>
       </div>
 
-      <button type="button" className={styles.button} onClick={toFilter}>
-        Показати результати
-      </button>
-    </div>
+      <div className={styles.button}>
+        <button
+          type="button"
+          className={styles.button__button}
+          onClick={toFilter}
+        >
+          Показати результати
+        </button>
+      </div>
+    </>
   );
 };
 

@@ -2,28 +2,13 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-.container {
-  background-color: $color-bg-light-1;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  box-shadow: 0px 0px 1rem #5558;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  width: 100%;
-  @include md-min {
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    max-width: 260px;
-  }
-}
-
 .title {
   align-items: center;
   display: flex;
   flex-direction: row;
   gap: 1rem;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  padding-inline: 1.5rem;
 
   &__name {
     color: $color-gray-dark-1;
@@ -35,35 +20,40 @@
   }
 }
 
-.details {
-  border-bottom: 1px solid #aaa;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  padding-bottom: 1rem;
+.items {
+  flex: 1;
+  overflow-y: auto;
+  padding-inline: 1.5rem;
+  &__details {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
 
-  &__summary {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    transition: 0.4s;
-    &:hover {
-      color: $color-orange-500;
+    &__summary {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      transition: 0.4s;
+      &:hover {
+        color: $color-orange-500;
+      }
+
+      &_span {
+        font-size: 1rem;
+      }
+
+      &__angleIcon {
+        transition: 0.5s;
+      }
     }
 
-    &_span {
-      font-size: 1rem;
-    }
-
-    &__angleIcon {
+    &[open] &__angleIcon {
+      transform: rotate(180deg);
       transition: 0.5s;
     }
-  }
-
-  &[open] &__angleIcon {
-    transform: rotate(180deg);
-    transition: 0.5s;
   }
 }
 
@@ -98,7 +88,8 @@
 }
 
 .button {
-  @include button-2;
-  color: $color-white;
-  margin-top: 2rem;
+  padding-inline: 1.5rem;
+  &__button {
+    @include button-2;
+  }
 }
