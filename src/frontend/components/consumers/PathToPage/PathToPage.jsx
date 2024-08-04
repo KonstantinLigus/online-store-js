@@ -21,19 +21,15 @@ const PathToPage = ({ categories, category, product }) => {
         onClick={() => history.back()}
         className={styles.path__button}
       >
-        <Image
-          src="/assets/icon/icon-arrow-left.svg"
-          width={28}
-          height={28}
-          alt="arrow icon"
-          priority
-        />
+        <span className={styles.path__button_image}></span>
       </button>
       <div className={styles.path__text_wrapper}>
         <div className={styles.path__text}>
-          <Link href="/" prefetch={false} className={styles.path__link}>
-            Головна
-          </Link>
+          <Link
+            href="/"
+            prefetch={false}
+            className={styles.path__linkImage}
+          ></Link>
           <span className={styles.path__span}>/</span>
           {categories ? (
             <>
@@ -44,7 +40,7 @@ const PathToPage = ({ categories, category, product }) => {
               >
                 Всі товари
               </Link>
-              <span className={styles.path__span}>/</span>
+              <span className={styles.path__span}>&nbsp; /</span>
               {product ? (
                 <>
                   <Link
@@ -54,12 +50,16 @@ const PathToPage = ({ categories, category, product }) => {
                   >
                     {category[0].toUpperCase() + category.slice(1)}
                   </Link>
-                  <span className={styles.path__span}>
-                    / {product[0].toUpperCase() + product.slice(1)}
+                  <span
+                    className={`${styles.path__span} ${styles.path__span_black}`}
+                  >
+                    &nbsp; / {product[0].toUpperCase() + product.slice(1)}
                   </span>
                 </>
               ) : (
-                <span className={styles.path__span}>
+                <span
+                  className={`${styles.path__span} ${styles.path__span_black}`}
+                >
                   {category[0].toUpperCase() + category.slice(1)}
                 </span>
               )}
