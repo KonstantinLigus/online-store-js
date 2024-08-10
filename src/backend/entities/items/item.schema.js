@@ -16,6 +16,10 @@ export const itemSchema = new mongoose.Schema({
   category: { type: String, required: true },
   label: { type: [String] },
   producer: { type: String },
+  term: { type: String },
+  condition: { type: String },
+  sort: { type: String },
+  suitFor: { type: [String] },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
