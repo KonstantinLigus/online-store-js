@@ -17,6 +17,7 @@ const ProductPage = ({ params }) => {
     const fetchData = async () => {
       const res = await fetch(`api/items/${params.id}`);
       const { item } = await res.json();
+      console.log(item.suitFor);
       setData(item);
     };
     fetchData();
@@ -107,38 +108,85 @@ const ProductPage = ({ params }) => {
           <div className={styles.characteristic}>
             <h2 className={styles.headline}>Характеристики</h2>
             <div>
-              <div className={styles.heading}>
-                <Image
-                  src="/assets/icon/information-line-icon.svg"
-                  alt="information"
-                  width={14}
-                  height={14}
-                />
-                <h2 className={styles.title}>Умови зберігання:</h2>
-              </div>
-              <p className={styles.description}>{data.description}</p>
-              <div className={styles.heading}>
-                <Image
-                  src="/assets/icon/information-line-icon.svg"
-                  alt="information"
-                  width={14}
-                  height={14}
-                />
-                <h2 className={styles.title}>Термін зберігання:</h2>
-              </div>
-              <p className={styles.description}>3-5 днів</p>
-              <div className={styles.heading}>
-                <Image
-                  src="/assets/icon/information-line-icon.svg"
-                  alt="information"
-                  width={14}
-                  height={14}
-                />
-                <h2 className={styles.title}>Місце походження:</h2>
-              </div>
-              <p className={styles.description}>{data.producer}</p>
+              {data.condition && (
+                <>
+                  <div className={styles.heading}>
+                    <Image
+                      src="/assets/icon/information-line-icon.svg"
+                      alt="information"
+                      width={14}
+                      height={14}
+                    />
+                    <h2 className={styles.title}>Умови зберігання:</h2>
+                  </div>
+                  <p className={styles.description}>{data.condition}</p>
+                </>
+              )}
+
+              {data.term && (
+                <>
+                  <div className={styles.heading}>
+                    <Image
+                      src="/assets/icon/information-line-icon.svg"
+                      alt="information"
+                      width={14}
+                      height={14}
+                    />
+                    <h2 className={styles.title}>Термін зберігання:</h2>
+                  </div>
+                  <p className={styles.description}>{data.term}</p>
+                </>
+              )}
+
+              {data.producer && (
+                <>
+                  <div className={styles.heading}>
+                    <Image
+                      src="/assets/icon/information-line-icon.svg"
+                      alt="information"
+                      width={14}
+                      height={14}
+                    />
+                    <h2 className={styles.title}>Виробник:</h2>
+                  </div>
+                  <p className={styles.description}>{data.producer}</p>
+                </>
+              )}
+
+              {data.sort && (
+                <>
+                  <div className={styles.heading}>
+                    <Image
+                      src="/assets/icon/information-line-icon.svg"
+                      alt="information"
+                      width={14}
+                      height={14}
+                    />
+                    <h2 className={styles.title}>Сорт:</h2>
+                  </div>
+                  <p className={styles.description}>{data.sort}</p>
+                </>
+              )}
             </div>
           </div>
+
+          {data.description && (
+            <>
+              <p className={styles.description}>Опис</p>
+              <p className={styles.description}>{data.description}</p>
+            </>
+          )}
+
+          {data.suitFor && (
+            <>
+              <p className={styles.description}>Ідеально підходять для:</p>
+              <ul>
+                {data.suitFor.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
 
         <ProductList
