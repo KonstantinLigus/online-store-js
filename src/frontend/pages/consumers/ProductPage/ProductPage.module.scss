@@ -15,16 +15,13 @@
   }
 
   .productName {
-    display: none;
-    @media screen and (min-width: $burger-menu-screen-width) {
-      color: $color-gray-dark-1;
-      display: block;
-      font-size: 1.5em;
-      font-weight: 500;
-      @media screen and (min-width: 768px) {
-        grid-column: 2/3;
-        grid-row: 1/2;
-      }
+    color: $color-gray-dark-1;
+    display: block;
+    font-size: 1.5em;
+    font-weight: 500;
+    @media screen and (min-width: 768px) {
+      grid-column: 2/3;
+      grid-row: 1/2;
     }
   }
 
@@ -137,7 +134,6 @@
     }
 
     .description {
-      max-width: 170px;
       color: $color-gray-dark-1;
       font-size: 0.875em;
       font-weight: 400;
