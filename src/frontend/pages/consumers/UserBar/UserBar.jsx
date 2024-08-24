@@ -45,10 +45,11 @@ const UserBar = ({ token }) => {
       <Link href="/cart">
         <Image
           src="/assets/icon/icon-cart.svg"
-          width={24}
-          height={24}
+          width={30}
+          height={30}
           alt="cart icon"
           priority
+          className={styles.cartIcon}
         />
       </Link>
     </div>

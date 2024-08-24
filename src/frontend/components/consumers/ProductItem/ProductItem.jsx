@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProductItem.module.scss";
 import LikeIcon from "../LikeIcon/LikeIcon";
+import { useCart } from "@/hooks/useCart";
 
 const ProductItem = ({ id, title, prices, mainImage, children }) => {
   return (
-    <li className={styles.item}>
-      <div className={styles.imgContainer}>
+    <li className={styles.product}>
+      <div className={styles.product__picture}>
         <Link href={`/${id}`}>
           <Image
-            className={styles.cardImage}
+            className={styles.product__image}
             src={mainImage}
             alt={title}
             width={300}
@@ -18,30 +19,28 @@ const ProductItem = ({ id, title, prices, mainImage, children }) => {
             priority
           />
         </Link>
-        <div className={styles.likeWrapper}>
+        <div className={styles.product__like}>
           <LikeIcon productId={id} />
         </div>
       </div>
-      <div className={styles.information}>
-        <Link href={`/${id}`}>
-          <h2 className={styles.title}>{title}</h2>
-        </Link>
-        <div className={styles.priceContainer}>
-          {prices[0].actionPrice ? (
-            <>
-              <p className={styles.actionPrice}>
-                <span>{prices[0].price} грн</span>
-                {prices[0].actionPrice} грн
-              </p>
-            </>
-          ) : (
-            <p className={styles.price}>{prices[0].price} грн</p>
-          )}
+      <Link href={`/${id}`} className={styles.product__title}>
+        {title}
+      </Link>
+      <div className={styles.price}>
+        {prices[0].actionPrice ? (
+          <>
+            <p className={styles.price__actionPrice}>
+              <span>{prices[0].price} грн</span>
+              {prices[0].actionPrice} грн
+            </p>
+          </>
+        ) : (
+          <p className={styles.price__normalPrice}>{prices[0].price} грн</p>
+        )}
 
-          <p className={styles.unit}>
-            {prices[0].value} {prices[0].unit}
-          </p>
-        </div>
+        <p className={styles.price__unit}>
+          {prices[0].value} {prices[0].unit}
+        </p>
       </div>
       <div>{children}</div>
     </li>
