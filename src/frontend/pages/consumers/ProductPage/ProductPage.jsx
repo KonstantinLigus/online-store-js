@@ -13,6 +13,8 @@ const ProductPage = ({ params }) => {
   const [data, setData] = useState(null);
   const { cart, addToCart, removeFromCart } = useCart();
 
+  const [productIsAvailable, setProductIsAvailable] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`api/items/${params.id}`);
@@ -38,154 +40,159 @@ const ProductPage = ({ params }) => {
           product={data.title}
         />
 
-        <div className={styles.productCard}>
-          <h2 className={styles.productName}>{data.title}</h2>
-
-          <div className={styles.imageContainer}>
-            {data.images.length > 1 ? (
-              <Slider images={data.images} />
-            ) : (
-              <Image
-                className={styles.imageProduct}
-                src={data.mainImage}
-                fill
-                alt="product image"
-              />
-            )}
-
-            <div className={styles.heartIconContainer}>
-              <LikeIcon productId={data._id} />
+        <div className={styles.product}>
+          <div
+            className={`${styles.product__container} ${styles.product__container_row}`}
+          >
+            <div className={styles.product__image}>
+              {data.images.length > 1 ? (
+                <Slider images={data.images} />
+              ) : (
+                <Image
+                  className={styles.product__imageImg}
+                  src={data.mainImage}
+                  fill
+                  alt="product image"
+                />
+              )}
+              <div className={styles.product__imageLike}>
+                <LikeIcon productId={data._id} />
+              </div>
             </div>
-          </div>
 
-          <div className={styles.priceInformation}>
-            {data.prices[0].actionPrice ? (
-              <>
-                <p className={styles.price}>
-                  <span>{data.prices[measure].price} грн</span>
-                  {data.prices[measure].actionPrice} грн
-                </p>
-              </>
-            ) : (
-              <p className={styles.price}>{data.prices[measure].price} грн</p>
-            )}
+            <div className={styles.product__container}>
+              <section className={styles.product__container}>
+                <h1 className={styles.product__title}>{data.title}</h1>
 
-            <div className={styles.measure}>
-              {data.prices.map((item, index) => (
-                <div key={index}>
-                  <input
-                    type="radio"
-                    name="measurement"
-                    id={index}
-                    className={styles.measureRadioBtn}
-                    checked={index === measure}
-                    onChange={() => setMeasure(index)}
-                    hidden
-                  />
-                  <label htmlFor={index} className={styles.measureLabel}>
-                    {item.value}
-                    {item.unit}
-                  </label>
+                {data.prices[0].actionPrice ? (
+                  <>
+                    <p className={styles.product__price}>
+                      <span>{data.prices[measure].price} грн</span>
+                      {data.prices[measure].actionPrice} грн
+                    </p>
+                  </>
+                ) : (
+                  <p className={styles.product__price}>
+                    {data.prices[measure].price} грн
+                  </p>
+                )}
+
+                <div className={styles.product__measure}>
+                  {data.prices.map((item, index) => (
+                    <div key={index}>
+                      <input
+                        type="radio"
+                        name="measurement"
+                        id={index}
+                        className={styles.product__measureRadioBtn}
+                        checked={index === measure}
+                        onChange={() => setMeasure(index)}
+                        hidden
+                      />
+                      <label
+                        htmlFor={index}
+                        className={styles.product__measureLabel}
+                      >
+                        {item.value}
+                        {item.unit}
+                      </label>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {cartChecker(data._id) ? (
-            <Button
-              className={styles.button}
-              title="Видалити з кошика"
-              onClick={() => removeFromCart(data._id)}
-            />
-          ) : (
-            <Button
-              className={styles.button}
-              title="Додати в кошик"
-              onClick={() => addToCart(data, measure)}
-            />
-          )}
+                {productIsAvailable ? (
+                  <p
+                    className={`${styles.product__text} ${styles.product__text_green}`}
+                  >
+                    Є в наявності!
+                  </p>
+                ) : (
+                  <p
+                    className={`${styles.product__text} ${styles.product__text_red}`}
+                  >
+                    Нема в наявності
+                  </p>
+                )}
+              </section>
 
-          <div className={styles.characteristic}>
-            <h2 className={styles.headline}>Характеристики</h2>
-            <div>
-              {data.condition && (
-                <>
-                  <div className={styles.heading}>
-                    <Image
-                      src="/assets/icon/information-line-icon.svg"
-                      alt="information"
-                      width={14}
-                      height={14}
-                    />
-                    <h2 className={styles.title}>Умови зберігання:</h2>
-                  </div>
-                  <p className={styles.description}>{data.condition}</p>
-                </>
-              )}
+              <div
+                className={`${styles.product__container} ${styles.product__container_columnReverse}`}
+              >
+                {cartChecker(data._id) ? (
+                  <Button
+                    className={styles.product__buttonCart}
+                    title="Видалити з кошика"
+                    onClick={() => removeFromCart(data._id)}
+                  />
+                ) : (
+                  <Button
+                    className={styles.product__buttonCart}
+                    title="Додати до кошика"
+                    onClick={() => addToCart(data, measure)}
+                  />
+                )}
 
-              {data.term && (
-                <>
-                  <div className={styles.heading}>
-                    <Image
-                      src="/assets/icon/information-line-icon.svg"
-                      alt="information"
-                      width={14}
-                      height={14}
-                    />
-                    <h2 className={styles.title}>Термін зберігання:</h2>
-                  </div>
-                  <p className={styles.description}>{data.term}</p>
-                </>
-              )}
+                <section className={styles.product__container}>
+                  <h2 className={styles.product__subtitle}>Характеристики</h2>
 
-              {data.producer && (
-                <>
-                  <div className={styles.heading}>
-                    <Image
-                      src="/assets/icon/information-line-icon.svg"
-                      alt="information"
-                      width={14}
-                      height={14}
-                    />
-                    <h2 className={styles.title}>Виробник:</h2>
-                  </div>
-                  <p className={styles.description}>{data.producer}</p>
-                </>
-              )}
+                  <ul>
+                    {data.condition && (
+                      <li className={styles.product__listItem}>
+                        <p className={styles.product__text}>
+                          Умови зберігання:
+                        </p>
+                        <p className={styles.product__text}>{data.condition}</p>
+                      </li>
+                    )}
 
-              {data.sort && (
-                <>
-                  <div className={styles.heading}>
-                    <Image
-                      src="/assets/icon/information-line-icon.svg"
-                      alt="information"
-                      width={14}
-                      height={14}
-                    />
-                    <h2 className={styles.title}>Сорт:</h2>
-                  </div>
-                  <p className={styles.description}>{data.sort}</p>
-                </>
-              )}
+                    {data.term && (
+                      <li className={styles.product__listItem}>
+                        <p className={styles.product__text}>
+                          Термін зберігання:
+                        </p>
+                        <p className={styles.product__text}>{data.term}</p>
+                      </li>
+                    )}
+
+                    {data.producer && (
+                      <li className={styles.product__listItem}>
+                        <p className={styles.product__text}>Виробник:</p>
+                        <p className={styles.product__text}>{data.producer}</p>
+                      </li>
+                    )}
+
+                    {data.sort && (
+                      <li className={styles.product__listItem}>
+                        <p className={styles.product__text}>Сорт:</p>
+                        <p className={styles.product__text}>{data.sort}</p>
+                      </li>
+                    )}
+                  </ul>
+                </section>
+              </div>
             </div>
           </div>
 
           {data.description && (
-            <>
-              <p className={styles.description}>Опис</p>
-              <p className={styles.description}>{data.description}</p>
-            </>
+            <section className={styles.product__container}>
+              <h2 className={styles.product__subtitle}>Опис</h2>
+              <p className={styles.product__text}>{data.description}</p>
+            </section>
           )}
 
           {data.suitFor && (
-            <>
-              <p className={styles.description}>Ідеально підходять для:</p>
+            <section className={styles.product__container}>
+              <h2 className={styles.product__subtitle}>
+                Ідеально підходять для:
+              </h2>
               <ul>
                 {data.suitFor.map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li key={index} className={styles.product__listItemSuitsFor}>
+                    {item}
+                  </li>
                 ))}
               </ul>
-            </>
+            </section>
           )}
         </div>
 

@@ -9,7 +9,7 @@ import { Pagination } from "swiper/modules";
 
 const Banner = () => {
   return (
-    <section>
+    <section className={styles.banner}>
       <Swiper
         pagination={{
           type: "fraction",

@@ -2,144 +2,142 @@
 @import "../../../../../src/styles/mixins";
 @import "../../../../../src/styles/variables";
 
-.productCard {
+.product {
   @include wrapper;
-  display: grid;
-  margin-top: 4em;
+  color: $color-gray-dark-1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   margin-bottom: 6em;
   width: 100%;
-  @media screen and (min-width: 768px) {
-    gap: 1em;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, auto);
-  }
 
-  .productName {
-    color: $color-gray-dark-1;
-    display: block;
-    font-size: 1.5em;
-    font-weight: 500;
-    @media screen and (min-width: 768px) {
-      grid-column: 2/3;
-      grid-row: 1/2;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    &_row {
+      @include lg-min {
+        flex-direction: row;
+      }
+    }
+
+    &_columnReverse {
+      @include lg-min {
+        flex-direction: column-reverse;
+      }
     }
   }
 
-  .imageContainer {
+  &__image {
     aspect-ratio: 1/1;
-    max-height: 600px;
-    max-width: 600px;
-    min-width: 240px;
+    min-width: 15rem;
     position: relative;
     width: 100%;
-    @media screen and (min-width: 768px) {
-      grid-column: 1/2;
-      grid-row: 1/-1;
+    @include lg-min {
+      max-height: 37.5rem;
+      max-width: 37.5rem;
     }
 
-    .imageProduct {
+    &Img {
       object-fit: cover;
       position: relative !important;
     }
 
-    .heartIconContainer {
+    &Like {
+      height: 1.5rem;
       position: absolute;
       top: 1rem;
       right: 1rem;
+      width: 1.5rem;
       z-index: 5;
     }
   }
 
-  .priceInformation {
-    margin-block: 2rem;
-    text-align: left;
-    @media screen and (min-width: 768px) {
-      grid-column: 2/3;
-      grid-row: 2/3;
-      margin-block: 0rem;
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    @include lg-min {
+      font-size: 2rem;
+    }
+  }
+
+  &__price {
+    color: $color-gray-dark-1;
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    span {
+      color: $color-red-1;
+      margin-right: 0.5rem;
+      text-decoration: line-through;
+    }
+  }
+
+  &__measure {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    &Label {
+      border: 1px solid $color-orange-300;
+      border-radius: 1rem;
+      color: #777;
+      cursor: pointer;
+      font-size: 1.125rem;
+      padding: 0.5rem 1rem;
     }
 
-    .price {
+    &RadioBtn:checked + label {
+      border: 2px solid $color-orange-500;
       color: $color-gray-dark-1;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    @include lg-min {
       font-size: 1.5rem;
-      font-weight: 500;
-
-      span {
-        color: $color-red-1;
-        margin-right: 0.5rem;
-        text-decoration: line-through;
-      }
-    }
-
-    .measure {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin: 1rem 0;
-
-      .measureLabel {
-        border: 1px solid $color-orange-300;
-        border-radius: 1rem;
-        color: #777;
-        cursor: pointer;
-        font-size: 1.125rem;
-        padding: 0.5rem 1rem;
-      }
-
-      .measureRadioBtn:checked + label {
-        border: 2px solid $color-orange-500;
-        color: $color-gray-dark-1;
-      }
     }
   }
 
-  .button {
-    @include button-1;
-    color: $color-white;
-    @media screen and (min-width: 768px) {
-      grid-column: 2/3;
-      grid-row: 4/5;
+  &__text {
+    font-size: 1rem;
+    line-height: 1.5;
+    @include lg-min {
+      font-size: 1.125rem;
+    }
+
+    &_green {
+      color: $color-green-dark-3;
+    }
+
+    &_red {
+      color: $color-red-1;
     }
   }
 
-  .characteristic {
-    border-radius: 1em;
-    border: 1px solid $color-gray-dark-1;
-    margin-top: 2rem;
-    padding: 1em;
-    @media screen and (min-width: 768px) {
-      border: none;
-      grid-column: 2/3;
-      grid-row: 3/4;
-      margin-top: 0rem;
+  &__listItem {
+    list-style: url("/assets/icon/information-line-icon.svg");
+    margin-left: 2rem;
+  }
+
+  &__button {
+    &Cart {
+      @include button-1;
+      margin-inline: auto;
+      max-width: 18rem !important;
     }
+  }
 
-    .headline {
-      color: $color-gray-dark-1;
-      font-size: 1.25em;
-      font-weight: 400;
-      margin-bottom: 1em;
-    }
-
-    .heading {
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-
-      .title {
-        color: $color-gray-dark-1;
-        font-size: 0.875em;
-        font-weight: 400;
-      }
-    }
-
-    .description {
-      color: $color-gray-dark-1;
-      font-size: 0.875em;
-      font-weight: 400;
-      margin-top: 0.5em;
-      margin-bottom: 0.5em;
-      margin-left: 1.25em;
+  &__listItemSuitsFor {
+    line-height: 1.5;
+    margin-left: 2rem;
+    &::marker {
+      color: #ff8a00;
     }
   }
 }

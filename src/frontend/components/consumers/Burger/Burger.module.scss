@@ -2,42 +2,61 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-.burgerContainer {
+.burgerButton {
+  background-color: transparent;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 3px;
-  cursor: pointer;
-  width: 16px;
+  outline: none;
   height: 16px;
-  background-color: transparent;
-  margin-top: 2px;
+  width: 16px;
+  @include md-min {
+    gap: 4px;
+    height: 20px;
+    width: 23px;
+  }
+  @include lg-min {
+    width: 28px;
+  }
+}
 
-  .burger {
-    width: 16px;
-    height: 2px;
-    background-color: $color-gray-dark-1;
-    border-radius: 50px;
+.burger {
+  background-color: $color-gray-dark-1;
+  height: 2px;
+  width: 16px;
+  @include md-min {
+    width: 23px;
+  }
+  @include lg-min {
+    width: 28px;
+  }
 
-    &.clicked {
-      &:nth-child(1) {
-        transform: translateY(2px) rotate(-45deg);
-        transition: ease-out 0.5s;
-      }
-
-      &:nth-child(2) {
-        display: none;
-      }
-
-      &:nth-child(3) {
-        transform: translateY(-3px) rotate(45deg);
-        transition: ease-out 0.5s;
-      }
-    }
-
-    &.unClicked {
-      transform: rotate(0) translate(0);
+  &.clicked {
+    &:nth-child(1) {
+      transform: translateY(2px) rotate(-45deg);
       transition: ease-out 0.5s;
+      @include md-min {
+        transform: translateY(3px) rotate(-45deg);
+      }
     }
+
+    &:nth-child(2) {
+      display: none;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(-3px) rotate(45deg);
+      transition: ease-out 0.5s;
+      @include md-min {
+        transform: translateY(-3px) rotate(45deg);
+      }
+    }
+  }
+
+  &.unClicked {
+    transform: rotate(0) translate(0);
+    transition: ease-out 0.5s;
   }
 }

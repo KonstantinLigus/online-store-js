@@ -2,33 +2,48 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-@mixin footerText {
-  font-size: 1rem;
-  line-height: 2;
-  text-decoration: none;
-  @include md-min {
-    font-size: 1.125rem;
-  }
-}
-
 .footer {
-  background-color: rgba($color-green-dark-3, 0.35);
+  background-color: rgba($color-green-dark-3, 0.25);
   background-image: url("/assets/footer-bg-pattern.png");
   background-repeat: repeat;
-  padding-block: 2rem;
+  padding-top: 1.75rem;
+  padding-bottom: 3rem;
+  @include md-min {
+    padding-top: 2.25rem;
+    padding-bottom: 3.25rem;
+  }
+  @include lg-min {
+    padding-top: 2.75rem;
+    padding-bottom: 4rem;
+  }
 
   &__inner {
     @include wrapper;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 600;
+    gap: 1.5rem;
+    line-height: 1.5;
+    @include md-min {
+      gap: 1.75rem;
+    }
+    @include lg-min {
+      font-size: 1.125rem;
+      gap: 2rem;
+      max-width: 76rem;
+    }
   }
 
   &__logo {
     cursor: pointer;
     display: block;
-    margin-bottom: 1rem;
-    width: 160px;
+    width: 130px;
     @include md-min {
-      margin-bottom: 2rem;
       width: 220px;
+    }
+    @include lg-min {
+      width: 300px;
     }
     @include xl-min {
       width: 330px;
@@ -41,55 +56,95 @@
     }
   }
 
-  &__container {
+  &__info {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
     @include md-min {
       flex-direction: row-reverse;
       justify-content: space-between;
     }
-  }
-}
 
-.contacts {
-  margin-bottom: 1rem;
-  @include md-min {
-    margin-bottom: 2rem;
-  }
+    &Section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      list-style: none;
+      position: relative;
+      @include md-min {
+        gap: 0.625rem;
+      }
+      @include lg-min {
+        gap: 0.875rem;
+      }
 
-  &__item {
-    @include footerText();
-  }
-}
-
-.links {
-  &__list {
-    color: $color-gray-dark-1;
-    list-style: none;
-  }
-
-  &__item {
-    @include footerText();
+      &Title {
+        @include md-min {
+          position: absolute;
+          left: 0;
+          top: -2.75rem;
+        }
+        @include lg-min {
+          top: -3.5rem;
+        }
+      }
+    }
   }
 
   &__link {
     color: inherit;
     text-decoration: none;
+    transition: 0.2s;
     &:hover {
       color: $color-orange-500;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-top: 0.25rem;
+    @include md-min {
+      align-items: center;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+    @include lg-min {
+      margin-top: 2rem;
     }
   }
 }
 
 .social {
   display: flex;
+  flex-direction: row;
   gap: 1rem;
-  padding-block: 1rem;
-  @include md-min {
-    padding-block: 0;
-  }
-}
 
-.copyright {
-  font-size: 0.875rem;
+  &__link {
+    background-color: $color-gray-dark-1;
+    display: block;
+    height: 1.25rem;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-position: center;
+    -webkit-mask-position: center;
+    transition: 0.2s;
+    width: 1.25rem;
+    @include md-min {
+      height: 1.75rem;
+      width: 1.75rem;
+    }
+    @include lg-min {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    &:hover {
+      background-color: $color-orange-500;
+    }
+  }
 }

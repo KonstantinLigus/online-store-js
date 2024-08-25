@@ -2,108 +2,121 @@
 @import "../../../../../src/styles/mixins";
 @import "../../../../../src/styles/responsive";
 
-.item {
-  border-radius: 10px;
-  height: fit-content;
+.product {
+  container: productCard / inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  @container productCard (min-width:12.5rem) {
+    gap: 1rem;
+  }
+  @container productCard (min-width:17.5rem) {
+    gap: 2.25rem;
+  }
 
-  .imgContainer {
+  &__picture {
     aspect-ratio: 1/1;
-    //height: 200px;
     overflow: hidden;
     position: relative;
     width: 100%;
+  }
 
-    a {
-      display: block;
-      height: 100%;
-      width: 100%;
-
-      .cardImage {
-        display: block;
-        //max-height: 300px;
-        height: 100%;
-        margin: auto;
-        object-fit: cover;
-        object-position: center;
-        transition: all 0.4s;
-        width: 100%;
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-    }
-
-    .likeWrapper {
-      position: absolute;
-      right: 1rem;
-      top: 1rem;
+  &__image {
+    display: block;
+    height: 100%;
+    margin: auto;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.4s;
+    width: 100%;
+    &:hover {
+      transform: scale(1.1);
     }
   }
 
-  .information {
-    a {
-      text-decoration: none;
+  &__like {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    max-height: 1.75rem;
+    max-width: 1.75rem;
+    height: 18%;
+    width: 18%;
+  }
+
+  &__title {
+    text-align: left;
+    color: $color-gray-dark-1;
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+    width: fit-content;
+    @container productCard (min-width:12.5rem) {
+      font-size: 1rem;
+    }
+    @container productCard (min-width:17.5rem) {
+      font-size: 1.25rem;
+    }
+    &:hover {
+      color: $color-green-dark-2;
+    }
+  }
+}
+
+.price {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  height: 1rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  &__actionPrice {
+    color: $color-red-1;
+    font-size: 1rem;
+    @container productCard (min-width:12.5rem) {
+      font-size: 1.125rem;
     }
 
-    .title {
-      text-align: left;
+    span {
       color: $color-gray-dark-1;
-      font-size: 1rem;
-      font-weight: 400;
-      margin-block: 0.75rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.2s;
-      white-space: nowrap;
-      @include lg-min {
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+      text-decoration: line-through;
+      @container productCard (min-width:12.5rem) {
+        font-size: 0.938rem;
+      }
+      @container productCard (min-width:17.5rem) {
         font-size: 1.125rem;
       }
-      &:hover {
-        color: $color-green-dark-2;
-      }
     }
+  }
 
-    .priceContainer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+  &__normalPrice {
+    color: $color-gray-dark-1;
+    font-size: 0.75rem;
+    @container productCard (min-width:12.5rem) {
+      font-size: 0.938rem;
+    }
+    @container productCard (min-width:17.5rem) {
+      font-size: 1.125rem;
+    }
+  }
 
-      .actionPrice {
-        color: $color-red-1;
-        font-size: 1rem;
-        font-weight: 400;
-        @include lg-min {
-          font-size: 1.125rem;
-        }
-
-        span {
-          color: $color-gray-dark-1;
-          font-size: 0.875rem;
-          margin-right: 0.5rem;
-          text-decoration: line-through;
-          @include lg-min {
-            font-size: 1rem;
-          }
-        }
-      }
-
-      .price {
-        color: $color-gray-dark-1;
-        font-size: 1rem;
-        font-weight: 400;
-        @include lg-min {
-          font-size: 1.125rem;
-        }
-      }
-
-      .unit {
-        color: $color-gray-light-1;
-        font-size: 1rem;
-        @include lg-min {
-          font-size: 1.125rem;
-        }
-      }
+  &__unit {
+    color: $color-gray-light-1;
+    font-size: 0.75rem;
+    @container productCard (min-width:12.5rem) {
+      font-size: 0.938rem;
+    }
+    @container productCard (min-width:17.5rem) {
+      font-size: 1.125rem;
     }
   }
 }
