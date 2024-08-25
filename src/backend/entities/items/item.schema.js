@@ -9,6 +9,7 @@ export const itemSchema = new mongoose.Schema({
       actionPrice: { type: Number },
       value: { type: Number, required: true },
       unit: { type: String, required: true },
+      ammount: { type: Number, required: true },
     },
   ],
   images: { type: [String] },
