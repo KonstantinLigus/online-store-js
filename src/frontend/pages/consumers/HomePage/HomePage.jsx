@@ -18,7 +18,6 @@ export default async function HomePage() {
       <div className={styles.divider}></div>
       <Blog />
       <div className={styles.dividerSmall}></div>
-      <PaymentExample />
     </>
   );
 }
