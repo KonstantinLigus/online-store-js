@@ -10,9 +10,9 @@ import Image from "next/image";
 const UserBar = ({ token }) => {
   const { status } = useSession();
 
-  const getUserStyles = () => {
-    if (status === "unauthenticated" && !token) return styles.userIconEmpty;
-    if (status === "authenticated" || token) return styles.userIconFilled;
+  const isFilled = () => {
+    if (status === "unauthenticated" && !token) return false;
+    if (status === "authenticated" || token) return true;
     return styles.userIconEmpty;
   };
 
@@ -36,19 +36,26 @@ const UserBar = ({ token }) => {
           className={styles.userSignOutBtn}
         />
       )}
-      {status === "loading" && <p className={styles.userInfo}>Loading...</p>}
       <Link href={getURL()}>
-        <svg className={getUserStyles()}>
-          <use href="assets/icon/icon-person-outline.svg#user" />
-        </svg>
+        <Image
+          src={`/assets/icon/icon-person-${
+            isFilled() ? "filled" : "outline"
+          }.svg`}
+          width={30}
+          height={30}
+          alt="cart icon"
+          priority
+          className={styles.cartIcon}
+        />
       </Link>
       <Link href="/cart">
         <Image
           src="/assets/icon/icon-cart.svg"
-          width={24}
-          height={24}
+          width={30}
+          height={30}
           alt="cart icon"
           priority
+          className={styles.cartIcon}
         />
       </Link>
     </div>

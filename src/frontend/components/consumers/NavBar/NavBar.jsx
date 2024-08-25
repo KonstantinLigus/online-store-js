@@ -52,56 +52,63 @@ export default function NavBar(props) {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerContainer}>
-        <div className={styles.headerItems}>
-          <div style={{ display: "flex" }}>
-            <div className={styles.burgerContainer}>
-              <Burger menuIsClicked={menuIsClicked} onClick={updateMenu} />
-            </div>
-            <Image
-              src="/assets/icon/icon-search.svg"
-              width={18}
-              height={18}
-              alt="user icon"
-              priority
-              onClick={() => setIsSearchClicked(true)}
-            />
+      <div className={styles.header__headline}>
+        <div className={styles.header__icons}>
+          <div className={styles.header__burger}>
+            <Burger menuIsClicked={menuIsClicked} onClick={updateMenu} />
           </div>
 
-          <Link href="/" prefetch={false} className={styles.logo}>
-            <Image
-              src="/assets/Logo.png"
-              width={220}
-              height={44}
-              alt="user icon"
-              priority
-            />
-          </Link>
-          <UserBar token={props.token} />
+          <Image
+            src="/assets/icon/icon-search.svg"
+            width={26}
+            height={26}
+            alt="search"
+            priority
+            onClick={() => setIsSearchClicked(true)}
+            className={styles.header__search}
+          />
         </div>
+
+        <Link href="/" prefetch={false} className={styles.header__logo}>
+          <Image
+            src="/assets/logo.svg"
+            width={220}
+            height={44}
+            alt="logo"
+            priority
+            className={styles.header__logoImage}
+          />
+        </Link>
+
+        <UserBar token={props.token} />
       </div>
 
       <nav
         className={
           menuIsClicked
-            ? `${styles.navigation} ${styles.visible}`
-            : `${styles.navigation} ${styles.hidden}`
+            ? `${styles.navbar} ${styles.navbar__visible}`
+            : `${styles.navbar} ${styles.navbar__hidden}`
         }
       >
-        <ul className={styles.list}>
+        <ul className={styles.navbar__list}>
           {links.map(link => (
-            <Link key={link.id} href={link.url} onClick={updateMenu}>
-              <li className={styles.item}>
-                {link.title}
+            <li key={link.id}>
+              <Link
+                href={link.url}
+                onClick={updateMenu}
+                className={styles.navbar__link}
+              >
+                <p className={styles.navbar__linkText}>{link.title}</p>
                 <Image
                   src="/assets/icon/icon-arrow-right.svg"
                   width={24}
                   height={24}
                   alt="arrow icon"
                   priority
+                  className={styles.navbar__linkImage}
                 />
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       </nav>

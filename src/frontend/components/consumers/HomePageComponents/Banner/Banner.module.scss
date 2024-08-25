@@ -2,6 +2,12 @@
 @import "../../../../../styles/mixins";
 @import "../../../../../styles/variables";
 
+.banner {
+  @media screen and (min-width: $burger-menu-screen-width) {
+    margin-top: 3rem;
+  }
+}
+
 .bannerTitle {
   color: $color-white;
   font-size: 2.5rem;
