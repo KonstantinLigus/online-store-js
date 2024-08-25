@@ -17,8 +17,8 @@ const LikeIcon = ({ productId }) => {
         <Image
           src="/assets/icon/icon-heart-fill.svg"
           alt="heart icon"
-          width={24}
-          height={24}
+          width={32}
+          height={32}
           className={styles.heartIcon}
           onClick={() => toDislike(productId)}
         />
@@ -26,8 +26,8 @@ const LikeIcon = ({ productId }) => {
         <Image
           src="/assets/icon/icon-heart.svg"
           alt="heart icon"
-          width={24}
-          height={24}
+          width={32}
+          height={32}
           className={styles.heartIcon}
           onClick={() => toLike(productId)}
         />

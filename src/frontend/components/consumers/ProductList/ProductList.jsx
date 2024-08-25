@@ -35,23 +35,23 @@ const ProductList = ({ title, className }) => {
               type: "fraction",
             }}
             slidesPerView={1}
-            spaceBetween={16}
+            spaceBetween={8}
             navigation={true}
             modules={[Pagination]}
             loop={true}
             className={styles.mySwiper}
             breakpoints={{
-              // when window width is >= 576px
-              440: {
+              310: {
                 slidesPerView: 2,
+                spaceBetween: 8,
               },
-              // when window width is >= 768px
               768: {
                 slidesPerView: 3,
+                spaceBetween: 16,
               },
-              // when window width is >= 992px
               992: {
                 slidesPerView: 4,
+                spaceBetween: 16,
               },
             }}
           >

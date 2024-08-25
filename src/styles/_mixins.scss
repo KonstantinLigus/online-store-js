@@ -15,13 +15,19 @@
   width: 100%;
   min-width: 260px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding-inline: 1rem;
   @include md-min {
-    padding: 0 40px;
+    padding-inline: 2rem;
+  }
+  @include lg-min {
+    padding-inline: 3rem;
   }
   @include xl-min {
-    max-width: 1400px;
-    padding: 0 60px;
+    padding-inline: 4rem;
+  }
+  @include xxl-min {
+    max-width: 100rem;
+    padding-inline: 5rem;
   }
 }
 
@@ -55,18 +61,18 @@
 }
 
 @mixin button-1 {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: $s;
-  //background-color: $color-green-1;
   background-color: $color-orange-500;
   border: none;
   border-radius: 2rem;
-  color: $color-gray-dark-1;
-  font-size: 1.5rem;
-  max-width: 500px;
-  padding: 1rem;
+  color: $color-white;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 600;
+  justify-content: center;
+  gap: 0.5rem;
+  outline: 3px solid rgba($color-orange-200, 0);
+  padding: 0.75rem;
   text-align: center;
   width: 100%;
 
@@ -92,16 +98,16 @@
 }
 
 @mixin button-2 {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: $s;
-  //background-color: $color-green-1;
   background-color: $color-white;
   border: 1px solid $color-orange-300;
   border-radius: 3rem;
   color: $color-orange-500;
-  font-size: 0.875rem;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: center;
+  gap: 0.5rem;
   outline: 3px solid rgba($color-orange-200, 0);
   padding: 0.5rem;
   text-align: center;
@@ -118,7 +124,9 @@
   &:enabled {
     cursor: pointer;
     &:hover {
+      background-color: $color-orange-200;
       border-color: $color-orange-400;
+      color: $color-orange-50;
     }
     &:active {
       background-color: $color-orange-200;

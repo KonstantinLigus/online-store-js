@@ -3,7 +3,7 @@ import styles from "./Burger.module.scss";
 
 const Burger = ({ menuIsClicked, onClick }) => {
   return (
-    <div className={styles.burgerContainer} onClick={onClick}>
+    <button className={styles.burgerButton} onClick={onClick}>
       <div
         className={
           menuIsClicked
@@ -25,7 +25,7 @@ const Burger = ({ menuIsClicked, onClick }) => {
             : `${styles.burger} ${styles.unClicked}`
         }
       ></div>
-    </div>
+    </button>
   );
 };
 
