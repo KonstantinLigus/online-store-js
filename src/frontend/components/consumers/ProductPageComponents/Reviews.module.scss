@@ -1,0 +1,120 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.reviews {
+  @include wrapper;
+  margin-inline: 0;
+  margin-bottom: 3rem;
+  max-width: 83.5rem !important;
+
+  &__header {
+    border-bottom: 1px solid $color-gray-light-1;
+    display: flex;
+    padding-bottom: 1rem;
+    @include md-min {
+      padding-bottom: 1.5rem;
+    }
+    @include lg-min {
+      padding-bottom: 2rem;
+    }
+  }
+
+  &__title {
+    display: flex;
+    gap: 0.5rem;
+    &Reviews,
+    &Qty {
+      font-size: 1.25rem;
+      font-weight: 400;
+      @include md-min {
+        font-size: 1.5rem;
+      }
+      @include lg-min {
+        font-size: 2rem;
+      }
+    }
+    &Qty {
+      color: $color-gray-light-1;
+    }
+  }
+
+  &__reviews {
+    list-style: none;
+  }
+}
+
+.review {
+  border-bottom: 1px solid $color-gray-light-1;
+  padding-block: 0.5rem;
+  @include md-min {
+    padding-block: 1.5rem;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2.75rem;
+    position: relative;
+    @include md-min {
+      margin-bottom: 2.25rem;
+    }
+  }
+
+  &__name {
+    font-size: 1rem;
+    line-height: 1.5;
+    @include md-min {
+      flex: 1;
+    }
+    @include lg-min {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    left: 0;
+    position: absolute;
+    top: 2rem;
+    @include md-min {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  &__star {
+    display: block;
+    height: auto;
+    width: 18px;
+  }
+
+  &__date {
+    color: $color-gray-light-1;
+    text-align: right;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    @include md-min {
+      flex: 1;
+      font-size: 0.875rem;
+    }
+    @include lg-min {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__message {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    @include md-min {
+      font-size: 1rem;
+    }
+    @include lg-min {
+      font-size: 1.125rem;
+    }
+  }
+}

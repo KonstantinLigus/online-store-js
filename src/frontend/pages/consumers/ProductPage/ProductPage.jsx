@@ -8,12 +8,29 @@ import Button from "@/frontend/components/consumers/Button/Button";
 import LikeIcon from "@/frontend/components/consumers/LikeIcon/LikeIcon";
 import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
+import Reviews from "@/frontend/components/consumers/ProductPageComponents/Reviews";
+
+const productReviews = [
+  {
+    name: "Пилипчук Дмитро",
+    message: "Дуже смачний нектарин, соковитий та солодкий",
+    date: "12 травня 2023",
+    rating: 5,
+  },
+  {
+    name: "Крилова Марія",
+    message: "Замовляю тут неодноразово, якість продукції на висоті!",
+    date: "1 липня  2023",
+    rating: 4,
+  },
+];
 
 const ProductPage = ({ params }) => {
   const [data, setData] = useState(null);
   const { cart, addToCart, removeFromCart } = useCart();
 
   const [productIsAvailable, setProductIsAvailable] = useState(true);
+  const [reviews, setReviews] = useState(productReviews);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -195,6 +212,8 @@ const ProductPage = ({ params }) => {
             </section>
           )}
         </div>
+
+        {reviews.length > 0 && <Reviews reviews={reviews} />}
 
         <ProductList
           className={styles.productList}

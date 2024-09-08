@@ -58,6 +58,9 @@
   &__title {
     font-size: 1.25rem;
     font-weight: 500;
+    @include md-min {
+      font-size: 1.5rem;
+    }
     @include lg-min {
       font-size: 2rem;
     }
@@ -99,8 +102,11 @@
   &__subtitle {
     font-size: 1.25rem;
     font-weight: 400;
-    @include lg-min {
+    @include md-min {
       font-size: 1.5rem;
+    }
+    @include lg-min {
+      font-size: 2rem;
     }
   }
 

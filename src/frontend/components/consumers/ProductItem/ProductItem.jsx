@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./ProductItem.module.scss";
 import LikeIcon from "../LikeIcon/LikeIcon";
-import { useCart } from "@/hooks/useCart";
 
 const ProductItem = ({ id, title, prices, mainImage, children }) => {
   return (
@@ -28,12 +27,12 @@ const ProductItem = ({ id, title, prices, mainImage, children }) => {
       </Link>
       <div className={styles.price}>
         {prices[0].actionPrice ? (
-          <>
+          <div className={styles.price__sale}>
+            <p className={styles.price__previousPrice}>{prices[0].price} грн</p>
             <p className={styles.price__actionPrice}>
-              <span>{prices[0].price} грн</span>
               {prices[0].actionPrice} грн
             </p>
-          </>
+          </div>
         ) : (
           <p className={styles.price__normalPrice}>{prices[0].price} грн</p>
         )}
