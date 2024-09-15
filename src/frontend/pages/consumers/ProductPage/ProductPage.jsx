@@ -10,17 +10,21 @@ import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
 import Reviews from "@/frontend/components/consumers/ProductPageComponents/Reviews";
 
-const productReviews = [
+let productReviews = [
   {
     name: "Пилипчук Дмитро",
     message: "Дуже смачний нектарин, соковитий та солодкий",
-    date: "12 травня 2023",
+    day: 12,
+    month: 4,
+    year: 2023,
     rating: 5,
   },
   {
     name: "Крилова Марія",
     message: "Замовляю тут неодноразово, якість продукції на висоті!",
-    date: "1 липня  2023",
+    day: 1,
+    month: 6,
+    year: 2023,
     rating: 4,
   },
 ];
@@ -30,14 +34,17 @@ const ProductPage = ({ params }) => {
   const { cart, addToCart, removeFromCart } = useCart();
 
   const [productIsAvailable, setProductIsAvailable] = useState(true);
-  const [reviews, setReviews] = useState(productReviews);
+  const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`api/items/${params.id}`);
       const { item } = await res.json();
-      console.log(item.suitFor);
       setData(item);
+
+      // reverse reviews
+      let allReviews = [...productReviews].reverse();
+      setReviews(allReviews);
     };
     fetchData();
   }, [params.id]);
@@ -199,9 +206,9 @@ const ProductPage = ({ params }) => {
 
           {data.suitFor && (
             <section className={styles.product__container}>
-              <h2 className={styles.product__subtitle}>
+              <p className={styles.product__subtitleSuits}>
                 Ідеально підходять для:
-              </h2>
+              </p>
               <ul>
                 {data.suitFor.map((item, index) => (
                   <li key={index} className={styles.product__listItemSuitsFor}>
@@ -213,7 +220,7 @@ const ProductPage = ({ params }) => {
           )}
         </div>
 
-        {reviews.length > 0 && <Reviews reviews={reviews} />}
+        <Reviews reviews={reviews} setReviews={setReviews} />
 
         <ProductList
           className={styles.productList}

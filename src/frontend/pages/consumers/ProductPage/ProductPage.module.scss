@@ -110,6 +110,18 @@
     }
   }
 
+  &__subtitleSuits {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    @include md-min {
+      font-size: 1.125rem;
+    }
+    @include lg-min {
+      font-size: 1.25rem;
+    }
+  }
+
   &__text {
     font-size: 1rem;
     line-height: 1.5;
@@ -143,7 +155,7 @@
     line-height: 1.5;
     margin-left: 2rem;
     &::marker {
-      color: #ff8a00;
+      color: #1e1e1c;
     }
   }
 }
