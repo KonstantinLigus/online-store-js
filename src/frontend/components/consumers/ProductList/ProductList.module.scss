@@ -11,11 +11,11 @@
     font-weight: 500;
     margin-bottom: 1.25rem;
     @include md-min {
-      font-size: 2.25rem;
+      font-size: 1.75rem;
       margin-bottom: 2.25rem;
     }
     @include lg-min {
-      font-size: 3rem;
+      font-size: 2rem;
       margin-bottom: 3.25rem;
     }
   }
