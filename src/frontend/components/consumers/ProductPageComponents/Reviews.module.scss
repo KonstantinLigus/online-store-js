@@ -1,0 +1,181 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.reviews {
+  @include wrapper;
+  margin-bottom: 3rem;
+
+  &__inner {
+    max-width: 83.5rem !important;
+  }
+
+  &__header {
+    align-items: flex-start;
+    border-bottom: 1px solid $color-gray-light-1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    @include md-min {
+      flex-direction: row;
+      gap: 5rem;
+      padding-bottom: 1.5rem;
+    }
+    @include lg-min {
+      gap: 12rem;
+      padding-bottom: 2rem;
+    }
+    @include xl-min {
+      gap: 20rem;
+    }
+  }
+
+  &__title {
+    display: flex;
+    gap: 0.5rem;
+    &Reviews,
+    &Qty {
+      font-size: 1.25rem;
+      font-weight: 400;
+      @include md-min {
+        font-size: 1.5rem;
+      }
+      @include lg-min {
+        font-size: 2rem;
+      }
+    }
+    &Qty {
+      color: $color-gray-light-1;
+    }
+  }
+
+  &__buttonAddReview {
+    @include button-2;
+    margin-inline: 0;
+    max-width: 18rem !important;
+  }
+
+  &__reviews {
+    list-style: none;
+  }
+}
+
+.review {
+  border-bottom: 1px solid $color-gray-light-1;
+  display: block;
+  padding-block: 0.5rem;
+  @include md-min {
+    padding-block: 1.5rem;
+  }
+
+  &_visible {
+    display: block;
+  }
+
+  &_hidden {
+    display: none;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2.75rem;
+    position: relative;
+    @include md-min {
+      margin-bottom: 2.25rem;
+    }
+  }
+
+  &__name {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    @include md-min {
+      flex: 1;
+    }
+    @include lg-min {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    left: 0;
+    position: absolute;
+    top: 2rem;
+    @include md-min {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  &__star {
+    display: block;
+    height: auto;
+    width: 18px;
+
+    &_hover {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__date {
+    color: $color-gray-light-1;
+    text-align: right;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    @include md-min {
+      flex: 1;
+      font-size: 0.875rem;
+    }
+    @include lg-min {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__message {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    @include md-min {
+      font-size: 1rem;
+    }
+    @include lg-min {
+      font-size: 1.125rem;
+    }
+  }
+
+  &__buttonMoreReviews {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-family: inherit;
+    margin: 1rem auto 0 auto;
+    outline: none;
+    @include md-min {
+      margin-right: 0;
+    }
+
+    &Text {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    &Icon {
+      transform: rotate(0deg);
+      &Up {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

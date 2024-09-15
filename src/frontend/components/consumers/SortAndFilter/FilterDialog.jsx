@@ -95,7 +95,7 @@ const FilterDialog = ({
         <Image
           className={styles.title__icon}
           src="/assets/icon/icon-close.svg"
-          alt="sort icon"
+          alt="icon"
           width={16}
           height={16}
           priority
@@ -109,7 +109,7 @@ const FilterDialog = ({
             <span className={styles.items__details__summary_span}>Ціна</span>
             <Image
               src="/assets/icon/icon-angle-down.svg"
-              alt="heart icon"
+              alt="icon"
               width={16}
               height={16}
               className={styles.items__details__angleIcon}
@@ -137,7 +137,7 @@ const FilterDialog = ({
               </span>
               <Image
                 src="/assets/icon/icon-angle-down.svg"
-                alt="heart icon"
+                alt="icon"
                 width={16}
                 height={16}
                 className={styles.items__details__angleIcon}
@@ -167,7 +167,7 @@ const FilterDialog = ({
             </span>
             <Image
               src="/assets/icon/icon-angle-down.svg"
-              alt="heart icon"
+              alt="icon"
               width={16}
               height={16}
               className={styles.items__details__angleIcon}
