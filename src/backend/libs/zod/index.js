@@ -5,3 +5,4 @@ export { orderDeliveryInfoToPostOfficeSchema } from "./order.deliveryInfoToPostO
 export { orderDeliveryInfoByCourierSchema } from "./order.delivetyInfoByCourier.zod.schema";
 export { updateUserSchema } from "./user.update.zod.schema";
 export { userPasswordRestoreZodSchema } from "./user.restorePassword.schema";
+export * from "./comment.create.schema";
