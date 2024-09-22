@@ -11,12 +11,10 @@ async function createComment(commentObj) {
   return comment.toObject();
 }
 
-async function getComments() {
-  const comment = await Comment.find().populate("author", [
-    "firstName",
-    "surname",
-    "email",
-    "image",
-  ]);
+async function getComments({ skip, limit }) {
+  const comment = await Comment.find()
+    .skip(skip)
+    .limit(limit)
+    .populate("author", ["firstName", "surname", "email", "image"]);
   return comment;
 }
