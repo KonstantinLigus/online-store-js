@@ -2,8 +2,9 @@
 @import "@/styles/mixins";
 
 .LoginForm___title {
-  @include fonts($size: $font-size-xl);
+  @include fonts($size: $font-size-2xl);
   margin-bottom: $m;
+  text-align: center;
 }
 .LoginForm___form {
   margin-bottom: $m;
@@ -12,7 +13,9 @@
   margin-bottom: $m;
 }
 .LoginForm__container {
+  padding: $m 0;
   @include wrapper;
+  max-width: 632px !important;
 }
 .LoginForm__errorMsg {
   @include invalidData;

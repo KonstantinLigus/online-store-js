@@ -3,13 +3,17 @@
 @import "@/styles/variables";
 
 .RegisterForm__container {
+  padding: $m 0;
   @include wrapper;
+  max-width: 632px !important;
 }
 .RegisterForm__title {
-  @include fonts($size: $font-size-xl);
+  @include fonts($size: $font-size-2xl);
+  text-align: center;
 }
 .RegisterForm__form {
   margin-top: $m;
+  // margin: 0 auto;
 }
 .RegisterForm__inputWrapper {
   margin-bottom: $m;

@@ -116,7 +116,7 @@ const RegistrationPage = () => {
             </p>
           )}
         </div>
-        <SubmitButton disabled={isDisabled}>Зареєструватись</SubmitButton>
+          <SubmitButton disabled={isDisabled}>Зареєструватись</SubmitButton>
       </form>
     </div>
   );
