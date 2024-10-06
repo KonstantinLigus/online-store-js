@@ -7,14 +7,21 @@
   .title {
     color: $color-gray-dark-1;
     font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1.125rem;
+    line-height: 1.5;
     text-align: center;
     @include md-min {
-      font-size: 1.75rem;
+      font-size: 2rem;
+      margin-bottom: 2.25rem;
     }
     @include lg-min {
-      font-size: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 2.75rem;
+    }
+    @include xl-min {
+      font-size: 3rem;
+      margin-bottom: 3.25rem;
     }
 
     a {

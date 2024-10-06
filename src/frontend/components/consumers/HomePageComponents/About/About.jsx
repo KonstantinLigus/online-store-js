@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import styles from "./About.module.scss";
 import Button from "../../Button/Button";
 
@@ -7,23 +6,23 @@ const About = () => {
   const items = [
     {
       id: 0,
-      title: "Натуральність",
-      image: "/assets/home-page/naturalness.png",
+      value: "100%",
+      text: "Свіжість прямо з ферми",
     },
     {
       id: 1,
-      title: "Смак та якість",
-      image: "/assets/home-page/quality.png",
+      value: "5000+",
+      text: "Задоволених клієнтів",
     },
     {
       id: 2,
-      title: "Підтримка фермера",
-      image: "/assets/home-page/handshake.png",
+      value: "20",
+      text: "Років традицій та якості",
     },
     {
       id: 3,
-      title: "Зручність",
-      image: "/assets/home-page/convenience.png",
+      value: "50+",
+      text: "Видів продукції",
     },
   ];
   return (
@@ -35,16 +34,9 @@ const About = () => {
       </p>
       <div className={styles.about__items}>
         {items.map(item => (
-          <div className={styles.item} key={item.id}>
-            <Image
-              src={item.image}
-              width={270}
-              height={270}
-              alt={item.title}
-              priority
-              className={styles.item__img}
-            />
-            <p className={styles.item__text}>{item.title}</p>
+          <div className={styles.about__item} key={item.id}>
+            <p className={styles.about__value}>{item.value}</p>
+            <p className={styles.about__text}>{item.text}</p>
           </div>
         ))}
       </div>

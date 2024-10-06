@@ -33,6 +33,7 @@ const CategoriesPage = () => {
   const [filtredProductsLength, setFiltredProductsLength] = useState(1);
   const [productsByCategories, setProductsByCategories] = useState([]);
   const [producers, setProducers] = useState([]);
+  const [sortingValue, setSortingValue] = useState("Спочатку популярні");
   const { cart, addToCart, removeFromCart } = useCart();
 
   const sortByCategories = list => {
@@ -65,16 +66,28 @@ const CategoriesPage = () => {
     const fetchData = async () => {
       const res = await fetch("api/itemsAllFields");
       const { items } = await res.json();
+      items.sort(function (a, b) {
+        if (a.label.includes("популярні") < b.label.includes("популярні")) {
+          return 1;
+        }
+        if (a.label.includes("популярні") > b.label.includes("популярні")) {
+          return -1;
+        }
+        return 0;
+      });
       setSortedProducts(items);
       setFiltredProducts(items);
       setProductsByCategories(sortByCategories(items));
 
-      const producers = await fetch("api/producers");
-      let data = await producers.json();
       let producersList = [];
-      for (let i of data)
-        producersList.push({ id: i._id, producer: i.name, selected: false });
-      setProducers(producersList);
+      for (let i of items) producersList.push(i.producer);
+      let allProducers = Array.from(new Set(producersList));
+      allProducers = allProducers.map(i => ({
+        id: i.toString().split(" ").join("") + "producer",
+        producer: i,
+        selected: false,
+      }));
+      setProducers(allProducers);
     };
     fetchData();
   }, []);
@@ -94,6 +107,8 @@ const CategoriesPage = () => {
         setFiltredProductsLength={setFiltredProductsLength}
         categories={allCategories}
         producers={producers}
+        sortingValue={sortingValue}
+        setSortingValue={setSortingValue}
       />
       {filtredProductsLength > 0 ? (
         Object.keys(productsByCategories).map((item, index) => (

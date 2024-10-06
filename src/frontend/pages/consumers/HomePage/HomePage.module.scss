@@ -1,19 +1,20 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/responsive";
 
-.dividerSmall {
-  height: 30px;
-  width: 100%;
-  @include lg-min {
-    height: 60px;
-  }
-}
-
 .divider {
-  height: 60px;
+  height: 2rem;
   width: 100%;
+  @include md-min {
+    height: 3rem;
+  }
   @include lg-min {
-    height: 100px;
+    height: 4rem;
+  }
+  @include xl-min {
+    height: 5rem;
+  }
+  @include xxl-min {
+    height: 6rem;
   }
 }
 
