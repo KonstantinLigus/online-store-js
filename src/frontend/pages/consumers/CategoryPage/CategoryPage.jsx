@@ -22,6 +22,7 @@ const CategoryPage = ({ params }) => {
   const [filtredProducts, setFiltredProducts] = useState([]);
   const [filtredProductsLength, setFiltredProductsLength] = useState(1);
   const [producers, setProducers] = useState([]);
+  const [sortingValue, setSortingValue] = useState("Спочатку популярні");
   const { cart, addToCart, removeFromCart } = useCart();
   const currentCategory = allCategories[params.name];
 
@@ -31,6 +32,15 @@ const CategoryPage = ({ params }) => {
         `../api/itemsAllFields?category=${currentCategory}`,
       );
       const { items } = await res.json();
+      items.sort(function (a, b) {
+        if (a.label.includes("популярні") < b.label.includes("популярні")) {
+          return 1;
+        }
+        if (a.label.includes("популярні") > b.label.includes("популярні")) {
+          return -1;
+        }
+        return 0;
+      });
       setSortedProducts(items);
       setFiltredProducts(items);
 
@@ -66,6 +76,8 @@ const CategoryPage = ({ params }) => {
         setFiltredProductsLength={setFiltredProductsLength}
         categories={[]}
         producers={producers}
+        sortingValue={sortingValue}
+        setSortingValue={setSortingValue}
       />
 
       {filtredProductsLength > 0 ? (

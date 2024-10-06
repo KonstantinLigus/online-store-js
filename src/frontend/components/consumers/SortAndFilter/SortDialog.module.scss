@@ -2,49 +2,49 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-.title {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  justify-content: space-between;
-  padding-inline: 1.5rem;
-
-  &__name {
-    color: $color-gray-dark-1;
-    font-size: 1rem;
-  }
-
-  &__icon {
-    cursor: pointer;
-  }
-}
-
 .items {
+  box-shadow: 0 0.25rem 1.25rem rgba(#000, 0.15);
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   flex: 1;
   overflow-y: auto;
-  padding-inline: 1.5rem;
+  padding: 1.75rem 1.25rem 2.25rem 1.25rem;
 
-  &__item {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    justify-content: space-between;
-    list-style: none;
+  @include md-min {
+    gap: 1.5rem;
+    padding: 2rem 1.5rem 2.75rem 1.5rem;
   }
 
-  &__label {
-    cursor: pointer;
-  }
-}
-
-.button {
-  padding-inline: 1.5rem;
   &__button {
-    @include button-2;
+    background-color: transparent;
+    border: none;
+    border-radius: 1rem;
+    color: $color-gray-light-1;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    transition: all 0.4s;
+
+    @include md-min {
+      font-size: 1.25rem;
+    }
+
+    &Current {
+      color: $color-gray-dark-1;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &:active {
+      color: $color-orange-500;
+    }
   }
 }

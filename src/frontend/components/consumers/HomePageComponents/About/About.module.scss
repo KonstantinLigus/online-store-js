@@ -6,31 +6,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 40px 0;
+  gap: 1rem;
   @include wrapper;
-  margin-top: 15px;
-  margin-bottom: 16px;
+  @include xl-min {
+    gap: 1.5rem;
+  }
 
   &__title {
     color: $color-gray-dark-1;
-    font-size: 1.75rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.5;
     @include md-min {
-      font-size: 2.25rem;
+      font-size: 2rem;
     }
     @include lg-min {
+      font-size: 2.5rem;
+    }
+    @include xl-min {
       font-size: 3rem;
     }
   }
 
   &__info {
     color: $color-gray-dark-1;
-    font-size: 1.125rem;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 1.5;
-    margin-bottom: 2rem;
     text-align: center;
+    max-width: 56rem;
+    @include md-min {
+      font-size: 1.125rem;
+    }
     @include lg-min {
       font-size: 1.25rem;
     }
@@ -42,89 +49,67 @@
   &__items {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+    column-gap: 2rem;
+    margin-block: 1.5rem;
+
+    @include md-min {
+      column-gap: 3rem;
+    }
+
     @include lg-min {
       grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-block: 2rem;
     }
 
-    div:nth-child(1) {
-      border-right: 1px solid #000;
-      border-bottom: 1px solid #000;
-      @include lg-min {
-        border: none;
-      }
-    }
-
-    div:nth-child(2) {
-      border-left: 1px solid #000;
-      border-bottom: 1px solid #000;
-      @include lg-min {
-        border: none;
-      }
-    }
-
-    div:nth-child(3) {
-      border-right: 1px solid #000;
-      border-top: 1px solid #000;
-      @include lg-min {
-        border: none;
-      }
-    }
-
-    div:nth-child(4) {
-      border-left: 1px solid #000;
-      border-top: 1px solid #000;
-      @include lg-min {
-        border: none;
-      }
+    @include xxl-min {
+      gap: 4.5rem;
+      margin-block: 2.5rem;
     }
   }
 
-  &__btn {
-    @include button-1;
-    margin-top: 3rem;
-  }
-}
-
-.item {
-  padding: 1rem;
-  text-align: center;
-  @include md-min {
-    padding: 1.5rem;
-  }
-  @include xxl-min {
-    padding: 1rem 2rem;
+  &__item {
+    text-align: center;
   }
 
-  &__img {
-    display: block;
-    height: 80px;
-    margin: auto;
-    width: auto;
+  &__value {
+    color: rgba($color-green-dark-3, 0.5);
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.5;
+
     @include md-min {
-      height: 120px;
+      font-size: 2.5rem;
+      font-weight: 800;
     }
-    @include xl-min {
-      height: 160px;
+    @include lg-min {
+      font-size: 3rem;
+      font-weight: 800;
     }
     @include xxl-min {
-      height: 200px;
+      font-size: 4.375rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
     }
   }
 
   &__text {
     color: $color-gray-dark-1;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.875rem;
     line-height: 1.5;
-    margin-top: 1rem;
     @include md-min {
-      font-size: 1.25rem;
+      font-size: 1rem;
     }
-    @include xl-min {
-      margin-top: 1.5rem;
+    @include lg-min {
+      font-size: 1.125rem;
     }
     @include xxl-min {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
     }
+  }
+
+  &__btn {
+    @include button-1;
   }
 }

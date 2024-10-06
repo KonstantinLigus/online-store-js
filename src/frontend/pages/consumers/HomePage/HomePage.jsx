@@ -9,7 +9,7 @@ export default async function HomePage() {
   return (
     <>
       <Banner />
-      <div className={styles.dividerSmall}></div>
+      <div className={styles.divider}></div>
       <About />
       <div className={styles.divider}></div>
       <ProductList className={styles.productList} title="Популярні товари" />
@@ -17,7 +17,7 @@ export default async function HomePage() {
       <ProductList className={styles.productList} title="Акційні товари" />
       <div className={styles.divider}></div>
       <Blog />
-      <div className={styles.dividerSmall}></div>
+      <div className={styles.divider}></div>
     </>
   );
 }
