@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductList.module.scss";
 import "swiper/css";
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductItem from "@/frontend/components/consumers/ProductItem/ProductItem";
 import { Pagination } from "swiper/modules";
@@ -32,14 +33,16 @@ const ProductList = ({ title, className }) => {
           <h2 className={styles.title}>{title}</h2>
           <Swiper
             pagination={{
-              type: "fraction",
+              type: "bullets",
+              clickable: true,
+              dynamicBullets: true,
+              dynamicMainBullets: 3,
             }}
             slidesPerView={1}
             spaceBetween={8}
-            navigation={true}
             modules={[Pagination]}
             loop={true}
-            className={styles.mySwiper}
+            className={styles.productsSwiper}
             breakpoints={{
               310: {
                 slidesPerView: 2,

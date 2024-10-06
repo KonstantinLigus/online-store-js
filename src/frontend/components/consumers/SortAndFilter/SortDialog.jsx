@@ -8,6 +8,8 @@ const SortDialog = ({
   setSortedProducts,
   filtredProducts,
   setFiltredProducts,
+  sortingValue,
+  setSortingValue,
 }) => {
   const [sortType, setSortType] = useState(1);
 
@@ -33,10 +35,6 @@ const SortDialog = ({
       }
       return 0;
     });
-  };
-
-  const sortByRating = list => {
-    alert("За рейтингом");
   };
 
   const sortAtoZ = list => {
@@ -79,10 +77,10 @@ const SortDialog = ({
     );
   };
 
-  const toSort = () => {
+  const toSort = sortParam => {
     let sortedList = Array.from(sortedProducts);
     let filtredList = Array.from(filtredProducts);
-    switch (sortType) {
+    switch (sortParam[2]) {
       case 1:
         sortPopularFirst(sortedList);
         sortPopularFirst(filtredList);
@@ -92,82 +90,53 @@ const SortDialog = ({
         sortActionFirst(filtredList);
         break;
       case 3:
-        sortByRating();
-        break;
-      case 4:
         sortAtoZ(sortedList);
         sortAtoZ(filtredList);
         break;
-      case 5:
+      case 4:
         sortZtoA(sortedList);
         sortZtoA(filtredList);
         break;
-      case 6:
+      case 5:
         sortCheapFirst(sortedList);
         sortCheapFirst(filtredList);
         break;
-      case 7:
+      case 6:
         sortExpensiveFirst(sortedList);
         sortExpensiveFirst(filtredList);
         break;
     }
     setSortedProducts(sortedList);
     setFiltredProducts(filtredList);
+    setSortingValue(sortParam[0]);
     toggleSort();
   };
 
   const parameters = [
     ["Спочатку популярні", "popular", 1],
     ["Спочатку акційні", "sale", 2],
-    ["За рейтингом", "rating", 3],
-    ["Від А до Я", "aToZ", 4],
-    ["Від Я до А", "zToA", 5],
-    ["Спочатку дешевші", "cheapFirst", 6],
-    ["Спочатку дорожчі", "expensiveFirst", 7],
+    ["Від А до Я", "aToZ", 3],
+    ["Від Я до А", "zToA", 4],
+    ["Спочатку дешевші", "cheapFirst", 5],
+    ["Спочатку дорожчі", "expensiveFirst", 6],
   ];
 
   return (
-    <>
-      <div className={styles.title}>
-        <p className={styles.title__name}>Сортування</p>
-        <Image
-          className={styles.title__icon}
-          src="/assets/icon/icon-close.svg"
-          alt="sort icon"
-          width={16}
-          height={16}
-          priority
-          onClick={toggleSort}
-        />
-      </div>
-
-      <ul className={styles.items}>
-        {parameters.map(item => (
-          <li className={styles.items__item} key={item[1]}>
-            <label htmlFor={item[1]} className={styles.items__label}>
-              {item[0]}
-            </label>
-            <input
-              type="radio"
-              name="sort"
-              id={item[1]}
-              value={item[2]}
-              onChange={() => setSortType(item[2])}
-            />
-          </li>
-        ))}
-      </ul>
-
-      <div className={styles.button}>
+    <div className={styles.items}>
+      {parameters.map(item => (
         <button
-          type="button"
-          className={styles.button__button}
-          onClick={toSort}
+          key={item[1]}
+          className={
+            item[0] === sortingValue
+              ? `${styles.items__button} ${styles.items__buttonCurrent}`
+              : styles.items__button
+          }
+          onClick={() => toSort(item)}
         >
-          Застосувати
+          {item[0]}
         </button>
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 

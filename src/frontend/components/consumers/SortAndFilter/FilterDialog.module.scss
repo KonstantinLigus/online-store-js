@@ -12,7 +12,11 @@
 
   &__name {
     color: $color-gray-dark-1;
-    font-size: 1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    @include md-min {
+      font-size: 1.5rem;
+    }
   }
 
   &__icon {
@@ -24,6 +28,7 @@
   flex: 1;
   overflow-y: auto;
   padding-inline: 1.5rem;
+
   &__details {
     border-bottom: 1px solid #aaa;
     margin-bottom: 1rem;
@@ -42,7 +47,11 @@
       }
 
       &_span {
-        font-size: 1rem;
+        font-size: 1.125rem;
+        @include md-min {
+          font-size: 1.25rem;
+          font-weight: 500;
+        }
       }
 
       &__angleIcon {
@@ -74,9 +83,15 @@
     color: $color-gray-light-1;
     font-size: 1rem;
     transition: 0.4s;
+
+    @include md-min {
+      font-size: 1.125rem;
+    }
+
     &:hover {
       color: $color-orange-500;
     }
+
     &_color_black {
       color: $color-gray-dark-1;
     }

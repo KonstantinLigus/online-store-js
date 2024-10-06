@@ -2,7 +2,10 @@ import "@/global-styles/globals.css";
 import { Wix_Madefor_Display } from "next/font/google";
 import SessionProvider from "@/frontend/pages/consumers/SessionProvider/SessionProvider";
 
-const font = Wix_Madefor_Display({ weight: "400", subsets: ["latin"] });
+const font = Wix_Madefor_Display({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["cyrillic", "latin"],
+});
 
 export const metadata = {
   title: "Store",
