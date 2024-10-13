@@ -113,7 +113,7 @@ const CategoriesPage = () => {
       {filtredProductsLength > 0 ? (
         Object.keys(productsByCategories).map((item, index) => (
           <div key={index} className={styles.category}>
-            <h2 key={index} className={styles.categoryName}>
+            <h2 key={index} className={styles.category__name}>
               <Link href={`/category/${linkCategories[item]}`}>{item}</Link>
             </h2>
 

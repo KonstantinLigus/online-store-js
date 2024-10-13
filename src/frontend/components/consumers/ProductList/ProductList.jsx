@@ -9,13 +9,13 @@ import { Pagination } from "swiper/modules";
 import { useCart } from "@/hooks/useCart";
 import Button from "@/frontend/components/consumers/Button/Button";
 
-const ProductList = ({ title, className }) => {
+const ProductList = ({ title, products, className }) => {
   const [data, setData] = useState([]);
   const { cart, addToCart, removeFromCart } = useCart();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("api/items");
+      const res = await fetch(`../api/itemsAllFields?${products}`);
       const { items } = await res.json();
       setData(items);
     };
@@ -52,7 +52,7 @@ const ProductList = ({ title, className }) => {
                 slidesPerView: 3,
                 spaceBetween: 16,
               },
-              992: {
+              1024: {
                 slidesPerView: 4,
                 spaceBetween: 16,
               },

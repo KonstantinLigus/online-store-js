@@ -20,24 +20,33 @@
     &_row {
       @include lg-min {
         flex-direction: row;
+        gap: 3rem;
+      }
+      @include xxl-min {
+        gap: 5rem;
       }
     }
 
     &_columnReverse {
       @include lg-min {
         flex-direction: column-reverse;
+        flex: 1;
+        justify-content: space-between;
+        align-items: flex-start;
       }
     }
   }
 
   &__image {
     aspect-ratio: 1/1;
+    display: block;
     min-width: 15rem;
     position: relative;
+    height: 100%;
     width: 100%;
     @include lg-min {
-      max-height: 37.5rem;
-      max-width: 37.5rem;
+      max-height: 40rem;
+      max-width: 40rem;
     }
 
     &Img {
@@ -56,13 +65,16 @@
   }
 
   &__title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 500;
     @include md-min {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
     @include lg-min {
-      font-size: 2rem;
+      font-size: 2.75rem;
+    }
+    @include xl-min {
+      font-size: 3rem;
     }
   }
 
@@ -82,20 +94,20 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin: 1rem 0;
+    margin: 0.25rem 0;
 
     &Label {
-      border: 1px solid $color-orange-300;
-      border-radius: 1rem;
       color: #777;
       cursor: pointer;
-      font-size: 1.125rem;
-      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      @include lg-min {
+        ffont-size: 1.125rem;
+      }
     }
 
     &RadioBtn:checked + label {
-      border: 2px solid $color-orange-500;
       color: $color-gray-dark-1;
+      font-weight: 600;
     }
   }
 
@@ -136,10 +148,15 @@
     &_red {
       color: $color-red-1;
     }
+
+    &_medium {
+      font-weight: 500;
+    }
   }
 
   &__listItem {
     list-style: url("/assets/icon/information-line-icon.svg");
+    margin-bottom: 0.5rem;
     margin-left: 2rem;
   }
 
@@ -148,12 +165,19 @@
       @include button-1;
       margin-inline: auto;
       max-width: 18rem !important;
+      @include lg-min {
+        margin-inline: 0;
+      }
     }
   }
 
   &__listItemSuitsFor {
+    font-size: 1rem;
     line-height: 1.5;
     margin-left: 2rem;
+    @include lg-min {
+      font-size: 1.125rem;
+    }
     &::marker {
       color: #1e1e1c;
     }
@@ -162,4 +186,8 @@
 
 .productList {
   @include wrapper;
+  margin-bottom: 2rem;
+  @include lg-min {
+    margin-bottom: 3rem;
+  }
 }
