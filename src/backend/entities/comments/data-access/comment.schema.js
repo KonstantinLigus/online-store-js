@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
 
 export const commentSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
   comment: { type: String, required: true },
-  score: { type: String, required: true },
-  date: { type: String, required: true },
+  score: { type: Number, required: true },
+  date: { type: Date, required: true },
   author: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+  itemId: { type: mongoose.Schema.Types.ObjectId },
 });
 
 export const Comment =

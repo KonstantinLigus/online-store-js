@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 import Image from "next/image";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
@@ -10,44 +10,31 @@ import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
 import Reviews from "@/frontend/components/consumers/ProductPageComponents/Reviews";
 
-let productReviews = [
-  {
-    name: "Пилипчук Дмитро",
-    message: "Дуже смачний нектарин, соковитий та солодкий",
-    day: 12,
-    month: 4,
-    year: 2023,
-    rating: 5,
-  },
-  {
-    name: "Крилова Марія",
-    message: "Замовляю тут неодноразово, якість продукції на висоті!",
-    day: 1,
-    month: 6,
-    year: 2023,
-    rating: 4,
-  },
-];
-
-const ProductPage = ({ params }) => {
+const ProductPage = ({ params, token }) => {
   const [data, setData] = useState(null);
   const { cart, addToCart, removeFromCart } = useCart();
 
   const [productIsAvailable, setProductIsAvailable] = useState(true);
   const [reviews, setReviews] = useState(null);
 
+  const getComments = useCallback(async () => {
+    const res = await fetch(`api/comment/all?itemId=${params.id}`);
+    const comments = await res.json();
+    setReviews(comments);
+  }, [params.id]);
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`api/items/${params.id}`);
       const { item } = await res.json();
       setData(item);
-
-      // reverse reviews
-      let allReviews = [...productReviews].reverse();
-      setReviews(allReviews);
     };
     fetchData();
   }, [params.id]);
+
+  useEffect(() => {
+    getComments();
+  }, [getComments]);
 
   const cartChecker = id => {
     return cart.some(cartItem => cartItem._id === id);
@@ -220,7 +207,12 @@ const ProductPage = ({ params }) => {
           )}
         </div>
 
-        <Reviews reviews={reviews} setReviews={setReviews} />
+        <Reviews
+          reviews={reviews}
+          getComments={getComments}
+          token={token}
+          itemId={params.id}
+        />
 
         <ProductList
           className={styles.productList}

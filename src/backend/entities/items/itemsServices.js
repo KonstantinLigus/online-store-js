@@ -7,13 +7,16 @@ export const itemsServices = Object.freeze({
   getAllItemsWithAllFieldsByField,
 });
 
-async function getAllItemsWithAllFieldsByField(objQuery) {
-  const items = await Item.find(objQuery);
+async function getAllItemsWithAllFieldsByField({ objQuery, skip, limit }) {
+  const items = await Item.find(objQuery).skip(skip).limit(limit);
   return items;
 }
 
-async function getAllItemsByField(objQuery) {
-  const items = await Item.find(objQuery).select("title prices mainImage");
+async function getAllItemsByField({ objQuery, skip, limit }) {
+  const items = await Item.find(objQuery)
+    .select("title prices mainImage")
+    .skip(skip)
+    .limit(limit);
   return items;
 }
 

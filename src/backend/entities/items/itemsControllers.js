@@ -6,12 +6,20 @@ export const itemsControllers = Object.freeze({
   getAllItemsWithAllFieldsByField,
 });
 
-async function getAllItemsWithAllFieldsByField(objQuery) {
-  const items = await itemsServices.getAllItemsWithAllFieldsByField(objQuery);
+async function getAllItemsWithAllFieldsByField({ objQuery, skip, limit }) {
+  const items = await itemsServices.getAllItemsWithAllFieldsByField({
+    objQuery,
+    skip,
+    limit,
+  });
   return { items, status: 200 };
 }
-async function getAllItemsByField(objQuery) {
-  const items = await itemsServices.getAllItemsByField(objQuery);
+async function getAllItemsByField({ objQuery, skip, limit }) {
+  const items = await itemsServices.getAllItemsByField({
+    objQuery,
+    skip,
+    limit,
+  });
   return { items, status: 200 };
 }
 

@@ -26,6 +26,7 @@ export async function createCommentCase(comment) {
   }
   if (!user) throw new UserNotAuthorizedError();
   comment.author = user._id;
+  comment.date = new Date();
   const createdComment = await commentServices.createComment(comment);
   return createdComment;
 }
