@@ -162,7 +162,9 @@ const ProductPage = ({ params }) => {
                   <ul>
                     {data.condition && (
                       <li className={styles.product__listItem}>
-                        <p className={styles.product__text}>
+                        <p
+                          className={`${styles.product__text} ${styles.product__text_medium}`}
+                        >
                           Умови зберігання:
                         </p>
                         <p className={styles.product__text}>{data.condition}</p>
@@ -171,7 +173,9 @@ const ProductPage = ({ params }) => {
 
                     {data.term && (
                       <li className={styles.product__listItem}>
-                        <p className={styles.product__text}>
+                        <p
+                          className={`${styles.product__text} ${styles.product__text_medium}`}
+                        >
                           Термін зберігання:
                         </p>
                         <p className={styles.product__text}>{data.term}</p>
@@ -180,14 +184,22 @@ const ProductPage = ({ params }) => {
 
                     {data.producer && (
                       <li className={styles.product__listItem}>
-                        <p className={styles.product__text}>Виробник:</p>
+                        <p
+                          className={`${styles.product__text} ${styles.product__text_medium}`}
+                        >
+                          Виробник:
+                        </p>
                         <p className={styles.product__text}>{data.producer}</p>
                       </li>
                     )}
 
                     {data.sort && (
                       <li className={styles.product__listItem}>
-                        <p className={styles.product__text}>Сорт:</p>
+                        <p
+                          className={`${styles.product__text} ${styles.product__text_medium}`}
+                        >
+                          Сорт:
+                        </p>
                         <p className={styles.product__text}>{data.sort}</p>
                       </li>
                     )}
@@ -225,6 +237,7 @@ const ProductPage = ({ params }) => {
         <ProductList
           className={styles.productList}
           title="З цим товаром купують"
+          products="label=популярні"
         />
       </>
     )

@@ -4,37 +4,62 @@
 
 .categories {
   padding-bottom: 5em;
+}
 
-  .category {
-    padding: 2em;
-    width: 100%;
+.category {
+  margin-bottom: 2rem;
+  @include lg-min {
+    margin-bottom: 3rem;
+  }
 
-    .categoryName {
-      font-size: 1.75em;
-      margin: 1em auto;
-      text-align: center;
-      text-transform: capitalize;
-
-      & > a {
-        color: $color-gray-dark-1;
-        text-decoration: none;
-      }
+  &__name {
+    color: $color-gray-dark-1;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    text-transform: capitalize;
+    @include md-min {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    @include lg-min {
+      font-size: 2.5rem;
+      margin-bottom: 1.75rem;
+    }
+    @include xl-min {
+      font-size: 3rem;
+      margin-bottom: 2rem;
     }
 
-    .products {
-      @include wrapper;
-      display: grid;
-      gap: 20px;
-      list-style: none;
-      @include md-min {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @include lg-min {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      @include xl-min {
-        grid-template-columns: repeat(4, 1fr);
+    & > a {
+      color: $color-gray-dark-1;
+      text-decoration: none;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $color-orange-500;
       }
     }
+  }
+}
+
+.products {
+  @include wrapper;
+  display: grid;
+  column-gap: 0.5rem;
+  row-gap: 1.5rem;
+  list-style: none;
+  @media screen and (min-width: 310px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include lg-min {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1rem;
+    row-gap: 2rem;
+  }
+  @include xl-min {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

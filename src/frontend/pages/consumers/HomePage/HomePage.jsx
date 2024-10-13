@@ -12,9 +12,17 @@ export default async function HomePage() {
       <div className={styles.divider}></div>
       <About />
       <div className={styles.divider}></div>
-      <ProductList className={styles.productList} title="Популярні товари" />
+      <ProductList
+        className={styles.productList}
+        title="Популярні товари"
+        products="label=популярні"
+      />
       <div className={styles.divider}></div>
-      <ProductList className={styles.productList} title="Акційні товари" />
+      <ProductList
+        className={styles.productList}
+        title="Акційні товари"
+        products="label=акційні"
+      />
       <div className={styles.divider}></div>
       <Blog />
       <div className={styles.divider}></div>

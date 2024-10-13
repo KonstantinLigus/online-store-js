@@ -65,6 +65,7 @@ const CartPage = () => {
         <ProductList
           className={styles.productList}
           title="Вас може зацікавити:"
+          products="label=популярні"
         />
       </div>
 
