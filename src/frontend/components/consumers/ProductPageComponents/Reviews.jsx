@@ -1,29 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import styles from "./Reviews.module.scss";
 import Button from "@/frontend/components/consumers/Button/Button";
 import ReviewRating from "./ReviewRating";
 import ConsumerReview from "./ConsumerReview";
 import GuestReview from "./GuestReview";
 
-const months = [
-  "січня",
-  "лютого",
-  "березня",
-  "квітня",
-  "травня",
-  "червня",
-  "липня",
-  "серпня",
-  "вересня",
-  "жовтня",
-  "листопада",
-  "грудня",
-];
-
-const Reviews = ({ reviews, setReviews }) => {
+const Reviews = ({ reviews, token, itemId, getComments }) => {
   const { status } = useSession();
   const [addReview, setAddReview] = useState(false);
   const [allReviewsVisible, setAllReviewsVisible] = useState(false);
@@ -40,20 +24,24 @@ const Reviews = ({ reviews, setReviews }) => {
           </div>
 
           <Button
-            className={styles.reviews__buttonAddReview}
+            className={`${styles.reviews__buttonAddReview} ${styles.desktop}`}
             title="Залишити відгук"
             onClick={() => setAddReview(!addReview)}
           />
+          <button
+            className={`${styles.review__buttonMoreReviews} ${styles.mobile}`}
+            onClick={() => setAllReviewsVisible(!allReviewsVisible)}
+          >
+            <span className={styles.review__buttonMoreReviewsText}>
+              {allReviewsVisible ? "Менше" : "Переглянути всі"}
+            </span>
+          </button>
         </div>
 
         {addReview && (
           <div className={styles.review}>
-            {status === "authenticated" ? (
-              <ConsumerReview
-                reviews={reviews}
-                setReviews={setReviews}
-                setAddReview={setAddReview}
-              />
+            {status === "authenticated" || token ? (
+              <ConsumerReview itemId={itemId} getComments={getComments} />
             ) : (
               <GuestReview />
             )}
@@ -63,43 +51,60 @@ const Reviews = ({ reviews, setReviews }) => {
         {reviews && reviews.length > 0 && (
           <>
             <ul className={styles.reviews__reviews}>
-              {reviews.map((item, index) => (
-                <li
-                  key={index}
-                  className={
-                    reviews.length < 3
-                      ? styles.review
-                      : index < 2
+              {reviews.map((item, index) => {
+                const date = new Date(item.date);
+                const month = new Intl.DateTimeFormat("uk", {
+                  month: "long",
+                  day: "numeric",
+                }).format(date);
+                const year = date.getFullYear();
+
+                return (
+                  <li
+                    key={index}
+                    className={
+                      reviews.length < 3
                         ? styles.review
-                        : allReviewsVisible
-                          ? `${styles.review} ${styles.review_visible}`
-                          : `${styles.review} ${styles.review_hidden}`
-                  }
-                >
-                  <div className={styles.review__header}>
-                    <p className={styles.review__name}>{item.name}</p>
+                        : index < 2
+                          ? styles.review
+                          : allReviewsVisible
+                            ? `${styles.review} ${styles.review_visible}`
+                            : `${styles.review} ${styles.review_hidden}`
+                    }
+                  >
+                    <div className={styles.review__header}>
+                      <p className={styles.review__name}>
+                        {item.author.firstName} {item.author.surname}
+                      </p>
 
-                    <ReviewRating rating={item.rating} />
+                      <ReviewRating rating={item.score} />
 
-                    <p className={styles.review__date}>
-                      {item.day} {months[item.month]} {item.year}
-                    </p>
-                  </div>
+                      <p className={styles.review__date}>
+                        {month} {year}
+                      </p>
+                    </div>
 
-                  <p className={styles.review__message}>{item.message}</p>
-                </li>
-              ))}
+                    <p className={styles.review__message}>{item.comment}</p>
+                  </li>
+                );
+              })}
             </ul>
 
             {reviews.length > 2 && (
-              <button
-                className={styles.review__buttonMoreReviews}
-                onClick={() => setAllReviewsVisible(!allReviewsVisible)}
-              >
-                <span className={styles.review__buttonMoreReviewsText}>
-                  {allReviewsVisible ? "Менше" : "Більше"}
-                </span>
-                <Image
+              <>
+                <Button
+                  className={`${styles.reviews__buttonAddReview} ${styles.mobile} ${styles.center} ${styles.reviews__buttonAddReview_marginTop}`}
+                  title="Залишити відгук"
+                  onClick={() => setAddReview(!addReview)}
+                />
+                <button
+                  className={`${styles.review__buttonMoreReviews} ${styles.review__buttonMoreReviews_marginTop} ${styles.desktop} ${styles.review__buttonMoreReviews_alignRight}`}
+                  onClick={() => setAllReviewsVisible(!allReviewsVisible)}
+                >
+                  <span className={styles.review__buttonMoreReviewsText}>
+                    {allReviewsVisible ? "Менше" : "Переглянути всі"}
+                  </span>
+                  {/* <Image
                   src="/assets/icon/icon-angle-down.svg"
                   alt="icon"
                   width={16}
@@ -109,8 +114,9 @@ const Reviews = ({ reviews, setReviews }) => {
                       ? styles.review__buttonMoreReviewsIconUp
                       : styles.review__buttonMoreReviewsIcon
                   }
-                />
-              </button>
+                /> */}
+                </button>
+              </>
             )}
           </>
         )}

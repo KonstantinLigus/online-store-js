@@ -4,26 +4,23 @@ import styles from "./ConsumerReview.module.scss";
 import Button from "@/frontend/components/consumers/Button/Button";
 import ConsumeReviewRating from "./ConsumerReviewRating";
 
-const ConsumerReview = ({ reviews, setReviews, setAddReview }) => {
+const ConsumerReview = ({ itemId, getComments }) => {
   const [consumerRating, setConsumerRating] = useState(0);
-  const messageRef = useRef();
+  const [message, setMessage] = useState("");
 
-  const sendReview = () => {
-    let today = new Date();
+  const onChangeClick = e => {
+    setMessage(e.target.value);
+  };
 
-    let currentReview = [
-      {
-        name: "John Doe",
-        message: messageRef.current.value,
-        day: today.getDate(),
-        month: today.getMonth(),
-        year: today.getFullYear(),
-        rating: consumerRating,
-      },
-    ];
+  const sendReview = async () => {
+    await fetch("api/comment/create", {
+      method: "POST",
+      body: JSON.stringify({ comment: message, score: consumerRating, itemId }),
+    });
 
-    setReviews(currentReview.concat(reviews));
-    setAddReview(false);
+    await getComments();
+    setMessage("");
+    setConsumerRating("");
   };
 
   return (
@@ -49,13 +46,15 @@ const ConsumerReview = ({ reviews, setReviews, setAddReview }) => {
         id="productReview"
         className={styles.consumerReview__message}
         rows={5}
-        ref={messageRef}
+        value={message}
+        onChange={onChangeClick}
       ></textarea>
 
       <Button
         className={styles.consumerReview__button}
         title="Залишити відгук"
         onClick={sendReview}
+        disabled={!message}
       />
     </div>
   );
