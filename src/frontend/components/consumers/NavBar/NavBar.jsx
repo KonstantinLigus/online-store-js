@@ -100,7 +100,7 @@ export default function NavBar(props) {
               >
                 <p className={styles.navbar__linkText}>{link.title}</p>
                 <Image
-                  src="/assets/icon/icon-arrow-right.svg"
+                  src="/assets/icon/icon-arrow-right-black.svg"
                   width={24}
                   height={24}
                   alt="arrow icon"

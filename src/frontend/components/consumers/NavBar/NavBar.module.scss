@@ -111,18 +111,19 @@
 
   &__link {
     align-items: center;
-    background-color: $color-orange-500;
+    background-color: #f4f5f4;
     border: none;
-    border-radius: 3em;
-    color: $color-white;
+    border-radius: 0.75rem;
+    color: $color-gray-dark-1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 0.5em 1em;
     text-decoration: none;
+    transition: all 0.2s;
     @media screen and (min-width: $burger-menu-screen-width) {
       background-color: transparent;
-      color: $color-gray-dark-1;
+      border-radius: 0;
       padding: 0;
     }
 
@@ -145,7 +146,7 @@
     }
 
     &:hover {
-      background-color: $color-orange-300;
+      background-color: $color-orange-200;
       @media screen and (min-width: $burger-menu-screen-width) {
         color: $color-orange-500;
         background-color: transparent;
