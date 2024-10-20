@@ -2,58 +2,8 @@
 @import "../../../../../src/styles/mixins";
 @import "../../../../../src/styles/responsive";
 
-.main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.headline {
-  @include wrapper;
-  align-items: center;
-  background-color: $color-bg-light-1;
-  border-bottom: 1px solid #999;
-  display: flex;
-  padding-bottom: 0.5em !important;
-  padding-top: 0.5em !important;
-  @media screen and (min-width: $burger-menu-screen-width) {
-    background-color: transparent;
-    border-bottom: none;
-  }
-
-  &__button {
-    align-items: center;
-    background-color: $color-orange-500;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    display: flex;
-    font-size: 18px;
-    font-weight: bold;
-    height: 2rem;
-    justify-content: center;
-    margin-right: 1rem;
-    outline: none;
-    width: 2rem;
-
-    &:hover {
-      background-color: $color-orange-300;
-    }
-  }
-
-  &__text {
-    font-size: 1.125em;
-    font-weight: 500;
-    @media screen and (min-width: $burger-menu-screen-width) {
-      color: $color-gray-light-1;
-      font-size: 1.25em;
-    }
-  }
-}
-
 .productsWrapper {
   flex: 1 1 auto;
-  margin-top: 3em;
 
   .products {
     display: grid;

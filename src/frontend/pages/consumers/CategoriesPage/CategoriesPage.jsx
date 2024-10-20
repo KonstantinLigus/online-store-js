@@ -98,7 +98,7 @@ const CategoriesPage = () => {
 
   return (
     <div className={styles.categories}>
-      <PathToPage />
+      <PathToPage pageTitle={"Всі товари"} />
       <SortAndFilter
         sortedProducts={sortedProducts}
         setSortedProducts={setSortedProducts}
