@@ -7,45 +7,29 @@ import Link from "next/link";
 import styles from "./CartPage.module.scss";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
+import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 
 const CartPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
 
   return (
-    <main className={styles.main}>
-      <div className={styles.headline}>
-        <button
-          type="button"
-          onClick={() => history.back()}
-          className={styles.headline__button}
-        >
-          <Image
-            src="/assets/icon/icon-arrow-left.svg"
-            width={28}
-            height={28}
-            alt="arrow icon"
-            priority
-          />
-        </button>
-        <p className={styles.headline__text}>Кошик</p>
-      </div>
+    <>
+      <PathToPage pageTitle={"Кошик"} />
 
       {cart !== null && cart.length > 0 && (
-        <>
-          <div className={styles.productsWrapper}>
-            <ul className={styles.products}>
-              {cart.map(item => (
-                <CartItem
-                  className={styles.cartItem}
-                  key={item._id}
-                  item={item}
-                  removeFromCart={removeFromCart}
-                  updateCartItem={updateCartItem}
-                />
-              ))}
-            </ul>
-          </div>
-        </>
+        <div className={styles.productsWrapper}>
+          <ul className={styles.products}>
+            {cart.map(item => (
+              <CartItem
+                className={styles.cartItem}
+                key={item._id}
+                item={item}
+                removeFromCart={removeFromCart}
+                updateCartItem={updateCartItem}
+              />
+            ))}
+          </ul>
+        </div>
       )}
 
       {(cart === null || cart.length === 0) && (
@@ -83,7 +67,7 @@ const CartPage = () => {
           </div>
         </>
       )}
-    </main>
+    </>
   );
 };
 export default CartPage;

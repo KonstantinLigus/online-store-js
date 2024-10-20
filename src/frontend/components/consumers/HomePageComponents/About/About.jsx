@@ -40,7 +40,6 @@ const About = () => {
           </div>
         ))}
       </div>
-      <Button title={"Дізнатись більше"} className={styles.about__btn} />
     </section>
   );
 };

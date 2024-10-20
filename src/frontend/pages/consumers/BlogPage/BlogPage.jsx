@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./BlogPage.module.scss";
-import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import BlogItem from "@/frontend/components/consumers/BlogItem/BlogItem";
 
 const BlogPage = () => {
@@ -98,7 +98,7 @@ const BlogPage = () => {
 
   return (
     <>
-      <ToPreviousPage title="Наш блог" />
+      <PathToPage pageTitle={"Наш блог"} />
       <div className={styles.blog}>
         <p className={styles.title}>Наш блог</p>
 

@@ -13,7 +13,7 @@ const allCategories = {
   молоко: "milk",
 };
 
-const PathToPage = ({ categories, category, product }) => {
+const PathToPage = ({ pageTitle, categories, category, product }) => {
   return (
     <div className={styles.path}>
       <button
@@ -65,7 +65,9 @@ const PathToPage = ({ categories, category, product }) => {
               )}
             </>
           ) : (
-            "Всі товари"
+            <span className={`${styles.path__span} ${styles.path__span_black}`}>
+              {pageTitle}
+            </span>
           )}
         </div>
       </div>
