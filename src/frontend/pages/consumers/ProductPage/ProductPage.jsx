@@ -10,26 +10,17 @@ import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
 import Reviews from "@/frontend/components/consumers/ProductPageComponents/Reviews";
 
-const ProductPage = ({ params, token }) => {
-  const [data, setData] = useState(null);
+const ProductPage = ({ params, token, item }) => {
+  const [data, setData] = useState(item);
   const { cart, addToCart, removeFromCart } = useCart();
 
   const [productIsAvailable, setProductIsAvailable] = useState(true);
   const [reviews, setReviews] = useState(null);
 
   const getComments = useCallback(async () => {
-    const res = await fetch(`api/comment/all?itemId=${params.id}`);
+    const res = await fetch(`api/comments/${params.id}`);
     const comments = await res.json();
     setReviews(comments);
-  }, [params.id]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`api/items/${params.id}`);
-      const { item } = await res.json();
-      setData(item);
-    };
-    fetchData();
   }, [params.id]);
 
   useEffect(() => {
@@ -37,7 +28,7 @@ const ProductPage = ({ params, token }) => {
   }, [getComments]);
 
   const cartChecker = id => {
-    return cart.some(cartItem => cartItem._id === id);
+    return cart?.some(cartItem => cartItem._id === id);
   };
 
   const [measure, setMeasure] = useState(0);
