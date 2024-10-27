@@ -1,0 +1,47 @@
+@import "../../../../../src/styles/responsive";
+@import "../../../../../src/styles/mixins";
+@import "../../../../../src/styles/variables";
+
+.notFound_Section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFound_Section__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  @include lg-max {
+    padding: 20px 0;
+  }
+}
+
+.notFound_Section__title {
+  font-size: $font-size-3xl;
+  color: $color-orange-500;
+  @include lg-max {
+    font-size: 20px;
+  }
+}
+
+.notFound_Section__link {
+  @include button-1;
+  width: fit-content;
+  padding-left: 150px;
+  padding-right: 150px;
+  text-decoration: none;
+  @include lg-max {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+.notFound_Section__Image {
+  @include lg-max {
+    display: none;
+  }
+  max-width: 50vw;
+  height: auto;
+}

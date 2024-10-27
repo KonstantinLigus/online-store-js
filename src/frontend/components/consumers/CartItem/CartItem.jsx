@@ -34,12 +34,12 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
   };
 
   return (
-    <li className={styles.item}>
-      <div className={styles.info}>
+    <li className={styles.product}>
+      <div className={styles.product__inner}>
         <Link href={`${item._id}`}>
-          <div className={styles.imgContainer}>
+          <div className={styles.picture}>
             <Image
-              className={styles.cardImage}
+              className={styles.picture__image}
               src={item.mainImage}
               alt={item.title}
               priority
@@ -48,89 +48,91 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
           </div>
         </Link>
 
-        <div className={styles.information}>
-          <Link href={`${item._id}`}>
-            <h2 className={styles.title}>{item.title}</h2>
-          </Link>
-          <div className={styles.measure}>
-            {item.prices.map((i, index) => (
-              <div key={index}>
-                <input
-                  type="radio"
-                  name={item._id}
-                  id={index + item._id}
-                  className={styles.measureRadioBtn}
-                  checked={index === measureCurrent}
-                  onChange={() => updateMeasure(index)}
-                  hidden
-                />
-                <label
-                  htmlFor={index + item._id}
-                  className={styles.measureLabel}
+        <div className={styles.info}>
+          <div className={styles.info__first}>
+            <Link href={`${item._id}`} className={styles.title}>
+              <h2 className={styles.title__text}>{item.title}</h2>
+            </Link>
+
+            <div className={styles.measure}>
+              {item.prices.map((i, index) => (
+                <div key={index}>
+                  <input
+                    type="radio"
+                    name={item._id}
+                    id={index + item._id}
+                    className={styles.measure__button}
+                    checked={index === measureCurrent}
+                    onChange={() => updateMeasure(index)}
+                    hidden
+                  />
+                  <label
+                    htmlFor={index + item._id}
+                    className={styles.measure__label}
+                  >
+                    {i.value} {i.unit}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.info__second}>
+            <div className={styles.counter}>
+              <button
+                type="button"
+                className={styles.counter__button}
+                onClick={() => decreaseQuantity()}
+                style={{
+                  maskImage: 'url("/assets/icon/icon-minus.svg")',
+                  webkitMaskImage: 'url("/assets/icon/icon-minus.svg")',
+                }}
+              ></button>
+              <p className={styles.counter__value}>{quantityCurrent}</p>
+              <button
+                type="button"
+                className={styles.counter__button}
+                onClick={() => increaseQuantity()}
+                style={{
+                  maskImage: 'url("/assets/icon/icon-plus.svg")',
+                  webkitMaskImage: 'url("/assets/icon/icon-plus.svg")',
+                }}
+              ></button>
+            </div>
+
+            {item.prices[measureCurrent].actionPrice ? (
+              <div className={styles.price}>
+                <p className={styles.price__sale}>
+                  {item.prices[measureCurrent].price * quantityCurrent} грн
+                </p>
+                <p
+                  className={`${styles.price__normal} ${styles.price__normal_red}`}
                 >
-                  {i.value} {i.unit}
-                </label>
+                  {item.prices[measureCurrent].actionPrice * quantityCurrent}{" "}
+                  грн
+                </p>
               </div>
-            ))}
+            ) : (
+              <p className={styles.price__normal}>
+                {item.prices[measureCurrent].price * quantityCurrent} грн
+              </p>
+            )}
           </div>
         </div>
-      </div>
 
-      <div className={styles.price}>
-        <div className={styles.counter}>
-          <button
-            type="button"
-            className={styles.counterButton}
-            onClick={() => decreaseQuantity()}
-          >
-            <Image
-              src="/assets/icon/icon-minus.svg"
-              width={12}
-              height={12}
-              alt="minus"
-              priority
-            />
-          </button>
-          <p className={styles.counterValue}>{quantityCurrent}</p>
-          <button
-            type="button"
-            className={styles.counterButton}
-            onClick={() => increaseQuantity()}
-          >
-            <Image
-              src="/assets/icon/icon-plus.svg"
-              width={12}
-              height={12}
-              alt="plus"
-              priority
-            />
-          </button>
+        <div className={styles.remove}>
+          <Image
+            className={styles.remove__icon}
+            src="/assets/icon/icon-trash.svg"
+            alt="remove"
+            onClick={() => removeFromCart(item._id)}
+            width={20}
+            height={20}
+            onMouseOver={hoverTrashIcoon}
+            onMouseLeave={initialTrashIcoon}
+          />
         </div>
-
-        {item.prices[measureCurrent].actionPrice ? (
-          <p className={styles.actionSum}>
-            <span>
-              {item.prices[measureCurrent].price * quantityCurrent} грн
-            </span>
-            {item.prices[measureCurrent].actionPrice * quantityCurrent} грн
-          </p>
-        ) : (
-          <p className={styles.sum}>
-            {item.prices[measureCurrent].price * quantityCurrent} грн
-          </p>
-        )}
       </div>
-
-      <Image
-        className={styles.deleteIcon}
-        src="/assets/icon/icon-trash.svg"
-        alt="delete-icon"
-        onClick={() => removeFromCart(item._id)}
-        width={20}
-        height={20}
-        onMouseOver={hoverTrashIcoon}
-        onMouseLeave={initialTrashIcoon}
-      />
     </li>
   );
 };

@@ -7,49 +7,49 @@ import Link from "next/link";
 import styles from "./CartPage.module.scss";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
+import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 
 const CartPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
 
   return (
-    <main className={styles.main}>
-      <div className={styles.headline}>
-        <button
-          type="button"
-          onClick={() => history.back()}
-          className={styles.headline__button}
-        >
-          <Image
-            src="/assets/icon/icon-arrow-left.svg"
-            width={28}
-            height={28}
-            alt="arrow icon"
-            priority
-          />
-        </button>
-        <p className={styles.headline__text}>Кошик</p>
-      </div>
+    <>
+      <PathToPage pageTitle={"Кошик"} />
 
       {cart !== null && cart.length > 0 && (
-        <>
-          <div className={styles.productsWrapper}>
-            <ul className={styles.products}>
-              {cart.map(item => (
-                <CartItem
-                  className={styles.cartItem}
-                  key={item._id}
-                  item={item}
-                  removeFromCart={removeFromCart}
-                  updateCartItem={updateCartItem}
-                />
-              ))}
-            </ul>
+        <div className={styles.container}>
+          <ul className={styles.products}>
+            {cart.map(item => (
+              <CartItem
+                key={item._id}
+                item={item}
+                removeFromCart={removeFromCart}
+                updateCartItem={updateCartItem}
+              />
+            ))}
+          </ul>
+
+          <div className={`${styles.price} ${styles.maxWidth}`}>
+            <p className={styles.price__text}>Всього до сплати:</p>
+            <p className={`${styles.price__text} ${styles.price__text_bold}`}>
+              {totalPrice} грн
+            </p>
           </div>
-        </>
+
+          <div className={styles.links}>
+            <Link href="/order" className={styles.links__order}>
+              Оформити замовлення
+            </Link>
+
+            <Link href="/categories" className={styles.links__categories}>
+              Повернутись до покупок
+            </Link>
+          </div>
+        </div>
       )}
 
       {(cart === null || cart.length === 0) && (
-        <div className={styles.productsWrapper}>
+        <div className={styles.container}>
           <div className={styles.emptyCart}>
             <div className={styles.emptyCart__icon}></div>
             <p className={styles.emptyCart__text}>
@@ -61,6 +61,7 @@ const CartPage = () => {
           </div>
         </div>
       )}
+
       <div className={styles.similarProducts}>
         <ProductList
           className={styles.productList}
@@ -68,22 +69,7 @@ const CartPage = () => {
           products="label=популярні"
         />
       </div>
-
-      {cart !== null && cart.length > 0 && (
-        <>
-          <div className={styles.price}>
-            <p className={styles.caption}>Всього до сплати:</p>
-            <p className={styles.sum}>{totalPrice} грн</p>
-          </div>
-
-          <div className={styles.linkToOrder}>
-            <Link href="/order">
-              <p className={styles.button}>Оформити замовлення</p>
-            </Link>
-          </div>
-        </>
-      )}
-    </main>
+    </>
   );
 };
 export default CartPage;
