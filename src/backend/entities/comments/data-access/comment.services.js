@@ -12,8 +12,8 @@ async function createComment(commentObj) {
 }
 
 async function getComments({ itemId }) {
-  const comment = await Comment.find({ itemId })
+  const comments = await Comment.find({ itemId })
     .populate("author", ["firstName", "surname", "email", "image"])
     .sort("-date");
-  return comment;
+  return comments;
 }

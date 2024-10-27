@@ -10,12 +10,12 @@ import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
 import Slider from "@/frontend/components/consumers/ProductPageComponents/Slider";
 import Reviews from "@/frontend/components/consumers/ProductPageComponents/Reviews";
 
-const ProductPage = ({ params, token, item }) => {
+const ProductPage = ({ params, token, item, comments }) => {
   const [data, setData] = useState(item);
   const { cart, addToCart, removeFromCart } = useCart();
 
   const [productIsAvailable, setProductIsAvailable] = useState(true);
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState(comments);
 
   const getComments = useCallback(async () => {
     const res = await fetch(`api/comments/${params.id}`);
@@ -23,9 +23,9 @@ const ProductPage = ({ params, token, item }) => {
     setReviews(comments);
   }, [params.id]);
 
-  useEffect(() => {
-    getComments();
-  }, [getComments]);
+  // useEffect(() => {
+  //   getComments();
+  // }, [getComments]);
 
   const cartChecker = id => {
     return cart?.some(cartItem => cartItem._id === id);

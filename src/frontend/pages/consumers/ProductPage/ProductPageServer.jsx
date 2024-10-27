@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import ProductPage from "./ProductPage";
 import itemsControllers from "@/backend/entities/items";
 import { notFound } from "next/navigation";
+import { commentServices } from "@/backend/entities/comments/data-access/comment.services";
 
 const getItem = async id => {
   try {
@@ -13,12 +14,26 @@ const getItem = async id => {
   }
 };
 
+const getComments = async id => {
+  const comments = await commentServices.getComments({ itemId: id });
+  return comments.map(comment => comment.toObject());
+};
+
 const ProductPageServer = async ({ params }) => {
-  const item = await getItem(params.id);
+  const { id } = params;
+  const item = await getItem(id);
   if (!item) notFound();
+  const comments = await getComments(id);
   const token = cookies().get("token")?.value;
 
-  return <ProductPage params={params} token={token} item={item} />;
+  return (
+    <ProductPage
+      params={params}
+      token={token}
+      item={item}
+      comments={comments}
+    />
+  );
 };
 
 export default ProductPageServer;
