@@ -21,6 +21,7 @@ export const itemSchema = new mongoose.Schema({
   condition: { type: String },
   sort: { type: String },
   suitFor: { type: [String] },
+  relatedCategories: { type: [String] },
 });
 
 export const Item = mongoose.models.item || mongoose.model("item", itemSchema);
