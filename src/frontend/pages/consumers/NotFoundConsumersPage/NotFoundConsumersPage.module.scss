@@ -20,6 +20,7 @@
 
 .notFound_Section__title {
   font-size: $font-size-3xl;
+  color: $color-orange-500;
   @include lg-max {
     font-size: 20px;
   }
