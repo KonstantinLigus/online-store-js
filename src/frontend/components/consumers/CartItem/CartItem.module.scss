@@ -1,114 +1,253 @@
 @import "../../../../../src/styles/variables";
 @import "../../../../../src/styles/mixins";
+@import "../../../../../src/styles/responsive";
 
-.item {
-  background-color: #eee;
-  padding: 1em;
-  position: relative;
+.product {
+  border-bottom: 1px solid $color-green-dark-3;
+  container: card/inline-size;
+  padding-block: 1em;
 
-  .info {
+  &__inner {
     display: flex;
-    width: 100%;
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
 
-    .imgContainer {
-      height: 120px;
-      margin-right: 1em;
-      position: relative;
-      width: 120px;
+.picture {
+  height: 5rem;
+  position: relative;
+  width: 5rem;
 
-      .cardImage {
-        object-fit: cover;
-      }
+  &__image {
+    display: block;
+    height: inherit;
+    width: inherit;
+  }
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+
+  &__first {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__second {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.title {
+  text-decoration: none;
+
+  &__text {
+    color: $color-gray-dark-1;
+    font-size: 1rem;
+    font-weight: 500;
+    word-break: break-word;
+  }
+}
+
+.measure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &__label {
+    color: #777;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  &__button:checked + &__label {
+    color: $color-gray-dark-1;
+  }
+}
+
+.counter {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  &__button {
+    background-color: $color-orange-500 !important;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    height: 1rem;
+    width: 1rem;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-position: center;
+    -webkit-mask-position: center;
+
+    &:hover {
+      background-color: $color-red-1 !important;
+    }
+  }
+
+  &__value {
+    color: $color-gray-dark-1;
+    font-size: 1rem;
+  }
+}
+
+.price {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  &__normal {
+    font-size: 1rem;
+    font-weight: 500;
+
+    &_red {
+      color: $color-red-1;
+    }
+  }
+
+  &__sale {
+    font-size: 0.875rem;
+    text-decoration: line-through;
+  }
+}
+
+.remove {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+
+  &__icon {
+    display: block;
+    height: 20px;
+    width: auto;
+  }
+}
+
+@container card (min-width: 25rem) {
+  .picture {
+    height: 6.25rem;
+    width: 6.25rem;
+  }
+
+  .title__text {
+    font-size: 1.125rem;
+  }
+
+  .info__second {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@container card (min-width: 45rem) {
+  .product__inner {
+    gap: 1.5rem;
+  }
+
+  .picture {
+    height: 7.5rem;
+    width: 7.5rem;
+  }
+
+  .title__text {
+    font-size: 1.625rem;
+  }
+
+  .measure__label {
+    font-size: 1.25rem;
+  }
+
+  .counter {
+    gap: 1rem;
+
+    &__button {
+      height: 1.25rem;
+      width: 1.25rem;
     }
 
-    .information {
-      position: relative;
-
-      a {
-        text-decoration: none;
-      }
-
-      .title {
-        color: $color-gray-dark-1;
-        font-size: 1.125em;
-        font-weight: 500;
-      }
-
-      .measure {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin: 1rem 0;
-
-        .measureLabel {
-          border: 1px solid #777;
-          color: #777;
-          cursor: pointer;
-          padding: 0.2rem 0.5rem;
-        }
-
-        .measureRadioBtn:checked + label {
-          border: 2px solid $color-gray-dark-1;
-          color: $color-gray-dark-1;
-        }
-      }
+    &__value {
+      font-size: 1.25rem;
     }
   }
 
   .price {
+    gap: 0.75rem;
+
+    &__normal {
+      font-size: 1.25rem;
+    }
+
+    &__sale {
+      font-size: 1rem;
+    }
+  }
+}
+
+@container card (min-width: 56rem) {
+  .product__inner {
     align-items: center;
-    display: flex;
+    gap: 2rem;
+  }
+
+  .info {
     flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 1em;
+    align-items: center;
 
-    .counter {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
+    &__second {
+      gap: 4rem;
+    }
+  }
+}
 
-      .counterButton {
-        align-items: center;
-        background-color: $color-green-1;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        padding: 0.5rem;
-        &:hover {
-          background-color: $color-green-3;
-        }
-      }
+@container card (min-width: 75rem) {
+  .title__text {
+    font-size: 2rem;
+  }
 
-      .counterValue {
-        color: $color-gray-dark-1;
-        font-size: 1.25rem;
-        margin: 0 0.75rem;
-      }
+  .measure__label {
+    font-size: 1.5rem;
+  }
+
+  .counter {
+    gap: 1rem;
+
+    &__button {
+      height: 1.5rem;
+      width: 1.5rem;
     }
 
-    .actionSum {
-      font-size: 1.25rem;
-      color: $color-red-1;
-
-      span {
-        color: $color-gray-dark-1;
-        font-size: 0.875rem;
-        margin-right: 0.5rem;
-        text-decoration: line-through;
-      }
-    }
-
-    .sum {
-      font-size: 1.25rem;
+    &__value {
+      font-size: 1.5rem;
     }
   }
 
-  .deleteIcon {
-    cursor: pointer;
-    position: absolute;
-    top: 1em;
-    right: 1em;
+  .price {
+    gap: 0.75rem;
+
+    &__normal {
+      font-size: 1.5rem;
+    }
+
+    &__sale {
+      font-size: 1.125rem;
+    }
   }
 }
