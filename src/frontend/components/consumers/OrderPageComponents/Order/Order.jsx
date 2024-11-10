@@ -1,5 +1,5 @@
 "use client";
-import React  from "react";
+import React from "react";
 import styles from "./Order.module.scss";
 import OrderForm from "./OrderForm/OrderForm";
 import Link from "next/link";
@@ -9,13 +9,13 @@ const Order = props => {
     <div className={styles.wrapper}>
       <div className={styles.nav}>
         <div className={styles.authenticated}>
-          {!props.user && (
+          {/* {!props.user && (
             <>
               <div className={styles.customerOn}>
                 <Link href="/login?callbackUrl=/order">Я постійний клієнт</Link>
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
 

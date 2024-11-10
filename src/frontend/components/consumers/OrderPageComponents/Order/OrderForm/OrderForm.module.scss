@@ -8,34 +8,39 @@
   padding: 1rem;
   width: 100%;
   @include lg-min {
-    gap: 1em;
+    gap: 2rem;
     grid-template-columns: repeat(3, 1fr);
     margin: 0;
   }
   @include xl-min {
-    gap: 1em;
+    gap: 2.5em;
     grid-template-columns: repeat(1, 1fr);
   }
 
   .fieldset {
     border: none;
-    margin-top: 1rem;
+    // margin-top: 1rem;
 
     .legend {
+      margin-bottom: 2rem;
       align-items: center;
       display: flex;
       font-size: 1.5rem;
       height: 40px;
+      font-weight: $font-weight-semi;
 
       span {
         align-items: center;
-        background-color: $color-green-1;
-        border-radius: 1rem;
+        // background-color: $color-green-1;
+        border-radius: 100%;
+        border: 2px solid $color-green-dark-3;
+        padding: 1.5rem;
         display: inline-flex;
         height: 2rem;
         justify-content: center;
         margin-right: 0.5rem;
         width: 2rem;
+        font-weight: $font-weight-medium;
       }
     }
 
