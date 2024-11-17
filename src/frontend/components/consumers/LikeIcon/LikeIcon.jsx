@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import styles from "./LikeIcon.module.scss";
-import Image from "next/image";
+import React from "react";
 import { useLike } from "@/hooks/useLike";
+
+import IconButton from "../IconLinkButton/IconButton";
 
 const LikeIcon = ({ productId }) => {
   const { liked, toLike, toDislike } = useLike();
@@ -13,25 +13,20 @@ const LikeIcon = ({ productId }) => {
 
   return (
     <>
-      {likeChecker(productId) ? (
-        <Image
-          src="/assets/icon/icon-heart-fill.svg"
-          alt="heart icon"
-          width={32}
-          height={32}
-          className={styles.heartIcon}
-          onClick={() => toDislike(productId)}
-        />
-      ) : (
-        <Image
-          src="/assets/icon/icon-heart.svg"
-          alt="heart icon"
-          width={32}
-          height={32}
-          className={styles.heartIcon}
-          onClick={() => toLike(productId)}
-        />
-      )}
+      <IconButton
+        icon={likeChecker(productId) ? "heartFilled" : "heart"}
+        onClick={
+          likeChecker(productId)
+            ? () => toDislike(productId)
+            : () => toLike(productId)
+        }
+        ariaLabel={
+          likeChecker(productId)
+            ? "Видалити з вподобаних"
+            : "Додати до вподобаних"
+        }
+        ternary={true}
+      />
     </>
   );
 };

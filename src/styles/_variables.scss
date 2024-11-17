@@ -4,7 +4,8 @@ $color-black: #000;
 $color-bg-light-1: #fafafa; // main background
 $color-bg-light-2: #fffdf9; // input background
 
-$color-gray-light-1: #777a77; // input placeholder, product measure
+$color-gray-light-1: #afb3af; // input placeholder, product measure
+$color-gray-light-2: #777a77; // disabled button
 $color-gray-dark-1: #1e1e1c; // main text, input text
 
 $color-green-light-1: #e0ece1; // button bg
@@ -17,6 +18,7 @@ $color-green-dark-2: #67b06c; // button bg, button text, links hover
 $color-green-dark-3: #008000; // success text, loader, bg
 
 $color-orange-50: #fffdf9; // input background
+$color-orange-100: #ffecd5; // button focus outline, ternary button disabled
 $color-orange-200: #ffc683;
 $color-orange-300: #ffad4d;
 $color-orange-400: #ff9920;
