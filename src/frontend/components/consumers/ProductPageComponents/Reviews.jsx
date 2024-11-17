@@ -23,11 +23,15 @@ const Reviews = ({ reviews, token, itemId, getComments }) => {
             </p>
           </div>
 
-          <Button
-            className={`${styles.reviews__buttonAddReview} ${styles.desktop}`}
-            title="Залишити відгук"
-            onClick={() => setAddReview(!addReview)}
-          />
+          <div className={styles.buttonReviewWidth}>
+            <Button
+              title="Залишити відгук"
+              onClick={() => setAddReview(!addReview)}
+              secondary={true}
+              maxWidth="100%"
+            />
+          </div>
+
           <button
             className={`${styles.review__buttonMoreReviews} ${styles.mobile}`}
             onClick={() => setAllReviewsVisible(!allReviewsVisible)}

@@ -120,19 +120,18 @@ const ProductPage = ({ params, token, item, comments }) => {
               <div
                 className={`${styles.product__container} ${styles.product__container_columnReverse}`}
               >
-                {cartChecker(data._id) ? (
-                  <Button
-                    className={styles.product__buttonCart}
-                    title="Видалити з кошика"
-                    onClick={() => removeFromCart(data._id)}
-                  />
-                ) : (
-                  <Button
-                    className={styles.product__buttonCart}
-                    title="Додати до кошика"
-                    onClick={() => addToCart(data, measure)}
-                  />
-                )}
+                <Button
+                  title={
+                    cartChecker(data._id)
+                      ? "Видалити з кошика"
+                      : "Додати до кошика"
+                  }
+                  onClick={
+                    cartChecker(data._id)
+                      ? () => removeFromCart(data._id)
+                      : () => addToCart(data, measure)
+                  }
+                />
 
                 <section className={styles.product__container}>
                   <h2 className={styles.product__subtitle}>Характеристики</h2>

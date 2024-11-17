@@ -2,12 +2,12 @@
 import "@/global-styles/globals.css";
 import React, { useState } from "react";
 import { useCart } from "@/hooks/useCart";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./CartPage.module.scss";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
 import CartItem from "@/frontend/components/consumers/CartItem/CartItem";
 import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
+import ButtonLink from "@/frontend/components/consumers/Button/ButtonLink";
 
 const CartPage = () => {
   const { totalPrice, cart, removeFromCart, updateCartItem } = useCart();
@@ -37,13 +37,12 @@ const CartPage = () => {
           </div>
 
           <div className={styles.links}>
-            <Link href="/order" className={styles.links__order}>
-              Оформити замовлення
-            </Link>
-
-            <Link href="/categories" className={styles.links__categories}>
-              Повернутись до покупок
-            </Link>
+            <ButtonLink title="Оформити замовлення" href="/order" />
+            <ButtonLink
+              title="Повернутись до покупок"
+              href="/categories"
+              secondary={true}
+            />
           </div>
         </div>
       )}
@@ -55,9 +54,7 @@ const CartPage = () => {
             <p className={styles.emptyCart__text}>
               У вашому кошику немає товарів
             </p>
-            <Link href="/categories" className={styles.emptyCart__link}>
-              Обрати товар
-            </Link>
+            <ButtonLink title="Обрати товар" href="/categories" />
           </div>
         </div>
       )}

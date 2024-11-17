@@ -2,61 +2,95 @@
 @import "../../../../styles/mixins";
 @import "../../../../styles/variables";
 
-.burgerButton {
-  background-color: transparent;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3px;
-  outline: none;
-  height: 16px;
-  width: 16px;
-  @include md-min {
-    gap: 4px;
-    height: 20px;
-    width: 23px;
-  }
+$_time: 0.2s;
+
+@mixin _bar {
+  background-color: $color-gray-dark-1;
+  border-radius: 1px;
+  position: absolute;
+  left: 0;
+  transform-origin: center;
+  transition-duration: $_time, $_time, calc($_time * 2);
+  height: 2px;
+  width: 100%;
   @include lg-min {
-    width: 28px;
+    height: 3px;
   }
 }
 
-.burger {
-  background-color: $color-gray-dark-1;
-  height: 2px;
-  width: 16px;
-  @include md-min {
-    width: 23px;
-  }
+.button {
+  $size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: calc($size - 3px);
+  width: $size;
   @include lg-min {
-    width: 28px;
+    height: 2rem;
+    width: 2rem;
   }
-
-  &.clicked {
-    &:nth-child(1) {
-      transform: translateY(2px) rotate(-45deg);
-      transition: ease-out 0.5s;
-      @include md-min {
-        transform: translateY(3px) rotate(-45deg);
-      }
-    }
-
-    &:nth-child(2) {
-      display: none;
-    }
-
-    &:nth-child(3) {
-      transform: translateY(-3px) rotate(45deg);
-      transition: ease-out 0.5s;
-      @include md-min {
-        transform: translateY(-3px) rotate(45deg);
-      }
-    }
+  @media screen and (min-width: $burger-menu-screen-width) {
+    display: none;
   }
+  &:hover div {
+    background-color: $color-orange-500;
+  }
+}
 
-  &.unClicked {
-    transform: rotate(0) translate(0);
-    transition: ease-out 0.5s;
+.bar1 {
+  @include _bar;
+  top: 12.5%;
+  transition-property: top, opacity, background-color;
+  transition-delay: $_time, $_time, 0s;
+
+  &__clicked {
+    top: 50%;
+    opacity: 0;
+    transition-property: top, opacity, background-color;
+    transition-delay: 0s, 0s, 0s;
+  }
+}
+
+.bar2 {
+  @include _bar;
+  top: 37.5%;
+  transition-property: top, transform, background-color;
+  transition-delay: $_time, 0s, 0s;
+
+  &__clicked {
+    top: 50%;
+    transform: rotate(45deg);
+    transition-property: top, transform, background-color;
+    transition-delay: 0s, $_time, 0s;
+  }
+}
+
+.bar3 {
+  @include _bar;
+  top: 62.5%;
+  transition-property: top, transform, background-color;
+  transition-delay: $_time, 0s, 0s;
+
+  &__clicked {
+    top: 50%;
+    transform: rotate(135deg);
+    transition-property: top, transform, background-color;
+    transition-delay: 0s, $_time, 0s;
+  }
+}
+
+.bar4 {
+  @include _bar;
+  top: 87.5%;
+  transition-property: top, opacity, background-color;
+  transition-delay: $_time, $_time, 0s;
+
+  &__clicked {
+    top: 50%;
+    opacity: 0;
+    transition-property: top, opacity, background-color;
+    transition-delay: 0s, 0s, 0s;
   }
 }
