@@ -21,6 +21,7 @@ const PaymentChecker = ({ consumer, setConsumer }) => {
           checked={consumer.paymentMethod === "receipt"}
           onChange={handleChange}
         />
+        <span className={styles.checkmark}></span>
         Оплата при отриманні
       </label>
 
@@ -34,6 +35,7 @@ const PaymentChecker = ({ consumer, setConsumer }) => {
           checked={consumer.paymentMethod === "card"}
           onChange={handleChange}
         />
+        <span className={styles.checkmark}></span>
         Оплата карткою
       </label>
     </>
