@@ -4,12 +4,12 @@
 
 .wrapper {
   @include wrapper;
-  @include shadow;
+  // @include shadow;
   margin-bottom: 1rem;
   margin-top: 1rem;
   padding: 0 !important;
   @include xl-min {
-    width: 450px;
+    width: 524px;
   }
 
   .nav {

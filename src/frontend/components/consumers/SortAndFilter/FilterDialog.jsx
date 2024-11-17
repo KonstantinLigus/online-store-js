@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./FilterDialog.module.scss";
+
 import PriceRange from "./PriceRange";
 import CategoriesFilter from "./CategoriesFilter";
 import ProducersFilter from "./ProducersFilter";
+import Button from "../Button/Button";
 
 const FilterDialog = ({
   toggleFilter,
@@ -197,14 +199,8 @@ const FilterDialog = ({
         </div>
       </div>
 
-      <div className={styles.button}>
-        <button
-          type="button"
-          className={styles.button__button}
-          onClick={toFilter}
-        >
-          Показати результати
-        </button>
+      <div className={styles.buttonWrapper}>
+        <Button title="Показати результати" onClick={toFilter} />
       </div>
     </>
   );

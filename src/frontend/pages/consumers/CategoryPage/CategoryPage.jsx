@@ -87,14 +87,15 @@ const CategoryPage = ({ params }) => {
           <ul className={styles.products}>
             {filtredProducts.map(item => (
               <ProductItem key={item._id} id={item._id} {...item}>
-                {cartChecker(item._id) ? (
-                  <Button
-                    title="З кошика"
-                    onClick={() => removeFromCart(item._id)}
-                  />
-                ) : (
-                  <Button title="До кошика" onClick={() => addToCart(item)} />
-                )}
+                <Button
+                  title={cartChecker(item._id) ? "З кошика" : "До кошика"}
+                  onClick={
+                    cartChecker(item._id)
+                      ? () => removeFromCart(item._id)
+                      : () => addToCart(item)
+                  }
+                  secondary={true}
+                />
               </ProductItem>
             ))}
           </ul>

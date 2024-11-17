@@ -21,17 +21,11 @@
   }
 
   &__icons {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     justify-content: space-between;
-  }
-
-  &__burger {
-    @media screen and (min-width: $burger-menu-screen-width) {
-      display: none;
-    }
   }
 
   &__search {

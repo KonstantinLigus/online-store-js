@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./SortAndFilter.module.scss";
+
+import Button from "../Button/Button";
 import SortDialog from "./SortDialog";
 import FilterDialog from "./FilterDialog";
+import iconFilter from "/public/assets/icon/icon-filter.svg";
+import iconSort from "/public/assets/icon/icon-sort.svg";
 
 const SortAndFilter = ({
   sortedProducts,
@@ -56,6 +60,22 @@ const SortAndFilter = ({
             priority
           />
         </button>
+      </div>
+      <div className={styles.buttons}>
+        <Button
+          title="Фільтри"
+          icon={iconFilter}
+          onClick={toggleFilter}
+          ternaryDark={true}
+        />
+
+        <Button
+          title={sortingValue}
+          icon={iconSort}
+          onClick={toggleSort}
+          ternaryDark={true}
+          flexDirection="row-reverse"
+        />
       </div>
 
       <div className={styles.dialogs}>

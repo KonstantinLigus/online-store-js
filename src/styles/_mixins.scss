@@ -33,9 +33,9 @@
 
 @mixin input-1 {
   background-color: $color-bg-light-2;
-  border: 2px solid $color-green-1;
+  border: 2px solid $color-gray-light-1;
   border-radius: 0.75rem; // 12px
-  color: $color-gray-dark-1;
+  color: $color-gray-dark-2;
   font-size: 1.125rem; // 18px
   padding: 1.125rem 0.75rem;
   outline: none;
@@ -72,7 +72,7 @@
   justify-content: center;
   gap: 0.5rem;
   outline: 3px solid rgba($color-orange-200, 0);
-  padding: 0.75rem;
+  padding: 1rem;
   text-align: center;
   width: 100%;
 
@@ -168,7 +168,7 @@
 }
 
 @mixin validData {
-  color: $color-green-dark-3;
+  color: $color-gray-dark-1;
   font-weight: $font-weight-medium;
 }
 

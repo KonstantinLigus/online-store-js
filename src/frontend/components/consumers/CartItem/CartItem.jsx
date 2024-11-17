@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CartItem.module.scss";
-import { useCart } from "@/hooks/useCart";
+
+import IconButton from "../IconLinkButton/IconButton";
 
 const CartItem = ({ item, removeFromCart, updateCartItem }) => {
   const [measureCurrent, setMeasureCurrent] = useState(item.measure);
@@ -85,9 +86,15 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
                 onClick={() => decreaseQuantity()}
                 style={{
                   maskImage: 'url("/assets/icon/icon-minus.svg")',
-                  webkitMaskImage: 'url("/assets/icon/icon-minus.svg")',
+                  WebkitMaskImage: 'url("/assets/icon/icon-minus.svg")',
                 }}
               ></button>
+              <IconButton
+                icon="minus"
+                onClick={() => decreaseQuantity()}
+                ariaLabel="Відняти один товар"
+                secondary={true}
+              />
               <p className={styles.counter__value}>{quantityCurrent}</p>
               <button
                 type="button"
@@ -95,9 +102,15 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
                 onClick={() => increaseQuantity()}
                 style={{
                   maskImage: 'url("/assets/icon/icon-plus.svg")',
-                  webkitMaskImage: 'url("/assets/icon/icon-plus.svg")',
+                  WebkitMaskImage: 'url("/assets/icon/icon-plus.svg")',
                 }}
               ></button>
+              <IconButton
+                icon="plus"
+                onClick={() => increaseQuantity()}
+                ariaLabel="Додати один товар"
+                secondary={true}
+              />
             </div>
 
             {item.prices[measureCurrent].actionPrice ? (
@@ -120,18 +133,11 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
           </div>
         </div>
 
-        <div className={styles.remove}>
-          <Image
-            className={styles.remove__icon}
-            src="/assets/icon/icon-trash.svg"
-            alt="remove"
-            onClick={() => removeFromCart(item._id)}
-            width={20}
-            height={20}
-            onMouseOver={hoverTrashIcoon}
-            onMouseLeave={initialTrashIcoon}
-          />
-        </div>
+        <IconButton
+          icon="trash"
+          onClick={() => removeFromCart(item._id)}
+          ariaLabel="Видалити з кошика"
+        />
       </div>
     </li>
   );

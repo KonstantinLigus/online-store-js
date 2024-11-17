@@ -6,6 +6,7 @@ import Burger from "@/frontend/components/consumers/Burger/Burger";
 import React, { useState, useRef, useEffect } from "react";
 import UserBar from "@/frontend/pages/consumers/UserBar/UserBar";
 import SearchDialog from "./SearchDialog/SearchDialog";
+import IconButton from "../IconLinkButton/IconButton";
 
 const links = [
   {
@@ -54,22 +55,21 @@ export default function NavBar(props) {
     <header className={styles.header}>
       <div className={styles.header__headline}>
         <div className={styles.header__icons}>
-          <div className={styles.header__burger}>
-            <Burger menuIsClicked={menuIsClicked} onClick={updateMenu} />
-          </div>
+          <Burger menuIsClicked={menuIsClicked} onClick={updateMenu} />
 
-          <Image
-            src="/assets/icon/icon-search.svg"
-            width={26}
-            height={26}
-            alt="search"
-            priority
+          <IconButton
+            icon="search"
             onClick={() => setIsSearchClicked(true)}
-            className={styles.header__search}
+            ariaLabel="Пошук продуктів"
           />
         </div>
 
-        <Link href="/" prefetch={false} className={styles.header__logo}>
+        <Link
+          href="/"
+          prefetch={false}
+          className={styles.header__logo}
+          aria-label="Логотип"
+        >
           <Image
             src="/assets/logo.svg"
             width={220}

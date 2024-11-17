@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Field.module.scss";
 import deliveryTypes from "./deliveryTypes";
-
+import Image from "next/image";
 const [, , storeDelivery] = deliveryTypes;
 
 const DeliveryType = ({ initValue, setConsumer }) => {
@@ -30,18 +30,26 @@ const DeliveryType = ({ initValue, setConsumer }) => {
       <label htmlFor="delivery" className={styles.labelSelect}>
         Спосіб доставки:
       </label>
-      <select
-        id="delivery"
-        className={styles.select}
-        value={deliveryType}
-        onChange={handleDeliveryType}
-      >
-        {deliveryTypes.map(i => (
-          <option key={i} value={i}>
-            {i}
-          </option>
-        ))}
-      </select>
+      <div className={styles.selectWrapper}>
+        <select
+          id="delivery"
+          className={styles.select}
+          value={deliveryType}
+          onChange={handleDeliveryType}
+        >
+          {deliveryTypes.map(i => (
+            <option key={i} value={i}>
+              {i}
+            </option>
+          ))}
+        </select>
+        <Image
+          src="/assets/icon/icon-angle-down.svg"
+          alt="arrow"
+          width={16}
+          height={16}
+        />
+      </div>
     </>
   );
 };

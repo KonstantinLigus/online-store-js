@@ -4,6 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./PathToPage.module.scss";
 
+import IconLink from "../IconLinkButton/IconLink";
+import IconButton from "../IconLinkButton/IconButton";
+
 const allCategories = {
   овочі: "vegetables",
   "фрукти та ягоди": "fruits",
@@ -16,21 +19,24 @@ const allCategories = {
 const PathToPage = ({ pageTitle, categories, category, product }) => {
   return (
     <div className={styles.path}>
-      <button
-        type="button"
-        onClick={() => history.back()}
-        className={styles.path__button}
-      >
-        <span className={styles.path__button_image}></span>
-      </button>
+      <div className={styles.path__button}>
+        <IconButton
+          icon="arrowLeftSmall"
+          ariaLabel="На попередню сторінку"
+          onClick={() => history.back()}
+          secondary={true}
+        />
+      </div>
+
       <div className={styles.path__text_wrapper}>
         <div className={styles.path__text}>
-          <Link
+          <IconLink
             href="/"
-            prefetch={false}
-            className={styles.path__linkImage}
-          ></Link>
-          <span className={styles.path__span}>/</span>
+            icon="home"
+            ariaLabel="На головну сторінку"
+            backgroundColor="#afb3af"
+          />
+          <span className={styles.path__span}>&nbsp; /</span>
           {categories ? (
             <>
               <Link
