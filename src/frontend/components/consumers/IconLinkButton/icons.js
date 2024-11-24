@@ -1,4 +1,4 @@
-import home from "/public/assets/icon/icon-home.svg";
+import homeSmall from "/public/assets/icon/icon-home-small.svg";
 import search from "/public/assets/icon/icon-search.svg";
 import cart from "/public/assets/icon/icon-cart.svg";
 import personOutline from "/public/assets/icon/icon-person-outline.svg";
@@ -11,7 +11,7 @@ import plus from "/public/assets/icon/icon-plus.svg";
 import minus from "/public/assets/icon/icon-minus.svg";
 
 export const icons = {
-  home,
+  homeSmall,
   search,
   cart,
   personOutline,

@@ -32,7 +32,7 @@ const PathToPage = ({ pageTitle, categories, category, product }) => {
         <div className={styles.path__text}>
           <IconLink
             href="/"
-            icon="home"
+            icon="homeSmall"
             ariaLabel="На головну сторінку"
             backgroundColor="#afb3af"
           />
