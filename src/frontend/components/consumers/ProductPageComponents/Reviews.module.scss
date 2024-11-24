@@ -49,14 +49,8 @@
     }
   }
 
-  &__buttonAddReview {
-    @include button-2;
-    margin-inline: 0;
-    max-width: 18rem !important;
-
-    &_marginTop {
-      margin-top: 1rem !important;
-    }
+  &_marginTop {
+    margin-top: 1rem !important;
   }
 
   &__reviews {
@@ -193,15 +187,17 @@
 }
 
 .buttonReviewWidth {
+  // display: none;
   width: 100%;
-  @include lg-min {
-    max-width: fit-content;
-  }
+  // @include lg-min {
+  // display: block;
+  // max-width: fit-content;
+  // }
 }
 
 .desktop {
   display: none;
-  @include md-min {
+  @include xl-min {
     display: block;
     width: fit-content;
   }
@@ -209,11 +205,12 @@
 
 .mobile {
   display: block;
-  @include md-min {
-    display: none;
+  @include xl-min {
+    display: none !important;
   }
 }
 
 .center {
-  margin: auto;
+  display: flex;
+  justify-content: center;
 }
