@@ -1,0 +1,61 @@
+@import "../../../../../src/styles/variables";
+@import "../../../../../src/styles/mixins";
+
+@mixin _common {
+  background-color: $color-gray-dark-1;
+  cursor: pointer;
+  display: block;
+  height: 1.5rem;
+  min-height: 1.5rem;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  -webkit-mask-position: center;
+  transition: all 0.3s;
+  width: 1.5rem;
+  min-width: 1.5rem;
+
+  @media (min-width: 768px) {
+    height: 2rem;
+    min-height: 2rem;
+    width: 2rem;
+    min-width: 2rem;
+  }
+
+  &:hover {
+    background-color: $color-orange-300;
+  }
+
+  &:active,
+  &:focus {
+    background-color: $color-orange-500;
+  }
+}
+
+.link {
+  @include _common;
+}
+
+.button {
+  @include _common;
+}
+
+.buttonSecondary {
+  @extend .button;
+  background-color: $color-orange-300;
+  &:hover {
+    background-color: $color-orange-500;
+  }
+
+  &:active,
+  &:focus {
+    background-color: $color-green-dark-1;
+  }
+}
+
+.buttonTernary {
+  @extend .button;
+  background-color: $color-white;
+}

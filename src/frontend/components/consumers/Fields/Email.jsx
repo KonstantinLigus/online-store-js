@@ -26,7 +26,7 @@ const Email = ({ initValue, setState }) => {
   };
 
   return (
-    <>
+    <div className={styles.Field__inputWrapper}>
       <label
         htmlFor="email"
         className={`${styles.Field__label_marginBottom} ${styles.Field__label}`}
@@ -43,7 +43,7 @@ const Email = ({ initValue, setState }) => {
         onChange={handleInputChange}
       />
       <p className={styles.Field__errorMsg}>Невірний формат email</p>
-    </>
+    </div>
   );
 };
 

@@ -52,22 +52,13 @@
     justify-content: space-between;
     gap: 2rem;
   }
-
-  &__order {
-    @include button-1;
-    text-decoration: none;
-    @extend .maxWidth;
-  }
-
-  &__categories {
-    @include button-2;
-    text-decoration: none;
-    @extend .maxWidth;
-  }
 }
 
 .emptyCart {
-  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
   &__icon {
     background-color: #d9d9d9;
@@ -80,14 +71,6 @@
   &__text {
     font-size: 1rem;
     line-height: 1.5;
-    margin-block: 1.5rem;
-  }
-
-  &__link {
-    @include button-1;
-    color: $color-white;
-    margin: auto;
-    text-decoration: none;
   }
 }
 

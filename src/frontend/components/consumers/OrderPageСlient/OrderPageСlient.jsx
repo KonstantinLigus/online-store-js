@@ -6,6 +6,7 @@ import Image from "next/image";
 import styles from "./OrderPageСlient.module.scss";
 import Order from "@/frontend/components/consumers/OrderPageComponents/Order/Order";
 import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import PathToPage from "../PathToPage/PathToPage";
 import Button from "@/frontend/components/consumers/Button/Button";
 import { Payment } from "@/frontend/components/consumers/Payment/Payment";
 import CartItems from "@/frontend/components/consumers/CartItems";
@@ -24,7 +25,7 @@ const OrderPageClient = ({ user }) => {
 
   return (
     <>
-      <ToPreviousPage title="Оформлення замовлення" />
+      <PathToPage pageTitle={"Оформлення замовлення"} />
       <div className={styles.order}>
         {cart?.length > 0 && !isOrderCreated && (
           <>

@@ -43,7 +43,7 @@ const Phone = ({ initValue, setState }) => {
   };
 
   return (
-    <>
+    <div className={styles.Field__inputWrapper}>
       <label
         htmlFor="tel"
         className={`${styles.Field__label_marginBottom} ${styles.Field__label}`}
@@ -63,7 +63,7 @@ const Phone = ({ initValue, setState }) => {
       <p className={styles.Field__errorMsg}>
         Телефон повинен складатися з 13 цифр символів
       </p>
-    </>
+    </div>
   );
 };
 

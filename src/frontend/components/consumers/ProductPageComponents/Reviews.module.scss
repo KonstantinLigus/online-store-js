@@ -192,6 +192,13 @@
   }
 }
 
+.buttonReviewWidth {
+  width: 100%;
+  @include lg-min {
+    max-width: fit-content;
+  }
+}
+
 .desktop {
   display: none;
   @include md-min {

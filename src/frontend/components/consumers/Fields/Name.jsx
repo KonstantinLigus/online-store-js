@@ -45,7 +45,7 @@ const Name = ({ initValue, setState, name }) => {
     (name === "firstName" && "І'мя") || (name === "surname" && "Прізвище");
 
   return (
-    <>
+    <div className={styles.Field__inputWrapper}>
       <label
         htmlFor={name}
         className={`${styles.Field__label_marginBottom} ${styles.Field__label}`}
@@ -65,7 +65,7 @@ const Name = ({ initValue, setState, name }) => {
         {getName()} повинне складатись мінімум з 2 символів. Може містити тільки
         букви та(або) цифри.
       </p>
-    </>
+    </div>
   );
 };
 

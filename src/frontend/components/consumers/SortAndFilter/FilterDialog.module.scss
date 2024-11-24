@@ -102,9 +102,6 @@
   }
 }
 
-.button {
+.buttonWrapper {
   padding-inline: 1.5rem;
-  &__button {
-    @include button-2;
-  }
 }
