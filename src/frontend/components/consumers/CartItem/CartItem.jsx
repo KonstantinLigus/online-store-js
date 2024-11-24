@@ -27,13 +27,6 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
     updateCartItem(item, measureCurrent, quantity);
   };
 
-  const hoverTrashIcoon = e => {
-    e.target.src = "/assets/icon/icon-trash-fill.svg";
-  };
-  const initialTrashIcoon = e => {
-    e.target.src = "/assets/icon/icon-trash.svg";
-  };
-
   return (
     <li className={styles.product}>
       <div className={styles.product__inner}>
@@ -89,12 +82,6 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
                   WebkitMaskImage: 'url("/assets/icon/icon-minus.svg")',
                 }}
               ></button>
-              <IconButton
-                icon="minus"
-                onClick={() => decreaseQuantity()}
-                ariaLabel="Відняти один товар"
-                secondary={true}
-              />
               <p className={styles.counter__value}>{quantityCurrent}</p>
               <button
                 type="button"
@@ -105,12 +92,6 @@ const CartItem = ({ item, removeFromCart, updateCartItem }) => {
                   WebkitMaskImage: 'url("/assets/icon/icon-plus.svg")',
                 }}
               ></button>
-              <IconButton
-                icon="plus"
-                onClick={() => increaseQuantity()}
-                ariaLabel="Додати один товар"
-                secondary={true}
-              />
             </div>
 
             {item.prices[measureCurrent].actionPrice ? (
