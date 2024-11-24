@@ -35,8 +35,12 @@
         font-size: 1.25rem;
       }
 
-      &_right {
-        text-align: right;
+      &_sort {
+        display: none;
+        @include md-min {
+          display: block;
+          text-align: right;
+        }
       }
     }
   }

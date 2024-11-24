@@ -23,7 +23,7 @@ const Reviews = ({ reviews, token, itemId, getComments }) => {
             </p>
           </div>
 
-          <div className={styles.buttonReviewWidth}>
+          <div className={`${styles.buttonReviewWidth} ${styles.desktop}`}>
             <Button
               title="Залишити відгук"
               onClick={() => setAddReview(!addReview)}
@@ -96,11 +96,15 @@ const Reviews = ({ reviews, token, itemId, getComments }) => {
 
             {reviews.length > 2 && (
               <>
-                <Button
-                  className={`${styles.reviews__buttonAddReview} ${styles.mobile} ${styles.center} ${styles.reviews__buttonAddReview_marginTop}`}
-                  title="Залишити відгук"
-                  onClick={() => setAddReview(!addReview)}
-                />
+                <div
+                  className={`${styles.mobile} ${styles.center} ${styles.reviews_marginTop}`}
+                >
+                  <Button
+                    title="Залишити відгук"
+                    onClick={() => setAddReview(!addReview)}
+                    secondary
+                  />
+                </div>
                 <button
                   className={`${styles.review__buttonMoreReviews} ${styles.review__buttonMoreReviews_marginTop} ${styles.desktop} ${styles.review__buttonMoreReviews_alignRight}`}
                   onClick={() => setAllReviewsVisible(!allReviewsVisible)}
