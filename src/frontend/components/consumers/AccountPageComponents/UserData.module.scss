@@ -1,0 +1,72 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.data {
+  @include wrapper;
+  display: grid;
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+  width: 100%;
+  @include lg-min {
+    gap: 2rem;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr auto 1fr;
+  }
+
+  &__input {
+    display: none;
+    &:checked + label::after {
+      transform: translateY(-50%) rotate(0deg);
+      @include lg-min {
+        background-color: $color-orange-500;
+      }
+    }
+  }
+
+  &__label {
+    cursor: pointer;
+    display: block;
+    font-size: 1.125rem;
+    position: relative;
+    @include lg-min {
+      font-size: 1.5rem;
+      grid-column: 1/1;
+      padding-right: 1rem;
+    }
+
+    &::after {
+      content: "";
+      background-image: url("/assets/icon/icon-angle-up.svg");
+      background-size: contain;
+      background-position: center;
+      width: 1.125rem;
+      height: 1.125rem;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(180deg);
+      @include lg-min {
+        background-image: none;
+        transform: translateY(-50%) rotate(0deg);
+        width: 2px;
+        height: 140%;
+      }
+    }
+
+    & + div {
+      @include lg-min {
+        grid-column: 2/-1;
+        grid-row: 1/-1;
+        height: 100%;
+      }
+    }
+  }
+
+  &__exit {
+    @include lg-min {
+      grid-column: 1/1;
+      grid-row: 7/-1;
+    }
+  }
+}
