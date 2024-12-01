@@ -1,7 +1,8 @@
 import "@/global-styles/globals.css";
 import styles from "./AccountPage.module.scss";
 import ConsumerData from "@/frontend/components/consumers/AccountPageComponents/ConsumerData/ConsumerData";
-import ToPreviousPage from "@/frontend/components/consumers/ToPreviousPage/ToPreviousPage";
+import PathToPage from "@/frontend/components/consumers/PathToPage/PathToPage";
+import UserData from "@/frontend/components/consumers/AccountPageComponents/UserData";
 import LikedProducts from "@/frontend/components/consumers/AccountPageComponents/LikedProducts/LikedProducts";
 import { getUserAction } from "@/backend/entities/users/entry-points";
 import { redirectToPage } from "@/backend/libs/next";
@@ -11,13 +12,16 @@ const AccountPage = async () => {
   if (!user) redirectToPage("/login");
 
   return (
-    <div className={styles.container}>
-      <ToPreviousPage title="Особистий кабінет" />
-      <div className={styles.accoyntData}>
+    <>
+      <PathToPage pageTitle={"Особистий кабінет"} />
+      <h1 className={styles.title}>Особистий кабінет</h1>
+      <UserData user={user} />
+
+      {/*<div className={styles.accoyntData}>
         <ConsumerData user={user} />
         <LikedProducts />
-      </div>
-    </div>
+      </div>*/}
+    </>
   );
 };
 
