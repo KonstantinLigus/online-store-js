@@ -20,7 +20,7 @@ const ProductList = ({ title, products, className }) => {
       setData(items);
     };
     fetchData();
-  }, []);
+  }, [products]);
 
   const cartChecker = id => {
     return cart.some(cartItem => cartItem._id === id);

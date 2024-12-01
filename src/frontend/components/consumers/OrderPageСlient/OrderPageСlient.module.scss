@@ -71,14 +71,14 @@
       }
 
       .price {
-        @include wrapper;
-        align-items: center;
-        background-color: #d9d9d9;
+        // @include wrapper;
+        // align-items: center;
+        // background-color: #d9d9d9;
         display: flex;
         justify-content: space-between;
         margin-top: 1rem;
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
+        // padding-top: 1rem !important;
+        // padding-bottom: 1rem !important;
 
         .caption {
           color: $color-gray-dark-1;

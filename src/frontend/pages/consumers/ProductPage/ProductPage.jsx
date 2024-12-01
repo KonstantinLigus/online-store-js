@@ -13,6 +13,9 @@ import Reviews from "@/frontend/components/consumers/ProductPageComponents/Revie
 const ProductPage = ({ params, token, item, comments }) => {
   const [data, setData] = useState(item);
   const { cart, addToCart, removeFromCart } = useCart();
+  const relateCategoriesFilter = item.relatedCategories
+    .map(category => `category=${category}`)
+    .join("&");
 
   const [productIsAvailable, setProductIsAvailable] = useState(true);
   const [reviews, setReviews] = useState(comments);
@@ -219,7 +222,7 @@ const ProductPage = ({ params, token, item, comments }) => {
         <ProductList
           className={styles.productList}
           title="З цим товаром купують"
-          products="label=популярні"
+          products={relateCategoriesFilter}
         />
       </>
     )
