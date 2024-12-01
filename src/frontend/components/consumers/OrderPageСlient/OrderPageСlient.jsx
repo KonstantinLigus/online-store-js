@@ -18,6 +18,7 @@ const OrderPageClient = ({ user }) => {
   const [paymentData, setPaymentData] = useState(null);
   const [isPaymentShown, setIsPaymentShown] = useState(false);
 
+  const deliveryPrice = 70;
   const onToggleBtnClick = () => {
     setIsPaymentShown(!isPaymentShown);
     // if (isPaymentShown) setPaymentData(false);
@@ -54,8 +55,18 @@ const OrderPageClient = ({ user }) => {
                 </details>
 
                 <div className={styles.price}>
-                  <p className={styles.caption}>Всього до сплати:</p>
-                  <p className={styles.sum}>{totalPrice} грн</p>
+                  <span className={styles.caption}>Підсумок:</span>
+                  <span className={styles.sum}>{totalPrice} грн</span>
+                </div>
+                <div className={styles.price}>
+                  <span className={styles.caption}>
+                    Доставка (Нова Пошта (Самовивіз):
+                  </span>
+                  <span className={styles.sum}>{deliveryPrice} грн</span>
+                </div>
+                <div className={styles.price}>
+                  <b className={styles.caption}>Разом:</b>
+                  <b>{totalPrice + deliveryPrice} грн</b>
                 </div>
               </div>
 
