@@ -11,7 +11,8 @@
   @include lg-min {
     gap: 2rem;
     grid-template-columns: max-content auto;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr auto 1fr;
+    grid-template-rows: repeat(7, auto);
+    margin-bottom: 4rem;
   }
 
   &__input {
@@ -31,7 +32,7 @@
     position: relative;
     @include lg-min {
       font-size: 1.5rem;
-      grid-column: 1/1;
+      grid-column: 1;
       padding-right: 1rem;
     }
 
@@ -56,17 +57,54 @@
 
     & + div {
       @include lg-min {
-        grid-column: 2/-1;
+        grid-column: 2;
         grid-row: 1/-1;
-        height: 100%;
+      }
+    }
+
+    &_gridRow1 {
+      @include lg-min {
+        grid-row: 1;
+      }
+    }
+    &_gridRow2 {
+      @include lg-min {
+        grid-row: 2;
+      }
+    }
+    &_gridRow3 {
+      @include lg-min {
+        grid-row: 3;
+      }
+    }
+    &_gridRow4 {
+      @include lg-min {
+        grid-row: 4;
+      }
+    }
+    &_gridRow5 {
+      @include lg-min {
+        grid-row: 5;
       }
     }
   }
 
   &__exit {
+    background-color: transparent;
+    border: none;
+    color: $color-gray-light-2;
+    cursor: pointer;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: auto;
+    outline: none;
+    padding: 0;
+    width: fit-content;
     @include lg-min {
-      grid-column: 1/1;
-      grid-row: 7/-1;
+      font-size: 1.5rem;
+      grid-column: 1;
+      grid-row: 7;
+      margin: 0;
     }
   }
 }
