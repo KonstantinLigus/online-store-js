@@ -6,8 +6,9 @@ import AddressTab from "./UserData/AddressTab";
 import OrdersTab from "./UserData/OrdersTab";
 import LikedProductsTab from "./UserData/LikedProductsTab";
 import PasswordTab from "./UserData/PasswordTab";
+import UserQuitButton from "../UserQuitButton/UserQuitButton";
 
-const UserData = ({ user }) => {
+const UserData = ({ user, token }) => {
   const [cuttentTab, setCuttentTab] = useState(1);
 
   return (
@@ -91,8 +92,7 @@ const UserData = ({ user }) => {
         Зміна паролю
       </label>
       {cuttentTab === 5 && <PasswordTab />}
-
-      <button className={styles.data__exit}>Вийти</button>
+      <UserQuitButton token={token} className={styles.data__exit} />
     </div>
   );
 };

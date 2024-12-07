@@ -16,7 +16,7 @@ const Button = ({
   const button = useRef();
   useEffect(() => {
     button.current.blur();
-  }, [onclick]);
+  }, []);
 
   const handleClick = e => {
     if (onClick) onClick(e);
