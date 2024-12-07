@@ -6,8 +6,10 @@ import UserData from "@/frontend/components/consumers/AccountPageComponents/User
 import LikedProducts from "@/frontend/components/consumers/AccountPageComponents/LikedProducts/LikedProducts";
 import { getUserAction } from "@/backend/entities/users/entry-points";
 import { redirectToPage } from "@/backend/libs/next";
+import { cookies } from "next/headers";
 
 const AccountPage = async () => {
+  const token = cookies().get("token")?.value;
   const user = await getUserAction();
   if (!user) redirectToPage("/login");
 
@@ -15,7 +17,7 @@ const AccountPage = async () => {
     <>
       <PathToPage pageTitle={"Особистий кабінет"} />
       <h1 className={styles.title}>Особистий кабінет</h1>
-      <UserData user={user} />
+      <UserData user={user} token={token} />
 
       {/*<div className={styles.accoyntData}>
         <ConsumerData user={user} />
