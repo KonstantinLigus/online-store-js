@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "../ConsumerData.module.scss";
+import styles from "./Field.module.scss";
 
 const Birthday = ({ initValue, setState }) => {
   const [consumerBirthday, setConsumerBirthday] = useState(initValue);
@@ -19,19 +19,22 @@ const Birthday = ({ initValue, setState }) => {
   };
 
   return (
-    <>
-      <label htmlFor="name" className={styles.labelValid}>
+    <div className={styles.Field__inputWrapper}>
+      <label
+        htmlFor="birthday"
+        className={`${styles.Field__label_marginBottom} ${styles.Field__label}`}
+      >
         Дата народження:
       </label>
       <input
         type="date"
         name="birthday"
         id="birthday"
-        className={styles.inputText}
+        className={styles.Field__input}
         value={consumerBirthday}
         onChange={handleChange}
       />
-    </>
+    </div>
   );
 };
 

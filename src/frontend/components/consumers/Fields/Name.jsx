@@ -42,7 +42,9 @@ const Name = ({ initValue, setState, name }) => {
   };
 
   const getName = () =>
-    (name === "firstName" && "І'мя") || (name === "surname" && "Прізвище");
+    (name === "firstName" && "І'мя") ||
+    (name === "secondName" && "По-батькові") ||
+    (name === "surname" && "Прізвище");
 
   return (
     <div className={styles.Field__inputWrapper}>
