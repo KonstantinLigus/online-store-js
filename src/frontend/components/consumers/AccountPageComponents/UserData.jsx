@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./UserData.module.scss";
-import Contacts from "./UserData/Contacts";
-import Address from "./UserData/Address";
-import Orders from "./UserData/Orders";
-import Liked from "./UserData/Liked";
-import Password from "./UserData/Password";
+import ContactsTab from "./UserData/ContactsTab";
+import AddressTab from "./UserData/AddressTab";
+import OrdersTab from "./UserData/OrdersTab";
+import LikedProductsTab from "./UserData/LikedProductsTab";
+import PasswordTab from "./UserData/PasswordTab";
 
 const UserData = ({ user }) => {
   const [cuttentTab, setCuttentTab] = useState(1);
@@ -20,10 +20,13 @@ const UserData = ({ user }) => {
         onChange={() => setCuttentTab(1)}
         className={styles.data__input}
       />
-      <label htmlFor="tab1" className={styles.data__label}>
+      <label
+        htmlFor="tab1"
+        className={`${styles.data__label} ${styles.data__label_gridRow1}`}
+      >
         Контактна інформація
       </label>
-      {cuttentTab === 1 && <Contacts user={user} />}
+      {cuttentTab === 1 && <ContactsTab user={user} />}
 
       <input
         type="radio"
@@ -33,10 +36,13 @@ const UserData = ({ user }) => {
         onChange={() => setCuttentTab(2)}
         className={styles.data__input}
       />
-      <label htmlFor="tab2" className={styles.data__label}>
+      <label
+        htmlFor="tab2"
+        className={`${styles.data__label} ${styles.data__label_gridRow2}`}
+      >
         Адреса доставки
       </label>
-      {cuttentTab === 2 && <Address user={user} />}
+      {cuttentTab === 2 && <AddressTab user={user} />}
 
       <input
         type="radio"
@@ -46,10 +52,13 @@ const UserData = ({ user }) => {
         onChange={() => setCuttentTab(3)}
         className={styles.data__input}
       />
-      <label htmlFor="tab3" className={styles.data__label}>
+      <label
+        htmlFor="tab3"
+        className={`${styles.data__label} ${styles.data__label_gridRow3}`}
+      >
         Історія замовлень
       </label>
-      {cuttentTab === 3 && <Orders />}
+      {cuttentTab === 3 && <OrdersTab />}
 
       <input
         type="radio"
@@ -59,10 +68,13 @@ const UserData = ({ user }) => {
         onChange={() => setCuttentTab(4)}
         className={styles.data__input}
       />
-      <label htmlFor="tab4" className={styles.data__label}>
+      <label
+        htmlFor="tab4"
+        className={`${styles.data__label} ${styles.data__label_gridRow4}`}
+      >
         Список бажань
       </label>
-      {cuttentTab === 4 && <Liked />}
+      {cuttentTab === 4 && <LikedProductsTab />}
 
       <input
         type="radio"
@@ -72,10 +84,13 @@ const UserData = ({ user }) => {
         onChange={() => setCuttentTab(5)}
         className={styles.data__input}
       />
-      <label htmlFor="tab5" className={styles.data__label}>
+      <label
+        htmlFor="tab5"
+        className={`${styles.data__label} ${styles.data__label_gridRow5}`}
+      >
         Зміна паролю
       </label>
-      {cuttentTab === 5 && <Password />}
+      {cuttentTab === 5 && <PasswordTab />}
 
       <button className={styles.data__exit}>Вийти</button>
     </div>

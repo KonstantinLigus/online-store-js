@@ -1,0 +1,82 @@
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/variables";
+
+.tab {
+  width: 100%;
+
+  &__inner {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    @include lg-min {
+      align-items: flex-start;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    display: none;
+    @include lg-min {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  width: 100%;
+  @include xxl-min {
+    flex-direction: row;
+    gap: 4rem;
+  }
+
+  &__fieldset {
+    margin: auto;
+    max-width: 26rem;
+    width: 100%;
+    @include lg-min {
+      margin: 0;
+    }
+  }
+}
+
+.likedProducts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__list {
+    display: grid;
+    column-gap: 0.5rem;
+    row-gap: 1.5rem;
+    list-style: none;
+    @media screen and (min-width: 310px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include md-min {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include lg-min {
+      grid-column: 2/-1;
+      grid-row: 1/-1;
+      height: 100%;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1rem;
+      row-gap: 2rem;
+    }
+    @include xl-min {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include xxl-min {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
