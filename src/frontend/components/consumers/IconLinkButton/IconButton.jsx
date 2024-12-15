@@ -7,7 +7,7 @@ const IconButton = ({ icon, ariaLabel, onClick, secondary, ternary }) => {
   const iconButton = useRef();
   useEffect(() => {
     iconButton.current.blur();
-  }, [onclick]);
+  }, [onClick]);
 
   const handleClick = e => {
     if (onClick) onClick(e);
