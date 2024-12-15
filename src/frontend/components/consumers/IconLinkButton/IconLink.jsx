@@ -8,7 +8,7 @@ const IconLink = ({ icon, href, ariaLabel, onClick, backgroundColor }) => {
   const iconLink = useRef();
   useEffect(() => {
     iconLink.current.blur();
-  }, [onclick]);
+  }, [onClick]);
 
   const handleClick = e => {
     if (onClick) onClick(e);

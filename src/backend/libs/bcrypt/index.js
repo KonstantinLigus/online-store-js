@@ -1,2 +1,2 @@
-export { comparePassword } from "./comparePassword";
+export { isPasswordsTheSame } from "./isPasswordsTheSame";
 export { getHashedPassword } from "./getHashPassword";

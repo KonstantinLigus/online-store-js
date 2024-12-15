@@ -3,7 +3,7 @@ import {
   UserNotFoundError,
   WrongUserPasswordError,
 } from "@/backend/helpers/errors";
-import { comparePassword } from "@/backend/libs/bcrypt";
+import { isPasswordsTheSame } from "@/backend/libs/bcrypt";
 import { createUserToken } from "@/backend/libs/jwt";
 import { setUserTokenToCookie } from "@/backend/libs/next";
 import { userServices } from "../data-access/userServices";
@@ -14,7 +14,7 @@ export async function signIn(user) {
     email,
   });
   if (!userFromDB) throw new UserNotFoundError();
-  const isPasswordMatch = await comparePassword({
+  const isPasswordMatch = await isPasswordsTheSame({
     pswd: password,
     hashedPswd: userFromDB.password || "",
   });
