@@ -4,7 +4,7 @@ import {
   WrongUserPasswordError,
 } from "@/backend/helpers/errors";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
-import { comparePassword, getHashedPassword } from "@/backend/libs/bcrypt";
+import { isPasswordsTheSame, getHashedPassword } from "@/backend/libs/bcrypt";
 import { userPasswordRestoreZodSchema } from "@/backend/libs/zod";
 
 async function passwordChange(req) {
@@ -15,8 +15,11 @@ async function passwordChange(req) {
     email,
   });
   if (!userFromDB) throw new UserNotFoundError();
-  if (!comparePassword(oldPassword, userFromDB.password))
-    throw new WrongUserPasswordError();
+  const isPswdsTheSame = await isPasswordsTheSame({
+    pswd: oldPassword,
+    hashedPswd: userFromDB.password,
+  });
+  if (!isPswdsTheSame) throw new WrongUserPasswordError();
   const newHashedPassword = await getHashedPassword(newPassword);
   await userServices.updateUser({ email }, { password: newHashedPassword });
   return { message: "Password was changed", status: 200 };

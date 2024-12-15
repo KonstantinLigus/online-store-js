@@ -2,7 +2,7 @@ import userServices from "@/backend/entities/users/data-access/userServices";
 import { createUserToken } from "@/backend/libs/jwt/createUserToken";
 import { getTryCatchWrapper } from "@/backend/helpers/tryCatchWrapper";
 import { userSignInZodSchema } from "@/backend/libs/zod/user.signIn.schema";
-import { comparePassword } from "@/backend/libs/bcrypt/comparePassword";
+import { isPasswordsTheSame } from "@/backend/libs/bcrypt/isPasswordsTheSame";
 import {
   EmailNotVerifiedError,
   UserNotFoundError,
@@ -18,7 +18,7 @@ async function signIn(req) {
     email,
   });
   if (!userFromDB) throw new UserNotFoundError();
-  const isPasswordMatch = await comparePassword({
+  const isPasswordMatch = await isPasswordsTheSame({
     pswd: password,
     hashedPswd: userFromDB.password,
   });

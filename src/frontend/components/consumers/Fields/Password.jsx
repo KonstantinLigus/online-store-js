@@ -8,20 +8,12 @@ const Password = ({ setState, name }) => {
 
   const handleInputChange = e => {
     let { value } = e.target;
-
     setPassword(value);
 
     setState(prev => ({
       ...prev,
-      [name]: "",
+      [name]: value,
     }));
-
-    if (value.length >= 7) {
-      setState(prev => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
   };
 
   const getName = () =>

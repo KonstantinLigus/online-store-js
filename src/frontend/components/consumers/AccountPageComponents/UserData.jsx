@@ -7,6 +7,7 @@ import OrdersTab from "./UserData/OrdersTab";
 import LikedProductsTab from "./UserData/LikedProductsTab";
 import PasswordTab from "./UserData/PasswordTab";
 import UserQuitButton from "../UserQuitButton/UserQuitButton";
+import PasswordChangeForm from "../PasswordChangeForm";
 
 const UserData = ({ user, token }) => {
   const [cuttentTab, setCuttentTab] = useState(1);
@@ -77,21 +78,25 @@ const UserData = ({ user, token }) => {
       </label>
       {cuttentTab === 4 && <LikedProductsTab />}
 
-      <input
-        type="radio"
-        name="tabs"
-        id="tab5"
-        checked={cuttentTab === 5}
-        onChange={() => setCuttentTab(5)}
-        className={styles.data__input}
-      />
-      <label
-        htmlFor="tab5"
-        className={`${styles.data__label} ${styles.data__label_gridRow5}`}
-      >
-        Зміна паролю
-      </label>
-      {cuttentTab === 5 && <PasswordTab />}
+      {token && (
+        <>
+          <input
+            type="radio"
+            name="tabs"
+            id="tab5"
+            checked={cuttentTab === 5}
+            onChange={() => setCuttentTab(5)}
+            className={styles.data__input}
+          />
+          <label
+            htmlFor="tab5"
+            className={`${styles.data__label} ${styles.data__label_gridRow5}`}
+          >
+            Зміна паролю
+          </label>
+        </>
+      )}
+      {token && cuttentTab === 5 && <PasswordChangeForm />}
       <UserQuitButton token={token} className={styles.data__exit} />
     </div>
   );
