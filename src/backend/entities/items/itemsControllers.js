@@ -24,6 +24,10 @@ async function getAllItemsByField({ objQuery, skip, limit }) {
 }
 
 async function getItemById(id) {
+  // const item = (await itemsServices.getItemById(id)).toObject({
+  //   flattenMaps: true,
+  // });
+  // item._id = item._id.valueOf();
   const item = await itemsServices.getItemById(id);
   return { item, status: 200 };
 }

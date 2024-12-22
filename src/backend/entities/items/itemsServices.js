@@ -21,6 +21,6 @@ async function getAllItemsByField({ objQuery, skip, limit }) {
 }
 
 async function getItemById(id) {
-  const item = await Item.findById(id);
+  const item = await Item.findById(id).lean();
   return item;
 }

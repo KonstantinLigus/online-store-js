@@ -8,7 +8,7 @@ const getItem = async id => {
   try {
     const { item } = await itemsControllers.getItemById(id);
     if (!item) return undefined;
-    return item.toObject();
+    return item;
   } catch (error) {
     return undefined;
   }
@@ -16,7 +16,7 @@ const getItem = async id => {
 
 const getComments = async id => {
   const comments = await commentServices.getComments({ itemId: id });
-  return comments.map(comment => comment.toObject());
+  return comments;
 };
 
 const ProductPageServer = async ({ params }) => {
