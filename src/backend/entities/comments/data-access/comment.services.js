@@ -13,7 +13,13 @@ async function createComment(commentObj) {
 
 async function getComments({ itemId }) {
   const comments = await Comment.find({ itemId })
+    .lean()
     .populate("author", ["firstName", "surname", "email", "image"])
     .sort("-date");
-  return comments;
+
+  return comments.map(comment => {
+    comment._id = comment._id.valueOf();
+    comment.itemId = comment.itemId.valueOf();
+    return comment;
+  });
 }
