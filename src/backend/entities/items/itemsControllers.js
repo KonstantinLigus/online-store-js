@@ -4,6 +4,7 @@ export const itemsControllers = Object.freeze({
   getItemById,
   getAllItemsByField,
   getAllItemsWithAllFieldsByField,
+  getAllItemsByIds,
 });
 
 async function getAllItemsWithAllFieldsByField({ objQuery, skip, limit }) {
@@ -20,6 +21,11 @@ async function getAllItemsByField({ objQuery, skip, limit }) {
     skip,
     limit,
   });
+  return { items, status: 200 };
+}
+
+async function getAllItemsByIds(ids) {
+  const items = await itemsServices.GetAllItemsByIds(ids);
   return { items, status: 200 };
 }
 
