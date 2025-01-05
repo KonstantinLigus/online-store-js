@@ -13,12 +13,16 @@ const LikedProductsTab = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("api/items");
+      const searchParams = new URLSearchParams(
+        liked.map(param => ["id", param]),
+      ).toString();
+      const url = "api/items/ids" + "?" + searchParams;
+      const res = await fetch(url);
       const { items } = await res.json();
       setData(items);
     };
-    fetchData();
-  }, []);
+    if (liked) fetchData();
+  }, [liked]);
 
   const cartChecker = id => {
     return cart.some(cartItem => cartItem._id === id);
@@ -28,21 +32,19 @@ const LikedProductsTab = () => {
     <div className={styles.likedProducts}>
       <p className={styles.tab__title}>Список бажань</p>
       <ul className={styles.likedProducts__list}>
-        {data
-          .filter(i => liked.includes(i._id))
-          .map(item => (
-            <ProductItem key={item._id} id={item._id} {...item}>
-              <Button
-                title={cartChecker(item._id) ? "З кошика" : "До кошика"}
-                onClick={
-                  cartChecker(item._id)
-                    ? () => removeFromCart(item._id)
-                    : () => addToCart(item)
-                }
-                secondary={true}
-              />
-            </ProductItem>
-          ))}
+        {data.map(item => (
+          <ProductItem key={item._id} id={item._id} {...item}>
+            <Button
+              title={cartChecker(item._id) ? "З кошика" : "До кошика"}
+              onClick={
+                cartChecker(item._id)
+                  ? () => removeFromCart(item._id)
+                  : () => addToCart(item)
+              }
+              secondary={true}
+            />
+          </ProductItem>
+        ))}
       </ul>
     </div>
   );
