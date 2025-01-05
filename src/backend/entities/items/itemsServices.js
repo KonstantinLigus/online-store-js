@@ -5,6 +5,7 @@ export const itemsServices = Object.freeze({
   getItemById,
   getAllItemsByField,
   getAllItemsWithAllFieldsByField,
+  GetAllItemsByIds,
 });
 
 async function getAllItemsWithAllFieldsByField({ objQuery, skip, limit }) {
@@ -17,6 +18,11 @@ async function getAllItemsByField({ objQuery, skip, limit }) {
     .select("title prices mainImage")
     .skip(skip)
     .limit(limit);
+  return items;
+}
+
+async function GetAllItemsByIds(ids) {
+  const items = await Item.find().where("_id").in(ids);
   return items;
 }
 
