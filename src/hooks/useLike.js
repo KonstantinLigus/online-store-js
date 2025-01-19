@@ -12,13 +12,17 @@ export const useLike = () => {
   }, []);
 
   const toLike = item => {
-    const updatedLikes = [...liked, item];
+    let likedProducts = localStorage.getItem("liked");
+    likedProducts = JSON.parse(likedProducts);
+    const updatedLikes = [...likedProducts, item];
     setLiked(updatedLikes);
     localStorage.setItem("liked", JSON.stringify(updatedLikes));
   };
 
   const toDislike = item => {
-    const updatedLikes = liked.filter(i => i !== item);
+    let likedProducts = localStorage.getItem("liked");
+    likedProducts = JSON.parse(likedProducts);
+    const updatedLikes = likedProducts.filter(i => i !== item);
     setLiked(updatedLikes);
     localStorage.setItem("liked", JSON.stringify(updatedLikes));
   };
