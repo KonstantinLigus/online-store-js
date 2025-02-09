@@ -3,10 +3,13 @@ import mongoose from "mongoose";
 export const orderSchema = new mongoose.Schema({
   products: [
     {
+      mainImage: { type: String },
       productName: { type: String, repuired: true },
       quantity: { type: Number, required: true },
-      value: { type: String, required: true },
+      value: { type: Number, required: true },
+      unit: { type: String, required: true },
       price: { type: Number, required: true },
+      product: { type: mongoose.Schema.Types.ObjectId, ref: "item" },
     },
   ],
   deliveryInfo: {
@@ -42,6 +45,7 @@ export const orderSchema = new mongoose.Schema({
     data: { type: String },
     signature: { type: String },
   },
+  totalPrice: { type: Number, required: true },
 });
 
 export const Order =

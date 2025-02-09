@@ -40,6 +40,7 @@ export async function createOrderCase(order) {
     order_id: order._id.toString(),
   });
 
+  order.totalPrice = totalPrice;
   order.liqPayEncodedData = liqPayEncodedData;
   const createdOrder = await orderServices.createOrder(order);
   const newOrderMsg = createNewOrderMessage({

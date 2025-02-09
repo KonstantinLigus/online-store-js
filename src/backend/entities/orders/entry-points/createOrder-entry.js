@@ -6,6 +6,9 @@ import {
   orderDeliveryInfoToPostOfficeSchema,
 } from "@/backend/libs/zod";
 import { createOrderCase } from "../domain";
+import deliveryTypes from "@/deliveryTypes";
+
+const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
 export async function createOrderEntry(req) {
   try {
@@ -14,9 +17,9 @@ export async function createOrderEntry(req) {
     if (!newOrder.deliveryInfo)
       throw new ParseError("deliveryInfo doesn't exist!");
     let result = null;
-    if (newOrder.deliveryInfo.deliveryType === "Нова Пошта - Відділення")
+    if (newOrder.deliveryInfo.deliveryType === postOfficeDelivery)
       result = orderDeliveryInfoToPostOfficeSchema.safeParse(newOrder);
-    if (newOrder.deliveryInfo.deliveryType === "Нова Пошта - доставка кур’єром")
+    if (newOrder.deliveryInfo.deliveryType === courierDelivery)
       result = orderDeliveryInfoByCourierSchema.safeParse(newOrder);
     if (!result.success) throw new ParseError(result.error);
 
