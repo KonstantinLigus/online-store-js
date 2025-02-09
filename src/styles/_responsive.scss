@@ -5,64 +5,72 @@ $screen-lg-max: 1023px;
 $screen-xl-max: 1199px;
 
 //Small devices
-@mixin sm-max { // screen < 576px
+@mixin sm-max {
+  // screen < 576px
   @media screen and (max-width: #{$screen-sm-max}) {
     @content;
   }
 }
 
-//@mixin xsm-min { // screen > 320px
-//  @media screen and (min-width: #{$screen-xsm-max}) {
-//    @content;
-//  }
-//}
+@mixin xsm-min {
+  // screen > 320px
+  @media screen and (min-width: #{$screen-xsm-max}) {
+    @content;
+  }
+}
 
 // Medium devices
-@mixin md-max { // screen < 768px
+@mixin md-max {
+  // screen < 768px
   @media screen and (max-width: #{$screen-md-max}) {
     @content;
   }
 }
 
-@mixin md-min { // screen > 575px
+@mixin md-min {
+  // screen > 575px
   @media screen and (min-width: #{$screen-sm-max + 1}) {
     @content;
   }
 }
 
 // Large devices
-@mixin lg-max { // screen < 1024px
+@mixin lg-max {
+  // screen < 1024px
   @media screen and (max-width: #{$screen-lg-max}) {
     @content;
   }
 }
 
-@mixin lg-min { // screen > 767px
+@mixin lg-min {
+  // screen > 767px
   @media screen and (min-width: #{$screen-md-max + 1}) {
     @content;
   }
 }
 
 // X-large devices
-@mixin xl-max { // screen < 1200px
+@mixin xl-max {
+  // screen < 1200px
   @media screen and (max-width: #{$screen-xl-max}) {
     @content;
   }
 }
 
-@mixin xl-min { // screen > 1023px
+@mixin xl-min {
+  // screen > 1023px
   @media screen and (min-width: #{$screen-lg-max + 1}) {
     @content;
   }
 }
 
 // XX-large devices
-@mixin xxl-min { // screen > 1199px
+@mixin xxl-min {
+  // screen > 1199px
   @media screen and (min-width: #{$screen-xl-max + 1}) {
     @content;
   }
 }
-
 
 // Custom max-width devices
 @mixin cwd-max($screen) {

@@ -1,5 +1,8 @@
 import { z } from "zod";
 import { productsZodSchema } from "./order.productsZodSchema.zod.schema";
+import deliveryTypes from "@/deliveryTypes";
+
+const [, courierDelivery] = deliveryTypes;
 
 export const orderDeliveryInfoByCourierSchema = productsZodSchema.extend({
   deliveryInfo: z.object({
@@ -11,7 +14,7 @@ export const orderDeliveryInfoByCourierSchema = productsZodSchema.extend({
       message:
         "Surname must contain 1 word without leading or trailing spaces. Word must start with a capital letter.",
     }),
-    deliveryType: z.enum(["Нова Пошта - доставка кур’єром"]),
+    deliveryType: z.enum([courierDelivery]),
     region: z.object({ ref: z.string(), name: z.string() }),
     city: z.object({ ref: z.string(), name: z.string() }),
     street: z.string(),

@@ -10,7 +10,7 @@ import Email from "../../Fields/Email";
 import Name from "../../Fields/Name";
 import DeliveryType from "../../Fields/DeliveryType";
 import DeliveryFields from "../../Fields/DeliveryFields";
-import deliveryTypes from "../../Fields/deliveryTypes";
+import deliveryTypes from "../../../../../deliveryTypes";
 
 const dataChanging = {
   firstName: false,
