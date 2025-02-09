@@ -6,9 +6,11 @@ export const productsZodSchema = z.object({
       z.object({
         productName: z.string(),
         quantity: z.number(),
-        value: z.string(),
+        value: z.number(),
+        unit: z.string(),
         price: z.number(),
         _id: z.string(),
+        mainImage: z.string(),
       }),
     )
     .nonempty({

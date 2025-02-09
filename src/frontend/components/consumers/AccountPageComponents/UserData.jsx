@@ -60,7 +60,7 @@ const UserData = ({ user, token }) => {
       >
         Історія замовлень
       </label>
-      {cuttentTab === 3 && <OrdersTab />}
+      {cuttentTab === 3 && <OrdersTab user={user} />}
 
       <input
         type="radio"

@@ -10,15 +10,14 @@ import DeliveryFields from "../../../Fields/DeliveryFields";
 import PaymentChecker from "../../../Fields/PaymentChecker";
 import DeliveryType from "../../../Fields/DeliveryType";
 import { isObjectFieldEqualsToValue } from "@/frontend/helpers";
-import deliveryTypes from "../../../Fields/deliveryTypes";
-import { useRouter } from "next/navigation";
+import deliveryTypes from "@/deliveryTypes";
 
 const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
 const userInitValues = {
   firstName: "",
   surname: "",
-  deliveryType: "Нова Пошта - Відділення",
+  deliveryType: postOfficeDelivery,
   region: { name: "", ref: "" },
   city: { name: "", ref: "" },
   postOffice: { name: "", ref: "" },
@@ -32,15 +31,9 @@ const userInitValues = {
 };
 
 const OrderForm = props => {
-  const router = useRouter();
-
   const { user, cart, setIsOrderCreated, removeCart, setPaymentData } = props;
   const [consumer, setConsumer] = useState(user || userInitValues);
   const [isDisabled, setIsDisabled] = useState(true);
-
-  // useEffect(() => {
-  //   router.refresh();
-  // }, [router, user]);
 
   useEffect(() => {
     setConsumer(() => user || userInitValues);
@@ -64,12 +57,14 @@ const OrderForm = props => {
     setIsDisabled(isEmpty);
   }, [consumer]);
 
-  const validateData = async e => {
+  const validateData = async () => {
     let orderedProducts = cart.map(i => ({
       _id: i._id,
+      mainImage: i.mainImage,
       productName: i.title,
       quantity: i.quantity,
-      value: i.prices[i.measure].value + " " + i.prices[i.measure].unit,
+      value: i.prices[i.measure].value,
+      unit: i.prices[i.measure].unit,
       price: i.prices[i.measure].actionPrice
         ? i.prices[i.measure].actionPrice
         : i.prices[i.measure].price,

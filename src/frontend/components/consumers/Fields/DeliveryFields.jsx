@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DeliveryInputOptions from "./DeliveryInputOptions";
 import ConsumerAddress from "./ConsumerAddress";
-import deliveryTypes from "./deliveryTypes";
+import deliveryTypes from "../../../../deliveryTypes";
 
 const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 

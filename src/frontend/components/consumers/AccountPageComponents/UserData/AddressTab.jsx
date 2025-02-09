@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./Tab.module.scss";
 import DeliveryType from "../../Fields/DeliveryType";
 import DeliveryFields from "../../Fields/DeliveryFields";
-import deliveryTypes from "../../Fields/deliveryTypes";
+import deliveryTypes from "../../../../../deliveryTypes";
 import Button from "../../Button/Button";
 
 const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;

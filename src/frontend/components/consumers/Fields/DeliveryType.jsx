@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Field.module.scss";
-import deliveryTypes from "./deliveryTypes";
+import deliveryTypes from "../../../../deliveryTypes";
 import Image from "next/image";
 const [, , storeDelivery] = deliveryTypes;
 

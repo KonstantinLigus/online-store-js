@@ -1,13 +1,12 @@
 "use client";
+import OrderHistoryList from "../../OrderHistoryList/OrderHistoryList";
 import styles from "./Tab.module.scss";
 
-const OrdersTab = () => {
+const OrdersTab = ({ user }) => {
   return (
     <div className={styles.tab}>
       <p className={styles.tab__title}>Історія замовлень</p>
-      <p>
-        <i>Історія замовлень</i>
-      </p>
+      <OrderHistoryList owner={user} />
     </div>
   );
 };

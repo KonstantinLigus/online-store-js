@@ -5,6 +5,7 @@ export const orderServices = Object.freeze({
   getOrderByField,
   createOrder,
   updateOrder,
+  getOrdersByField,
 });
 
 async function getOrderByField(objQuery) {
@@ -22,4 +23,9 @@ async function updateOrder({ _id, updatedFields }) {
     new: true,
   });
   return updatedOrder;
+}
+
+async function getOrdersByField(objQuery) {
+  const order = await Order.find(objQuery);
+  return order;
 }
