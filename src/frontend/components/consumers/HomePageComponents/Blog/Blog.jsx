@@ -1,39 +1,16 @@
+"use client";
 import React from "react";
 import styles from "./Blog.module.scss";
 import Link from "next/link";
 import BlogItem from "../../BlogItem/BlogItem";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import { blogArticles } from "@/frontend/pages/consumers/BlogPage/blogArticles";
 
 const Blog = () => {
-  const articles = [
-    {
-      title: "Дивовижні властивості меду",
-      text: `He дивно, що бджоли знають про мед багато. Вони не лише виробники \
-      меду, a i його споживачі, причому справжні гурмани. Запропонуйте хворій \
-      бджолі різні сорти меду, i вона o6epe саме той, який найкраще бореться з \
-      інфекцією. Людям, навпаки, належить ще багато дізнатися про поживні \
-      властивості меду. Лише кілька десятиліть тому мед не відносили до надзвичайно \
-      корисних продуктів за межами базового харчування, каже ентомолог Мей Беренбаум \
-      з Університету Іллінойсу в Урбана-Шампейн.`,
-      imageAlt: "honey",
-      image: "/assets/blog-page/delicious-honey.jpg",
-      linkTo: "/blog/honey",
-    },
-    {
-      title: "Lorem ipsum dolor sit amet",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
-      Duis hendrerit eros eu purus pulvinar facilisis. Vestibulum varius \
-      ex a nisl euismod, ac elementum elit tempus. Aliquam dignissim libero \
-      id facilisis auctor. Proin molestie condimentum mi quis pretium. \
-      Phasellus sit amet ligula turpis. Praesent dui odio, mollis a metus et, \
-      tempus tincidunt lectus. Nam pharetra, odio quis sodales porta, diam orci \
-      aliquet neque, ut placerat dui mauris ut tellus. Nulla porttitor dui at \
-      arcu vestibulum aliquam. Nulla eget ipsum vel orci interdum porta at sed \
-      lorem. Morbi efficitur tempus mi in fringilla.",
-      imageAlt: "honey",
-      image: "/assets/blog-page/variety-of-dairy-products.jpg",
-      linkTo: "/blog/honey",
-    },
-  ];
+  const articles = [...blogArticles, ...blogArticles, ...blogArticles];
 
   return (
     <section className={styles.container}>
@@ -41,18 +18,37 @@ const Blog = () => {
         <Link href="/blog">Наш блог</Link>
       </h2>
 
-      <div className={styles.articles}>
+      <Swiper
+        pagination={{
+          type: "bullets",
+          clickable: true,
+          dynamicBullets: true,
+          dynamicMainBullets: 3,
+        }}
+        slidesPerView={1}
+        spaceBetween={8}
+        modules={[Pagination]}
+        loop={true}
+        className={styles.articlesSwiper}
+        breakpoints={{
+          1024: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+        }}
+      >
         {articles.map((article, index) => (
-          <BlogItem
-            key={index}
-            title={article.title}
-            text={article.text}
-            image={article.image}
-            imageAlt={article.imageAlt}
-            linkTo={article.linkTo}
-          />
+          <SwiperSlide key={index}>
+            <BlogItem
+              title={article.title}
+              text={article.text}
+              image={article.image}
+              imageAlt={article.imageAlt}
+              linkTo={article.linkTo}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 };
