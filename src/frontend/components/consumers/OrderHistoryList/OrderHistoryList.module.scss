@@ -96,6 +96,13 @@
   }
 }
 
+.PriceOfOrder {
+  flex-basis: 182px;
+  @include lg-max {
+    flex-basis: auto;
+  }
+}
+
 .DateAndAddress {
   display: flex;
   flex-direction: column;

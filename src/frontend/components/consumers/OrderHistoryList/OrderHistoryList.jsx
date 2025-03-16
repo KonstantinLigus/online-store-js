@@ -2,11 +2,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./OrderHistoryList.module.scss";
 import deliveryTypes from "@/deliveryTypes";
+import InputRadioCarusel from "../InputRadio/InputRadioCarusel";
 
 const [post, courier, store] = deliveryTypes;
 
 export default function OrderHistoryList({ owner }) {
   const [orders, setOrders] = useState([]);
+  const [currentTab, setCurrentTab] = useState("");
 
   useEffect(() => {
     const getOrders = async () => {
@@ -54,59 +56,82 @@ export default function OrderHistoryList({ owner }) {
 
             return (
               <li key={_id} className={styles.OrderWrapper}>
-                <div className={styles.OrderInfoWrapper}>
-                  <b>Замовлення {_id}</b>
-                  <div className={`${styles.Price} ${styles.OrderPrice}`}>
-                    <div className={styles.MarginBottom}>Сума замовлення:</div>
-                    <b>{totalPrice} ₴</b>
-                  </div>
-                </div>
-                <ul className={styles.ProductList}>
-                  {products.map(
-                    ({
-                      mainImage,
-                      productName,
-                      value,
-                      unit,
-                      quantity,
-                      price,
-                      _id,
-                    }) => (
-                      <li key={_id} className={styles.ProductWrapper}>
-                        <Image
-                          src={mainImage}
-                          alt={productName}
-                          width={130}
-                          height={130}
-                        />
-                        <div className={styles.ProductInfoWrapper}>
-                          <div className={styles.ProductNameWrap}>
-                            <div className={styles.ProductName}>
-                              {productName}
-                            </div>
-                            <div>
-                              {isCompleted ? "Доставлений" : "Не доставлений"}
-                            </div>
-                          </div>
-                          <div className={styles.QuantityAndValue}>
-                            <div>
-                              {quantity * value} {unit}
-                            </div>
-                            <div className={styles.Price}>{price} ₴</div>
-                          </div>
+                <InputRadioCarusel
+                  currentTab={currentTab}
+                  setCurrentTab={setCurrentTab}
+                  tabIndex={_id}
+                >
+                  <div className={styles.OrderInfoWrapper}>
+                    <div>
+                      <b>Замовлення {_id}</b>
+                      {currentTab !== _id && (
+                        <div>
+                          {isCompleted ? "Доставлений" : "Не доставлений"}
                         </div>
-                      </li>
-                    ),
-                  )}
-                </ul>
-                <div className={styles.DateAndAddress}>
-                  <div>
-                    <b>Адреса доставки: </b> {formatedDate}
+                      )}
+                    </div>
+                    <div className={`${styles.Price} ${styles.OrderPrice}`}>
+                      <div className={styles.MarginBottom}>
+                        Сума замовлення:
+                      </div>
+                      <b>{totalPrice} ₴</b>
+                    </div>
                   </div>
-                  <div>
-                    <b>Адреса доставки: </b> {getAddress()}
-                  </div>
-                </div>
+                </InputRadioCarusel>
+                {currentTab === _id && (
+                  <>
+                    <ul className={styles.ProductList}>
+                      {products.map(
+                        ({
+                          mainImage,
+                          productName,
+                          value,
+                          unit,
+                          quantity,
+                          price,
+                          _id,
+                        }) => (
+                          <li key={_id} className={styles.ProductWrapper}>
+                            <Image
+                              src={mainImage}
+                              alt={productName}
+                              width={130}
+                              height={130}
+                            />
+                            <div className={styles.ProductInfoWrapper}>
+                              <div className={styles.ProductNameWrap}>
+                                <div className={styles.ProductName}>
+                                  {productName}
+                                </div>
+                                <div>
+                                  {isCompleted
+                                    ? "Доставлений"
+                                    : "Не доставлений"}
+                                </div>
+                              </div>
+                              <div className={styles.QuantityAndValue}>
+                                <div>
+                                  {quantity * value} {unit}
+                                </div>
+                                <div className={styles.PriceOfOrder}>
+                                  {price} ₴
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                    <div className={styles.DateAndAddress}>
+                      <div>
+                        <b>Адреса доставки: </b> {formatedDate}
+                      </div>
+                      <div>
+                        <b>Адреса доставки: </b> {getAddress()}
+                      </div>
+                    </div>
+                  </>
+                )}
               </li>
             );
           },

@@ -1,0 +1,39 @@
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixins";
+@import "../../../../styles/variables";
+
+.Input {
+  display: none;
+  &:checked + label::after {
+    transform: translateY(-50%) rotate(0deg);
+    // @include lg-min {
+    //   background-color: $color-orange-500;
+    // }
+  }
+}
+
+.Label {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  @include lg-min {
+    padding-right: 2rem;
+  }
+
+  &::after {
+    content: "";
+    background-image: url("/assets/icon/icon-angle-up.svg");
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 1.125rem;
+    height: 1.125rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%) rotate(180deg);
+    @include lg-min {
+      top: 50%;
+    }
+  }
+}
