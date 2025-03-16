@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getError } from "@/backend/helpers";
 import {
   orderDeliveryInfoByCourierSchema,
+  orderDeliveryInfoByStoreSchema,
   orderDeliveryInfoToPostOfficeSchema,
 } from "@/backend/libs/zod";
 import { createOrderCase } from "../domain";
@@ -21,6 +22,8 @@ export async function createOrderEntry(req) {
       result = orderDeliveryInfoToPostOfficeSchema.safeParse(newOrder);
     if (newOrder.deliveryInfo.deliveryType === courierDelivery)
       result = orderDeliveryInfoByCourierSchema.safeParse(newOrder);
+    if (newOrder.deliveryInfo.deliveryType === storeDelivery)
+      result = orderDeliveryInfoByStoreSchema.safeParse(newOrder);
     if (!result.success) throw new ParseError(result.error);
 
     const createdOrder = await createOrderCase(newOrder);

@@ -48,6 +48,14 @@ const OrderForm = props => {
     if (consumer.deliveryType === courierDelivery) {
       delete consumer.postOffice;
     }
+    if (consumer.deliveryType === storeDelivery) {
+      delete consumer.region;
+      delete consumer.city;
+      delete consumer.postOffice;
+      delete consumer.street;
+      delete consumer.house;
+      delete consumer.flat;
+    }
 
     !consumer.comment && delete consumer.comment;
     delete consumer.birthday;
