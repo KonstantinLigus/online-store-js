@@ -123,10 +123,10 @@ export default function OrderHistoryList({ owner }) {
                       )}
                     </ul>
                     <div className={styles.DateAndAddress}>
-                      <div>
-                        <b>Адреса доставки: </b> {formatedDate}
+                      <div className={styles.Date}>
+                        <b>Дата доставки: </b> {formatedDate}
                       </div>
-                      <div>
+                      <div className={styles.Address}>
                         <b>Адреса доставки: </b> {getAddress()}
                       </div>
                     </div>
