@@ -1,14 +1,13 @@
-import Banner from "@/frontend/components/consumers/HomePageComponents/Banner/Banner";
+import Hero from "@/frontend/components/consumers/HomePageComponents/Hero/Hero";
 import About from "@/frontend/components/consumers/HomePageComponents/About/About";
 import ProductList from "@/frontend/components/consumers/ProductList/ProductList";
-import Blog from "@/frontend/components/consumers/HomePageComponents/Blog/Blog";
+import CallToAction from "@/frontend/components/consumers/HomePageComponents/CallToAction/CallToAction";
 import styles from "@/frontend/pages/consumers/HomePage/HomePage.module.scss";
-import { PaymentExample } from "@/frontend/components/consumers/PaymentExample/PaymentExample";
 
 export default async function HomePage() {
   return (
     <>
-      <Banner />
+      <Hero />
       <div className={styles.divider}></div>
       <About />
       <div className={styles.divider}></div>
@@ -24,7 +23,7 @@ export default async function HomePage() {
         products="label=акційні"
       />
       <div className={styles.divider}></div>
-      <Blog />
+      <CallToAction />
       <div className={styles.divider}></div>
     </>
   );

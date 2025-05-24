@@ -26,7 +26,7 @@ const About = () => {
     },
   ];
   return (
-    <section className={styles.about}>
+    <section className={styles.about} id="about">
       <h2 className={styles.about__title}>Про нас</h2>
       <p className={styles.about__info}>
         Насолоджуйтеся найсвіжішими та найсмачнішими продуктами від маленьких

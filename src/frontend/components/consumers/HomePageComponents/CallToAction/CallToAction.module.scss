@@ -1,0 +1,132 @@
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/variables";
+
+$_offset: 2.5rem;
+$_offsetLarge: 3.5rem;
+$_gap: 1.5rem;
+$_gapLarge: 2rem;
+$_runTextWidth: 14rem;
+
+.section {
+  background-color: $color-green-dark-4;
+  background-image: url("/assets/cta-vegetables.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: none !important;
+  margin-bottom: $_offset !important;
+  padding-top: calc(2 * $_offset) !important;
+  @include wrapper;
+  @include lg-min {
+    margin-bottom: $_offsetLarge !important;
+    padding-top: calc(3 * $_offset) !important;
+  }
+
+  &__content {
+    background: $color-white;
+    max-width: 90rem;
+    margin: auto;
+    padding-top: $_offset;
+    transform: translateY($_offset);
+    @include lg-min {
+      padding-top: $_offsetLarge;
+      transform: translateY($_offsetLarge);
+    }
+  }
+
+  &__title {
+    color: $color-gray-dark-1;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    margin: auto;
+    padding-inline: 1rem;
+    @include md-min {
+      font-size: 2rem;
+    }
+    @include lg-min {
+      font-size: 2.5rem;
+    }
+    @include xl-min {
+      font-size: 3rem;
+    }
+  }
+
+  &__info {
+    color: $color-gray-dark-1;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    margin: auto;
+    max-width: 30rem;
+    padding: $_gap 1rem;
+    @include md-min {
+      font-size: 1.125rem;
+    }
+    @include lg-min {
+      font-size: 1.25rem;
+      max-width: 35rem;
+      padding-block: $_gapLarge;
+    }
+    @include xxl-min {
+      font-size: 1.5rem;
+      max-width: 40rem;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $_gap;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 1rem;
+    padding-bottom: calc($_gap * 2);
+    @include lg-min {
+      flex-direction: row;
+      gap: $_gapLarge;
+      padding-bottom: calc($_gapLarge * 2);
+    }
+  }
+}
+
+.runtext {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    min-width: $_runTextWidth;
+    transform: translateX(0);
+    animation: runningText 8s linear infinite;
+  }
+
+  &__text {
+    color: $color-green-dark-3;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  &__dot {
+    background: $color-green-dark-3;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+}
+
+@keyframes runningText {
+  to {
+    transform: translateX(calc(-1 * $_runTextWidth));
+  }
+}
