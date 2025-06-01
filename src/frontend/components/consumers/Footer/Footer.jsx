@@ -36,11 +36,6 @@ export default function Footer() {
               </li>
               <li>Про нас</li>
               <li>Акційні товари</li>
-              <li>
-                <Link href="/blog" className={styles.footer__link}>
-                  Наш блог
-                </Link>
-              </li>
             </ul>
           </nav>
         </div>

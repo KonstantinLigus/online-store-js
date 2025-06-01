@@ -7,7 +7,7 @@ const ButtonLink = ({ title, href, onClick, secondary, ternary, maxWidth }) => {
   const button = useRef();
   useEffect(() => {
     button.current.blur();
-  }, [onclick]);
+  }, [onClick]);
 
   const handleClick = e => {
     if (onClick) onClick(e);
