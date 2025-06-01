@@ -1,0 +1,99 @@
+@import "../../../../../styles/responsive";
+@import "../../../../../styles/mixins";
+@import "../../../../../styles/variables";
+
+.hero {
+  background: $color-green-dark-4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 57px);
+  min-height: 30rem;
+  max-height: 60rem;
+  @include md-min {
+    height: calc(100vh - 69px);
+  }
+  @include lg-min {
+    height: calc(100vh - 79px);
+  }
+  @media screen and (min-width: $burger-menu-screen-width) {
+    height: calc(100vh - 139px - 3rem);
+    margin-top: 3rem;
+    flex-direction: row;
+  }
+  @include xl-min {
+    height: calc(100vh - 148px - 3rem);
+  }
+  @include xxl-min {
+    height: calc(100vh - 156px - 3rem);
+  }
+}
+
+.info {
+  @media screen and (min-width: $burger-menu-screen-width) {
+    flex: 1;
+  }
+
+  &__wrapper {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 19rem;
+    padding: 2rem 1rem;
+    @include md-min {
+      max-width: 28rem;
+    }
+    @include lg-min {
+      padding-inline: 1.5rem;
+      max-width: 29rem;
+    }
+    @include xxl-min {
+      max-width: 32rem;
+    }
+    @media screen and (min-width: 1400px) {
+      padding-right: 6rem;
+      margin-right: 0;
+      max-width: 42rem;
+    }
+  }
+
+  &__title {
+    color: $color-white;
+    font-weight: 600;
+    text-align: left;
+    line-height: 1.5;
+    font-size: 2rem;
+    @include md-min {
+      font-size: 3rem;
+    }
+    @media screen and (min-width: $burger-menu-screen-width) {
+      margin-bottom: 2rem;
+    }
+    @include xxl-min {
+      font-size: 3.5rem;
+    }
+    @media screen and (min-width: 1400px) {
+      font-size: 4rem;
+    }
+  }
+}
+
+.picture {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+
+  &__wrapper {
+    background-image: url("/assets/hero-vegetables.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    max-width: 80rem;
+  }
+}
