@@ -31,12 +31,14 @@
 }
 
 .info {
+  width: 100%;
   @media screen and (min-width: $burger-menu-screen-width) {
     flex: 1;
   }
 
   &__wrapper {
-    margin: auto;
+    margin-left: 0;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -45,19 +47,29 @@
     max-width: 19rem;
     padding: 2rem 1rem;
     @include md-min {
-      max-width: 28rem;
+      max-width: 30rem;
+      padding-inline: 2rem;
     }
     @include lg-min {
-      padding-inline: 1.5rem;
+      padding-inline: 3rem;
+      max-width: 32rem;
+    }
+    @media screen and (min-width: $burger-menu-screen-width) {
+      padding-right: 0.5rem;
       max-width: 29rem;
     }
+    @include xl-min {
+      padding-left: 4rem;
+    }
     @include xxl-min {
-      max-width: 32rem;
+      padding-left: 5rem;
+      max-width: 34rem;
     }
     @media screen and (min-width: 1400px) {
       padding-right: 6rem;
       margin-right: 0;
-      max-width: 42rem;
+      margin-left: auto;
+      max-width: 45rem;
     }
   }
 
