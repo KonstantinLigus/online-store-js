@@ -13,7 +13,8 @@ export const useLike = () => {
 
   const toLike = item => {
     let likedProducts = localStorage.getItem("liked");
-    likedProducts = JSON.parse(likedProducts);
+    if (likedProducts) likedProducts = JSON.parse(likedProducts);
+    if (!likedProducts) likedProducts = [];
     const updatedLikes = [...likedProducts, item];
     setLiked(updatedLikes);
     localStorage.setItem("liked", JSON.stringify(updatedLikes));
@@ -21,7 +22,8 @@ export const useLike = () => {
 
   const toDislike = item => {
     let likedProducts = localStorage.getItem("liked");
-    likedProducts = JSON.parse(likedProducts);
+    if (likedProducts) likedProducts = JSON.parse(likedProducts);
+    if (!likedProducts) likedProducts = [];
     const updatedLikes = likedProducts.filter(i => i !== item);
     setLiked(updatedLikes);
     localStorage.setItem("liked", JSON.stringify(updatedLikes));
