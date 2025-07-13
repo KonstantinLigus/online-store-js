@@ -13,7 +13,7 @@ const ConsumerReview = ({ itemId, getComments }) => {
   };
 
   const sendReview = async () => {
-    await fetch("api/comment/create", {
+    await fetch("api/comments/create", {
       method: "POST",
       body: JSON.stringify({ comment: message, score: consumerRating, itemId }),
     });

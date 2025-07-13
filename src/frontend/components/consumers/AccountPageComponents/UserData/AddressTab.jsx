@@ -5,11 +5,22 @@ import DeliveryType from "../../Fields/DeliveryType";
 import DeliveryFields from "../../Fields/DeliveryFields";
 import deliveryTypes from "../../../../../deliveryTypes";
 import Button from "../../Button/Button";
+import { useRouter } from "next/navigation";
 
 const [postOfficeDelivery, courierDelivery, storeDelivery] = deliveryTypes;
 
 const AddressTab = ({ user }) => {
   const [consumerData, setConsumerData] = useState(user);
+  const router = useRouter();
+
+  const buttonClickHandler = async () => {
+    await fetch("api/auth/updateUser", {
+      method: "POST",
+      body: JSON.stringify(consumerData),
+    });
+
+    router.refresh();
+  };
 
   return (
     <div className={styles.tab}>
@@ -30,7 +41,7 @@ const AddressTab = ({ user }) => {
           </fieldset>
         </form>
 
-        <Button title="Зберегти зміни" />
+        <Button title="Зберегти зміни" onClick={buttonClickHandler} />
       </div>
     </div>
   );
