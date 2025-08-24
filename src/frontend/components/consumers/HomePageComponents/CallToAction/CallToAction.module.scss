@@ -15,23 +15,23 @@ $_runTextWidth: 14rem;
   background-position: center;
   background-size: cover;
   max-width: none !important;
-  margin-bottom: $_offset !important;
-  padding-top: calc(2 * $_offset) !important;
+  margin-bottom: calc($_offset * 2) !important;
+  padding-top: calc($_offset) !important;
   @include wrapper;
   @include lg-min {
-    margin-bottom: $_offsetLarge !important;
-    padding-top: calc(3 * $_offset) !important;
+    margin-bottom: calc($_offsetLarge * 2) !important;
+    padding-top: calc($_offset) !important;
   }
 
   &__content {
-    background: $color-white;
+    background: #fffaf4;
     max-width: 90rem;
     margin: auto;
-    padding-top: $_offset;
-    transform: translateY($_offset);
+    padding-block: $_offset;
+    transform: translateY(calc($_offset * 2));
     @include lg-min {
-      padding-top: $_offsetLarge;
-      transform: translateY($_offsetLarge);
+      padding-block: $_offsetLarge;
+      transform: translateY(calc($_offsetLarge * 2));
     }
   }
 

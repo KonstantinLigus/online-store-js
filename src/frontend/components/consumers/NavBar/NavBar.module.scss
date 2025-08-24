@@ -8,7 +8,7 @@
   position: relative;
   z-index: 50;
   @include md-min {
-    background-image: url("/assets/footer-bg-pattern.png");
+    background-image: url("/assets/footer-bg.png");
     background-repeat: repeat;
   }
 
@@ -26,6 +26,12 @@
     flex-direction: row;
     gap: 1rem;
     justify-content: space-between;
+    @include md-min {
+      gap: 1.25rem;
+    }
+    @include lg-min {
+      gap: 1.5rem;
+    }
   }
 
   &__search {
