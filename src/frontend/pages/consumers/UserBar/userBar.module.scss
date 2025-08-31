@@ -4,7 +4,13 @@
 .userBarContainer {
   display: flex;
   align-items: center;
-  gap: $s;
+  gap: 0.75rem;
+  @include md-min {
+    gap: 1rem;
+  }
+  @include lg-min {
+    gap: 1.25rem;
+  }
 }
 .userInfo {
   display: inline-block;
